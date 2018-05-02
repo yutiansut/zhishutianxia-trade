@@ -75,3 +75,8 @@ $w: 7.5rem;
     height: $h;
     background-color: $bgcolor;
 }
+@mixin flex($align_items:center,$justify_content:center) {
+    display: flex;
+    align-items: $align_items;
+    justify-content: $align_items;
+}

@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import trade from '@/page/trade'
-import home from '@/page/home'
+
 import discover from '@/page/discover'
 import match from '@/page/match'
 import quote from '@/page/quote'
-
+import home from '@/page/account/home/home'
 import login from '@/page/account/login/login'
 Vue.use(Router)
 
