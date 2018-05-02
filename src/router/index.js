@@ -6,7 +6,8 @@ import trade from '@/page/trade'
 import discover from '@/page/discover'
 import match from '@/page/match'
 import quote from '@/page/quote'
-import home from '@/page/account/home/home'
+import my from '@/page/account/my/my'
+import self_select from '@/page/account/my/self_select'
 import login from '@/page/account/login/login'
 import regitser from '@/page/account/login/regitser'
 Vue.use(Router)
@@ -15,11 +16,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -34,9 +30,14 @@ export default new Router({
       component: trade
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/my',
+      name: 'my',
+      component: my
+    },
+    {
+      path: '/self_select',
+      name: 'self_select',
+      component: self_select
     },
     {
       path: '/discover',

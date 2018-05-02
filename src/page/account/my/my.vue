@@ -1,7 +1,7 @@
 <template>
     <div id="home" :style="{height:clientHeight}">
         <mt-header fixed title="我的">           
-            <mt-button slot="left" icon="back"></mt-button>
+            <mt-button slot="left" icon="back" @click="goBack"></mt-button>
             <mt-button slot="right">
                 <span class="icon"></span>
             </mt-button>
