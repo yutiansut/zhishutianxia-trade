@@ -13,7 +13,7 @@
 			</ul>
 			<div>
 				<div class="showTip">请输入正确手机号</div>
-				<span class="forgetPsd">忘记密码？</span>
+				<span class="forgetPsd" @click="toForgetPsd">忘记密码？</span>
 			</div>
 			<button class="btn">登录</button>
 			<p @click="toRegister">新用户注册>></p>
@@ -38,6 +38,9 @@
 		methods:{
 			toRegister:function(){
 				this.$router.push({path:"/regitser"});
+			},
+			toForgetPsd:function(){
+				this.$router.push({path:"/forgetPassword"});
 			}
 		}
 	}
@@ -58,7 +61,7 @@
 			height: 1.2rem;
 			line-height: 1.2rem;
 			border-bottom: 0.01rem solid $bgDeep;
-			color:$blackBold ;
+			color:$graySimple ;
 			text-indent: 0.36rem;
 			font-size: 0.28rem;
 		}

@@ -1,6 +1,6 @@
 <template>
-	<div id="register">
-		<loginHeader title="注册"></loginheader>
+	<div id="forgetPassword">
+		<loginHeader title="找回密码"></loginHeader>
 		<div id="container">
 			<ul>
 				<li>
@@ -10,17 +10,12 @@
 					<span class="getcode">获取验证码</span>
 					<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 				</li>
-				<li class="Rt">
-					<i class="psdIcon"></i>
-					<input type="password"  placeholder="请输入密码" class="input" v-model="password"/>
-				</li>
 			</ul>
-			<button class="btn">注册</button>
-			<p @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
+			<button class="btn" @click="toResetPassword">下一步</button>
+			<p>新用户注册>></p>
 			<div class="showWX">
-				<i class="toWX" @click="toWX"></i>
+				<i class="toWX"></i>
 			</div>
-			<p @click="toProtocol"><span class="color_gray">注册即代表阅读并同意</span>《指数天下用户协议》</p>
 		</div>
 	</div>
 </template>
@@ -28,33 +23,26 @@
 <script>
 	import loginHeader from "../../../components/loginHeader.vue"
 	export default{
-		name:"regitser",
+		name:'forgetPassword',
 		components:{ loginHeader },
 		data(){
 			return{
-				phone:"",
-				password:"",
+				phone:'',
 				code:''
 			}
 		},
 		methods:{
-			toLogin:function(){
-				this.$router.push({path:"/login"});
-			},
-			toWX:function(){
-				this.$router.push({path:"/WXregister"});
-			},
-			toProtocol:function(){
-				this.$router.push({path:"/userRegistrationProtocol"});
+			toResetPassword:function(){
+				this.$router.push({path:"/resetPassword"})
 			}
 		}
 	}
 </script>
 
-
+<
 <style lang="scss" scoped>
 	@import "../../../assets/css/common.scss";
-	#register{
+	#forgetPassword{
 		width: $w;
 	}
 	#container{
@@ -76,16 +64,6 @@
 		}
 		.Rt{
 			position: relative;
-		}
-		.psdIcon{
-			top: 0.52rem;
-			right: 0.3rem;
-			position: absolute;
-			display: inline-block;
-			width:0.32rem;
-			height: 0.16rem;
-			background: url(../../../assets/images/account/account_psd.png);
-			background-size: 100% 100%;
 		}
 		.getcode{
 			display: block;
@@ -109,12 +87,7 @@
 			text-align: center;
 			color: $blackBold;
 			margin-top: 0.8rem;
-			&:nth-child(1){
-				font-size: $fs28;
-			}
-			&:nth-child(2){
-				font-size: $fs24;
-			}
+			font-size: $fs28;
 		}
 		.showWX{
 			width: 100%;
@@ -127,9 +100,6 @@
 				background: url(../../../assets/images/account/WXlogin.png) no-repeat;
 				background-size: 100% 100%;
 			}
-		}
-		.color_gray{
-			color: $grayMiddle;
 		}
 	}
 </style>

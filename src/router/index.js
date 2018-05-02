@@ -10,6 +10,10 @@ import my from '@/page/account/my/my'
 import self_select from '@/page/account/my/self_select'
 import login from '@/page/account/login/login'
 import regitser from '@/page/account/login/regitser'
+import WXregister from '@/page/account/login/WXregister'
+import forgetPassword from "@/page/account/login/forgetPassword"
+import resetPassword from "@/page/account/login/resetPassword"
+import userRegistrationProtocol from "@/page/account/login/userRegistrationProtocol"
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +66,26 @@ export default new Router({
       path: '/regitser',
       name: 'regitser',
       component: regitser
-    }
+    },
+    {
+      path: '/WXregister',
+      name: 'WXregister',
+      component: WXregister
+    },
+    {
+      path: '/forgetPassword',
+      name: 'forgetPassword',
+      component: forgetPassword
+    },
+     {
+      path: '/resetPassword',
+      name: 'resetPassword',
+      component: resetPassword
+    },
+    {
+      path: '/userRegistrationProtocol',
+      name: 'userRegistrationProtocol',
+      component: userRegistrationProtocol
+    },
   ]
 })
