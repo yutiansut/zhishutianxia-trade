@@ -19,14 +19,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "./assets/css/common.scss";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+ width: $w;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,

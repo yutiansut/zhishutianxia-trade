@@ -7,7 +7,7 @@ import discover from '@/page/discover'
 import match from '@/page/match'
 import quote from '@/page/quote'
 
-
+import login from '@/page/account/login/login'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +46,15 @@ export default new Router({
       path: '/match',
       name: 'match',
       component: match
+    },
+    
+    
+    
+    
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     }
   ]
 })

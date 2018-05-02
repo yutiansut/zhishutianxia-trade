@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="login">
 		login
 	</div>
 </template>
@@ -8,7 +8,11 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../../../assets/css/common.css";
-	
+	@import "../../../assets/css/common.scss";
+	.login{
+		background-color: $redSimple;
+		width: $w;
+		height: 2rem;
+	}
 	
 </style>
