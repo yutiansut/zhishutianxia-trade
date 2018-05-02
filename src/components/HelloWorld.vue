@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-
+    {{msg}}
+    <router-link to="/home">home</router-link>
   </div>
 </template>
 

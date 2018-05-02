@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition :name="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')">
+      <keep-alive  class="router-view" >
+        <router-view></router-view>
+      </keep-alive>
+    </transition>    
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Vue from "vue"
 export default {
-  name: 'App'
+  name: 'App',
+  computed:{
+      ...mapState(['direction'])
+    },
 }
 </script>
 
@@ -18,5 +27,35 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+  will-change: transform;
+  transition: transform 500ms;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+.vux-pop-out-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+.vux-pop-out-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+body {
+  background-color: #fbf9fe;
 }
 </style>
