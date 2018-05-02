@@ -6,10 +6,12 @@ import trade from '@/page/trade'
 import discover from '@/page/discover'
 import match from '@/page/match'
 import quote from '@/page/quote'
-import home from '@/page/account/home/home'
+import my from '@/page/account/my/my'
 import login from '@/page/account/login/login'
 import regitser from '@/page/account/login/regitser'
 import WXregister from '@/page/account/login/WXregister'
+import forgetPassword from "@/page/account/login/forgetPassword"
+import resetPassword from "@/page/account/login/resetPassword"
 Vue.use(Router)
 
 export default new Router({
@@ -35,9 +37,9 @@ export default new Router({
       component: trade
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/my',
+      name: 'my',
+      component: my
     },
     {
       path: '/discover',
@@ -67,6 +69,16 @@ export default new Router({
       path: '/WXregister',
       name: 'WXregister',
       component: WXregister
-    }
+    },
+    {
+      path: '/forgetPassword',
+      name: 'forgetPassword',
+      component: forgetPassword
+    },
+     {
+      path: '/resetPassword',
+      name: 'resetPassword',
+      component: resetPassword
+    },
   ]
 })
