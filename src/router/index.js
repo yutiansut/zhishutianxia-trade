@@ -12,6 +12,7 @@ import regitser from '@/page/account/login/regitser'
 import WXregister from '@/page/account/login/WXregister'
 import forgetPassword from "@/page/account/login/forgetPassword"
 import resetPassword from "@/page/account/login/resetPassword"
+import userRegistrationProtocol from "@/page/account/login/userRegistrationProtocol"
 Vue.use(Router)
 
 export default new Router({
@@ -79,6 +80,11 @@ export default new Router({
       path: '/resetPassword',
       name: 'resetPassword',
       component: resetPassword
+    },
+    {
+      path: '/userRegistrationProtocol',
+      name: 'userRegistrationProtocol',
+      component: userRegistrationProtocol
     },
   ]
 })

@@ -20,7 +20,7 @@
 			<div class="showWX">
 				<i class="toWX" @click="toWX"></i>
 			</div>
-			<p><span class="color_gray">注册即代表阅读并同意</span>《指数天下用户协议》</p>
+			<p @click="toProtocol"><span class="color_gray">注册即代表阅读并同意</span>《指数天下用户协议》</p>
 		</div>
 	</div>
 </template>
@@ -43,6 +43,9 @@
 			},
 			toWX:function(){
 				this.$router.push({path:"/WXregister"});
+			},
+			toProtocol:function(){
+				this.$router.push({path:"/userRegistrationProtocol"});
 			}
 		}
 	}
