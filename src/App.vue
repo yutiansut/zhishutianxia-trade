@@ -25,9 +25,13 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
- width: $w;
+  max-width: 7.5rem;
+	width: 7.5rem;
+	height: auto;
+	overflow: hidden;
+	background: $bg;
+	position: relative;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,
