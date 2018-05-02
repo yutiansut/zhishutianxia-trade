@@ -31,7 +31,6 @@ export default {
 	height: auto;
 	overflow: hidden;
 	background: $bg;
-	position: relative;
 }
 .vux-pop-out-enter-active,
 .vux-pop-out-leave-active,
