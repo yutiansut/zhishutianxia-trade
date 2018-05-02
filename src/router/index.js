@@ -8,6 +8,7 @@ import match from '@/page/match'
 import quote from '@/page/quote'
 
 import login from '@/page/account/login/login'
+import regitser from '@/page/account/login/regitser'
 Vue.use(Router)
 
 export default new Router({
@@ -55,6 +56,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/regitser',
+      name: 'regitser',
+      component: regitser
     }
   ]
 })
