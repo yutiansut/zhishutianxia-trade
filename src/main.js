@@ -4,6 +4,13 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import App from './App'
+import axios from 'axios'
+import 'babel-polyfill'
+Vue.prototype.$http = axios
+import Mint from 'mint-ui';
+Vue.use(Mint);
+import 'mint-ui/lib/style.css';
+import "./assets/css/my-mint.scss";
 
 import router from './router'
 import store from './store'

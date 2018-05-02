@@ -62,7 +62,7 @@ $w: 7.5rem;
 }
 
 /*****mixin*****/
-@mixin font ($size:0.36rem,$line-height:1,$color:#333,$text-align:center) {
+@mixin font ($size:$fs36,$line-height:1,$color:#333,$text-align:center) {
     font: normal $size "Microsoft YaHei";
     line-height: $line-height;
     color: $color;
