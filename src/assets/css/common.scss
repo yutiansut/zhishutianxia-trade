@@ -1,3 +1,4 @@
+@charset "utf-8";
 /*颜色*/
 $bg : #ffffff;  /*背景*/
 $headColr : #333340; /*头部导航背景*/
@@ -58,4 +59,19 @@ $w: 7.5rem;
     z-index: 99;
     background: #000;
     opacity: 0.5;
+}
+
+/*****mixin*****/
+@mixin font ($size:0.36rem,$line-height:1,$color:#333,$text-align:center) {
+    font: normal $size "Microsoft YaHei";
+    line-height: $line-height;
+    color: $color;
+    text-align: $text-align;
+}
+@mixin padding_bg($w:7.5rem,$h:0.12rem,$bgcolor:#F5F5F5) {
+    display: block;
+    content: '';
+    width: $w;
+    height: $h;
+    background-color: $bgcolor;
 }

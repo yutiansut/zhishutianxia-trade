@@ -18,6 +18,11 @@ export default new Router({
       component: HelloWorld
     },
     {
+      path: '/HelloWorld',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
       path: '/quote',
       name: 'quote',
       component: quote
