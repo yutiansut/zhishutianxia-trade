@@ -11,7 +11,7 @@
         <div class="user_info">
             <img src="../assets/images/account/portrait_icon.png" alt="用户头像">
             <p v-if="!isLogin">-点击登录-</p>
-            <p v-else>拉风的皮皮</p>
+            <p class="login" v-else>拉风的皮皮</p>
         </div>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
 .user_info{
 
     width:7.5rem;
-    padding: 40px 0 0 0; 
+    padding: 0.96rem 0 0 0; 
     background-color:$headColr; 
     img{
         display: block;
@@ -54,6 +54,12 @@ export default {
     }
     p{
         @include font($fs32,0.44rem,#fff)
+    }
+    .login{
+        &::after{
+            content: '',
+
+        }
     }
 }
 
