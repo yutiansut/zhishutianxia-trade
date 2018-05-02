@@ -80,3 +80,14 @@ $w: 7.5rem;
     align-items: $align_items;
     justify-content: $align_items;
 }
+
+
+/*20高div背景*/
+.h_20{
+    width:100%;
+    height: 0.2rem;
+    background-color:#f2f2f2 ;
+    border-bottom:0.01rem solid #e6e6e6;
+    border-top: 0.01rem solid #e6e6e6;
+    
+}

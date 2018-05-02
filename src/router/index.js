@@ -9,6 +9,7 @@ import quote from '@/page/quote'
 import home from '@/page/account/home/home'
 import login from '@/page/account/login/login'
 import regitser from '@/page/account/login/regitser'
+import WXregister from '@/page/account/login/WXregister'
 Vue.use(Router)
 
 export default new Router({
@@ -61,6 +62,11 @@ export default new Router({
       path: '/regitser',
       name: 'regitser',
       component: regitser
+    },
+    {
+      path: '/WXregister',
+      name: 'WXregister',
+      component: WXregister
     }
   ]
 })
