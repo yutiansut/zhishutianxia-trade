@@ -2,12 +2,12 @@
     <div id="home" :style="{height:clientHeight}">
         <mt-header fixed title="我的">           
             <mt-button slot="left" icon="back" @click="goBack"></mt-button>
-            <mt-button slot="right">
+            <mt-button slot="right" @click="goto('/information')">
                 <span class="icon"></span>
             </mt-button>
         </mt-header>
         <div class="user_info">
-            <img src="../../../assets/images/account/portrait_icon.png" alt="用户头像">
+            <img src="../../../assets/images/account/WXuser.png" alt="用户头像">
             <p v-if="!isLogin">-点击登录-</p>
             <p class="login" v-else>拉风的皮皮</p>
         </div>
