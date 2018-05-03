@@ -1,6 +1,6 @@
 <template>
 	<div id="login">
-		<loginHeader title="登录"></loginheader>
+		<loginHeader title="登录" type="1"></loginheader>
 		<div id="container">
 			<ul>
 				<li>
@@ -37,7 +37,7 @@
 		},
 		methods:{
 			toRegister:function(){
-				this.$router.push({path:"/regitser"});
+				this.$router.push({path:"/register"});
 			},
 			toForgetPsd:function(){
 				this.$router.push({path:"/forgetPassword"});

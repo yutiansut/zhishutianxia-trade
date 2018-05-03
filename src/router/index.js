@@ -12,7 +12,7 @@ import self_setting from '@/page/account/my/self_setting'
 import reset_password from '@/page/account/my/reset_password'
 import reset_phone from '@/page/account/my/reset_phone'
 import login from '@/page/account/login/login'
-import regitser from '@/page/account/login/regitser'
+import register from '@/page/account/login/register'
 import WXregister from '@/page/account/login/WXregister'
 import forgetPassword from "@/page/account/login/forgetPassword"
 import resetPassword from "@/page/account/login/resetPassword"
@@ -83,9 +83,9 @@ export default new Router({
       component: login
     },
     {
-      path: '/regitser',
-      name: 'regitser',
-      component: regitser
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {
       path: '/WXregister',
