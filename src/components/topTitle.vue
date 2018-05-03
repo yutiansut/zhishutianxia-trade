@@ -33,6 +33,9 @@
 	@import "../assets/css/common.scss";
 	#loginHeader{
 		width: $w;
+		position: fixed;
+		top: 0;
+		z-index: 1;
 	}
 	#container{
 		height: 0.96rem;

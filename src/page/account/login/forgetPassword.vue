@@ -1,6 +1,6 @@
 <template>
 	<div id="forgetPassword">
-		<loginHeader title="找回密码" type="0"></loginHeader>
+		<topTitle title="找回密码" type="0"></topTitle>
 		<div id="container">
 			<ul>
 				<li>
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	export default{
 		name:'forgetPassword',
-		components:{ loginHeader },
+		components:{ topTitle },
 		data(){
 			return{
 				phone:'',
@@ -46,6 +46,7 @@
 		width: $w;
 	}
 	#container{
+		margin-top: 0.96rem;
 		width: 7.5rem;
 		display: flex;
 		flex-direction: column;

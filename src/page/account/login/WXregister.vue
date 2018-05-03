@@ -1,6 +1,6 @@
 <template>
 	<div id="WXregister">
-		<loginHeader title="微信注册"></loginHeader>
+		<topTitle title="微信注册"></topTitle>
 		<div id="WXname">
 			<ul>
 				<li><img src="../../../assets/images/account/WXuser.png" alt="" /></li>
@@ -34,10 +34,10 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	export default{
 		name:"WXregister",
-		components:{ loginHeader },
+		components:{ topTitle },
 		data(){
 			return{
 				nickname:"你是谁",
@@ -60,6 +60,7 @@
 		width: $w;
 	}
 	#WXname{
+		margin-top: 0.96rem;
 		width: 100%;
 		text-align: center;
 		height: 2.4rem;

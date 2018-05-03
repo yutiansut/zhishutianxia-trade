@@ -1,6 +1,6 @@
 <template>
 	<div id="register">
-		<loginHeader title="注册" type="1"></loginheader>
+		<topTitle title="注册" type="1"></topTitle>
 		<div id="container">
 			<ul>
 				<li>
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	import codeDialog from "../../../components/codeDialog.vue"
 	export default{
 		name:"register",
-		components:{ loginHeader,codeDialog },
+		components:{ topTitle,codeDialog },
 		data(){
 			return{
 				phone:"",
@@ -63,6 +63,7 @@
 		width: $w;
 	}
 	#container{
+		margin-top: 0.96rem;
 		width: 7.5rem;
 		display: flex;
 		flex-direction: column;

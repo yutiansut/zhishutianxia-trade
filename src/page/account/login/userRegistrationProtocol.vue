@@ -1,6 +1,6 @@
 <template>
 	<div id="userRegistrationProtocol">
-		<loginHeader title="用户注册协议" type="0"></loginHeader>
+		<topTitle title="用户注册协议" type="0"></topTitle>
 		<div id="container">
 			<p class="p_center">指数天下服务协议</p>
 			<p class="p_nomal">指数天下是成都指数天下智慧科技有限公司负责运营（以下“本应用”均指指数天下）。在您注册成为本应用用户前请务必仔细阅读以下条款。若您一旦注册，则表示您同意接受本应用的服务并受以下条款的约束。若您不接受以下条款，请您立即停止注册或主动停止使用本应用的服务。</p>
@@ -287,10 +287,10 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	export default{
 		name:"userRegistrationProtocol",
-		components:{ loginHeader },
+		components:{ topTitle },
 		data(){
 			return{
 				
@@ -308,6 +308,7 @@
 		width: 7.5rem;
 	}
 	#container{
+		margin-top: 0.96rem;
 		width: 7.5rem;
 		display: flex;
 		flex-direction: column;

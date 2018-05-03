@@ -1,6 +1,6 @@
 <template>
 	<div id="login">
-		<loginHeader title="登录" type="1"></loginheader>
+		<topTitle title="登录" type="1"></topTitle>
 		<div id="container">
 			<ul>
 				<li>
@@ -25,10 +25,10 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	export default{
 		name:"login",
-		components:{ loginHeader },
+		components:{ topTitle },
 		data(){
 			return{
 				phone:"",
@@ -52,6 +52,7 @@
 		width: $w;
 	}
 	#container{
+		margin-top: 0.96rem;
 		width: 7.5rem;
 		display: flex;
 		flex-direction: column;

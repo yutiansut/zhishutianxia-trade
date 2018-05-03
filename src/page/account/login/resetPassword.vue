@@ -1,6 +1,6 @@
 <template>
 	<div id="resetPassword">
-		<loginHeader title="设置新密码" type="0"></loginHeader>
+		<topTitle title="设置新密码" type="0"></topTitle>
 		<div id="container">
 			<ul>
 				<li class="Rt">
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-	import loginHeader from "../../../components/loginHeader.vue"
+	import topTitle from "../../../components/topTitle.vue"
 	export default{
 		name:"resetPassword",
-		components:{ loginHeader },
+		components:{ topTitle },
 		data(){
 			return{
 				password:"",
@@ -41,6 +41,7 @@
 		width: $w;
 	}
 	#container{
+		margin-top: 0.96rem;
 		width: 7.5rem;
 		display: flex;
 		flex-direction: column;
