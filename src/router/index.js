@@ -8,6 +8,9 @@ import match from '@/page/match'
 import quote from '@/page/quote'
 import my from '@/page/account/my/my'
 import self_select from '@/page/account/my/self_select'
+import self_setting from '@/page/account/my/self_setting'
+import reset_password from '@/page/account/my/reset_password'
+import reset_phone from '@/page/account/my/reset_phone'
 import login from '@/page/account/login/login'
 import regitser from '@/page/account/login/regitser'
 import WXregister from '@/page/account/login/WXregister'
@@ -33,6 +36,7 @@ export default new Router({
       name: 'trade',
       component: trade
     },
+    /* my页面的路由配置 begin */
     {
       path: '/my',
       name: 'my',
@@ -43,6 +47,22 @@ export default new Router({
       name: 'self_select',
       component: self_select
     },
+    {
+      path: '/self_setting',
+      name: 'self_setting',
+      component: self_setting
+    },
+    {
+      path: '/reset_password',
+      name: 'reset_password',
+      component: reset_password
+    },
+    {
+      path: '/reset_phone',
+      name: 'reset_phone',
+      component: reset_phone
+    },
+    /* my页面的路由配置 end */
     {
       path: '/discover',
       name: 'discover',

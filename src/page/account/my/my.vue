@@ -180,8 +180,7 @@ export default {
     display: inline-block;
     width: 0.14rem;
     height: 0.22rem;
-    background: url("../../../assets/images/account/right_jiantou.png") center
-      no-repeat;
+    background: url("../../../assets/images/account/right_jiantou.png") center no-repeat;
     background-size: cover;
     vertical-align: middle;
     text-align: right;
