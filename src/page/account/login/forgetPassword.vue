@@ -1,6 +1,6 @@
 <template>
 	<div id="forgetPassword">
-		<loginHeader title="找回密码"></loginHeader>
+		<loginHeader title="找回密码" type="0"></loginHeader>
 		<div id="container">
 			<ul>
 				<li>

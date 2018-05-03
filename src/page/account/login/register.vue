@@ -1,13 +1,13 @@
 <template>
 	<div id="register">
-		<loginHeader title="注册"></loginheader>
+		<loginHeader title="注册" type="1"></loginheader>
 		<div id="container">
 			<ul>
 				<li>
 					<input type="tel"  placeholder="请输入手机号" class="input input1" v-model="phone" maxlength="11"/>
 				</li>
 				<li class="Rt">
-					<span class="getcode">获取验证码</span>
+					<span class="getcode" @click="getCode">获取验证码</span>
 					<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 				</li>
 				<li class="Rt">
@@ -22,14 +22,16 @@
 			</div>
 			<p @click="toProtocol"><span class="color_gray">注册即代表阅读并同意</span>《指数天下用户协议》</p>
 		</div>
+		<codeDialog type="register" ref="codeDialog"></codeDialog>
 	</div>
 </template>
 
 <script>
 	import loginHeader from "../../../components/loginHeader.vue"
+	import codeDialog from "../../../components/codeDialog.vue"
 	export default{
-		name:"regitser",
-		components:{ loginHeader },
+		name:"register",
+		components:{ loginHeader,codeDialog },
 		data(){
 			return{
 				phone:"",
@@ -46,6 +48,9 @@
 			},
 			toProtocol:function(){
 				this.$router.push({path:"/userRegistrationProtocol"});
+			},
+			getCode:function(){
+				this.$refs.codeDialog.ishow = true;
 			}
 		}
 	}

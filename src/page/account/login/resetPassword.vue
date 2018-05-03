@@ -1,6 +1,6 @@
 <template>
 	<div id="resetPassword">
-		<loginHeader title="设置新密码"></loginHeader>
+		<loginHeader title="设置新密码" type="0"></loginHeader>
 		<div id="container">
 			<ul>
 				<li class="Rt">
