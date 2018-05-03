@@ -6,11 +6,11 @@
 				<h3 class="title">请先输入图形 验证码</h3>
 				<div class="code_box">
 					<input type="tel" class="fl" v-model="code" />
-					<a href="javascript:void(0);" class="fr"><img :src="imgPath"/></a>
+					<a href="javascript:void(0);" class="fr"><img :src="imgPath" @click="refreshCode" /></a>
 				</div>
 				<div class="black"></div>
 				<div class="btn_box">
-					<span>确认</span>
+					<span @click="confirm">确认</span>
 					<span @click="cancel">取消</span>
 				</div>
 			</div>
@@ -43,6 +43,7 @@
 				}
 			},
 			imgPath: function(){
+				console.log(this.path)
 				if(this.path) return this.path;
 			},
 			PATH: function(){
@@ -55,6 +56,93 @@
 		methods: {
 			cancel:function(){
 				this.ishow = false;
+			},
+			refreshCode: function(){
+				this.path = this.path + '&' + Math.random();
+			},
+			confirm: function(){
+				if(this.code == ''){
+					this.$toast({message: '请输入验证码',duration: 2000});
+				}else{
+					if(this.type == 'login'){
+//						请求认证
+						var data = {
+							mobile: this.info.loginName,
+							password: this.info.password,
+							imgCode: this.code,
+							clientId:""
+						};
+						pro.fetch("post",'/loginAndRegister/mobileLogin',data,"").then(function(){
+							if(res.success == true && res.code == 1){
+								this.$toast({message: "登录成功",duration: 2000});
+								this.code = '';
+								this.token = res.data.token;
+								this.secret = res.data.secret;
+								var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': res.data.token, 'secret': res.data.secret};  
+								localStorage.setItem("user", JSON.stringify(userData));
+								setTimeout(function(){
+									this.ishow = false;
+								},1000)
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							if(data == undefined){
+								this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
+							}else{
+								this.$toast({message:data.message,duration: 2000});
+								this.code = '';
+								this.path = this.path + '&' + Math.random()*10;
+							}
+						}.bind(this))
+					}else if(this.type == 'register'){
+						//请求发送验证码
+						var data ={
+						 	"mobile": this.phone,
+							"type": 1,
+							"imageCode": this.code
+						};
+						pro.fetch('post', '/loginAndRegister/getSmsCode', data, "").then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
+									this.ishow = false;
+									this.$toast({message: '发送成功',duration: 2000});
+								}
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							if(data == undefined){
+								this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
+							}else{
+								this.code = '';
+								this.ishow = false;
+								this.$toast({message: data.message,duration: 2000});
+							}
+						}.bind(this));
+					}else if(this.type == 'findpwd'){
+						//请求发送验证码
+						var data={
+								mobile: this.phone,
+								type: 2,
+								imageCode: this.code
+						};
+						var headers = {version:this.version}
+						pro.fetch("post",'/loginAndRegister/getSmsCode',data,"").then(function(res){
+							if(res.success == true && res.code == 1){
+									this.$toast({message:"发送成功",duration: 2000});
+									setTimeout(function(){
+										this.ishow = false;
+									}.bind(this),1000);
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							if(data == undefined){
+								this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
+							}else{
+								this.$toast({message:data.message,duration: 2000});
+							}
+						}.bind(this))
+					}
+				}
 			}
 		}
 	}
