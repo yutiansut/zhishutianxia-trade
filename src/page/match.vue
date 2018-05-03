@@ -13,10 +13,10 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in 4">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" alt="" />
+				   			<img src="../assets/images/match/match_bananer.png" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_apply.png" alt="" />
+				   			<img src="../assets/images/match/match_apply.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -48,6 +48,12 @@
 				selected:"1"
 			}
 			
+		},
+		watch:{
+			selected:function(n,old){
+				console.log(n);
+				console.log("----"+old)
+			}
 		}
 		
 	}
