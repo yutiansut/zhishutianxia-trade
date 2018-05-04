@@ -61,6 +61,9 @@ $w: 7.5rem;
     background: #000;
     opacity: 0.5;
 }
+.border_bottom{
+    border-bottom: 0.01rem solid $bgDeep;
+}
 
 /*****mixin*****/
 @mixin font ($size:$fs36,$line-height:1,$color:#333,$text-align:center) {

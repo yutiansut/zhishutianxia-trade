@@ -53,10 +53,6 @@
 	@import "../../assets/css/common.scss";
 	#topNars{
 		width: $w;
-		position: fixed;
-		top: 0;
-		left: 0;
-		overflow: hidden;
 	}
 	#container{
 		margin-top: 0.96rem;
