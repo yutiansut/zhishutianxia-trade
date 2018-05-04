@@ -58,6 +58,10 @@
 	@import "../../../assets/css/common.scss";
 	#WXregister{
 		width: $w;
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 	#WXname{
 		margin-top: 0.96rem;

@@ -197,6 +197,10 @@
 	@import "../../../assets/css/common.scss";
 	#login{
 		width: $w;
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 	#container{
 		margin-top: 0.96rem;
