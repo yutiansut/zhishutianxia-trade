@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import trade from '@/page/trade'
-
+import home from "@/page/home"
 import discover from '@/page/discover'
 import match from '@/page/match'
 import quote from '@/page/quote'
@@ -49,6 +49,11 @@ export default new Router({
       path: '/my',
       name: 'my',
       component: my
+    },
+    {
+    	path: '/home',
+      name: 'home',
+      component: home
     },
     {
       path: '/self_select',
