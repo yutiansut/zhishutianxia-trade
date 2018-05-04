@@ -48,21 +48,14 @@
 		},
 		watch: {
 			tabSelected (value ,oldValue) {
-				this.$router.push({path: `/${value}`})
-				//value = this.tabSelect
-				// //console.log(value)
-				// let path = this.$router.path.slice(1);
-				// if(path === this.tabSelect){
-				// 	value = path
-				// }
-				
+				if(value == this.tabSelect) return;
+				this.$router.push({path: `/${value}`})				
 			},
 		},
-		// updated () {
-		// 	console.log(this.tabSelected)
-		// 	this.tabSelect = 
-		// 	this.tabSelected = this.tabSelect
-		// }
+		updated () {
+			//修复转跳后 选中状态的改变
+			this.tabSelected = this.tabSelect
+		}
 	}
 </script>
 
