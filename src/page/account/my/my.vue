@@ -85,7 +85,7 @@ export default {
     goto(path) {
       this.$router.push({ path: path });
     }
-  }
+  },
 };
 </script>
 

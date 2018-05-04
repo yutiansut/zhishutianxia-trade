@@ -24,28 +24,32 @@
 				   </div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
-			    	<mt-cell v-for="n in 4" :title="'测试 ' + n" />
+			    	<mt-cell v-for="n in 4" :title="'测试 ' + n"  :key="'测试'+n"/>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
-			    	<mt-cell v-for="n in 6" :title="'选项 ' + n" />
+			    	<mt-cell v-for="n in 6" :title="'选项 ' + n"  :key="'选项'+n"/>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
-			    	<mt-cell v-for="n in 6" :title="'哈哈 ' + n" />
+			    	<mt-cell v-for="n in 6" :title="'哈哈 ' + n"  :key="'哈哈'+n"/>
 			    </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
+		<!-- 选项卡 -->
+		<bottomTab :tabSelect="tabSelected" href></bottomTab>
 	</div>
 </template>
 
 <script>
 	import { Navbar, TabItem } from 'mint-ui';
 	import topTitle from "../components/topTitle"
+	import bottomTab from "../components/bottom_tab"
 	export default{
-		name:"match",
-		components:{ topTitle },
+		name: 'match',
+		components:{ topTitle ,bottomTab},
 		data(){
 			return{
-				selected:"1"
+				selected:"1",
+				tabSelected: 'match'
 			}
 			
 		},
@@ -53,8 +57,11 @@
 			selected:function(n,old){
 				console.log(n);
 				console.log("----"+old)
-			}
-		}
+			},
+		},
+		// activated () {
+		// 	this.tabSelected = 'trade'
+		// }
 		
 	}
 </script>
@@ -126,4 +133,6 @@
 			}
 		}
 	}
+
+
 </style>
