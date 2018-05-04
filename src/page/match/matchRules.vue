@@ -1,0 +1,172 @@
+<template>
+	<div id="matchRules">
+		<div class="time">
+			比赛时间：2018-01-20 至 2018-02-20
+		</div>
+		<div class="nar border_bottom">
+			<span>活动奖励</span>
+		</div>
+		<div class="activity">
+			<ul>
+				<li class="border_bottom">
+					<div>
+						<img src="../../assets/images/match/no1.png"/>
+						<span>第一名</span>
+					</div>
+					<label>1000元</label>
+				</li>
+				<li class="border_bottom">
+					<div>
+						<img src="../../assets/images/match/no2.png"/>
+						<span>第一名</span>
+					</div>
+					<label>1000元</label>
+				</li>
+				<li class="border_bottom">
+					<div>
+						<img src="../../assets/images/match/no3.png"/>
+						<span>第一名</span>
+					</div>
+					<label>1000元</label>
+				</li>
+			</ul>
+		</div>
+		<div class="h_20"></div>
+		<div class="nar border_bottom">
+			<span>比赛规则</span>
+		</div>
+		<div class="rules">
+			<ul>
+				<li class="border_bottom">
+					<span>初始资金：</span>
+					<label>1000元</label>
+				</li>
+				<li class="border_bottom">
+					<span>初始资金：</span>
+					<label>1000元</label>
+				</li>
+				<li class="border_bottom">
+					<span>初始资金：</span>
+					<label>1000元</label>
+				</li>
+				<li class="border_bottom">
+					<span>初始资金：</span>
+					<label>1000元</label>
+				</li>
+			</ul>
+		</div>
+		<div class="tips">
+			<span>提醒：</span>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+		</div>
+		<button>比赛报名中，立即参加</button>
+	</div>
+</template>
+
+<script>
+	export default{
+		name:"matchRules",
+		data(){
+			return{
+				
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	@import "../../assets/css/common.scss";
+	#matchRules{
+		width: $w;
+	}
+	.time{
+		width: 100%;
+		height: 0.64rem;
+		background-color: $bgGray;
+		border-bottom: 0.01rem solid $bgDeep;
+		border-top: 0.01rem solid $bgDeep;
+		text-align: center;
+		line-height: 0.64rem;
+		color: #919199;
+		font-size:$fs24;
+	}
+	.nar{
+		width: 100%;
+		height: 0.64rem;
+		line-height: 0.64rem;
+		padding-left: 0.3rem;
+		span{
+			font-size: $fs28;
+			border-left: 0.04rem solid $redDeep;
+			padding-left: 0.1rem;
+		}
+	}
+	.activity{
+		li{
+			padding: 0 0.3rem;
+			height: 0.96rem;
+			line-height: 0.96rem;
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			img{
+				width: 0.44rem;
+				height: 0.44rem;
+			}
+			span{
+				margin-left: 0.1rem;
+				color: #919199;
+				font-size: $fs28;
+			}
+			
+		}
+	}
+	.rules{
+		li{
+			padding: 0 0.3rem;
+			height: 0.96rem;
+			line-height: 0.96rem;
+			width: 100%;
+			span{
+				font-size: $fs28;
+				color: #919199;
+			}
+			label{
+				font-size: $fs28;
+				color: $blcakThin;
+			}
+		}
+	}
+	.tips{
+		margin-bottom: 1.5rem;
+		width: 100%;
+		margin-top: 0.3rem;
+		padding: 0rem 0.3rem;
+		font-size: $fs28;
+		span{
+			color: $redDeep;
+		}
+		p{
+			color: $graySimple;
+			line-height: 0.4rem;
+		}
+	}
+	button{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 0.98rem;
+		background-color: $redDeep;
+		color: $bg;
+		font-size: 0.36rem;
+		line-height: 0.48rem;
+	}
+</style>

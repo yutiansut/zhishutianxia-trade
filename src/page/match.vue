@@ -86,6 +86,9 @@
 		.mint-tab-container{
 			padding: 0 0.3rem;
 		}
+		#4 .mint-navbar .mint-tab-item.is-selected.mint-tab-item-label{
+			color:$redDeep ;
+		}
 		.matchDiv{
 			width: 6.9rem;
 			height: 3.2rem;
