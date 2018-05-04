@@ -127,6 +127,12 @@ const router = new Router({
      component: load('account/login/userRegistrationProtocol')
     },
     //以上是注册登录
+    //以下是比赛
+    {
+    	path:"/topNars",
+    	name:'topNars',
+    	component: load('match/topNars')
+    }
   ]
 })
 export default router
