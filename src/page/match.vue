@@ -35,7 +35,7 @@
 			</mt-tab-container>
 		</div>
 		<!-- 选项卡 -->
-		<bottomTab :tabSelect="tabSelected" href></bottomTab>
+		<bottomTab :tabSelect="tabSelected"></bottomTab>
 	</div>
 </template>
 
@@ -58,11 +58,7 @@
 				console.log(n);
 				console.log("----"+old)
 			},
-		},
-		// activated () {
-		// 	this.tabSelected = 'trade'
-		// }
-		
+		},		
 	}
 </script>
 

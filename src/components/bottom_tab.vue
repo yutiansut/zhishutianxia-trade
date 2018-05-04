@@ -1,5 +1,5 @@
 <template>
-	<div id="loginHeader">
+	<div id="bottom_tab">
 		<mt-tabbar v-model="tabSelected">
 			<template v-for="(item,index) in tabList">
 				<mt-tab-item :id="item.path" :key="item.path">
@@ -61,7 +61,7 @@
 
 <style lang="scss" scoped>
 	@import "../assets/css/common.scss";
-	#loginHeader{
+	#bottom_tab{
 		width: $w;
 		position: fixed;
 		top: 0;
@@ -74,7 +74,6 @@
   //background: url('../assets/img/icon_colour.png') top center no-repeat;
   background-size: cover;
 }
-
 @for $i from 1 through 5 {
   $img: ("index", "quotation", "trade", "match", "discover");
   .icon#{$i}{

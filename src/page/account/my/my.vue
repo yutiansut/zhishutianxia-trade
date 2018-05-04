@@ -52,7 +52,7 @@ export default {
         },
         {
           name: "比赛记录",
-          path: "/match_history"
+          path: "/my_match"
         },
         {
           name: "个人设置",
@@ -84,8 +84,19 @@ export default {
     },
     goto(path) {
       this.$router.push({ path: path });
-    }
-  },
+    },
+    //获取用户信息
+		// getUserInfo () {
+		// 		var headers = {
+		// 			token : this.userInfo.token,
+		// 			secret : this.userInfo.secret
+		// 		}
+		// 	  //	console.log(headers)
+		// 		pro.fetch("post","/account/getBasicMsg","",headers).then((res)=>{
+
+    //     })
+    // },
+  }  
 };
 </script>
 

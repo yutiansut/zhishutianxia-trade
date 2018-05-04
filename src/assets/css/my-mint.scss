@@ -13,11 +13,11 @@
     border-top:1px solid #e6e6e6; 
     z-index: 999;
 }	
-.mint-tab-item-label{
+#bottom_tab .mint-tab-item-label{
 	color: #c2c2cc;
 }
 
-.mint-tabbar > .mint-tab-item.is-selected .mint-tab-item-label {
+#bottom_tab .mint-tabbar > .mint-tab-item.is-selected .mint-tab-item-label {
     background-color: #eaeaea;
     color: #333340;
 }
