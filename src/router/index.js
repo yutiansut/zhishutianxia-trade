@@ -158,6 +158,11 @@ const router = new Router({
     	path:"/mineGt",
     	name:"mineGt",
     	component:load('match/mineGt')
+    },
+    {
+    	path:"/matchUserDetails",
+    	name:"matchUserDetails",
+    	component:load('match/matchUserDetails')
     }
   ]
 })
