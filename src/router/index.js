@@ -109,6 +109,11 @@ const router = new Router({
      component: load('account/my/match_details_history'),
      props:true
     },
+    {
+      path: '/follow_get_history/:id',
+     component: load('account/my/follow_get_history'),
+     props:true
+    },
     
     /* my页面的路由配置 end */
     //以下注册登录

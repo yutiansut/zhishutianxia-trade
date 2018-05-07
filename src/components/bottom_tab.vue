@@ -69,8 +69,8 @@
 	}
 .icon{
   display: inline-block;
-  width: 0.4rem;
-  height: 0.4rem;
+//   width: 0.4rem;
+//   height: 0.4rem;
   //background: url('../assets/img/icon_colour.png') top center no-repeat;
   background-size: cover;
 }
