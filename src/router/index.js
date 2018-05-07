@@ -167,6 +167,11 @@ const router = new Router({
     	path:"/matchUserDetails",
     	name:"matchUserDetails",
     	component:load('match/matchUserDetails')
+    },
+    {
+    	path:"/matchSet",
+    	name:"matchSet",
+    	component:load("match/matchSet")
     }
   ]
 })
