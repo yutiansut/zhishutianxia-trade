@@ -153,6 +153,11 @@ const router = new Router({
     	path:"/topNars",
     	name:'topNars',
     	component: load('match/topNars')
+    },
+    {
+    	path:"/mineGt",
+    	name:"mineGt",
+    	component:load('match/mineGt')
     }
   ]
 })

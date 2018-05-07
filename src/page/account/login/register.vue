@@ -1,6 +1,6 @@
 <template>
 	<div id="register">
-		<topTitle title="注册" type="1"></topTitle>
+		<topTitle title="注册" type="1" type1="1"></topTitle>
 		<div id="container">
 			<ul>
 				<li>
