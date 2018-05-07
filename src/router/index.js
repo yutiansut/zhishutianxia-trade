@@ -92,27 +92,31 @@ const router = new Router({
     {
       path: '/information',
       name: 'information',
-     component: load('account/my/information')
+      component: load('account/my/information')
     },
     {
       path: '/my_match',
       name: 'my_match',
-     component: load('account/my/my_match')
+      component: load('account/my/my_match')
     },
     {
       path: '/match_details/:id',
-     component: load('account/my/match_details'),
-     props:true
+      component: load('account/my/match_details'),
+      props:true
     },
     {
       path: '/match_details_history/:id',
-     component: load('account/my/match_details_history'),
-     props:true
+      component: load('account/my/match_details_history'),
+      props:true
     },
     {
       path: '/follow_get_history/:id',
-     component: load('account/my/follow_get_history'),
-     props:true
+      component: load('account/my/follow_get_history'),
+      props:true
+    },
+    {
+      path: '/help_docs',
+      component: load('account/my/help_docs'),
     },
     
     /* my页面的路由配置 end */

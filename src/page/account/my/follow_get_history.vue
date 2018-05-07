@@ -11,11 +11,11 @@
                 <ul class="history_list">
                     <li class="history_item_title">
                         <span>序号</span>
-                        <div class="phone_number">跟投用户名 发起者用户名</div>
+                        <div class="phone_number"> {{config.type}}</div>
                         <div class="name">跟投方向</div>
                         <span class="small">提取收益率</span>
                         <span class="small">跟投总收益</span>
-                        <span>提取收益</span>
+                        <span>{{config.name}}</span>
                         <span class="more">跟投获取收益</span>
                         <div class="time">跟投时间</div>
                         <div class="time">结束时间</div>
@@ -62,13 +62,22 @@
 </template>
 
 <script>
+const extractConfig = {
+    type: '跟投用户名',
+    name: '提取收益',
+}
+const deductionConfig = {
+    type: '被跟投用户名',
+    name: '扣除收益',
+}
 export default {
   name: 'match_details_history',
   props: ['id'],
   data () {
     return {
       isBegin: true,
-      selected: '1'
+      selected: '1',
+      config: {}
     }
   },
   computed: {
@@ -78,9 +87,11 @@ export default {
        titleName () {
            switch (this.id) {
                 case 'extract':
+                this.config = extractConfig;
                    return '跟投提取收益'
                    break;
                 case 'deduction':
+                this.config = deductionConfig;
                    return '跟投扣除收益'
                    break;   
            
