@@ -1,12 +1,14 @@
 <template>
 	<div id="matchDynamic ">
-		matchDynamic
+		<dynamicBar></dynamicBar>
 	</div>
 </template>
 
 <script>
+	import dynamicBar from"./dynamicBar.vue"
 	export default{
 		name:"matchDynamic",
+		components:{ dynamicBar },
 		data(){
 			return{
 				
