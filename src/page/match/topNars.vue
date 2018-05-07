@@ -1,6 +1,6 @@
 <template>
 	<div id="topNars">
-		<topTitle title="模拟比赛" type="0"></topTitle>
+		<topTitle title="模拟比赛" type="0" type1="0"></topTitle>
 		<div id="container">
 			<div class="tab" v-for="(n,index) in list" :class="{current:current == index}"  @click="switchTab(index)">
 				<span>{{n}}</span>

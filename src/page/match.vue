@@ -1,6 +1,6 @@
 <template>
 	<div id="match">
-		<topTitle title="比赛" type="1"></topTitle>
+		<topTitle title="比赛" type="1" type1="1"></topTitle>
 		<div id="container">
 			<mt-navbar v-model="selected">
 			  <mt-tab-item id="1">全部比赛</mt-tab-item>

@@ -1,6 +1,6 @@
 <template>
 	<div id="resetPassword">
-		<topTitle title="设置新密码" type="0"></topTitle>
+		<topTitle title="设置新密码" type="0" type1="1"></topTitle>
 		<div id="container">
 			<ul>
 				<li class="Rt">

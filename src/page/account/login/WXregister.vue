@@ -1,6 +1,6 @@
 <template>
 	<div id="WXregister">
-		<topTitle title="微信注册"></topTitle>
+		<topTitle title="微信注册" type="0" type1="1"></topTitle>
 		<div id="WXname">
 			<ul>
 				<li><img src="../../../assets/images/account/WXuser.png" alt="" /></li>

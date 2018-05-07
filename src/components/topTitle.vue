@@ -3,7 +3,9 @@
 		<div id="container">
 			<i :class="type == 1 ? 'account' : 'back'" @click="toNext(type)"></i>
 			<h1>{{title}}</h1>
-			<i class="online"></i>
+			<i class="online" @click="toRight" v-if="type1 == '1'"></i>
+			<span class="span_color" v-else-if="type1 == '0' " @click="toRight()">我的跟投者</span>
+			<i v-else-if="type1 == '2' "></i>
 		</div>
 	</div>
 </template>
@@ -11,7 +13,7 @@
 <script>
 	export default{
 		name:"loginHeader",
-		props:['title',"type"],
+		props:['title',"type","type1"],
 		data(){
 			return{
 				
@@ -23,6 +25,14 @@
 					this.$router.push({path:"/my"})
 				}else{
 					this.$router.back(-1)
+				}
+			},
+			toRight(){
+				if(this.type1 == "1"){
+					console.log("111")
+				}else{
+					console.log("222")
+					this.$router.push({path:"/mineGt"});
 				}
 			}
 		}
@@ -68,6 +78,11 @@
 			height: 0.64rem;
 			background: url(../assets/images/account/icon_back.png) no-repeat 70% 50%;
 			background-size: 0.16rem 0.32rem;
+		}
+		.span_color{
+			font-size: $fs28;
+			color: $bg;
+			padding-right: 0.3rem;
 		}
 	}
 	
