@@ -59,7 +59,44 @@
 			<div class="p_left border_bottom">
 				<span>成交记录</span>	
 			</div>
-			
+			<div id="history_details">
+				<div class="history">
+					<ul>
+						<li class="border_bottom">
+							<span>序号</span>
+							<span>合约名称</span>
+							<span>买/卖</span>
+							<span>成交价</span>
+							<span>成交量</span>
+							<span>手续费</span>
+							<span>平仓盈亏</span>
+							<span>币种</span>
+							<span>交易所</span>
+							<span>下单时间</span>
+						</li>
+						<template>
+							<li class="border_bottom" v-for="n in 10">
+								<span>1</span>
+								<span>2</span>
+								<span>3</span>
+								<span>4</span>
+								<span>5</span>
+								<span>6</span>
+								<span>7</span>
+								<span>8</span>
+								<span>8</span>
+								<span>9</span>
+							</li>
+							
+						</template>
+					</ul>
+				</div>
+			</div>
+			<div class="div_white"></div>
+			<div id="bottom_tab">
+				<span>正向跟投</span>
+				<span>反向跟投</span>
+			</div>
 		</div>
 	</div>	
 </template>
@@ -145,6 +182,63 @@
 			span{
 				border-left: 0.04rem solid $redDeep;
 				padding-left: 0.1rem;
+			}
+		}
+		#history_details{
+			width: $w;
+			.history{
+				width: 100%;
+				overflow-x: scroll;
+				ul{
+					display: block;
+					padding: 0 0.3rem;
+					width: 20.6rem;
+					li{
+						text-align: center;
+						line-height: 0.88rem;
+						height:0.88rem;
+						span{
+							float: left;
+							width: 2rem;
+							display: block;
+							overflow: hidden;
+							color: $blcakThin;
+						}
+					}
+				}
+			}
+		}
+		.div_white{
+			width: 100%;
+			height: 0.98rem;
+			background-color: $bg;
+		}
+		#bottom_tab{
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			height: 0.98rem;
+			text-align: center;
+			line-height: 0.98rem;
+			font-size: 0.36rem;
+			span{
+				&:nth-child(1){
+					height: 0.98rem;
+					float: left;
+					display: block;
+					width: 50%;
+					background-color: $redDeep;
+					color: $bg;
+				}
+				&:nth-child(2){
+					height: 0.98rem;
+					float: left;
+					display: block;
+					width: 50%;
+					background-color: $blcakThin;
+					color: $bg;
+				}
 			}
 		}
 	}
