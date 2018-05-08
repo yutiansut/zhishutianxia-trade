@@ -3,9 +3,9 @@
 		<topTitle title="微信注册" type="0" type1="1"></topTitle>
 		<div id="WXname">
 			<ul>
-				<li><img src="../../../assets/images/account/WXuser.png" alt="" /></li>
+				<li><img v-bind:src="this.headimgurl"/></li>
 				<li>
-					<p>亲爱的&nbsp;<span>哈哈哈</span></p>
+					<p>亲爱的&nbsp;<span>{{nickname}}</span></p>
 					<p>为了您的账户安全，请关联您的手机号，下次可直接登录。</p>
 				</li>
 			</ul>
@@ -18,16 +18,16 @@
 						<input type="tel"  placeholder="请输入手机号" class="input input1" v-model="phone" maxlength="11"/>
 					</li>
 					<li class="Rt">
-						<span class="getcode">获取验证码</span>
+						<span class="getcode">{{volid ? info1 : (time + '秒')}}</span>
 						<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 					</li>
 					<li class="Rt">
-						<i class="psdIcon"></i>
-						<input type="password"  placeholder="请输入密码" class="input" v-model="password"/>
+						<i :class="showPsd == false ? 'psdIcon1' : 'psdIcon'" @click="changepsd"></i>
+						<input type="password"  placeholder="请输入密码" class="input" v-model="password" id="password"/>
 					</li>
 				</ul>
 			</div>
-			<button class="btn">立即绑定并注册</button>
+			<button class="btn" @click="confirm">立即绑定并注册</button>
 			<p class="color_p" @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
 		</div>
 	</div>
@@ -43,13 +43,153 @@
 				nickname:"你是谁",
 				phone:"",
 				password:"",
-				code:""
+				code:"",
+				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
+				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				info1:"获取验证码",
+				time: 0,
+				info:"",
+				openid:"",
+				sex:"",
+				unionid:"",
+				province:"",
+				city:"",
+				country:"",
+				headimgurl:"",
+				privilege:"",
+				accessToken:"",
+				showPsd:false
+			}
+		},
+		computed: {
+			PATH: function(){
+				return this.$store.getters.PATH;
+			},
+			volid: function(){
+				if(this.time <= 0){
+					return true
+				}else{
+					return false
+				}
+			},
+			packChannel(){
+				return this.$store.state.account.packChannel;
 			}
 		},
 		methods:{
+			changepsd:function(){
+				this.showPsd=!this.showPsd;
+				if(this.showPsd == true){
+					$("#password").attr("type","text")
+				}else{
+					$("#password").attr("type","password")
+				}
+			},
 			toLogin:function(){
-				this.$router.push({path:"/login"});
+				this.$router.push({path:"/login"})
+			},
+			eyeEvent:function(e){
+				if(this.showEye == true){
+					this.showEye=!this.showEye;
+					this.showNo=!this.showNo;
+					$(e.target).removeClass("current").siblings(".input2").attr("type",'text');
+				}else{
+					this.showEye=!this.showEye;
+					this.showNo=!this.showNo;
+					$(e.target).removeClass("current").siblings(".input2").attr("type",'password');
+				}
+			},
+			getCode:function(e){
+				if($(e.target).hasClass('current')) return false;
+				if(this.phone == ''){
+					this.$toast({message: '请输入手机号码',duration: 2000});
+				}else if(this.phoneReg.test(this.phone) == false){
+					this.$toast({message: '手机格式错误',duration: 2000});
+				}else{
+					this.$refs.codeDialog.isshow = true;
+					this.$refs.codeDialog.path= this.PATH+"/loginAndRegister/getImgCode.jpg"+Math.random()*1000+"?mobile=" + this.phone;
+					this.$refs.codeDialog.phone = this.phone;
+					//页面效果
+					$(e.target).addClass('current');
+					this.time = 60;
+					var timing = setInterval(function(){
+						this.time--;
+						if(this.time <= 0){
+							clearInterval(timing);
+							$(e.target).removeClass('current');
+						}
+					}.bind(this), 1000);
+				}
+			},
+			confirm:function(){
+				if(this.phone == ""){
+					this.$toast({message: '请输入手机号码',duration: 2000});
+				}else if(this.code == ""){
+					this.$toast({message: '请输入短信验证码',duration: 2000});
+				}else if(this.password == ""){
+					this.$toast({message: '请输入登录密码',duration: 2000});
+				}else if(this.phoneReg.test(this.phone) == false){
+					this.$toast({message: '请输入正确手机格式',duration: 2000});
+				}else if(this.pwdReg.test(this.password) == false){
+					this.$toast({message: '请输入6-16位数字加字母的密码',duration: 2000});
+				}else {
+					var data = {
+						mobile:this.phone,
+						password:this.password,
+						code:this.code,
+						resource:this.packChannel,
+						openid:this.openid,
+						nickname:this.nickname,
+						sex:this.sex,
+						unionid:this.unionid,
+						province:this.province,
+						city:this.city,
+						country:this.country,
+						headimgurl:this.headimgurl,
+						privilege:this.privilege,
+						accessToken:this.accessToken
+					}
+					pro.fetch("post","/loginAndRegister/register",data,"").then((res)=>{
+						if(res.code == 1 && res.success == true){
+							this.$toast({message:"注册成功",duration: 2000});
+							this.$router.push({path:"/login"})
+						}
+					}).catch((err)=>{
+						var data = err.data;
+						if(data == undefined){
+							this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
+						}else{
+							this.$toast({message:data.message,duration: 2000});
+						}
+					})
+				}
 			}
+		},
+		mounted:function(){
+			this.info = this.$route.query.weixinInfo;
+			this.headimgurl = this.$route.query.weixinInfo.headimgurl;
+			this.nickname = this.$route.query.weixinInfo.nickname;
+			this.openid=this.$route.query.weixinInfo.openid;
+			this.unionid=this.$route.query.weixinInfo.unionid;
+			this.province=this.$route.query.weixinInfo.province;
+			this.city=this.$route.query.weixinInfo.city;
+			this.country=this.$route.query.weixinInfo.country;
+			this.privilege=this.$route.query.weixinInfo.privilege;
+			this.accessToken=this.$route.query.access_token;
+			this.sex=this.$route.query.sex;
+		},
+		activited:function(){
+			this.info = this.$route.query.weixinInfo;
+			this.headimgurl = this.$route.query.weixinInfo.headimgurl;
+			this.nickname = this.$route.query.weixinInfo.nickname;
+			this.openid=this.$route.query.weixinInfo.openid;
+			this.unionid=this.$route.query.weixinInfo.unionid;
+			this.province=this.$route.query.weixinInfo.province;
+			this.city=this.$route.query.weixinInfo.city;
+			this.country=this.$route.query.weixinInfo.country;
+			this.privilege=this.$route.query.weixinInfo.privilege;
+			this.accessToken=this.$route.query.weixinInfo.access_token;
+			this.sex=this.$route.query.weixinInfo.sex;
 		}
 	}
 </script>
@@ -134,6 +274,16 @@
 				width:0.32rem;
 				height: 0.16rem;
 				background: url(../../../assets/images/account/account_psd.png);
+				background-size: 100% 100%;
+			}
+			.psdIcon1{
+				top: 0.52rem;
+				right: 0.3rem;
+				position: absolute;
+				display: inline-block;
+				width:0.32rem;
+				height: 0.16rem;
+				background: url(../../../assets/images/account/accout_nopsd.png);
 				background-size: 100% 100%;
 			}
 			.getcode{

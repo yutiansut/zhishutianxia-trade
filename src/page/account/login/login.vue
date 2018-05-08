@@ -17,7 +17,7 @@
 			<button class="btn" @click="login">登录</button>
 			<p @click="toRegister">新用户注册>></p>
 			<div class="showWX" v-show="showWhat">
-				<i class="toWX"></i>
+				<i class="toWX" @click="getWechatId"></i>
 			</div>
 		</div>
 		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
@@ -38,7 +38,9 @@
 				phoneReg:/^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				showWhat:true,
-				showPsd:false
+				showPsd:false,
+				fullHeight:document.documentElement.clientHeight,
+				fullHeight1:document.documentElement.clientHeight,
 			}
 		},
 		computed : {
@@ -77,7 +79,6 @@
 						clientId:ClientId
 					};
 					pro.fetch('post', '/loginAndRegister/mobileLogin',info, "").then(function(res){
-//						console.log(res)
 						if(res.success == true){
 							if(res.code == 1){
 								this.$toast({message: '登录成功',duration: 1000,});
@@ -85,7 +86,6 @@
 								this.secret = res.data.secret;
 								var userData = {username:this.phone,password:Base64.encode(this.password),token:res.data.token,secret:res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
-								//this.$router.push({path:"/home"});
 								this.$router.push({path:"/my"});
 								this.$store.state.account.isLogin = true;
 							}
@@ -191,7 +191,7 @@
 							this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
 						}else{
 							this.$toast({message:"请先绑定手机号",duration: 1000});
-							this.$router.push({path:"/wechatRegisiter",query:{weixinInfo:weixinInfo}})
+							this.$router.push({path:"/WXregister",query:{weixinInfo:weixinInfo}})
 						}
 					}.bind(this));
 					this.$store._modules.root.state.account.weixinLoginInfo = false;

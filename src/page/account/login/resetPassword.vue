@@ -13,7 +13,7 @@
 				</li>
 			</ul>
 			<button class="btn" @click="login">登录</button>
-			<p @click="toRegister">新用户注册>></p>
+			<p @click="toRegisiter">新用户注册>></p>
 			<div class="showWX">
 				<i class="toWX"></i>
 			</div>
@@ -35,8 +35,8 @@
 			}
 		},
 		methods:{
-			toRegister:function(){
-				this.$router.push({path:"/register"});
+			toRegisiter:function(){
+				this.$router.push({path:"/regisiter"});
 			},
 			login:function(){
 				if(this.password == ''){

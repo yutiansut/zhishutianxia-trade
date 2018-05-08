@@ -43,7 +43,6 @@
 				}
 			},
 			imgPath: function(){
-				console.log(this.path)
 				if(this.path) return this.path;
 			},
 			PATH: function(){

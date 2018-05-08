@@ -17,8 +17,8 @@
 			</ul>
 			<button class="btn" @click="regisiter">注册</button>
 			<p @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
-			<div class="showWX">
-				<i class="toWX" @click="toWX"></i>
+			<div class="showWX" v-show="showWhat">
+				<i class="toWX" @click="getWechatId"></i>
 			</div>
 			<p @click="toProtocol"><span class="color_gray">注册即代表阅读并同意</span>《指数天下用户协议》</p>
 		</div>
@@ -44,7 +44,10 @@
 				time: 0,
 				isClick: false,
 				show: false,
-				showPsd:false
+				showPsd:false,
+				showWhat:true,
+				fullHeight:document.documentElement.clientHeight,
+				fullHeight1:document.documentElement.clientHeight
 			}
 		},
 		computed: {
@@ -73,8 +76,50 @@
 					this.isClick = false;
 				}
 			},
+			fullHeight (val) {
+		        if(val != this.fullHeight1){
+		        	this.showWhat = false;
+		        	$("#to").hide();
+		        }else{
+		        	this.showWhat =true;
+		        	$("#to").show();
+		        }
+		    },
+		    weixinLoginInfo(o,n){
+		    	if(o == true){
+			    	var weixinInfo = localStorage.weixinUser ? JSON.parse(localStorage.weixinUser) : "" ;
+					var ClientId = JSON.parse(localStorage.clientid).id ? JSON.parse(localStorage.clientid).id : '';
+					var data ={
+						openId:weixinInfo.openid,
+						clientId:ClientId
+					}
+					pro.fetch("post","/loginAndRegister/wxLogin",data,"").then(function(res){
+						if(res.code == 1 && res.success == true){
+							var userData = {'username':res.data.mobile,'token':res.data.token,'secret':res.data.secret};
+							localStorage.user=JSON.stringify(userData);
+							this.$toast({message:"授权登录成功",duration: 1000});
+							var saveState = {"issavepsd":true};
+							localStorage.setItem("stateLogin",JSON.stringify(saveState));
+							this.$router.push({path:"/index"});
+							this.$store.state.account.isLogin = true;
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						if(data == undefined){
+							this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+						}else{
+							this.$toast({message:"请先绑定手机号",duration: 1000});
+							this.$router.push({path:"/WXregister",query:{weixinInfo:weixinInfo}})
+						}
+					}.bind(this));
+					this.$store._modules.root.state.account.weixinLoginInfo = false;
+		    	}
+		    }
 		},
 		methods:{
+			getWechatId:function(){
+				pro.toweixin();
+			},
 			changepsd:function(){
 				this.showPsd=!this.showPsd;
 				if(this.showPsd == true){
@@ -151,6 +196,33 @@
 					})
 				}
 			},
+		},
+		mounted:function(){
+			pro.getClentId();
+			pro.isWXInstalled();
+			var isWXInstalled = localStorage.isWXInstalled ? localStorage.isWXInstalled : '';
+			if(isWXInstalled == 'false'){
+				this.showWhat = false;
+			}else{
+				this.showWhat = true;
+			}
+		},
+		activated:function(){
+			this.fullHeight1 = document.documentElement.clientHeight;
+			const that = this
+		    window.onresize = () => {
+		        return (() => {
+		          window.fullHeight = document.documentElement.clientHeight
+		          that.fullHeight = window.fullHeight
+		        })()
+		    }
+			pro.isWXInstalled();
+			var isWXInstalled = localStorage.isWXInstalled ? localStorage.isWXInstalled : '';
+			if(isWXInstalled == 'false'){
+				this.showWhat = false;
+			}else{
+				this.showWhat = true;
+			}
 		}
 	}
 </script>
