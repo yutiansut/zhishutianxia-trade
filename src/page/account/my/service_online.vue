@@ -1,6 +1,6 @@
 <template>
 	<div id="service">
-		<mt-header fixed title="客服中心">
+		<mt-header fixed title="客服咨询">
 			<mt-button slot="left" icon="back" @click="goBack"></mt-button>
 		</mt-header>
 		<div id="container">

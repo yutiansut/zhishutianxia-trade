@@ -11,6 +11,7 @@
 <script>
 import { mapState } from 'vuex'
 import Vue from "vue"
+import pro from './assets/js/common'
 export default {
   name: 'App',
   computed:{

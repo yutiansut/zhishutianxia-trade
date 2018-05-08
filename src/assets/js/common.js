@@ -332,6 +332,30 @@ pro.objIsInArray = function(arr, val){
 		return true;
 	}
 }
-
+let ls = localStorage;
+pro.local = {
+	set (key,value) {
+		let valueS = typeof value === 'string' ? value:JSON.stringify(value)
+		ls.setItem(key, valueS)
+	},
+	get (key) {
+		try {
+			return JSON.parse(ls.getItem(key))
+		} catch (error) {
+			console.log(`${key}不存在`)
+			return null
+		}
+		
+	},
+	remove (key) {
+		ls.removeItem(key)
+	},
+	clear () {
+		ls.clear()
+	},
+	keys () {
+		return Object.keys(ls)
+	}	
+}
 
 export default pro

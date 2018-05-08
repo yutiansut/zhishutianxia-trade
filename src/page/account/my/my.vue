@@ -1,5 +1,5 @@
 <template>
-    <div id="home" :style="{height:clientHeight}">
+    <div id="home">
         <mt-header fixed title="我的">           
             <mt-button slot="left" icon="back" @click="goLast"></mt-button>
             <mt-button slot="right" @click="goto('/information')">
@@ -43,10 +43,10 @@
 import pro from '../../../assets/js/common'
 import {mapMutations} from 'vuex'
 import switchAccount from '../../../components/switch_account'
-const user_info = {
-  token: 'NzE5YTdhOTlmNjJhNDlkZGI0YTk0ZTNiZmM0OWUwNmM=',
-  secret: '791cfd28e9bfd82e575418a96360e655'
-}
+
+const local = pro.local;
+const user = local.get('user')
+
 export default {
   name: "my",
   components: {
@@ -83,9 +83,8 @@ export default {
           path: "/news_info"
         }
       ],
-      userInfo: user_info,
+      userInfo: {},
       lastPath: '',
-      //accountInfo: {}
     };
   },
   computed: {
@@ -111,39 +110,39 @@ export default {
       this.$router.push({ path: path });
     },
     changeValue (msg, key) {
-      console.log(msg)
+      //console.log(msg)
       this[key] = msg
     },
     loginOut () {
       this.userInfo = {}
       this.clearUserInfo()
       this.isLogin = false
-      //this.accountInfo = {}
-      this.$toast({message:"成功退出登录",duration: 1000});
+      this.$toast({message:"成功退出登录",duration: 1000})
+      local.remove('user')
 
     },
     //获取用户信息
 		getUserInfo () {
-      this.userInfo = user_info
-				var headers = {
+      this.userInfo = user
+		  const headers = {
 					token : this.userInfo.token,
 					secret : this.userInfo.secret
 				}
-			  //	console.log(headers)
 				pro.fetch("post","/account/getBasicMsg","",headers).then((res)=>{
             //console.log(res);
-            this.setAccountInfo(res.data);
-            //this.accountInfo = this.$store.state.accountInfo;
-            this.isLogin = true;          
+            if(res.code == '1'){
+              this.setAccountInfo(res.data);
+              this.isLogin = true; 
+            }
+                     
         }).catch((err)=>{
-//					console.log("err==0"+JSON.stringify(err))
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 1000});
 					}else{
 						if(data.code == -9999){
 							this.$toast({message:"认证失败，请重新登录",duration: 1000});
-							this.$router.push({path:"/login"});
+							//this.$router.push({path:"/login"});
 						}
 						else{
 							this.$toast({message:data.message,duration: 1000});
@@ -157,14 +156,19 @@ export default {
   //    this.getUserInfo()
   // },
   activated () {
-    this.getUserInfo()
+    //console.log(user)
+    if(user){
+      this.getUserInfo()
+    }
+    
   },
   beforeRouteEnter: (to, from, next) => {
     //console.log(from)
     next(vm => {
       // 通过 `vm` 访问组件实例
-      console.log(from.path)
-      if(from.path !== '/login'){        
+      //console.log(from.path)
+      const lastPathArr = ['/home', '/quote', '/match', '/discover', '/trade']
+      if(lastPathArr.includes(from.path)){        
         vm.lastPath = from.path
       }
   })
@@ -290,7 +294,7 @@ export default {
 }
 .btn_wrap {
   width: 7.5rem;
-  padding: 0.6rem 0 0 0;
+  padding: 0.6rem 0;
   text-align: center;
   background-color: $bgGray;
   .btn {

@@ -4,6 +4,9 @@
     line-height: 0.96rem;
     width: 7.5rem;
 }
+.mint-header.is-fixed {
+    z-index: 999;
+}
 .mint-header-title{
     font-size: 0.36rem
 }
