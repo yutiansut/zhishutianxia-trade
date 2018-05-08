@@ -11,8 +11,8 @@
 					<input type="text"  placeholder="请输入验证码" class="input" v-model="code"/>
 				</li>
 				<li class="Rt">
-					<i class="psdIcon"></i>
-					<input type="password"  placeholder="请输入密码" class="input" v-model="password"/>
+					<i :class="showPsd == false ? 'psdIcon1' : 'psdIcon'" @click="changepsd"></i>
+					<input type="password"  placeholder="请输入密码" class="input" v-model="password" id="password"/>
 				</li>
 			</ul>
 			<button class="btn" @click="regisiter">注册</button>
@@ -44,6 +44,7 @@
 				time: 0,
 				isClick: false,
 				show: false,
+				showPsd:false
 			}
 		},
 		computed: {
@@ -74,6 +75,14 @@
 			},
 		},
 		methods:{
+			changepsd:function(){
+				this.showPsd=!this.showPsd;
+				if(this.showPsd == true){
+					$("#password").attr("type","text")
+				}else{
+					$("#password").attr("type","password")
+				}
+			},
 			toLogin:function(){
 				this.$router.push({path:"/login"});
 			},
@@ -185,6 +194,16 @@
 			width:0.32rem;
 			height: 0.16rem;
 			background: url(../../../assets/images/account/account_psd.png);
+			background-size: 100% 100%;
+		}
+		.psdIcon1{
+			top: 0.52rem;
+			right: 0.3rem;
+			position: absolute;
+			display: inline-block;
+			width:0.32rem;
+			height: 0.16rem;
+			background: url(../../../assets/images/account/accout_nopsd.png);
 			background-size: 100% 100%;
 		}
 		.getcode{

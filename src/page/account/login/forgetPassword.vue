@@ -12,7 +12,7 @@
 				</li>
 			</ul>
 			<button class="btn" @click="toResetPassword">下一步</button>
-			<p>新用户注册>></p>
+			<p @click="toRegister">新用户注册>></p>
 			<div class="showWX">
 				<i class="toWX"></i>
 			</div>
@@ -50,6 +50,9 @@
 			}
 		},
 		methods:{
+			toRegister:function(){
+				this.$router.push({path:"/register"});
+			},
 			toResetPassword:function(){
 				if(this.phone == ''){
 				this.$toast({message: '请输入手机号',duration: 2000});

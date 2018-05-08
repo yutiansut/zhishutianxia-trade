@@ -13,7 +13,7 @@
 				</li>
 			</ul>
 			<button class="btn" @click="login">登录</button>
-			<p>新用户注册>></p>
+			<p @click="toRegister">新用户注册>></p>
 			<div class="showWX">
 				<i class="toWX"></i>
 			</div>
@@ -35,6 +35,9 @@
 			}
 		},
 		methods:{
+			toRegister:function(){
+				this.$router.push({path:"/register"});
+			},
 			login:function(){
 				if(this.password == ''){
 					this.$toast({message: '请输入密码',duration: 2000});
