@@ -11,7 +11,7 @@
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
-				   <div class="matchDiv" v-for="n in 4" @click="toNext">
+				   <div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
 				   			<img src="../assets/images/match/match_bananer.png" />
 				   		</div>
@@ -22,15 +22,46 @@
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
+				   <div class="h_98"></div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
-			    	<mt-cell v-for="n in 4" :title="'测试 ' + n"  :key="'测试'+n"/>
+			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+				   		<div class="img_div">
+				   			<img src="../assets/images/match/match_bananer.png" />
+				   		</div>
+				   		<div class="time_div">
+				   			<img src="../assets/images/match/match_apply.png" />
+				   			<span>0105至0205</span>
+				   			<span>10086</span>
+				   			<span>参赛人数：</span>
+				   		</div>
+				   </div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
-			    	<mt-cell v-for="n in 6" :title="'选项 ' + n"  :key="'选项'+n"/>
+			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+				   		<div class="img_div">
+				   			<img src="../assets/images/match/match_bananer.png" />
+				   		</div>
+				   		<div class="time_div">
+				   			<img src="../assets/images/match/match_apply.png" />
+				   			<span>0105至0205</span>
+				   			<span>10086</span>
+				   			<span>参赛人数：</span>
+				   		</div>
+				   </div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
-			    	<mt-cell v-for="n in 6" :title="'哈哈 ' + n"  :key="'哈哈'+n"/>
+			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+				   		<div class="img_div">
+				   			<img src="../assets/images/match/match_bananer.png" />
+				   		</div>
+				   		<div class="time_div">
+				   			<img src="../assets/images/match/match_apply.png" />
+				   			<span>0105至0205</span>
+				   			<span>10086</span>
+				   			<span>参赛人数：</span>
+				   		</div>
+				   </div>
 			    </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
@@ -43,25 +74,48 @@
 	import { Navbar, TabItem } from 'mint-ui';
 	import topTitle from "../components/topTitle"
 	import bottomTab from "../components/bottom_tab"
+	import pro from "../assets/js/common.js"
 	export default{
 		name: 'match',
 		components:{ topTitle ,bottomTab},
 		data(){
 			return{
 				selected:"1",
-				tabSelected: 'match'
+				tabSelected: 'match',
+				List:""
 			}
 			
 		},
 		methods:{
 			toNext:function(){
 				this.$router.push({path:"/topNars"});
+			},
+			getMatchList:function(n){
+				var data = {
+					status:n,
+					pageNo:'',
+					pageSize:''
+				}
+				var headers = "";
+				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+						this.List = res.data.list;
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
 			}
 		},
+		mounted:function(){
+			this.getMatchList(0);
+		},
+		activited:function(){
+			
+		},
 		watch:{
-			selected:function(n,old){
-				console.log(n);
-				console.log("----"+old)
+			selected:function(n){
+				this.getMatchList(n-1);
 			},
 		},		
 	}
