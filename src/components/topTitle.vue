@@ -29,9 +29,8 @@
 			},
 			toRight(){
 				if(this.type1 == "1"){
-					console.log("111")
+					this.$router.push({path:"/customer_server"});
 				}else{
-					console.log("222")
 					this.$router.push({path:"/mineGt"});
 				}
 			}
