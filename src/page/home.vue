@@ -1,7 +1,7 @@
 <template>
 	<div id="home">
 		<p>哈哈哈</p>
-		<bottomTab :tabSelect="tabSelected" href></bottomTab>
+		<bottomTab :tabSelect="tabSelected"></bottomTab>
 	</div>
 </template>
 
