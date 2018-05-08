@@ -61,7 +61,9 @@ export default new Vuex.Store({
 		account,
 	},
 	state: {
-	    direction: 'forward',
+		direction: 'forward',
+		userInfo: {},
+		accountInfo: {},
 	    wsjsondata: {},
 		//行情websocket
 		quoteSocket: {},
@@ -89,9 +91,16 @@ export default new Vuex.Store({
 		}
 	},
     mutations: {
-    ['UPDATE_DIRECTION'](state,payload) {
+    	['UPDATE_DIRECTION'](state,payload) {
       		state.direction = payload.direction
-    	},
+		},
+		['ACCOUNT_INFO'](state,payload) {
+			state.accountInfo = payload
+		},
+		['INFO_CLEAR'](state,payload) {
+			state.userInfo = {}
+			state.accountInfo = {}
+		},
     },
 	actions: {
 	

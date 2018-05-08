@@ -129,14 +129,12 @@
                 exchangeList: exchange_about
     
             };
-        },
-    
+        },   
         computed: {
             clientHeight() {
                 return document.documentElement.clientHeight + "px";
             }
-        },
-    
+        },   
         methods: {
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");

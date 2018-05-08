@@ -7,18 +7,18 @@
             </mt-button>
         </mt-header>
         <div class="user_info">
-            <img src="../../../assets/images/account/WXuser.png" alt="用户头像">
-            <p v-if="!isLogin">-点击登录-</p>
-            <p class="login" v-else>拉风的皮皮</p>
+            <img :src="accountInfo.wxHeadimgurl||require('../../../assets/images/account/WXuser.png')" alt="用户头像">
+            <p v-if="!isLogin" @click="goto('/login')" >-点击登录-</p>
+            <p class="login" @click="changeValue(true,'isShow')" v-else>{{accountInfo.wxNickname||accountInfo.mobile}}</p>
         </div>
         <div class="money_wrap">
             <div class="money_box">
                 <p>可用资金</p>
-                <p class="money_text"><span>0.00</span>元</p>
+                <p class="money_text"><span>{{accountInfo.balance||'0.00'}}</span> 元</p>
             </div>
             <div class="money_box">
                 <p>账户余额</p>
-                <p class="money_text"><span>0.00</span>元</p>
+                <p class="money_text"><span>{{allMoney||"0.00"}}</span> 元</p>
             </div>
         </div>
         <!-- 列表 -->
@@ -33,18 +33,30 @@
         </div>
         <!-- login_out -->
         <div class="btn_wrap">
-            <button v-if="isLogin" class="btn">退出登录</button>
+            <button v-if="isLogin" @click="loginOut" class="btn">退出登录</button>
         </div>
+        <switch-account v-show="isShow" @show-modal="changeValue($event,'isShow')"></switch-account>
     </div>
 </template>
 
 <script>
+import pro from '../../../assets/js/common'
+import {mapMutations} from 'vuex'
+import switchAccount from '../../../components/switch_account'
+const user_info = {
+  token: 'NzE5YTdhOTlmNjJhNDlkZGI0YTk0ZTNiZmM0OWUwNmM=',
+  secret: '791cfd28e9bfd82e575418a96360e655'
+}
 export default {
-  name: "home",
+  name: "my",
+  components: {
+    switchAccount
+  },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      isLogin: true,
+      isLogin: false,
+      isShow: false,
       list: [
         {
           name: "自选管理",
@@ -70,33 +82,81 @@ export default {
           name: "新闻公告",
           path: "/news_info"
         }
-      ]
+      ],
+      userInfo: user_info,
+      //accountInfo: {}
     };
   },
   computed: {
     clientHeight() {
       return document.documentElement.clientHeight + "px";
+    },
+    allMoney () {
+      return this.accountInfo.balance*1 + this.accountInfo.freeze*1
+    },
+    accountInfo () {
+      return this.$store.state.accountInfo;
     }
   },
   methods: {
+    ...mapMutations({
+      setAccountInfo: 'ACCOUNT_INFO',
+      clearUserInfo: 'INFO_CLEAR'
+    }),
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
     },
     goto(path) {
       this.$router.push({ path: path });
     },
-    //获取用户信息
-		// getUserInfo () {
-		// 		var headers = {
-		// 			token : this.userInfo.token,
-		// 			secret : this.userInfo.secret
-		// 		}
-		// 	  //	console.log(headers)
-		// 		pro.fetch("post","/account/getBasicMsg","",headers).then((res)=>{
+    changeValue (msg, key) {
+      console.log(msg)
+      this[key] = msg
+    },
+    loginOut () {
+      this.userInfo = {}
+      this.clearUserInfo()
+      this.isLogin = false
+      //this.accountInfo = {}
+      this.$toast({message:"成功退出登录",duration: 1000});
 
-    //     })
-    // },
-  }  
+    },
+    //获取用户信息
+		getUserInfo () {
+      this.userInfo = user_info
+				var headers = {
+					token : this.userInfo.token,
+					secret : this.userInfo.secret
+				}
+			  //	console.log(headers)
+				pro.fetch("post","/account/getBasicMsg","",headers).then((res)=>{
+            console.log(res);
+            this.setAccountInfo(res.data);
+            //this.accountInfo = this.$store.state.accountInfo;
+            this.isLogin = true;          
+        }).catch((err)=>{
+//					console.log("err==0"+JSON.stringify(err))
+					var data = err.data;
+					if(data == undefined){
+						this.$toast({message:"网络不给力，请稍后再试",duration: 1000});
+					}else{
+						if(data.code == -9999){
+							this.$toast({message:"认证失败，请重新登录",duration: 1000});
+							this.$router.push({path:"/login"});
+						}
+						else{
+							this.$toast({message:data.message,duration: 1000});
+						}
+					}
+				})
+    },  
+  },  
+  // created () {
+  //    this.getUserInfo()
+  // },
+  activated () {
+    this.getUserInfo()
+  }
 };
 </script>
 
@@ -147,7 +207,7 @@ export default {
 .money_wrap {
   @include flex();
   width: 7.5rem;
-  @include font($fs24,0.36rem,#919199);
+  @include font($fs24,0.46rem,#919199);
   flex-wrap: wrap;
   background-color: $bg;
   .money_box {

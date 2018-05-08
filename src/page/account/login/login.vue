@@ -82,15 +82,16 @@
 								this.$toast({message: '登录成功',duration: 1000,});
 								this.token = res.data.token;
 								this.secret = res.data.secret;
-								var userData = {'username':this.phone,'password':Base64.encode(this.password),'token':res.data.token,'secret':res.data.secret,"issavepsd":this.issavepsd};
-								var saveState = {"issavepsd":true};
+								var userData = {username:this.phone,password:Base64.encode(this.password),token:res.data.token,secret:res.data.secret,issavepsd:this.issavepsd};
+								var saveState = {issavepsd:true};
 								localStorage.setItem("user", JSON.stringify(userData));
 								localStorage.setItem("stateLogin",JSON.stringify(saveState));
-								this.$router.push({path:"/my"});
+								this.$router.replace({path:"/my"});
 								this.$store.state.account.isLogin = true;
 							}
 						}
 					}.bind(this)).catch(function(err){
+						console.log(err)
 						var data = err.data;
 						if(data == undefined){
 							this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
