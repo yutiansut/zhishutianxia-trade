@@ -6,16 +6,14 @@
 				<li><span>总收益</span><i class="change change_1"></i><span>跟投人数</span><i class="change"></i></li>
 			</ul>
 		</div>
-		<div class="ranking border_bottom" v-for="n in 10">
-			<ul>
-				<li>
-					<i class="rang_no"></i>
-					<i class="user"></i>
-					<span class="username">那年那图</span>
-				</li>
-				<li><span class="perecnt">333.88%</span><span class="count">13</span></li>
-			</ul>
-		</div>
+		<ul class="ranking border_bottom" v-for="n in 10" @click="toMatchUser">
+			<li>
+				<i class="rang_no"></i>
+				<i class="user"></i>
+				<span class="username">那年那图</span>
+			</li>
+			<li><span class="perecnt">333.88%</span><span class="count">13</span></li>
+		</ul>
 	</div>
 </template>
 
@@ -25,6 +23,11 @@
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			toMatchUser:function(){
+				this.$router.push({path:"/matchUserDetails"});
 			}
 		}
 	}
@@ -44,7 +47,10 @@
 			height: 0.64rem;
 			display: flex;
 			justify-content: space-between;
-			align-items:center;
+			li{
+				display: inline-flex;
+				align-items: center;
+			}
 		}
 	}
 	.change{
@@ -62,14 +68,12 @@
 		width: $w;
 		padding: 0 0.3rem;
 		font-size: $fs28;
-		ul{
-			height: 1.28rem;
-			display: flex;
-			justify-content: space-between;
-			li{
-				display: inline-flex;
-				align-items:center;
-			}
+		height: 1.28rem;
+		display: flex;
+		justify-content: space-between;
+		li{
+			display: inline-flex;
+			align-items:center;
 		}
 	}
 	.rang_no{

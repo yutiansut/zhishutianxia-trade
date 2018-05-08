@@ -66,7 +66,20 @@
 			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
 			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
 		</div>
-		<button>比赛报名中，立即参加</button>
+		<!--<div class="btn bt">
+			<button>比赛报名中，立即参加</button>
+		</div>-->
+		<!--<div class="btn1 bt">
+			<button>报名终止</button>
+		</div>-->
+		<!--<div class="btn2 bt">
+			<button>已报名，等待开赛</button>
+			<button>跟投设置</button>
+		</div>-->
+		<div class="btn3 bt">
+			<button>进入比赛</button>
+			<button @click="toMatchSet">跟投设置</button>
+		</div>
 	</div>
 </template>
 
@@ -76,6 +89,11 @@
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			toMatchSet:function(){
+				this.$router.push({path:"/matchSet"});
 			}
 		}
 	}
@@ -159,14 +177,55 @@
 		}
 	}
 	button{
+		color: $bg;
+		font-size: 0.36rem;
+		height: 100%;
+	}
+	.bt{
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		width: 100%;
 		height: 0.98rem;
-		background-color: $redDeep;
-		color: $bg;
-		font-size: 0.36rem;
 		line-height: 0.48rem;
+	}
+	.btn{
+		button{
+			width: 100%;
+			color: $bg;
+			background-color: $redDeep;
+		}
+	}
+	.btn1{
+		button{
+			width: 100%;
+			background-color: $grayBtn;
+		}
+	}
+	.btn2{
+		button{
+			width: 50%;
+			&:nth-child(1){
+				background-color: $grayBtn;
+				float: left;
+			}
+			&:nth-child(2){
+				background-color: $blcakThin;
+				float: left;
+			}
+		}
+	}
+	.btn3{
+		button{
+			width: 50%;
+			&:nth-child(1){
+				background-color: $redDeep;
+				float: left;
+			}
+			&:nth-child(2){
+				background-color: $blcakThin;
+				float: left;
+			}
+		}
 	}
 </style>

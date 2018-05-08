@@ -11,7 +11,7 @@
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
-				   <div class="matchDiv" v-for="n in 4">
+				   <div class="matchDiv" v-for="n in 4" @click="toNext">
 				   		<div class="img_div">
 				   			<img src="../assets/images/match/match_bananer.png" />
 				   		</div>
@@ -52,6 +52,11 @@
 				tabSelected: 'match'
 			}
 			
+		},
+		methods:{
+			toNext:function(){
+				this.$router.push({path:"/topNars"});
+			}
 		},
 		watch:{
 			selected:function(n,old){
