@@ -1,7 +1,7 @@
 <template>
     <div id="home" :style="{height:clientHeight}">
         <mt-header fixed title="我的">           
-            <mt-button slot="left" icon="back" @click="goBack"></mt-button>
+            <mt-button slot="left" icon="back" @click="goLast"></mt-button>
             <mt-button slot="right" @click="goto('/information')">
                 <span class="icon"></span>
             </mt-button>
@@ -84,6 +84,7 @@ export default {
         }
       ],
       userInfo: user_info,
+      lastPath: '',
       //accountInfo: {}
     };
   },
@@ -103,8 +104,8 @@ export default {
       setAccountInfo: 'ACCOUNT_INFO',
       clearUserInfo: 'INFO_CLEAR'
     }),
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+    goLast() {
+      this.$router.push(this.lastPath);
     },
     goto(path) {
       this.$router.push({ path: path });
@@ -130,7 +131,7 @@ export default {
 				}
 			  //	console.log(headers)
 				pro.fetch("post","/account/getBasicMsg","",headers).then((res)=>{
-            console.log(res);
+            //console.log(res);
             this.setAccountInfo(res.data);
             //this.accountInfo = this.$store.state.accountInfo;
             this.isLogin = true;          
@@ -150,12 +151,24 @@ export default {
 					}
 				})
     },  
+
   },  
   // created () {
   //    this.getUserInfo()
   // },
   activated () {
     this.getUserInfo()
+  },
+  beforeRouteEnter: (to, from, next) => {
+    //console.log(from)
+    next(vm => {
+      // 通过 `vm` 访问组件实例
+      console.log(from.path)
+      if(from.path !== '/login'){        
+        vm.lastPath = from.path
+      }
+  })
+    // ...
   }
 };
 </script>
