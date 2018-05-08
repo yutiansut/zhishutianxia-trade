@@ -1,7 +1,7 @@
 <template>
 	<div id="dynamicAll">
 		<div class="container" v-for="n in 5">
-			<div class="details">
+			<div class="details" @click="toMatchUser">
 				<div class="user border_bottom">
 					<ul>
 						<li><i class="userP"></i><span class="username">哈哈哈</span></li>
@@ -29,6 +29,11 @@
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			toMatchUser:function(){
+				this.$router.push({path:"matchUserDetails"});
 			}
 		}
 	}
