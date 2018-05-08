@@ -4,17 +4,17 @@
 		<div id="container">
 			<ul>
 				<li class="Rt">
-				<i class="psdIcon"></i>
-					<input type="password"  placeholder="请输入密码(至少6位数)" class="input" v-model="password" maxlength="11"/>
+				<i :class="showPsd == false ? 'psdIcon1' : 'psdIcon'" @click="changepsd"></i>
+					<input type="password"  placeholder="请输入密码(至少6位数)" class="input" v-model="password" maxlength="11" id="password"/>
 				</li>
 				<li class="Rt">
-					<i class="psdIcon"></i>
-					<input type="password"  placeholder="请再次输入密码" class="input" v-model="surePassword" maxlength="11"/>
+					<i :class="showPsd1 == false ? 'psdIcon1' : 'psdIcon'" @click="changepsd1"></i>
+					<input type="password"  placeholder="请再次输入密码" class="input" v-model="surePassword" maxlength="11" id="password1"/>
 				</li>
 			</ul>
 			<button class="btn" @click="login">登录</button>
 			<p @click="toRegisiter">新用户注册>></p>
-			<div class="showWX">
+			<div class="showWX" v-show="showWhat">
 				<i class="toWX"></i>
 			</div>
 		</div>
@@ -32,9 +32,30 @@
 				password:"",
 				surePassword:"",
 				pwdReg:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				showWhat:true,
+				fullHeight:document.documentElement.clientHeight,
+				fullHeight1:document.documentElement.clientHeight,
+				showPsd:false,
+				showPsd1:false
 			}
 		},
 		methods:{
+			changepsd:function(){
+				this.showPsd=!this.showPsd;
+				if(this.showPsd == true){
+					$("#password").attr("type","text")
+				}else{
+					$("#password").attr("type","password")
+				}
+			},
+			changepsd1:function(){
+				this.showPsd1=!this.showPsd1;
+				if(this.showPsd1 == true){
+					$("#password1").attr("type","text")
+				}else{
+					$("#password1").attr("type","password")
+				}
+			},
 			toRegisiter:function(){
 				this.$router.push({path:"/regisiter"});
 			},
@@ -74,11 +95,60 @@
 		activited:function(){
 			this.code = this.$route.query.sendcode;
 			this.phone = this.$route.query.sendphone;
+			this.fullHeight1 = document.documentElement.clientHeight;
+			const that = this
+		    window.onresize = () => {
+		        return (() => {
+		          window.fullHeight = document.documentElement.clientHeight
+		          that.fullHeight = window.fullHeight
+		        })()
+		    }
+			this.code = this.$route.query.sendcode;
+			this.phone = this.$route.query.sendphone;
+		},
+		watch:{
+			fullHeight (val) {
+		        if(val != this.fullHeight1){
+		        	this.showWhat = false;
+		        }else{
+		        	this.showWhat =true;
+		        }
+		    },
+		    weixinLoginInfo(o,n){
+		    	if(o == true){
+			    	var weixinInfo = localStorage.weixinUser ? JSON.parse(localStorage.weixinUser) : "" ;
+					var ClientId = JSON.parse(localStorage.clientid).id ? JSON.parse(localStorage.clientid).id : '';
+					var data ={
+						openId:weixinInfo.openid,
+						clientId:ClientId
+					}
+					pro.fetch("post","/loginAndRegister/wxLogin",data,"").then(function(res){
+						if(res.code == 1 && res.success == true){
+							var userData = {'username':res.data.mobile,'token':res.data.token,'secret':res.data.secret};
+							localStorage.user=JSON.stringify(userData);
+							this.$toast({message:"授权登录成功",duration: 1000});
+							var saveState = {"issavepsd":true};
+							localStorage.setItem("stateLogin",JSON.stringify(saveState));
+							this.$router.push({path:"/index"});
+							this.$store.state.account.isLogin = true;
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						if(data == undefined){
+							this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+						}else{
+							this.$toast({message:"请先绑定手机号",duration: 1000});
+							this.$router.push({path:"/wechatRegisiter",query:{weixinInfo:weixinInfo}})
+						}
+					}.bind(this));
+					this.$store._modules.root.state.account.weixinLoginInfo = false;
+		    	}
+		    }
 		},
 		mounted:function(){
 			this.code = this.$route.query.sendcode;
 			this.phone = this.$route.query.sendphone;
-		},
+		}
 	}
 </script>
 
@@ -120,6 +190,16 @@
 			width:0.32rem;
 			height: 0.16rem;
 			background: url(../../../assets/images/account/account_psd.png);
+			background-size: 100% 100%;
+		}
+		.psdIcon1{
+			top: 0.52rem;
+			right: 0.3rem;
+			position: absolute;
+			display: inline-block;
+			width:0.32rem;
+			height: 0.16rem;
+			background: url(../../../assets/images/account/accout_nopsd.png);
 			background-size: 100% 100%;
 		}
 		.btn{

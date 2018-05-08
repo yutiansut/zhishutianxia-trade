@@ -13,7 +13,7 @@
 			</ul>
 			<button class="btn" @click="toResetPassword">下一步</button>
 			<p @click="toRegister">新用户注册>></p>
-			<div class="showWX">
+			<div class="showWX" v-show="showWhat">
 				<i class="toWX"></i>
 			</div>
 		</div>
@@ -34,7 +34,10 @@
 				code:'',
 				time: 0,
 				info: '获取验证码',
-				phoneReg:/^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/
+				phoneReg:/^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
+				showWhat:true,
+				fullHeight:document.documentElement.clientHeight,
+				fullHeight1:document.documentElement.clientHeight,
 			}
 		},
 		computed : {
@@ -85,6 +88,32 @@
 					}.bind(this), 1000);
 				}
 			},
+		},
+		activated:function(){
+			this.fullHeight1 = document.documentElement.clientHeight;
+			const that = this
+		    window.onresize = () => {
+		        return (() => {
+		          window.fullHeight = document.documentElement.clientHeight
+		          that.fullHeight = window.fullHeight
+		        })()
+		    }
+			pro.isWXInstalled();
+			var isWXInstalled = localStorage.isWXInstalled ? localStorage.isWXInstalled : '';
+			if(isWXInstalled == 'false'){
+				this.showWhat = false;
+			}else{
+				this.showWhat = true;
+			}
+		},
+		watch:{
+			fullHeight (val) {
+		        if(val != this.fullHeight1){
+		        	this.showWhat = false;
+		        }else{
+		        	this.showWhat =true;
+		        }
+		    }
 		}
 	}
 </script>
