@@ -42,15 +42,15 @@
 						break;
 
 				}
-			},
-			getMatchDetails:function(id){
-//				pro
 			}
 		},
 		mounted:function(){
+			this.current = 0;
+			this.currentView = 'matchRules';
 		},
 		activated:function(){
-//			this.currentView = 'matchRules'
+			this.current = 0;
+			this.currentView = 'matchRules';
 			this.matchid = this.$route.query.matchId
 		}
 	}
