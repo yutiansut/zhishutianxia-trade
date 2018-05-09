@@ -82,14 +82,36 @@
             },
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-            },
+			},
+			getMatchList () {
+				var sendData = {
+					status: 4,
+					pageNo: 1,
+					pageSize: 10
+
+				}
+				const headers = {
+					token : this.userInfo.token,
+					secret : this.userInfo.secret
+				}
+				this.$pro.fetch('post', '/tradeCompetition/historyRecords', sendData, headers).then(function(res) {
+					console.log(res)
+				}.bind(this)).catch(function(err) {
+
+				}.bind(this))
+			}
         },
 		watch:{
 			selected:function(n,old){
 				console.log(n);
 				console.log("----"+old)
 			},
-		},		
+		},	
+		created () {
+			const local = this.$pro.local
+			this.userInfo = local.get('user')
+			this.getMatchList()
+		}	
 	}
 </script>
 
