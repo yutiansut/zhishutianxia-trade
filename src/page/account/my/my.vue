@@ -35,7 +35,11 @@
         <div class="btn_wrap">
             <button v-if="isLogin" @click="loginOut" class="btn">退出登录</button>
         </div>
-        <switch-account v-show="isShow" @show-modal="changeValue($event,'isShow')"></switch-account>
+        <switch-account 
+        v-show="isShow" 
+        @show-modal="changeValue($event,'isShow')"
+        :userList = userList
+        ></switch-account>
     </div>
 </template>
 
@@ -84,7 +88,8 @@ export default {
         }
       ],
       userInfo: {},
-      lastPath: '',
+      lastPath: '/',
+      userList: []
     };
   },
   computed: {
@@ -157,6 +162,7 @@ export default {
   // },
   activated () {    
     this.userInfo = local.get('user')
+    this.userList = local.get('userList')
     if(this.userInfo){
       this.getUserInfo()
     }
@@ -200,6 +206,7 @@ export default {
     width: 1.2rem;
     height: 1.2rem;
     margin: 0.2rem auto;
+    border-radius: 50%;
   }
   p {
     @include font($fs32,0.44rem,#fff);
@@ -294,11 +301,11 @@ export default {
 }
 .btn_wrap {
   width: 7.5rem;
-  padding: 0.6rem 0;
   text-align: center;
   background-color: $bgGray;
   .btn {
     width: 7rem;
+    margin: 0.6rem 0;
     @include font($fs36,0.88rem,$bg);
     background-color: $redDeep;
     border-radius: 0.44rem;

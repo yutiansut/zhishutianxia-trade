@@ -14,9 +14,11 @@ import "./assets/css/my-mint.scss";
 
 import router from './router'
 import store from './store'
+import pro from './assets/js/common'
 // /*引入移动端手势库*/
 // import directives from './directives/touch'
 //directives(Vue);
+Vue.prototype.$pro = pro;
 const history = window.sessionStorage;
 let historyCount = history.getItem('count') * 1;
 router.beforeEach(function (to, from, next) {

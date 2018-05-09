@@ -28,6 +28,7 @@
 	import topTitle from "../../../components/topTitle.vue"
 	import codeDialog from "../../../components/codeDialog.vue"
 	import pro from "../../../assets/js/common.js"
+	const local = pro.local
 	export default{
 		name:"login",
 		components:{ topTitle,codeDialog },
@@ -41,6 +42,7 @@
 				showPsd:false,
 				fullHeight:document.documentElement.clientHeight,
 				fullHeight1:document.documentElement.clientHeight,
+				userList: []
 			}
 		},
 		computed : {
@@ -60,6 +62,17 @@
 			},
 			toForgetPsd:function(){
 				this.$router.push({path:"/forgetPassword"});
+			},
+			addItem (item,key='userList') {	
+				let index = this.userList.findIndex((userObj) =>{
+					return userObj.username == item.username
+				})	
+                if(index > -1) {
+					this.userList.splice(index,1,item);
+				}else{
+					this.push(item)
+				}
+                local.set(key,this.userList)
 			},
 			login:function(){
 				if(this.phone == ''){
@@ -86,6 +99,8 @@
 								this.secret = res.data.secret;
 								var userData = {username:this.phone,password:Base64.encode(this.password),token:res.data.token,secret:res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
+								this.addItem(userData)
+								local.get("user", JSON.stringify(userData));
 								this.$router.push({path:"/my"});
 								this.$store.state.account.isLogin = true;
 							}
@@ -133,8 +148,12 @@
 			}
 		},
 		activated:function(){
+			//得到userList
+			const userList1 = local.get('userList')||[]
+			this.userList = userList1
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			this.issavepsd= this.userInfo.issavepsd ? this.userInfo.issavepsd : '';
+			
 			if(this.issavepsd == true){
 				this.phone = this.userInfo.username;
 				this.password = Base64.decode(this.userInfo.password);

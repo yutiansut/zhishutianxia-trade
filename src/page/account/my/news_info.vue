@@ -7,7 +7,7 @@
         <!-- 列表 -->
         <div class="news_wrap">
             <ul class="news_list" v-if="hasList">
-                <li v-for="item in newsList" :key="item.id" @click="goto(item.id)">
+                <li v-for="item in newsList" :key="item.id" @click="goto(item)">
                     <span v-if="!item.isRead" class="is_read"></span>
                     <h3 :class="{have_read:!item.isRead}">{{item.title}}</h3>
                     <p>{{item.time}}</p>
@@ -41,11 +41,12 @@ const idList1 = local.get('idList')||[];
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
             },
-            goto(id) {
+            goto(item) {
                 this.$router.push({
-                    path: `news_info_details/${id}`
+                    path: `news_info_details/${item.id}`
                 });
-                this.storeId(id)
+                item.isRead = true
+                this.storeId(item.id)
             },
             storeId (id, key='idList') {
                 if(this.idList.includes(id)) return;

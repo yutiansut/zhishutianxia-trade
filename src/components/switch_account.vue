@@ -4,11 +4,8 @@
             <div class="list_box">
                 <h2>交易账号</h2>
                 <ul class="list">
-                    <li class="item checked">2607000071<i class="delete"></i></li>
-                    <li class="item">2607000072<i class="delete"></i></li>
-                    <li class="item">2607000073<i class="delete"></i></li>
-                    <li class="item">2607000074<i class="delete"></i></li>
-                    <li class="item">2607000075<i class="delete"></i></li>
+                    <li v-for="(item, index) in userList1" :key="item.username" :class="['item',{'checked': !index}]" @click="login(item)">{{item.username}}<i class="delete"></i></li>
+                    <!-- <li class="item checked">2607000071<i class="delete"></i></li> -->
                 </ul>
             </div>
             <span class="close" @click="close"></span>
@@ -18,12 +15,15 @@
 </template>
 
 <script>
+    import pro from '../assets/js/common'
+    const local = pro.local
     export default {
         name: "switch_account",
-        props: ['tabSelect', "type"],
+        props: ['userList'],
         data() {
             return {
-                isShow: true
+                isShow: true,
+                userInfo: {}
     
             }
         },
@@ -31,16 +31,68 @@
             clientHeight() {
                 return document.documentElement.clientHeight + "px";
             },
-            
+            userList1() {
+                return this.userList.reduce((newList, item) => {
+                    if (item.username == this.userInfo.username) {
+                        newList.unshift(item)
+                    } else {
+                        newList.push(item)
+                    }
+                    return newList
+                }, [])
+            }
+    
         },
         methods: {
-            close () {
+            close() {
                 //this.isShow = !this.isShow;
-                this.$emit('show-modal',false)
+                this.$emit('show-modal', false)
+            },
+            login(item) {
+                let ClientId = localStorage.clientid ? JSON.parse(localStorage.clientid).id : '';
+                let info = {
+                    mobile: item.username,
+                    password: Base64.decode(item.password),
+                    clientId: ClientId
+                };
+                pro.fetch('post', '/loginAndRegister/mobileLogin', info, "").then(function(res) {
+                    if (res.success == true) {
+                        if (res.code == 1) {
+                            this.$toast({
+                                message: '账号切换成功',
+                                duration: 1000,
+                            });
+                            this.token = res.data.token;
+                            this.secret = res.data.secret;
+                            var userData = item;
+                            localStorage.setItem("user", JSON.stringify(userData));
+                            this.$store.state.account.isLogin = true;
+                            //刷新当前页面
+                            location.reload();
+                        }
+                    }
+                }.bind(this)).catch(function(err) {
+                    console.log(err)
+                    var data = err.data;
+                    if (data == undefined) {
+                        this.$toast({
+                            message: "网络不给力，请稍后重试",
+                            duration: 2000
+                        });
+                    } else {
+                        this.$toast({
+                            message: data.message,
+                            duration: 2000
+                        });
+                    }
+                }.bind(this));
             }
         },
+        activated() {
+            this.userInfo = local.get('user')
+        },
         watch: {
-
+    
         },
     }
 </script>
@@ -85,10 +137,10 @@
                 background-size: cover;
             }
         }
-        .checked{
+        .checked {
             background-color: $redDeep;
             color: $bg;
-            .delete {              
+            .delete {
                 background-image: url('../assets/images/account/delete.png');
             }
         }
