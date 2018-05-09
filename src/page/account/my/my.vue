@@ -45,7 +45,7 @@ import {mapMutations} from 'vuex'
 import switchAccount from '../../../components/switch_account'
 
 const local = pro.local;
-const user = local.get('user')
+
 
 export default {
   name: "my",
@@ -123,7 +123,7 @@ export default {
     },
     //获取用户信息
 		getUserInfo () {
-      this.userInfo = user
+      
 		  const headers = {
 					token : this.userInfo.token,
 					secret : this.userInfo.secret
@@ -155,9 +155,9 @@ export default {
   // created () {
   //    this.getUserInfo()
   // },
-  activated () {
-    //console.log(user)
-    if(user){
+  activated () {    
+    this.userInfo = local.get('user')
+    if(this.userInfo){
       this.getUserInfo()
     }
     
