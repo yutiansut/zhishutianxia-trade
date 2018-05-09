@@ -33,12 +33,33 @@
 
 <script>
 	import topTitle from "../../components/topTitle.vue"
+	import pro from "../../assets/js/common.js"
 	export default{
 		name:"mineGt",
 		components:{ topTitle },
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			getMintGt:function(){
+				var data = {
+					id:"",
+					pageNo:"",
+					pageSize:""
+				}
+				var headers = {
+					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM=",
+					secret:"7cda0b054336c9cca469bf0aca8e3918"
+				}
+				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
 			}
 		}
 	}

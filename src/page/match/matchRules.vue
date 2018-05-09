@@ -8,27 +8,6 @@
 		</div>
 		<div class="activity">
 			<ul>
-				<!--<li class="border_bottom">
-					<div>
-						<img src="../../assets/images/match/no1.png"/>
-						<span>第一名</span>
-					</div>
-					<label>1000元</label>
-				</li>
-				<li class="border_bottom">
-					<div>
-						<img src="../../assets/images/match/no2.png"/>
-						<span>第一名</span>
-					</div>
-					<label>1000元</label>
-				</li>
-				<li class="border_bottom">
-					<div>
-						<img src="../../assets/images/match/no3.png"/>
-						<span>第一名</span>
-					</div>
-					<label>1000元</label>
-				</li>-->
 				<li class="border_bottom" v-for="(k,v) in award">
 					<div>
 						<img src="../../assets/images/match/no1.png"/>
@@ -44,22 +23,6 @@
 		</div>
 		<div class="rules">
 			<ul>
-				<!--<li class="border_bottom">
-					<span>初始资金：</span>
-					<label>1000元</label>
-				</li>
-				<li class="border_bottom">
-					<span>初始资金：</span>
-					<label>1000元</label>
-				</li>
-				<li class="border_bottom">
-					<span>初始资金：</span>
-					<label>1000元</label>
-				</li>
-				<li class="border_bottom">
-					<span>初始资金：</span>
-					<label>1000元</label>
-				</li>-->
 				<li class="border_bottom" v-for="(k,v) in rule">
 					<span>{{v}}：</span>
 					<label>{{k}}元</label>
@@ -70,19 +33,19 @@
 			<span>提醒：</span>
 			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
-		<!--<div class="btn bt">
-			<button>比赛报名中，立即参加</button>
-		</div>-->
-		<!--<div class="btn1 bt">
+		<div class="btn1 bt" v-if="rulesData.join == 0 && rulesData.statusName == 5">
 			<button>报名终止</button>
-		</div>-->
-		<!--<div class="btn2 bt">
+		</div>
+		<div class="btn2 bt" v-else-if="rulesData.join == 1">
 			<button>已报名，等待开赛</button>
 			<button>跟投设置</button>
-		</div>-->
-		<div class="btn3 bt">
+		</div>
+		<div class="btn3 bt" v-else-if="rulesData.join == 2">
 			<button>进入比赛</button>
 			<button @click="toMatchSet">跟投设置</button>
+		</div>
+		<div class="btn bt" v-else>
+			<button>比赛报名中，立即参加</button>
 		</div>
 	</div>
 </template>
@@ -112,13 +75,11 @@
 					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
 					secret:"7cda0b054336c9cca469bf0aca8e3918"
 				}
-				pro.fetch("post","/tradeCompetition/details",data,headers).then((res)=>{
+				pro.fetch("post","/tradeCompetition/details",data,"").then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
 						this.rulesData = res.data.qiwCompetition;
 						this.award = res.data.award;
 						$.map(res.data.rule,function(i,item){
-							console.log(item)
 							if(typeof i == "object"){
 								this.tip = i
 							}else{
