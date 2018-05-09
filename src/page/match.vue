@@ -13,12 +13,12 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_end.png" />
-				   			<span>0105至0205</span>
-				   			<span>10086</span>
+				   			<img :src="n.statusName | showMatch" />
+				   			<span>000至000</span>
+				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
@@ -27,10 +27,10 @@
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_end.png" />
+				   			<img src="../assets/images/match/match_applying.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -40,10 +40,10 @@
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_end.png" />
+				   			<img src="../assets/images/match/match_playready.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -53,7 +53,7 @@
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img src="../assets/images/match/match_end.png" />
@@ -99,6 +99,7 @@
 				var headers = "";
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
+						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
@@ -107,10 +108,8 @@
 			}
 		},
 		created :function(){
-//			console.log("222");
 		},
 		mounted:function(){
-//			console.log("11111")
 			this.getMatchList(0);
 		},
 		activated:function(){
@@ -120,7 +119,23 @@
 			selected:function(n){
 				this.getMatchList(n-1);
 			},
-		},		
+		},	
+		filters:{
+			showMatch:function(e){
+				switch (e){
+					case 1:
+						return require("../assets/images/match/match_waitapply.png");
+					case 2:
+						return require("../assets/images/match/match_applying.png");
+					case 3:
+						return require("../assets/images/match/match_waitplay.png");
+					case 4:
+						return require("../assets/images/match/match_playready.png");
+					case 5:
+						return require("../assets/images/match/match_end.png");
+				}
+			}
+		}
 	}
 </script>
 
