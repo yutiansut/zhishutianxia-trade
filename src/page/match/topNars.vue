@@ -6,7 +6,7 @@
 				<span>{{n}}</span>
 			</div>
 		</div>
-		<components :is="currentView"></components>
+		<components :is="currentView" :matchid="matchid"></components>
 	</div>
 </template>
 
@@ -23,7 +23,8 @@
 				selected:"1",
 				list:["比赛规则","排行榜","比赛动态"],
 				current:0,
-				currentView:'matchRules'
+				currentView:'matchRules',
+				matchid:""
 			}
 		},
 		methods:{
@@ -41,10 +42,16 @@
 						break;
 
 				}
+			},
+			getMatchDetails:function(id){
+//				pro
 			}
 		},
-		activited:function(){
+		mounted:function(){
+		},
+		activated:function(){
 //			this.currentView = 'matchRules'
+			this.matchid = this.$route.query.matchId
 		}
 	}
 </script>

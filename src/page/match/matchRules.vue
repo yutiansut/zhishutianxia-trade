@@ -84,16 +84,49 @@
 </template>
 
 <script>
+	import pro from "../../assets/js/common.js"
 	export default{
 		name:"matchRules",
+		props:['matchid'],
 		data(){
 			return{
-				
+//				id:""
 			}
 		},
 		methods:{
 			toMatchSet:function(){
 				this.$router.push({path:"/matchSet"});
+			},
+			getMtchRules:function(matchid){
+				var data = {
+					id:matchid
+				};
+				var headers = {
+					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
+					secret:"7cda0b054336c9cca469bf0aca8e3918"
+				}
+				pro.fetch("post","/tradeCompetition/details",data,headers).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
+			}
+		},
+		mounted:function(){
+//			console.log(this.$parent.matchid);
+//			console.log(this.matchid)
+//			this.getMtchRules(this.matchid);
+		},
+		activated:function(){
+//			console.log(this.$parent.matchid);
+//			console.log(this.matchid)
+//			this.getMtchRules(this.matchid);
+		},
+		watch:{
+			matchid:function(e){
+				this.getMtchRules(e);
 			}
 		}
 	}

@@ -26,15 +26,19 @@
 <script>
 	export default{
 		name:"dynamicAll",
+		props:['id'],
 		data(){
 			return{
-				
 			}
 		},
 		methods:{
 			toMatchUser:function(){
 				this.$router.push({path:"matchUserDetails"});
 			}
+		},
+		mounted:function(){
+//			console.log("9999999999999999");
+			console.log(this.id)
 		}
 	}
 </script>

@@ -11,7 +11,7 @@
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
-				   <div class="matchDiv" v-for="n in List" @click="toNext">
+				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
 				   			<img src="../assets/images/match/match_bananer.png" />
 				   		</div>
@@ -87,8 +87,8 @@
 			
 		},
 		methods:{
-			toNext:function(){
-				this.$router.push({path:"/topNars"});
+			toNext:function(id){
+				this.$router.push({path:"/topNars",query:{matchId:id}});
 			},
 			getMatchList:function(n){
 				var data = {
@@ -99,7 +99,6 @@
 				var headers = "";
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
@@ -107,10 +106,14 @@
 				})
 			}
 		},
+		created :function(){
+//			console.log("222");
+		},
 		mounted:function(){
+//			console.log("11111")
 			this.getMatchList(0);
 		},
-		activited:function(){
+		activated:function(){
 			
 		},
 		watch:{
