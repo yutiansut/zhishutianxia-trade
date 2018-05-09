@@ -18,8 +18,10 @@
 </template>
 
 <script>
+	import pro from "../../assets/js/common.js"
 	export default{
 		name:"matchRanking",
+		props:['matchid'],
 		data(){
 			return{
 				
@@ -29,7 +31,11 @@
 			toMatchUser:function(){
 				this.$router.push({path:"/matchUserDetails"});
 			}
-		}
+		},
+		mounted:function(){
+			console.log("111111")
+		},
+		
 	}
 </script>
 

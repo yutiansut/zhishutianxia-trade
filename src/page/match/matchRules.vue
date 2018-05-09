@@ -1,14 +1,14 @@
 <template>
 	<div id="matchRules">
 		<div class="time">
-			比赛时间：2018-01-20 至 2018-02-20
+			比赛时间：{{rulesData.beginTime}} 至 {{rulesData.endTime}}
 		</div>
 		<div class="nar border_bottom">
 			<span>活动奖励</span>
 		</div>
 		<div class="activity">
 			<ul>
-				<li class="border_bottom">
+				<!--<li class="border_bottom">
 					<div>
 						<img src="../../assets/images/match/no1.png"/>
 						<span>第一名</span>
@@ -28,6 +28,13 @@
 						<span>第一名</span>
 					</div>
 					<label>1000元</label>
+				</li>-->
+				<li class="border_bottom" v-for="(k,v) in award">
+					<div>
+						<img src="../../assets/images/match/no1.png"/>
+						<span>{{v}}</span>
+					</div>
+					<label>{{k}}元</label>
 				</li>
 			</ul>
 		</div>
@@ -37,7 +44,7 @@
 		</div>
 		<div class="rules">
 			<ul>
-				<li class="border_bottom">
+				<!--<li class="border_bottom">
 					<span>初始资金：</span>
 					<label>1000元</label>
 				</li>
@@ -52,19 +59,16 @@
 				<li class="border_bottom">
 					<span>初始资金：</span>
 					<label>1000元</label>
+				</li>-->
+				<li class="border_bottom" v-for="(k,v) in rule">
+					<span>{{v}}：</span>
+					<label>{{k}}元</label>
 				</li>
 			</ul>
 		</div>
 		<div class="tips">
 			<span>提醒：</span>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
-			<p>1.交易品种仅限于在交易所上市的正股，其他品种交易结束将不计算在收益之中；</p>
+			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
 		<!--<div class="btn bt">
 			<button>比赛报名中，立即参加</button>
@@ -84,16 +88,57 @@
 </template>
 
 <script>
+	import pro from "../../assets/js/common.js"
 	export default{
 		name:"matchRules",
+		props:['matchid'],
 		data(){
 			return{
-				
+				rulesData:[],
+				award:[],
+				tip:[],
+				rule:{}
 			}
 		},
 		methods:{
 			toMatchSet:function(){
 				this.$router.push({path:"/matchSet"});
+			},
+			getMtchRules:function(matchid){
+				var data = {
+					id:matchid
+				};
+				var headers = {
+					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
+					secret:"7cda0b054336c9cca469bf0aca8e3918"
+				}
+				pro.fetch("post","/tradeCompetition/details",data,headers).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+						this.rulesData = res.data.qiwCompetition;
+						this.award = res.data.award;
+						$.map(res.data.rule,function(i,item){
+							console.log(item)
+							if(typeof i == "object"){
+								this.tip = i
+							}else{
+								this.rule[item] = i;
+							}
+						}.bind(this))
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
+			}
+		},
+		mounted:function(){
+			if(this.matchid != ""){
+				this.getMtchRules(this.matchid);
+			}
+		},
+		watch:{
+			matchid:function(e){
+				this.getMtchRules(e);
 			}
 		}
 	}

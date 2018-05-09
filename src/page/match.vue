@@ -11,14 +11,14 @@
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
-				   <div class="matchDiv" v-for="n in List" @click="toNext">
+				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_apply.png" />
-				   			<span>0105至0205</span>
-				   			<span>10086</span>
+				   			<img :src="n.statusName | showMatch" />
+				   			<span>000至000</span>
+				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
@@ -27,10 +27,10 @@
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_apply.png" />
+				   			<img src="../assets/images/match/match_applying.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -40,10 +40,10 @@
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_apply.png" />
+				   			<img src="../assets/images/match/match_playready.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -53,10 +53,10 @@
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img src="../assets/images/match/match_bananer.png" />
+				   			<img :src="n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_apply.png" />
+				   			<img src="../assets/images/match/match_end.png" />
 				   			<span>0105至0205</span>
 				   			<span>10086</span>
 				   			<span>参赛人数：</span>
@@ -87,8 +87,8 @@
 			
 		},
 		methods:{
-			toNext:function(){
-				this.$router.push({path:"/topNars"});
+			toNext:function(id){
+				this.$router.push({path:"/topNars",query:{matchId:id}});
 			},
 			getMatchList:function(n){
 				var data = {
@@ -107,17 +107,35 @@
 				})
 			}
 		},
+		created :function(){
+		},
 		mounted:function(){
 			this.getMatchList(0);
 		},
-		activited:function(){
+		activated:function(){
 			
 		},
 		watch:{
 			selected:function(n){
 				this.getMatchList(n-1);
 			},
-		},		
+		},	
+		filters:{
+			showMatch:function(e){
+				switch (e){
+					case 1:
+						return require("../assets/images/match/match_waitapply.png");
+					case 2:
+						return require("../assets/images/match/match_applying.png");
+					case 3:
+						return require("../assets/images/match/match_waitplay.png");
+					case 4:
+						return require("../assets/images/match/match_playready.png");
+					case 5:
+						return require("../assets/images/match/match_end.png");
+				}
+			}
+		}
 	}
 </script>
 

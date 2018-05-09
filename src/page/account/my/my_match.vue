@@ -17,7 +17,7 @@
                                 <img src="../../../assets/images/match/match_bananer.png" />
                             </div>
                             <div class="time_div">
-                                <img src="../../../assets/images/match/match_apply.png" />
+                                <img src="../../../assets/images/match/match_end.png" />
                                 <span>01-05至02-05</span>
                                 <span>10086</span>
                                 <span>参赛人数：</span>
@@ -36,7 +36,7 @@
                                 <img src="../../../assets/images/match/match_bananer.png" />
                             </div>
                             <div class="time_div">
-                                <img src="../../../assets/images/match/match_apply.png" />
+                                <img src="../../../assets/images/match/match_end.png" />
                                 <span>01-05至02-05</span>
                                 <span>10086</span>
                                 <span>参赛人数：</span>

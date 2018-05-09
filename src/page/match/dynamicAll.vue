@@ -24,17 +24,42 @@
 </template>
 
 <script>
+	import pro from "../../assets/js/common.js"
 	export default{
 		name:"dynamicAll",
+		props:['id'],
 		data(){
 			return{
-				
 			}
 		},
 		methods:{
 			toMatchUser:function(){
 				this.$router.push({path:"matchUserDetails"});
+			},
+			getDynamic:function(id){
+				var data ={
+					id:id,
+					tradeNo:'',
+					type:0,
+					pageNo:1,
+					pageSize:10,
+					direction:0
+				}
+				var headers = {
+					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
+					secret:"7cda0b054336c9cca469bf0aca8e3918"
+				}
+				pro.fetch("post","/tradeCompetition/tradeDynamic",data,headers).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
 			}
+		},
+		mounted:function(){
+			this.getDynamic(this.id);
 		}
 	}
 </script>
