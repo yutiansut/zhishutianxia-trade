@@ -62,10 +62,10 @@ export default {
       isLogin: false,
       isShow: false,
       list: [
-        {
-          name: "自选管理",
-          path: "/self_select"
-        },
+        // {
+        //   name: "自选管理",
+        //   path: "/self_select"
+        // },
         {
           name: "比赛记录",
           path: "/my_match"

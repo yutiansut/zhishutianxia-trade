@@ -100,17 +100,17 @@ const router = new Router({
       component: load('account/my/my_match')
     },
     {
-      path: '/match_details/:id',
+      path: '/match_details/:id/title/:title',
       component: load('account/my/match_details'),
-      props:true
+      props: true
     },
     {
-      path: '/match_details_history/:id',
+      path: '/match_details_history/:id/title/:title',      
       component: load('account/my/match_details_history'),
       props:true
     },
     {
-      path: '/follow_get_history/:id',
+      path: '/follow_get_history/:account/type/:type',
       component: load('account/my/follow_get_history'),
       props:true
     },

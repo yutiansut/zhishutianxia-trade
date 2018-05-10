@@ -72,12 +72,13 @@ const deductionConfig = {
 }
 export default {
   name: 'match_details_history',
-  props: ['id'],
+  props: ['account','type'],
   data () {
     return {
       isBegin: true,
       selected: '1',
-      config: {}
+      config: {},
+      userInfo: {}
     }
   },
   computed: {
@@ -85,12 +86,12 @@ export default {
           return document.documentElement.clientHeight + 'px';
       },
        titleName () {
-           switch (this.id) {
-                case 'extract':
+           switch (this.type) {
+                case '0':
                 this.config = extractConfig;
                    return '跟投提取收益'
                    break;
-                case 'deduction':
+                case '1':
                 this.config = deductionConfig;
                    return '跟投扣除收益'
                    break;   
@@ -98,7 +99,6 @@ export default {
                default:
                    break;
            }
-          return document.documentElement.clientHeight + 'px';
       }
   },
   methods: {
@@ -108,6 +108,43 @@ export default {
     goFollow(id) {
       this.$router.push({ path: `/follow_get_history/${id}` });
     },
+    getList () {
+        var sendData = {
+                    account: this.account,
+                    type: this.type,
+                    id: 'sdsdfsd'
+                }
+                const headers = {
+                    token: this.userInfo.token,
+                    secret: this.userInfo.secret
+                }
+                this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
+                    console.log(res)
+                    if (res.success && res.code == 1) {
+                       
+                    }
+    
+                }.bind(this)).catch(function(err) {
+                    //console.log(err)
+                    var data = err.data;
+                    if (data == undefined) {
+                        this.$toast({
+                            message: "网络不给力，请稍后重试",
+                            duration: 2000
+                        });
+                    } else {
+                        this.$toast({
+                            message: data.message,
+                            duration: 2000
+                        });
+                    }
+                }.bind(this))
+    }
+  },
+  created () {
+       const local = this.$pro.local
+        this.userInfo = local.get('user')
+        this.getList()
   }
 }
 

@@ -54,6 +54,11 @@ var account = {
 		backtestIndexArr:[]
 	}
 }
+const tradeName = {
+	CL: '国际原油',
+	HSI: '恒指期货',
+	GC: '美黄金'
+}
 
 export default new Vuex.Store({
 	modules: {
@@ -62,6 +67,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		direction: 'forward',
+		tradeName: tradeName,
 		userInfo: {},
 		accountInfo: {},
 	    wsjsondata: {},
@@ -73,6 +79,7 @@ export default new Vuex.Store({
 		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'dev',
+
 	},
 	getters: {
 		PATH: function(state) {
