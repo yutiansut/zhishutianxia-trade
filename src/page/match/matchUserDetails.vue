@@ -103,13 +103,61 @@
 
 <script>
 	import topTitle from "../../components/topTitle.vue"
+	import pro from "../../assets/js/common.js"
+	const local = pro.local;
+//	const apiUrl = "";
+//	const header = "";
+//	const upData = "";
 	export default{
 		name:"matchUserDetails",
 		components:{ topTitle },
 		data(){
 			return{
-				
+				userId:"",
+				type:"",
+				upData:"",
+				headers:"",
+				apiUrl:""
 			}
+		},
+		methods:{
+			getUser:function(apiurl,upData,header){
+				pro.fetch("post",apiurl,upData,header).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+					}
+				}).catch((err)=>{
+						console.log(err)
+				})
+			},
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""	
+				}
+			},
+		},
+		activated:function(){
+			this.getHeaders();
+			this.userId = this.$route.query.userId;
+			this.type = this.$route.query.type
+			if(this.type == "mine"){
+				this.upData = {
+					account:this.userId
+				};
+				this.apiUrl = "/tradeCompetition/competitionDetails";
+			}else{
+				this.upData = {
+					id:this.userId
+				};
+				this.headers = "";
+				this.apiUrl = "/ tradeCompetition/getRankDetails";
+			}
+			this.getUser(this.apiUrl,this.upData,this.headers);
 		}
 	}
 </script>

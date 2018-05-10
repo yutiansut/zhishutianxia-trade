@@ -34,25 +34,29 @@
 			<span>提醒：</span>
 			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
-		<div class="btn1 bt" v-if="rulesData.join == 0 && rulesData.statusName == 5">
-			<button>报名终止</button>
+		<div class="btn1 bt" v-if="rulesData.statusName == 5">
+			<button>比赛已结束</button>
 		</div>
-		<div class="btn2 bt" v-else-if="rulesData.join == 1">
+		<div class="btn2 bt" v-else-if="rulesData.join == 1 && (rulesData.statusName == 2 || rulesData.statusName == 3)">
 			<button>已报名，等待开赛</button>
 			<button>跟投设置</button>
 		</div>
-		<div class="btn3 bt" v-else-if="rulesData.join == 2">
+		<div class="btn3 bt" v-else-if="(rulesData.join == 2 || rulesData.join == 1) && rulesData.statusName == 4">
 			<button>进入比赛</button>
 			<button @click="toMatchSet">跟投设置</button>
 		</div>
+		<div class="btn1 bt" v-else-if="rulesData.statusName == 4 && rulesData.join == 0">
+			<button>报名终止</button>
+		</div>
 		<div class="btn bt" v-else>
-			<button>比赛报名中，立即参加</button>
+			<button @click="matchApply">比赛报名中，立即参加</button>
 		</div>
 	</div>
 </template>
 
 <script>
 	import pro from "../../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name:"matchRules",
 		props:['matchid'],
@@ -61,22 +65,20 @@
 				rulesData:[],
 				award:[],
 				tip:[],
-				rule:{}
+				rule:{},
+				headers:""
 			}
 		},
 		methods:{
 			toMatchSet:function(){
-				this.$router.push({path:"/matchSet"});
+				this.$router.push({path:"/matchSet",query:{matchid:this.matchid}});
 			},
 			getMtchRules:function(matchid){
 				var data = {
 					id:matchid
 				};
-				var headers = {
-					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
-					secret:"7cda0b054336c9cca469bf0aca8e3918"
-				}
-				pro.fetch("post","/tradeCompetition/details",data,"").then((res)=>{
+				var header = this.headers;
+				pro.fetch("post","/tradeCompetition/details",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.rulesData = res.data.qiwCompetition;
 						this.award = res.data.award;
@@ -91,15 +93,47 @@
 				}).catch((err)=>{
 					console.log(err)
 				})
+			},
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""
+				}
+			},
+			matchApply:function(){
+				if(this.headers !=""){
+					var data = {
+							id : this.matchid
+						}
+					var header = this.headers;
+					console.log(header)
+					pro.fetch("post","/tradeCompetition/join",data,header).then((res)=>{
+						if(res.code == 1 && res.success == true){
+							console.log(res)
+						}
+					}).catch((err)=>{
+						console.log(err)
+					})
+				}else{
+					this.$toast({message: '请您先登录',duration: 2000});
+					this.$router.push({path:"/login"})
+				}
 			}
 		},
 		mounted:function(){
+			this.getHeaders();
 			if(this.matchid != ""){
 				this.getMtchRules(this.matchid);
 			}
+			
 		},
 		watch:{
 			matchid:function(e){
+				this.getHeaders();
 				this.getMtchRules(e);
 			}
 		},

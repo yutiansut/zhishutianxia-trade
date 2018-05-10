@@ -100,28 +100,29 @@
 				}
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
+//						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
 					console.log(err)
 				})
+			},
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""
+				}
 			}
-		},
-		created :function(){
 		},
 		mounted:function(){
-			if(local.get("user") != null){
-				this.headers = {
-					token:local.get("user").token,
-					secret:local.get("user").secret
-				}
-			}else{
-				this.headers = ""
-			}
-			this.getMatchList(0,this.headers);
 		},
 		activated:function(){ 
+			this.getHeaders();
+			this.getMatchList(0,this.headers);
 		},
 		watch:{
 			selected:function(n){

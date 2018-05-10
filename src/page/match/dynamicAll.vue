@@ -25,14 +25,26 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name:"dynamicAll",
 		props:['id'],
 		data(){
 			return{
+				headers:""
 			}
 		},
 		methods:{
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""	
+				}
+			},
 			toMatchUser:function(){
 				this.$router.push({path:"matchUserDetails"});
 			},
@@ -45,11 +57,8 @@
 					pageSize:10,
 					direction:0
 				}
-				var headers = {
-					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
-					secret:"7cda0b054336c9cca469bf0aca8e3918"
-				}
-				pro.fetch("post","/tradeCompetition/tradeDynamic",data,headers).then((res)=>{
+				var header = this.headers
+				pro.fetch("post","/tradeCompetition/tradeDynamic",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						console.log(res)
 					}
@@ -59,6 +68,7 @@
 			}
 		},
 		mounted:function(){
+			this.getHeaders();
 			this.getDynamic(this.id);
 		}
 	}
