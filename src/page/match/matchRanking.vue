@@ -2,17 +2,27 @@
 	<div id="matchRanking">
 		<div class="myRank">
 			<ul>
-				<li>我的排名：<span>100 80</span></li>
+				<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
 				<li><span>总收益</span><i class="change change_1"></i><span>跟投人数</span><i class="change"></i></li>
 			</ul>
 		</div>
-		<ul class="ranking border_bottom" v-for="n in 10" @click="toMatchUser">
-			<li>
-				<i class="rang_no"></i>
-				<i class="user"></i>
-				<span class="username">那年那图</span>
+		<ul class="ranking border_bottom" @click="toMatchUser(matchid,'mine')">
+			<li class="li_no">
+				<img :src="user.byProfitRate | changNo" alt="" class="rang_no" />
+				<span class="span_no">{{this.user.byProfitRate}}</span>
+				<img :src="user.wxHeadImg" alt="" class="user"/>
+				<span class="username">{{user.wxNickname}}</span>
 			</li>
-			<li><span class="perecnt">333.88%</span><span class="count">13</span></li>
+			<li><span class="perecnt">{{user.profitRate}}%</span><span class="count">{{user.followCount}}</span></li>
+		</ul>
+		<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,'other')">
+			<li class="li_no">
+				<img :src="k | changNo" alt="" class="rang_no" />
+				<span class="span_no">{{k+1}}</span>
+				<img :src="n.wxHeadImg" alt="" class="user"/>
+				<span class="username">{{n.wxNickname}}</span>
+			</li>
+			<li><span class="perecnt">{{n.profitRate}}%</span><span class="count">{{n.followCount}}</span></li>
 		</ul>
 	</div>
 </template>
@@ -24,12 +34,15 @@
 		props:['matchid'],
 		data(){
 			return{
-				
+				user:[],//用户信息
+				followedUser:[],//被跟投信息
+				rankingList:[],//排行信息
 			}
 		},
 		methods:{
-			toMatchUser:function(){
-				this.$router.push({path:"/matchUserDetails"});
+			toMatchUser:function(e,type){
+				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type}});
+
 			},
 			getRanking:function(id){
 				var data = {
@@ -45,7 +58,9 @@
 				}
 				pro.fetch("post","/tradeCompetition/ranking",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
+						this.user = res.data.user;
+						this.followedUser = res.data.followedUser;
+						this.rankingList = res.data.rankingList;
 					}
 				}).catch((err)=>{
 					console.log(err)
@@ -56,7 +71,20 @@
 		mounted:function(){
 			this.getRanking(this.matchid);
 		},
-		
+		filters:{
+			changNo:function(e){
+				switch (e){
+					case 0:
+						return require("../../assets/images/match/no1.png");
+					case 1:
+						return require("../../assets/images/match/no2.png");
+					case 2:
+						return require("../../assets/images/match/no3.png");
+					default:
+						return require("../../assets/images/match/no_a.png");
+				}
+			}
+		}
 	}
 </script>
 
@@ -84,7 +112,7 @@
 		display: inline-block;
 		width: 0.18rem;
 		height: 0.24rem;
-		background: url(../../assets/images/match/match_change.png) no-repeat;
+		background: url(../../assets/images/match/match_rankUp.png) no-repeat;
 		background-size: 0.18rem 0.24rem;
 		margin-left: 0.1rem;
 	}
@@ -107,15 +135,24 @@
 		display: inline-block;
 		width: 0.44rem;
 		height: 0.44rem;
-		background: url(../../assets/images/match/no_a.png) no-repeat ;
-		background-size: 0.44rem 0.44rem;
+	}
+	.li_no{
+		position: relative;
+	}
+	.span_no{
+		position: absolute;
+		top: 0.52rem;
+		left: 0.16rem;
+		font-size: $fs24;
+		font-weight: bold;
+		color: $bg;
 	}
 	.user{
 		width: 0.8rem;
 		height: 0.8rem;
 		display: inline-block;
-		background: url(../../assets/images/account/WXlogin.png) no-repeat;
-		background-size: 0.8rem 0.8rem;
+		border-radius: 50%;
+		margin: 0 0.2rem;
 	}
 	.username{
 		color: $grayDeep;

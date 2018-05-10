@@ -75,6 +75,7 @@
 	import topTitle from "../components/topTitle"
 	import bottomTab from "../components/bottom_tab"
 	import pro from "../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name: 'match',
 		components:{ topTitle ,bottomTab},
@@ -82,7 +83,8 @@
 			return{
 				selected:"1",
 				tabSelected: 'match',
-				List:""
+				List:"",
+				headers : ''
 			}
 			
 		},
@@ -90,34 +92,41 @@
 			toNext:function(id){
 				this.$router.push({path:"/topNars",query:{matchId:id}});
 			},
-			getMatchList:function(n){
+			getMatchList:function(n,headers){
 				var data = {
 					status:n,
 					pageNo:'',
 					pageSize:''
 				}
-				var headers = "";
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
+//						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
 					console.log(err)
 				})
+			},
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""
+				}
 			}
 		},
-		created :function(){
-		},
 		mounted:function(){
-			this.getMatchList(0);
 		},
-		activated:function(){
-			
+		activated:function(){ 
+			this.getHeaders();
+			this.getMatchList(0,this.headers);
 		},
 		watch:{
 			selected:function(n){
-				this.getMatchList(n-1);
+				this.getMatchList(n-1,this.headers);
 			},
 		},	
 		filters:{

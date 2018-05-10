@@ -70,7 +70,7 @@
                 if(index > -1) {
 					this.userList.splice(index,1,item);
 				}else{
-					this.push(item)
+					this.userList.push(item)
 				}
                 local.set(key,this.userList)
 			},

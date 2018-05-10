@@ -13,7 +13,7 @@
 <script>
 	export default{
 		name:"loginHeader",
-		props:['title',"type","type1"],
+		props:['title',"type","type1",'matchid'],
 		data(){
 			return{
 				
@@ -31,7 +31,7 @@
 				if(this.type1 == "1"){
 					this.$router.push({path:"/customer_server"});
 				}else{
-					this.$router.push({path:"/mineGt"});
+					this.$router.push({path:"/mineGt",query:{matchId:this.matchid}});
 				}
 			}
 		}
