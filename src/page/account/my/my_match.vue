@@ -145,12 +145,12 @@
             this.getMatchList(4, 'matchingList')
             this.getMatchList(5, 'matchHistoryList')
         },
-        activated () {
-            const local = this.$pro.local
-            this.userInfo = local.get('user')
-            this.getMatchList(4, 'matchingList')
-            this.getMatchList(5, 'matchHistoryList')
-        }
+        // activated () {
+        //     const local = this.$pro.local
+        //     this.userInfo = local.get('user')
+        //     this.getMatchList(4, 'matchingList')
+        //     this.getMatchList(5, 'matchHistoryList')
+        // }
     }
 </script>
 

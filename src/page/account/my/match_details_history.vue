@@ -195,7 +195,6 @@
             selected (value) {
                  if(value == 2) {
                     if(this.historyList.length) return; 
-                    console.log(1)
                     this.getHistory()
                 }
             }

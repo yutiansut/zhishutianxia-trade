@@ -100,7 +100,7 @@
 								var userData = {username:this.phone,password:Base64.encode(this.password),token:res.data.token,secret:res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.addItem(userData)
-								local.get("user", JSON.stringify(userData));
+								local.get("user");
 								this.$router.push({path:"/my"});
 								this.$store.state.account.isLogin = true;
 							}

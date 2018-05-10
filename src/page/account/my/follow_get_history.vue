@@ -12,46 +12,45 @@
                     <li class="history_item_title">
                         <span>序号</span>
                         <div class="phone_number"> {{config.type}}</div>
-                        <div class="name">跟投方向</div>
-                        <span class="small">提取收益率</span>
-                        <span class="small">跟投总收益</span>
-                        <span>{{config.name}}</span>
-                        <span class="more">跟投获取收益</span>
-                        <div class="time">跟投时间</div>
-                        <div class="time">结束时间</div>
-                        
+                        <span class="small">跟投盈亏</span>
+                        <span class="small">跟投比例</span>
+                        <template v-if="type=='1'">
+                            <span class="more">{{config.surplus}}</span>
+                        </template>
+                        <span class="more">{{config.name}}</span>                                                                      
+                        <div class="time">结算时间</div>                       
+                    </li>
+                    <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
+                        <span>{{ (index + 1).toString().padStart(2,0) }}</span>
+                        <div class="phone_number">{{item.wxNickname||item.telphone}}</div>
+                        <span class="small">{{item.followProfit}}</span>
+                        <span class="small">{{item.divide}}</span>
+                         <template v-if="type=='1'">
+                            <span class="more">{{item.deductProfit}}</span>
+                        </template>                       
+                        <span class="more">{{item.profit}}</span>     
+                        <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">{{item.settleTime}}</p></div>
                     </li>
                     <li class="history_item">                        
                         <span>01</span>
-                        <div class="phone_number">小四</div>
-                        <div class="name">正</div>                        
-                        <span class="small">12</span>
+                        <div class="phone_number">151****1502</div>            
                         <span class="small">100000</span>
-                        <span>12000</span>
+                        <span class="small">12%</span>
+                        <template v-if="type=='1'">
+                            <span class="more">88000</span>
+                        </template>                     
                         <span class="more">88000</span>
-                        <div class="time"><p class="time_day">2018-03-01</p><p class="time_date">15:59:12</p></div>
-                        <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">15:59:12</p></div>
-                    </li>
-                    <li class="history_item">                        
-                        <span>01</span>
-                        <div class="phone_number">151****1502</div>
-                        <div class="name">正</div>                        
-                        <span class="small">12</span>
-                        <span class="small">100000</span>
-                        <span>12000</span>
-                        <span class="more">88000</span>
-                        <div class="time"><p class="time_day">2018-03-01</p><p class="time_date">15:59:12</p></div>
                         <div class="time"><p class="time_day">2018-03-05</p><p class="time_date">15:59:12</p></div>
                     </li>
                     <li class="history_item">                        
                         <span>01</span>
-                        <div class="phone_number">小四</div>
-                        <div class="name">正</div>                        
+                        <div class="phone_number">小四</div>                  
                         <span class="small">12</span>
                         <span class="small">100000</span>
-                        <span>12000</span>
+                         <template v-if="type=='1'">
+                            <span class="more">110</span>
+                        </template>
                         <span class="more">88000</span>
-                        <div class="time"><p class="time_day">2018-03-01</p><p class="time_date">15:59:12</p></div>
                         <div class="time"><p class="time_day">2018-03-21</p><p class="time_date">15:59:12</p></div>
                     </li>
                 </ul>                                                
@@ -68,7 +67,8 @@ const extractConfig = {
 }
 const deductionConfig = {
     type: '被跟投用户名',
-    name: '扣除收益',
+    name: '跟投结余',
+    surplus: '跟投扣除金额' 
 }
 export default {
   name: 'match_details_history',
@@ -78,7 +78,8 @@ export default {
       isBegin: true,
       selected: '1',
       config: {},
-      userInfo: {}
+      userInfo: {},
+      followList: []
     }
   },
   computed: {
@@ -121,7 +122,7 @@ export default {
                 this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
-                       
+                       this.followList = res.data
                     }
     
                 }.bind(this)).catch(function(err) {
@@ -172,7 +173,7 @@ export default {
 
 }
 .history_item,.history_item_title{
-    width: 210%;
+    width: 160%;
     @include flex(space-around);
     @include font($fs28,0.64rem,$graySimple);
     .name{
@@ -182,7 +183,7 @@ export default {
     .time{
        width: 2rem;
     text-align: right;
-    padding-right: 0.4rem;
+    padding: 0.2rem 0.4rem 0.2rem 0;
     }
     .phone_number{
         width: 1.8rem;
