@@ -8,9 +8,10 @@
 		</div>
 		<div class="activity">
 			<ul>
-				<li class="border_bottom" v-for="(k,v) in award">
-					<div>
-						<img src="../../assets/images/match/no1.png"/>
+				<li class="border_bottom" v-for="(k,v,index) in award">
+					<div class="li_no">
+						<img :src="index | changNo"/>
+						<span id="span_no">{{index+1}}</span>
 						<span>{{v}}</span>
 					</div>
 					<label>{{k}}元</label>
@@ -101,6 +102,18 @@
 			matchid:function(e){
 				this.getMtchRules(e);
 			}
+		},
+		filters:{
+			changNo:function(e){
+				switch (e){
+					case 0:
+						return require("../../assets/images/match/no1.png");
+					case 1:
+						return require("../../assets/images/match/no2.png");
+					case 2:
+						return require("../../assets/images/match/no3.png");
+				}
+			}
 		}
 	}
 </script>
@@ -151,6 +164,18 @@
 			}
 			
 		}
+		.li_no{
+			position: relative;
+			#span_no{
+				position: absolute;
+				left: 0.06rem;
+				top: 0.04rem;
+				font-size: $fs24;
+				font-weight: bold;
+				color: $bg;
+			}
+		}
+		
 	}
 	.rules{
 		li{

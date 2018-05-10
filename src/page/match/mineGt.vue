@@ -6,24 +6,24 @@
 				<ul>
 					<li>
 						<span class="span_gray">提取收益率：</span>
-						<span class="span_black">12%</span>
+						<span class="span_black">{{divide}}%</span>
 					</li>
 					<li>
 						<span class="span_gray">跟投人数:</span>
-						<span class="span_black">3</span>
+						<span class="span_black">{{followCount}}</span>
 					</li>
 				</ul>
 			</div>
 			<div class="h_20"></div>
 			<div class="details">
-				<ul class="border_bottom" v-for="n in 5">
+				<ul class="border_bottom" v-for="n in followList">
 					<li>
-						<i class="user"></i>
-						<span class="span_gray">欧冠决赛</span>
+						<img :src="n.wxHeadImg" class="user"/>
+						<span class="span_gray">{{n.wxNickname}}</span>
 					</li>
 					<li>
-						<span class="span_simp">2018-11-11-2018-11-11</span>
-						<span class="color_red">正向</span>
+						<span class="span_simp">{{n.followTime}}</span>
+						<span class="color_red">{{n.direction | changDirection}}</span>
 					</li>
 				</ul>
 			</div>
@@ -39,13 +39,16 @@
 		components:{ topTitle },
 		data(){
 			return{
-				
+				matchid :'',
+				divide:"",//收益率
+				followCount:"",//跟投人数
+				followList:[]//跟投列表
 			}
 		},
 		methods:{
-			getMintGt:function(){
+			getMintGt:function(id){
 				var data = {
-					id:"",
+					id:id,
 					pageNo:"",
 					pageSize:""
 				}
@@ -56,10 +59,24 @@
 				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						console.log(res)
+						this.divide = res.data.divide;
+						this.followCount = res.data.followCount;
+						this.followList = res.data.followers
 					}
 				}).catch((err)=>{
 					console.log(err)
 				})
+			}
+		},
+		mounted:function(){
+		},
+		activated:function(){
+			this.matchid = this.$route.query.matchId;
+			this.getMintGt(this.matchid);
+		},
+		filters:{
+			changDirection:function(e){
+				return e == 0 ? "正向" : "反向"
 			}
 		}
 	}
@@ -116,8 +133,6 @@
 			width: 0.44rem;
 			height: 0.44rem;
 			display: inline-block;
-			background: url(../../assets/images/match/userP.png) no-repeat;
-			background-size: 0.44rem 0.44rem;
 			margin-right: 0.2rem;
 		}
 	}
