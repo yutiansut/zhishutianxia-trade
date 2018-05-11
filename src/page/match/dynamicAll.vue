@@ -1,7 +1,7 @@
 <template>
 	<div id="dynamicAll">
-		<div class="container" v-for="n in 5">
-			<div class="details" @click="toMatchUser">
+		<div class="container" v-for="(n,k) in dataList">
+			<div class="details" @click="toMatchUser(n.userNo,'other')">
 				<div class="user border_bottom">
 					<ul>
 						<li><i class="userP"></i><span class="username">哈哈哈</span></li>
@@ -31,7 +31,8 @@
 		props:['id'],
 		data(){
 			return{
-				headers:""
+				headers:"",
+				dataList:''
 			}
 		},
 		methods:{
@@ -45,13 +46,13 @@
 					this.headers = ""	
 				}
 			},
-			toMatchUser:function(){
-				this.$router.push({path:"matchUserDetails"});
+			toMatchUser:function(e,other){
+				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this,matchid}});
 			},
 			getDynamic:function(id){
 				var data ={
 					id:id,
-					tradeNo:'',
+					guardId:'',
 					type:0,
 					pageNo:1,
 					pageSize:10,

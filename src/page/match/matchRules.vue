@@ -51,6 +51,9 @@
 		<div class="btn bt" v-else-if="rulesData.join == -1">
 			<button @click="toLogin">比赛报名中，立即参加</button>
 		</div>
+		<div class="btn1 bt" v-else-if="rulesData.statusName == 1">
+			<button>等待报名</button>
+		</div>
 		<div class="btn bt" v-else>
 			<button @click="matchApply">比赛报名中，立即参加</button>
 		</div>-->
