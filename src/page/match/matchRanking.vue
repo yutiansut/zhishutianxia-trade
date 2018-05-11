@@ -41,7 +41,7 @@
 		},
 		methods:{
 			toMatchUser:function(e,type){
-				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type}});
+				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type,matchid:this.matchid}});
 
 			},
 			getRanking:function(id){

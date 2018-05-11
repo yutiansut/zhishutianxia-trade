@@ -93,10 +93,13 @@
 				</div>
 			</div>
 			<div class="div_white"></div>
-			<div id="bottom_tab">
-				<span>正向跟投</span>
-				<span>反向跟投</span>
+			<div class="bottom_tab">
+				<span @click="forwards(0)">正向跟投</span>
+				<span @click="forwards(1)">反向跟投</span>
 			</div>
+			<!--<div class="bottom_tab1">
+				<span @click="forwards(2)">取消跟投</span>
+			</div>-->
 		</div>
 	</div>	
 </template>
@@ -117,7 +120,9 @@
 				type:"",
 				upData:"",
 				headers:"",
-				apiUrl:""
+				apiUrl:"",
+				userNo:"",//交易账号
+				matchid:""//比赛id
 			}
 		},
 		methods:{
@@ -140,11 +145,28 @@
 					this.headers = ""	
 				}
 			},
+			//跟投
+			forwards:function(type){
+				var data = {
+					id:this.matchid,
+					account:this.userid,
+					type:type
+				};
+				var header=this.headers;
+				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						console.log(res)
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
+			}
 		},
 		activated:function(){
 			this.getHeaders();
 			this.userId = this.$route.query.userId;
-			this.type = this.$route.query.type
+			this.type = this.$route.query.type;
+			this.matchid = this.$route.query.matchid;
 			if(this.type == "mine"){
 				this.upData = {
 					account:this.userId
@@ -261,7 +283,7 @@
 			height: 0.98rem;
 			background-color: $bg;
 		}
-		#bottom_tab{
+		.bottom_tab{
 			width: 100%;
 			position: fixed;
 			bottom: 0;
@@ -287,6 +309,21 @@
 					background-color: $blcakThin;
 					color: $bg;
 				}
+			}
+		}
+		.bottom_tab1{
+			width: 100%;position: fixed;
+			bottom: 0;
+			left: 0;
+			height: 0.98rem;
+			text-align: center;
+			line-height: 0.98rem;
+			background-color: #0099e6;
+			font-size: 0.36rem;
+			span{
+				height: 0.98rem;
+				color: $bg;
+				
 			}
 		}
 	}

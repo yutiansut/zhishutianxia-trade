@@ -32,7 +32,7 @@
 			getDynamic:function(id){
 				var data ={
 					id:id,
-					tradeNo:'',
+					guardId:'',
 					type:2,
 					pageNo:1,
 					pageSize:10,
