@@ -100,7 +100,7 @@
 				}
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-//						console.log(res)
+						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
@@ -126,7 +126,20 @@
 		},
 		watch:{
 			selected:function(n){
-				this.getMatchList(n-1,this.headers);
+				switch (n){
+					case '1':
+						this.getMatchList(0,this.headers);	
+						break;
+					case '2':
+						this.getMatchList(2,this.headers);	
+						break;
+					case '3':
+						this.getMatchList(4,this.headers);	
+						break;
+					case '4':
+						this.getMatchList(5,this.headers);	
+						break;
+				}
 			},
 		},	
 		filters:{
