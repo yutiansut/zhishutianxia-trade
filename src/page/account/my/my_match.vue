@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                     </template>
-                    <div class="no_list" v-else>
+                    <div class="no_list" v-else @click="goto('/match')">
                         <p>啊哦，你暂未参加任何模拟比赛</p>
                         <button>立即报名</button>
                     </div>
@@ -85,10 +85,19 @@
             }
         },
         methods: {
-            goto(id,title) {
-                this.$router.push({
-                   path: `match_details/${id}/title/${title}`,
-                });
+            goto(...rest) {
+                console.log(rest[0])
+                console.log(rest[1])
+                if (rest.length == 1) {
+                    this.$router.push({
+                        path: rest[0],
+                    });
+                }else if(rest.length == 2){
+                    this.$router.push({
+                        path: `match_details/${id}/title/${title}`,
+                    });
+                }
+                
             },
             gotoOld(id,title) {
                 this.$router.push({
@@ -113,11 +122,11 @@
                     console.log(res)
                     if (res.success && res.code == 1) {
                         this[listName] = res.data.list
-                        this[isShow] = res.data.list.length > 0
+                        this[isShow] = res.data.list?res.data.list.length:res.data.list
                     }
     
                 }.bind(this)).catch(function(err) {
-                    //console.log(err)
+                    console.log(err)
                     var data = err.data;
                     if (data == undefined) {
                         this.$toast({
@@ -139,18 +148,28 @@
                 console.log("----" + old)
             },
         },
-        created() {
-            const local = this.$pro.local
-            this.userInfo = local.get('user')
-            this.getMatchList(4, 'matchingList')
-            this.getMatchList(5, 'matchHistoryList')
-        },
-        // activated () {
+        // created() {
         //     const local = this.$pro.local
         //     this.userInfo = local.get('user')
         //     this.getMatchList(4, 'matchingList')
         //     this.getMatchList(5, 'matchHistoryList')
-        // }
+        // },
+        activated () {
+            const local = this.$pro.local
+            this.userInfo = local.get('user')
+            this.getMatchList(4, 'matchingList')
+            this.getMatchList(5, 'matchHistoryList')
+        },  
+       beforeRouteEnter: (to, from, next) => {            
+            next(vm => {
+                const local = vm.$pro.local
+                vm.userInfo = local.get('user')
+                if (!vm.userInfo) {
+                    vm.$router.replace('/login')
+                }
+                
+            })
+        }
     }
 </script>
 

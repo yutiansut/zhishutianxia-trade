@@ -69,6 +69,16 @@
                     path: path
                 });
             }
+        },
+        beforeRouteEnter: (to, from, next) => {            
+            next(vm => {
+                const local = vm.$pro.local
+                vm.userInfo = local.get('user')
+                if (!vm.userInfo) {
+                    vm.$router.replace('/login')
+                }
+                
+            })
         }
     }
 </script>

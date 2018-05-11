@@ -2,9 +2,9 @@
     <div id="home">
         <mt-header fixed title="我的">           
             <mt-button slot="left" icon="back" @click="goLast"></mt-button>
-            <mt-button slot="right" @click="goto('/information')">
+            <!-- <mt-button slot="right" @click="goto('/information')">
                 <span class="icon"></span>
-            </mt-button>
+            </mt-button> -->
         </mt-header>
         <div class="user_info">
             <img :src="accountInfo.wxHeadimgurl||require('../../../assets/images/account/WXuser.png')" alt="用户头像">
@@ -14,7 +14,7 @@
         <div class="money_wrap">
             <div class="money_box">
                 <p>可用资金</p>
-                <p class="money_text"><span>{{accountInfo.balance||'0.00'}}</span> 元</p>
+                <p class="money_text"><span>{{buwei(accountInfo.balance)||"0.00"}}</span> 元</p>
             </div>
             <div class="money_box">
                 <p>账户余额</p>
@@ -118,6 +118,15 @@ export default {
       //console.log(msg)
       this[key] = msg
     },
+    buwei (numString) {     
+      if(numString === undefined||null) {
+          numString
+      }else if(numString.indexOf('.')>-1){
+         numString
+      }else{  
+         numString + '.00'
+      }
+    },
     loginOut () {
       this.userInfo = {}
       this.clearUserInfo()
@@ -157,9 +166,6 @@ export default {
     },  
 
   },  
-  // created () {
-  //    this.getUserInfo()
-  // },
   activated () {    
     this.userInfo = local.get('user')
     this.userList = local.get('userList')
