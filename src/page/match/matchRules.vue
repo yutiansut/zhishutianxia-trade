@@ -34,7 +34,7 @@
 			<span>提醒：</span>
 			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
-		<!--<div class="btn1 bt" v-if="rulesData.statusName == 5">
+		<div class="btn1 bt" v-if="rulesData.statusName == 5">
 			<button>比赛已结束</button>
 		</div>
 		<div class="btn2 bt" v-else-if="rulesData.join == 1 && (rulesData.statusName == 2 || rulesData.statusName == 3)">
@@ -56,11 +56,11 @@
 		</div>
 		<div class="btn bt" v-else>
 			<button @click="matchApply">比赛报名中，立即参加</button>
-		</div>-->
-		<div class="btn3 bt">
+		</div>
+		<!--<div class="btn3 bt">
 			<button @click="enterMatch">进入比赛</button>
 			<button @click="toMatchSet">跟投设置</button>
-		</div>
+		</div>-->
 	</div>
 </template>
 
@@ -113,6 +113,7 @@
 				var header = this.headers;
 				pro.fetch("post","/tradeCompetition/details",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
+						console.log(res);
 						this.rulesData = res.data.qiwCompetition;
 						this.award = res.data.award;
 						$.map(res.data.rule,function(i,item){
@@ -152,15 +153,26 @@
 					})
 			}
 		},
-		mounted:function(){
+		activated:function(){
+			console.log("88888")
 			this.getHeaders();
 			if(this.matchid != ""){
+				console.log("66666")
 				this.getMtchRules(this.matchid);
 			}
-			
+		},
+		mounted:function(){
+			console.log("666")
+			this.getHeaders();
+			if(this.matchid != ""){
+				console.log("66666")
+				this.getMtchRules(this.matchid);
+			}
 		},
 		watch:{
 			matchid:function(e){
+				console.log("7777777777")
+				console.log(e)
 				this.getHeaders();
 				this.getMtchRules(e);
 			}
