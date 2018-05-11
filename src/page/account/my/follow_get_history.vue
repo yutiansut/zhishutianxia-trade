@@ -1,22 +1,22 @@
 <template>
-    <div id="match_details_history" >
+    <div id="match_details_history">
         <mt-header fixed :title="titleName">
             <mt-button slot="left" icon="back" @click="goBack"></mt-button>
         </mt-header>
-       
+    
         <!-- 列表 -->
-        <div class="list_wrap">           
+        <div class="list_wrap">
             <!-- tab-container -->
-                <!-- 历史记录 -->
-                <ul class="history_list">
-                    <li class="history_item_title">
-                        <span>序号</span>
-                        <div class="phone_number"> {{config.type}}</div>
-                        <span class="small">跟投盈亏</span>
-                        <span class="small">跟投比例</span>
-                        <template v-if="type=='1'">
-                            <span class="more">{{config.surplus}}</span>
-                        </template>
+            <!-- 历史记录 -->
+            <ul class="history_list">
+                <li class="history_item_title">
+                    <span>序号</span>
+                    <div class="phone_number"> {{config.type}}</div>
+                    <span class="small">跟投盈亏</span>
+                    <span class="small">跟投比例</span>
+                    <template v-if="type=='1'">
+                                <span class="more">{{config.surplus}}</span>
+</template>
                         <span class="more">{{config.name}}</span>                                                                      
                         <div class="time">结算时间</div>                       
                     </li>
@@ -25,20 +25,21 @@
                         <div class="phone_number">{{item.wxNickname||item.telphone}}</div>
                         <span class="small">{{item.followProfit}}</span>
                         <span class="small">{{item.divide}}</span>
-                         <template v-if="type=='1'">
-                            <span class="more">{{item.deductProfit}}</span>
-                        </template>                       
+<template v-if="type=='1'">
+    <span class="more">{{item.deductProfit}}</span>
+</template>
                         <span class="more">{{item.profit}}</span>     
                         <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">{{item.settleTime}}</p></div>
+                        <div>{{123|abc}}</div>
                     </li>
                     <!-- <li class="history_item">                        
                         <span>01</span>
                         <div class="phone_number">151****1502</div>            
                         <span class="small">100000</span>
                         <span class="small">12%</span>
-                        <template v-if="type=='1'">
-                            <span class="more">88000</span>
-                        </template>                     
+<template v-if="type=='1'">
+    <span class="more">88000</span>
+</template>
                         <span class="more">88000</span>
                         <div class="time"><p class="time_day">2018-03-05</p><p class="time_date">15:59:12</p></div>
                     </li>
@@ -47,9 +48,9 @@
                         <div class="phone_number">小四</div>                  
                         <span class="small">12</span>
                         <span class="small">100000</span>
-                         <template v-if="type=='1'">
-                            <span class="more">110</span>
-                        </template>
+<template v-if="type=='1'">
+    <span class="more">110</span>
+</template>
                         <span class="more">88000</span>
                         <div class="time"><p class="time_day">2018-03-21</p><p class="time_date">15:59:12</p></div>
                     </li> -->
@@ -61,59 +62,64 @@
 </template>
 
 <script>
-const extractConfig = {
-    type: '跟投用户名',
-    name: '提取收益',
-}
-const deductionConfig = {
-    type: '被跟投用户名',
-    name: '跟投结余',
-    surplus: '跟投扣除金额' 
-}
-export default {
-  name: 'follow_history',
-  props: ['account','type', 'id'],
-  data () {
-    return {
-      isBegin: true,
-      selected: '1',
-      config: {},
-      userInfo: {},
-      followList: []
+    const extractConfig = {
+        type: '跟投用户名',
+        name: '提取收益',
     }
-  },
-  computed: {
-      clientHeight () {
-          return document.documentElement.clientHeight + 'px';
-      },
-       titleName () {
-           switch (this.type) {
-                case '0':
-                this.config = extractConfig;
-                   return '跟投提取收益'
-                   break;
-                case '1':
-                this.config = deductionConfig;
-                   return '跟投扣除收益'
-                   break;   
-           
-               default:
-                   break;
-           }
-      }
-  },
-  methods: {
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-    },
-    goFollow(id) {
-      this.$router.push({ path: `/follow_get_history/${id}` });
-    },
-    getList () {
-        var sendData = {
-                    account: this.account,
-                    type: this.type,
-                    id: this.id
+    const deductionConfig = {
+        type: '被跟投用户名',
+        name: '跟投结余',
+        surplus: '跟投扣除金额'
+    }
+    export default {
+        name: 'follow_history',
+        props: ['account', 'type', 'id'],
+        data() {
+            return {
+                isBegin: true,
+                selected: '1',
+                config: {},
+                userInfo: {},
+                followList: []
+            }
+        },
+        computed: {
+            clientHeight() {
+                return document.documentElement.clientHeight + 'px';
+            },
+            titleName() {
+                switch (this.type) {
+                    case '0':
+                        this.config = extractConfig;
+                        return '跟投提取收益'
+                        break;
+                    case '1':
+                        this.config = deductionConfig;
+                        return '跟投扣除收益'
+                        break;
+    
+                    default:
+                        break;
+                }
+            }
+        },
+        methods: {
+            goBack() {
+                window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+            },
+            goFollow(id) {
+                this.$router.push({
+                    path: `/follow_get_history/${id}`
+                });
+            },
+            getList() {
+                var sendData = {
+                    // account: this.account,
+                    // type: this.type,
+                    // id: this.id
+                    account: 'sdfsdf',
+                    type: '0',
+                    id: 'sdsdfsfdfsfsfd'
                 }
                 const headers = {
                     token: this.userInfo.token,
@@ -122,7 +128,7 @@ export default {
                 this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
-                       this.followList = res.data
+                        this.followList = res.data
                     }
     
                 }.bind(this)).catch(function(err) {
@@ -140,71 +146,73 @@ export default {
                         });
                     }
                 }.bind(this))
+            }
+        },
+        created() {
+            const local = this.$pro.local
+            this.userInfo = local.get('user')
+            this.getList()
+        }
     }
-  },
-  created () {
-       const local = this.$pro.local
-        this.userInfo = local.get('user')
-        this.getList()
-  }
-}
-
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/css/common.scss";
-#match_details_history{
-    width: 7.5rem;
-    background-color: $bgGray;
-}
-.list_wrap{
-   width:7.5rem; 
-   padding: 0.96rem 0 0 0;
-   background-color:$bgGray;  
-}
-#match_details_history .is-selected {
-    margin: 0;
-    border-bottom: 0.03rem solid #e64552;
-    color: #e64552;
-}
-.history_list{
-    width: 7.5rem;
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
-
-}
-.history_item,.history_item_title{
-    width: 160%;
-    @include flex(space-around);
-    @include font($fs28,0.64rem,$graySimple);
-    .name{
-        width: 1.5rem;
-        padding: 0.15rem 0;
-    }
-    .time{
-       width: 2rem;
-    text-align: right;
-    padding: 0.2rem 0.4rem 0.2rem 0;
-    }
-    .phone_number{
-        width: 1.8rem;
-    }
-    span{        
-        width: 1.4rem;
-    }
-    .more{
-        width: 1.8rem;
-    }
-
-    .time_day{
-        @include font($fs28,0.32rem,$blcakThin,right);
-    }
-    .time_date{
-        @include font($fs24,0.32rem,$graySimple,right);
+    @import "../../../assets/css/common.scss";
+    #match_details_history {
+        width: 7.5rem;
+        background-color: $bgGray;
     }
     
-}
-.history_item{
-    background-color: $bg
-}
+    .list_wrap {
+        width: 7.5rem;
+        padding: 0.96rem 0 0 0;
+        background-color: $bgGray;
+    }
+    
+    #match_details_history .is-selected {
+        margin: 0;
+        border-bottom: 0.03rem solid #e64552;
+        color: #e64552;
+    }
+    
+    .history_list {
+        width: 7.5rem;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .history_item,
+    .history_item_title {
+        width: 160%;
+        @include flex(space-around);
+        @include font($fs28, 0.64rem, $graySimple);
+        .name {
+            width: 1.5rem;
+            padding: 0.15rem 0;
+        }
+        .time {
+            width: 2rem;
+            text-align: right;
+            padding: 0.2rem 0.4rem 0.2rem 0;
+        }
+        .phone_number {
+            width: 1.8rem;
+        }
+        span {
+            width: 1.4rem;
+        }
+        .more {
+            width: 1.8rem;
+        }
+        .time_day {
+            @include font($fs28, 0.32rem, $blcakThin, right);
+        }
+        .time_date {
+            @include font($fs24, 0.32rem, $graySimple, right);
+        }
+    }
+    
+    .history_item {
+        background-color: $bg
+    }
 </style>

@@ -14,7 +14,7 @@
                     <template v-if="hasList">
                             <div class="matchDiv" v-for="match in matchingList" :key="match.id" @click="goto(match.id,match.title)">
                                 <div class="img_div">
-                                    <img :src="match.img" alt="match.title"/>
+                                    <img :src="imgPath+match.imgUrl" :alt="match.title"/>
                                     <!-- <img src="../../../assets/images/match/match_bananer.png" /> -->
                                 </div>
                                 <div class="time_div">
@@ -34,7 +34,7 @@
                     <template v-if="hasHistoryList">
                         <div class="matchDiv" v-for="match in matchHistoryList" :key="match.id" @click="gotoOld(match.id,match.title)">
                             <div class="img_div">
-                                <img :src="match.img" alt="match.title" />
+                                <img :src="imgPath+match.imgUrl" :alt="match.title" />
                                 <!-- <img src="../../../assets/images/match/match_bananer.png" /> -->
                             </div>
                             <div class="time_div">
@@ -82,6 +82,10 @@
         computed: {
             clientHeight() {
                 return document.documentElement.clientHeight + "px";
+            },
+            imgPath () {
+                return this.$store.getters.IMGPATH
+                
             }
         },
         methods: {
@@ -133,12 +137,18 @@
                             message: "网络不给力，请稍后重试",
                             duration: 2000
                         });
-                    } else {
+                    }else if(data.code == '-100') {
+                        this.$toast({
+                            message: `服务器异常 ${err.code}`,
+                            duration: 2000
+                        });
+                    }else {
                         this.$toast({
                             message: data.message,
                             duration: 2000
                         });
                     }
+                    
                 }.bind(this))
             }
         },

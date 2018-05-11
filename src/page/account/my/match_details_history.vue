@@ -94,7 +94,7 @@
 </template>
 
 <script>
-    export default {
+    export default  {
         name: 'match_details_history',
         props: ['id', 'title'],
         data() {
@@ -115,6 +115,9 @@
             },
             tradeName () {
                 return this.$store.state.tradeName
+            },
+            test1 () {
+                console.log(333)
             }
         },
         methods: {

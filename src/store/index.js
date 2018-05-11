@@ -57,7 +57,25 @@ var account = {
 const tradeName = {
 	CL: '国际原油',
 	HSI: '恒指期货',
-	GC: '美黄金'
+	GC: '美黄金',
+	CUS: '美元兑人民币',
+	DX: '美元指数',
+	FDAX: '德国DAX指数',
+	MHI: '小恒指',
+	CN: '富时A50',
+	HG: '美铜',
+	SI: '美白银',
+	YM: '迷你道琼',
+	NQ: '迷你纳斯达克',
+	ES: '迷你标准普尔',
+	NK: '日经225',
+	HHI: 'H股指数',
+	MCH: '小H股指数',
+	QM: '小原油',
+	FDXM: '迷你德国DAX指数',
+	NG: '天然气',
+	IF: '沪深300指数',
+	BRN: '布伦特原油'
 }
 
 export default new Vuex.Store({
@@ -95,7 +113,19 @@ export default new Vuex.Store({
 			} else if(state.setting == 'nat') {
 				return '/nat';
 			}
+		},
+		IMGPATH: function (state) {
+			if(state.setting == 'dev') {
+				return state.account.currentUrlHead + '//192.168.0.225'
+			}else if(state.setting == 'build'){
+				if(state.environment == 'test'){
+					return state.account.currentUrlHead + '//test.api.zhishutianxia.com';
+				}else{
+					return state.account.currentUrlHead + '//139.196.232.17';
+                }
+            }    
 		}
+
 	},
     mutations: {
     	['UPDATE_DIRECTION'](state,payload) {

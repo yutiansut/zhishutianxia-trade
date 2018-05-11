@@ -10,7 +10,10 @@
                     <!-- <li class="item checked">2607000071<i class="delete"></i></li> -->
                 </ul>
             </div>
-            <span class="close" @click="close"></span>
+            <div class="close_box" @click="close">
+                    <span class="close" ></span>
+            </div>
+            
         </div>
     
     </div>
@@ -158,14 +161,18 @@
                 background-image: url('../assets/images/account/delete.png');
             }
         }
-        .close {
+        .close_box {
             position: absolute;
-            top: -0.6rem;
-            right: 0;
-            width: 0.32rem;
-            height: 0.32rem;
-            background: url('../assets/images/account/close.png') center no-repeat;
-            background-size: cover;
+            top: -0.7rem;
+            right: -0.2rem;
+            padding: 0.2rem;
+            .close{
+                display: block;
+                width: 0.32rem;
+                height: 0.32rem;
+                background: url('../assets/images/account/close.png') center no-repeat;
+                background-size: cover;
+            }
         }
     }
     
