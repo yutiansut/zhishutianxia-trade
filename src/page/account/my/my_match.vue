@@ -143,6 +143,7 @@
                             duration: 2000
                         });
                     }else {
+                        console
                         this.$toast({
                             message: data.message,
                             duration: 2000

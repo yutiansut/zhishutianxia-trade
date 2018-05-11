@@ -126,7 +126,7 @@
                     secret: this.userInfo.secret
                 }
                 this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
-                    console.log(res)
+                    //console.log(res)
                     if (res.success && res.code == 1) {
                         this.followList = res.data
                     }
@@ -139,7 +139,12 @@
                             message: "网络不给力，请稍后重试",
                             duration: 2000
                         });
-                    } else {
+                    } else if(data.code == '-100') {
+                        this.$toast({
+                            message: `服务器异常 ${data.code}`,
+                            duration: 2000
+                        });
+                    }else {
                         this.$toast({
                             message: data.message,
                             duration: 2000

@@ -153,7 +153,13 @@
                             message: "网络不给力，请稍后重试",
                             duration: 2000
                         });
-                    } else {
+                    } else if(data.code == '-100') {
+                        this.$toast({
+                            message: `服务器异常 ${data.code}`,
+                            duration: 2000
+                        });
+                    }else {
+                        console
                         this.$toast({
                             message: data.message,
                             duration: 2000
