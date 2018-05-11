@@ -5,13 +5,12 @@
 				<div class="user border_bottom">
 					<ul>
 						<li><i class="userP"></i><span class="username">哈哈哈</span></li>
-						<li><span class="income">收益：</span><span class="count">1.86%</span></li>
 					</ul>
 				</div>
 				<div class="buyDetails">
 					<ul>
-						<li>{{n.direction | changeDrection}}：<span>{{n.commodityNo}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
-						<li>价格：<span>152.5</span></li>
+						<li>{{n.direction | changeDrection}}：<span>{{tradeName[n.commodityNo]}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
+						<li>价格：<span>{{n.tradePrice}}</span></li>
 					</ul>
 					<ul>
 						<li>10分钟前</li>
@@ -34,6 +33,11 @@
 				headers:"",
 				dataList:''
 			}
+		},
+		computed:{
+			tradeName () {
+                return this.$store.state.tradeName
+            }
 		},
 		methods:{
 			getHeaders:function(){
@@ -70,12 +74,12 @@
 			}
 		},
 		mounted:function(){
+			console.log("88888888")
 			this.getHeaders();
 			this.getDynamic(this.id);
 		},
 		filters:{
 			changeDrection:function(e){
-				console.log(e)
 				return e == 0 ? "买入" : "卖出"
 			}
 		}
