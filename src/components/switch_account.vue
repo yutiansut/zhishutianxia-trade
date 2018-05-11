@@ -4,7 +4,9 @@
             <div class="list_box">
                 <h2>交易账号</h2>
                 <ul class="list">
-                    <li v-for="(item, index) in userList1" :key="item.username" :class="['item',{'checked': !index}]" @click="login(item)">{{item.username}}<i class="delete"></i></li>
+                    <li v-for="(item, index) in userList1" :key="item.username" :class="['item',{'checked': !index}]" @click="login(item)">
+                        {{item.username}}<i v-if="index" @click.stop="deleteItem(userList,item.username)" class="delete"></i>
+                    </li>
                     <!-- <li class="item checked">2607000071<i class="delete"></i></li> -->
                 </ul>
             </div>
@@ -23,8 +25,7 @@
         data() {
             return {
                 isShow: true,
-                userInfo: {}
-    
+                userInfo: {},
             }
         },
         computed: {
@@ -48,6 +49,16 @@
                 //this.isShow = !this.isShow;
                 this.$emit('show-modal', false)
             },
+            deleteItem (listArr , username, key= 'userList') {
+                let index = listArr.findIndex((userObj) =>{
+					return userObj.username == username
+                })
+                if(index > -1) {
+					listArr.splice(index,1);
+                }
+                local.set(key,listArr)
+                this.$toast('删除成功')
+            },
             login(item) {
                 let ClientId = localStorage.clientid ? JSON.parse(localStorage.clientid).id : '';
                 let info = {
@@ -62,9 +73,7 @@
                                 message: '账号切换成功',
                                 duration: 1000,
                             });
-                            this.token = res.data.token;
-                            this.secret = res.data.secret;
-                            var userData = item;
+                            let userData = item;
                             localStorage.setItem("user", JSON.stringify(userData));
                             this.$store.state.account.isLogin = true;
                             //刷新当前页面
@@ -89,7 +98,7 @@
             }
         },
         activated() {
-            this.userInfo = local.get('user')
+            this.userInfo = local.get('user') || {};
         },
         watch: {
     
@@ -125,6 +134,10 @@
             background-color: $bg;
             opacity: 1;
             border-radius: 0 0 0.08rem 0.08rem;
+        }
+        .list_box{
+            height: 5.8rem;
+            overflow: scroll;
         }
         .item {
             @include flex(space-between);
