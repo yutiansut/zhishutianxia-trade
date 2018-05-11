@@ -29,6 +29,7 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name:"matchRanking",
 		props:['matchid'],
@@ -37,6 +38,7 @@
 				user:[],//用户信息
 				followedUser:[],//被跟投信息
 				rankingList:[],//排行信息
+				headers:""
 			}
 		},
 		methods:{
@@ -45,17 +47,14 @@
 
 			},
 			getRanking:function(id){
-				var data = {
+				var data = { 
 					id:id,
 					sidx:0,
 					sort:0,
 					pageNo:1,
 					pageSize:10
-				}
-				var headers = {
-					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM=",
-					secret:"7cda0b054336c9cca469bf0aca8e3918"
-				}
+				};
+				var headers = this.headers;
 				pro.fetch("post","/tradeCompetition/ranking",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.user = res.data.user;
@@ -66,9 +65,20 @@
 					console.log(err)
 				})
 				
+			},
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""
+				}
 			}
 		},
 		mounted:function(){
+			this.getHeaders();
 			this.getRanking(this.matchid);
 		},
 		filters:{

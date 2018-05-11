@@ -147,6 +147,7 @@
 					pro.fetch("post","/tradeCompetition/join",data,header).then((res)=>{
 						if(res.code == 1 && res.success == true){
 							console.log(res)
+							this.$toast({message:res.data.message,duration: 2000});
 						}
 					}).catch((err)=>{
 						console.log(err)

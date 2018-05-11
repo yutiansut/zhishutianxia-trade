@@ -10,7 +10,7 @@
 				</div>
 				<div class="buyDetails">
 					<ul>
-						<li>卖出：<span>国际原油</span>cl1820</li>
+						<li>{{n.direction | changeDrection}}：<span>{{n.commodityNo}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
 						<li>价格：<span>152.5</span></li>
 					</ul>
 					<ul>
@@ -62,6 +62,7 @@
 				pro.fetch("post","/tradeCompetition/tradeDynamic",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						console.log(res)
+						this.dataList = res.data
 					}
 				}).catch((err)=>{
 					console.log(err)
@@ -71,6 +72,12 @@
 		mounted:function(){
 			this.getHeaders();
 			this.getDynamic(this.id);
+		},
+		filters:{
+			changeDrection:function(e){
+				console.log(e)
+				return e == 0 ? "买入" : "卖出"
+			}
 		}
 	}
 </script>
