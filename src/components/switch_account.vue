@@ -138,6 +138,7 @@
         .list_box{
             height: 5.8rem;
             overflow: scroll;
+            -webkit-overflow-scrolling: touch;
         }
         .item {
             @include flex(space-between);

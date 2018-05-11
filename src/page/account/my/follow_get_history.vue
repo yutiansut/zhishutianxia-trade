@@ -31,7 +31,7 @@
                         <span class="more">{{item.profit}}</span>     
                         <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">{{item.settleTime}}</p></div>
                     </li>
-                    <li class="history_item">                        
+                    <!-- <li class="history_item">                        
                         <span>01</span>
                         <div class="phone_number">151****1502</div>            
                         <span class="small">100000</span>
@@ -52,7 +52,7 @@
                         </template>
                         <span class="more">88000</span>
                         <div class="time"><p class="time_day">2018-03-21</p><p class="time_date">15:59:12</p></div>
-                    </li>
+                    </li> -->
                 </ul>                                                
         </div>         
         
@@ -71,8 +71,8 @@ const deductionConfig = {
     surplus: '跟投扣除金额' 
 }
 export default {
-  name: 'match_details_history',
-  props: ['account','type'],
+  name: 'follow_history',
+  props: ['account','type', 'id'],
   data () {
     return {
       isBegin: true,
@@ -113,7 +113,7 @@ export default {
         var sendData = {
                     account: this.account,
                     type: this.type,
-                    id: 'sdsdfsd'
+                    id: this.id
                 }
                 const headers = {
                     token: this.userInfo.token,
@@ -170,6 +170,7 @@ export default {
 .history_list{
     width: 7.5rem;
     overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
 
 }
 .history_item,.history_item_title{

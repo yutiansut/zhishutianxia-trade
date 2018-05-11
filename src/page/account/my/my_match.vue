@@ -94,7 +94,7 @@
                     });
                 }else if(rest.length == 2){
                     this.$router.push({
-                        path: `match_details/${id}/title/${title}`,
+                        path: `match_details/${rest[0]}/title/${rest[1]}`,
                     });
                 }
                 

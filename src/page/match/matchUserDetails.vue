@@ -259,6 +259,7 @@
 			.history{
 				width: 100%;
 				overflow-x: scroll;
+				-webkit-overflow-scrolling: touch;
 				ul{
 					display: block;
 					padding: 0 0.3rem;

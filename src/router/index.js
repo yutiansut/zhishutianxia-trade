@@ -110,7 +110,7 @@ const router = new Router({
       props:true
     },
     {
-      path: '/follow_get_history/:account/type/:type',
+      path: '/follow_get_history/:account/type/:type/id/:id',
       component: load('account/my/follow_get_history'),
       props:true
     },
