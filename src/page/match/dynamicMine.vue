@@ -1,10 +1,10 @@
 <template>
 	<div id="dynamicMine">
-		<div class="container" v-for="n in 5">
+		<div class="container" v-for="n in dataList">
 			<div class="buyDetails">
 				<ul>
-					<li>卖出：<span>国际原油</span>cl1820</li>
-					<li>价格：<span>152.5</span></li>
+					<li>{{n.direction | changeDrection}}：<span>{{tradeName[n.commodityNo]}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
+					<li>价格：<span>{{n.tradePrice}}</span></li>
 				</ul>
 				<ul>
 					<li>10分钟前</li>
@@ -17,15 +17,32 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name:"dynamicMine",
 		props:['id'],
 		data(){
 			return{
-				
+				headers:"",
+				dataList:''
 			}
 		},
+		computed:{
+			tradeName () {
+                return this.$store.state.tradeName
+            }
+		},
 		methods:{
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""	
+				}
+			},
 			toMatchUser:function(){
 				this.$router.push({path:"matchUserDetails"});
 			},
@@ -37,14 +54,12 @@
 					pageNo:1,
 					pageSize:10,
 					direction:0
-				}
-				var headers = {
-					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM",
-					secret:"7cda0b054336c9cca469bf0aca8e3918"
-				}
+				};
+				var headers = this.headers;
 				pro.fetch("post","/tradeCompetition/tradeDynamic",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
+						console.log(res);
+						this.dataList = res.data;
 					}
 				}).catch((err)=>{
 					console.log(err)
@@ -52,7 +67,13 @@
 			}
 		},
 		mounted:function(){
+			this.getHeaders();
 			this.getDynamic(this.id);
+		},
+		filters:{
+			changeDrection:function(e){
+				return e == 0 ? "买入" : "卖出"
+			}
 		}
 	}
 </script>
