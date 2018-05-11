@@ -13,7 +13,7 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
-				   			<img :src="n.imgUrl" />
+				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -27,7 +27,7 @@
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img :src="n.imgUrl" />
+				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img src="../assets/images/match/match_applying.png" />
@@ -40,7 +40,7 @@
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img :src="n.imgUrl" />
+				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img src="../assets/images/match/match_playready.png" />
@@ -53,7 +53,7 @@
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext">
 				   		<div class="img_div">
-				   			<img :src="n.imgUrl" />
+				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img src="../assets/images/match/match_end.png" />
@@ -84,9 +84,15 @@
 				selected:"1",
 				tabSelected: 'match',
 				List:"",
-				headers : ''
+				headers : '',
+//				PATH:""
 			}
 			
+		},
+		computed:{
+			PATH: function(){
+				return this.$store.getters.PATH;
+			},
 		},
 		methods:{
 			toNext:function(id){
@@ -121,6 +127,7 @@
 		mounted:function(){
 		},
 		activated:function(){ 
+//			this.PATH=this.$store.getter.PATH;
 			this.getHeaders();
 			this.getMatchList(0,this.headers);
 		},
