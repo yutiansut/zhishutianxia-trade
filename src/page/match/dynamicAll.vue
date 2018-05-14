@@ -54,7 +54,7 @@
 				}
 			},
 			toMatchUser:function(e,other){
-				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this,matchid}});
+				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this.matchid}});
 			},
 			getDynamic:function(id){
 				var data ={

@@ -7,7 +7,7 @@
 				<li><mt-switch v-model="switchN" @change="changSwitch('switchN')"></mt-switch></li>
 			</ul>
 			<ul class="ipt border_bottom">
-				<li><input type="text" v-model="scale"/>%</li>
+				<li><input type="tel" v-model="scale"/>%</li>
 				<li><span>扣除跟单者盈利分成</span></li>
 			</ul>
 			<div class="h_20"></div>
@@ -65,13 +65,14 @@
 				this.follow = this.switchN ? 1 : 0;
 				this.tradeRecord = this.buyHistory ? 1 : 0;
 			},
+			//获取跟投信息
 			getIsSet:function(n,h){
 				var data = {
 					id:n
 				}
 				pro.fetch("post","/followInvest/getSetting",data,h).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
+						this.show = res.data == null ? true : false ;
 					}
 				}).catch((err)=>{
 					console.log(err)
@@ -87,21 +88,29 @@
 					this.headers = ""	
 				}
 			},
+			//保存跟投
 			matchSet:function(){
-				var data = {
-					id:this.matchid,
-					follow:this.follow,
-					divide:this.scale,
-					tradeRecord:this.tradeRecord
-				}
-				var header = this.headers
-				pro.fetch("post","/followInvest/setting",data,header).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						console.log(res)
+				if(this.scale > 40){
+					this.$toast({message: '比例最大不超过40%',duration: 2000});
+				}else if(this.scale < 0){
+					this.$toast({message: '比例不能设置为负数',duration: 2000});
+				}else{
+					var data = {
+						id:this.matchid,
+						follow:this.follow,
+						divide:this.scale,
+						tradeRecord:this.tradeRecord
 					}
-				}).catch((err)=>{
-					console.log(err)
-				})
+					var header = this.headers
+					pro.fetch("post","/followInvest/setting",data,header).then((res)=>{
+						if(res.code == 1 && res.success == true){
+							console.log(res)
+							this.$toast({message: '恭喜您，设置成功！',duration: 2000});
+						}
+					}).catch((err)=>{
+						console.log(err)
+					})
+				}
 			}
 		},
 		activated:function(){

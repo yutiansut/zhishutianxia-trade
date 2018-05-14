@@ -6,7 +6,7 @@
 				<span>{{n}}</span>
 			</div>
 		</div>
-		<components :is="currentView" :matchid="matchid"></components>
+		<components :is="currentView" :matchid="matchid" @getStatus="getStatus"></components>
 	</div>
 </template>
 
@@ -24,21 +24,39 @@
 				list:["比赛规则","排行榜","比赛动态"],
 				current:0,
 				currentView:'matchRules',
-				matchid:""
+				matchid:"",
+				status:""
 			}
 		},
 		methods:{
+			getStatus(...data){
+				this.status = data[0].status;
+				console.log(typeof this.status);
+			},
 			switchTab(index){
-				this.current = index;
 				switch (index){
 					case 0:
-					this.currentView = 'matchRules'
+						this.current = index;
+						this.currentView = 'matchRules'
 						break;
 					case 1:
-					this.currentView = 'matchRanking'
+						if(this.status == 1 || this.status == 2){
+							this.$toast({message: '比赛未开始，不能查看排行榜',duration: 2000});
+							console.log("1111")
+						}else{
+							this.current = index;
+							this.currentView = 'matchRanking'
+						}
+						
 						break;
 					case 2:
-					this.currentView = 'matchDynamic'
+						if(this.status == 1 || this.status == 2){
+							this.$toast({message: '比赛未开始，不能查看排行榜',duration: 2000});
+							console.log("1111")
+						}else{
+							this.current = index;
+							this.currentView = 'matchDynamic'
+						}
 						break;
 
 				}

@@ -127,7 +127,6 @@
 		mounted:function(){
 		},
 		activated:function(){ 
-//			this.PATH=this.$store.getter.PATH;
 			this.getHeaders();
 			this.getMatchList(0,this.headers);
 		},
