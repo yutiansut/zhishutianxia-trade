@@ -80,12 +80,13 @@
             imgPath () {
                 return this.$store.getters.IMGPATH
                 
-            }
+            },
+
         },
         methods: {
             goto(...rest) {
-                console.log(rest[0])
-                console.log(rest[1])
+                // console.log(rest[0])
+                // console.log(rest[1])
                 if (rest.length == 1) {
                     this.$router.push({
                         path: rest[0],
@@ -107,7 +108,7 @@
             },
             getMatchList(status, listName) {
                 let isShow = listName == 'matchingList' ? 'hasList' : 'hasHistoryList'
-                var sendData = {
+                const sendData = {
                     status: status,
                     pageNo: 1,
                     pageSize: 10
