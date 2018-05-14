@@ -11,19 +11,19 @@
                         <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
                     </div>
                     <div class="right">
-                        <h3>{{details.wxNickname||details.telphone}}</h3>
+                        <h3>{{details.wxNickname||account.mobile}}</h3>
                     </div>
                 </li>
                 <li class="item">
                     <p>初始资金: &nbsp<span class="money">{{account.totalTradeFund}}</span>&nbsp元</p>
-                    <p>亏损平仓线: &nbsp<span class="money">{{account.lossCloseoutLine}}</span>&nbsp元</p>
+                    <p>亏损平仓线: &nbsp<span class="money">{{account.lossCloseOutLine}}</span>&nbsp元</p>
                 </li>
                 <li class="item">
                     <p>交易账号: &nbsp<span class="money">{{accountShow(account.state,account.account)}}</span></p>
                     <p>交易密码: &nbsp<span class="money">{{accountShow(account.state,account.accountPassword)}}</span></p>
                 </li>
                 <li class="item">
-                    <p>活动时间: &nbsp<span class="money">{{details.beginTime?details.beginTime.split(' ')[0]:''}} 至 {{details.endTime?details.endTime.split(' ')[0]:''}}</span></p>
+                    <p>活动时间: &nbsp<span class="money">{{details.beginTime|dateChange('y-m-d')}} 至 {{details.endTime|dateChange('y-m-d')}}</span></p>
                     <p>报名时间: &nbsp<span class="money">{{account.applyTime}}</span></p>
                 </li>
             </ul>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import pro from '../../../assets/js/common'
     export default {
         name: 'match_details',
         props: ['id', 'title'],
@@ -122,6 +123,11 @@
                         });
                     }
                 }.bind(this))
+            }
+        },
+        filters: {
+            dateChange (time, d) {
+               return pro.getDate(time, d)
             }
         },
         created() {

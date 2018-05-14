@@ -15,7 +15,6 @@
                             <div class="matchDiv" v-for="match in matchingList" :key="match.id" @click="goto(match.id,match.title)">
                                 <div class="img_div">
                                     <img :src="imgPath+match.imgUrl" :alt="match.title"/>
-                                    <!-- <img src="../../../assets/images/match/match_bananer.png" /> -->
                                 </div>
                                 <div class="time_div">
                                     <img :src="statusName[match.statusName - 1]" />
@@ -35,7 +34,6 @@
                         <div class="matchDiv" v-for="match in matchHistoryList" :key="match.id" @click="gotoOld(match.id,match.title)">
                             <div class="img_div">
                                 <img :src="imgPath+match.imgUrl" :alt="match.title" />
-                                <!-- <img src="../../../assets/images/match/match_bananer.png" /> -->
                             </div>
                             <div class="time_div">
                                 <img :src="statusName[match.statusName - 1]" />
@@ -55,10 +53,6 @@
 </template>
 
 <script>
-    import {
-        Navbar,
-        TabItem
-    } from 'mint-ui';
     import topTitle from "../../../components/topTitle"
     
     export default {

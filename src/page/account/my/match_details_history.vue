@@ -19,7 +19,7 @@
                         <li class="item title_item">
                             <div class="left">
                                 <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
-                                <h3>{{details.wxNickname||details.telphone}}</h3>
+                                <h3>{{details.wxNickname||account.mobile}}</h3>
                             </div>
                             <div class="right">
                                 <p>跟投人数排名：<span class="orange">{{details.byFollowCount}}</span></p>
@@ -36,11 +36,11 @@
                         </li>
                         <li class="item">
                             <p>初始资金:&nbsp<span class="money">{{account.totalTradeFund}}</span>&nbsp元</p>
-                            <p>亏损平仓线:&nbsp<span class="money">{{account.lossCloseoutLine}}</span>&nbsp元</p>
+                            <p>亏损平仓线:&nbsp<span class="money">{{account.lossCloseOutLine}}</span>&nbsp元</p>
                             <p>交易账号：&nbsp<span class="money">{{account.account}}</span></p>
                             <p>交易密码:&nbsp<span class="money">{{account.accountPassword}}</span></p>
                             <p> 美元结算汇率:&nbsp<span class="money">1美元={{account.rate}}人民币 </span></p>
-                            <p>活动时间：&nbsp<span class="money">{{details.beginTime?details.beginTime.split(' ')[0]:''}} 至 {{details.endTime?details.endTime.split(' ')[0]:''}}</span></p>
+                            <p>活动时间：&nbsp<span class="money">{{details.beginTime|dateChange('y-m-d')}} 至 {{details.endTime|dateChange('y-m-d')}}</span></p>
                             <p>报名时间:&nbsp<span class="money">{{account.applyTime}}</span></p>
                         </li>
                         <li class="item trade_number">
@@ -64,28 +64,31 @@
                             <span>币种</span>
                             <span>交易所</span>
                         </li>
-                        <li class="history_item" v-for="(item, index) in historyList" :key="item.id">
-                            <span>{{ (index + 1).toString().padStart(2,0) }}</span>
-                            <div class="time">
-                                <p class="time_day">{{item.tradeDatetime?item.tradeDatetime.split( )[0]:''}}</p>
-                                <p class="time_date">{{item.tradeDatetime?item.tradeDatetime.split( )[1]:''}}</p>
-                            </div>
-                            <div class="name">
-                                <p class="time_day">{{tradeName[item.commodityNo]}}</p>
-                                <p class="time_date">{{item.commodityNo + item.contractNo}}</p>
-                            </div>
-                            <span class="small">{{item.direction?'卖':'买'}}</span>
-                            <span>{{item.tradeNum}}</span>
-                            <span>{{item.tradePrice}}</span>
-                            <span>{{item.hedgeProfit}}</span>
-                            <span>{{item.tradeFee}}</span>
-                            <span>{{item.currencyNo}}</span>
-                            <span>{{item.exchangeNo}}</span>
-                        </li>                       
+                        <template v-if="hasHistoryList">
+                             <li class="history_item" v-for="(item, index) in historyList" :key="item.id">
+                                <span>{{ (index + 1).toString().padStart(2,0) }}</span>
+                                <div class="time">
+                                    <p class="time_day">{{item.tradeDatetime|dateChange('y-m-d')}}</p>
+                                    <p class="time_date">{{item.tradeDatetime|dateChange('y-m-d')}}</p>
+                                </div>
+                                <div class="name">
+                                    <p class="time_day">{{tradeName[item.commodityNo]}}</p>
+                                    <p class="time_date">{{item.commodityNo + item.contractNo}}</p>
+                                </div>
+                                <span class="small">{{item.direction?'卖':'买'}}</span>
+                                <span>{{item.tradeNum}}</span>
+                                <span>{{item.tradePrice}}</span>
+                                <span>{{item.hedgeProfit}}</span>
+                                <span>{{item.tradeFee}}</span>
+                                <span>{{item.currencyNo}}</span>
+                                <span>{{item.exchangeNo}}</span>
+                            </li>      
+                        </template>
+                        <li class="no_list" v-else>
+                            <p>无相关比赛记录</p>
+                        </li>
                     </ul>
-    
-    
-    
+                    
                 </mt-tab-container-item>
             </mt-tab-container>
     
@@ -94,6 +97,7 @@
 </template>
 
 <script>
+import pro from '../../../assets/js/common'
     export default  {
         name: 'match_details_history',
         props: ['id', 'title'],
@@ -105,7 +109,8 @@
                 details: {},
                 account: {},
                 tradeNum: {},
-                historyList: []
+                historyList: [],
+                hasHistoryList: false
     
             }
         },
@@ -169,8 +174,8 @@
             },
             getHistory() {
                 var sendData = {
-                    //id: this.id
-                    id: '92bfec94ab03433ba18020a4bfb0b50a'
+                    id: this.id
+                    //id: '92bfec94ab03433ba18020a4bfb0b50a'
                 }
                 const headers = {
                     token: this.userInfo.token,
@@ -209,13 +214,19 @@
             }
            
         },
+        filters: {
+            dateChange (time, d) {
+               return pro.getDate(time, d)
+            }
+        },
         created() {
             const local = this.$pro.local
             this.userInfo = local.get('user')
-        },
-        activated() {
             this.getDetails()
-        }
+        },
+        // activated() {
+            
+        // }
     
     }
 </script>
@@ -367,7 +378,13 @@
             @include font($fs24, 0.32rem, $graySimple, right);
         }
     }
-    
+     .no_list {
+        text-align: center;
+        p {
+            @include font($fs28, 0.28rem, $graySimple);
+            padding-bottom: 0.58rem;
+        }
+    }
     .history_item {
         background-color: $bg
     }
