@@ -5,53 +5,53 @@
 			<ul class="dis_flex2 border_bottom">
 				<li>
 					<i class="userP"></i>
-					<span class="span_gray">{{ (otherData.wxNickname || userData.wxNickname) || (otherData.telphone || userData.telphone) }} </span>
+					<span class="span_gray">{{wxNickname || telphone}}</span>
 				</li>
 				<li>
-					<span class="span_gray">报名时间：{{(otherData.joinTime || userData.program.applyTime) | changTime}}</span>
+					<span class="span_gray">报名时间：{{applyTime | changTime}}</span>
 				</li>
 			</ul>
 			<div class="details border_bottom">
 				<ul class=" dis_flex1">
 					<li>
 						<span class="span_gray">今权益：</span>
-						<span class="span_black">+131115</span>
+						<span class="span_black">{{otherData.equities}}</span>
 					</li>
 					<li>
 						<span class="span_gray">初始资金：</span>
-						<!--<span class="span_black">{{program.totalTradeFund}}</span>-->
+						<span class="span_black">{{otherData.initialFund}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">总收益：</span>
-						<span class="span_red">+212.212</span>
+						<span class="span_red">{{otherData.totalProfit}}</span>
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
-						<!--<span class="span_black">{{byProfitRate}}</span>-->
+						<span class="span_black">{{otherData.byProfitRate}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">跟投收益：</span>
-						<span class="span_green">+212.212</span>
+						<span class="span_green">{{otherData.followProfit}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">跟投人数：</span>
-						<span class="span_black">暂无</span>
+						<span class="span_black">{{otherData.followCount}}</span>
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
-						<!--<span class="span_black">{{byFollowCount}}</span>-->
+						<span class="span_black">{{otherData.byFollowCount}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">分成比例：</span>
-						<span class="span_black">50%</span>
+						<span class="span_black">{{otherData.divide}}%</span>
 					</li>
 				</ul>
 			</div>
@@ -72,20 +72,20 @@
 							<span>平仓盈亏</span>
 							<span>币种</span>
 							<span>交易所</span>
-							<span>下单时间</span>
+							<span>成交时间</span>
 						</li>
 						<template>
-							<li class="border_bottom" v-for="n in 10">
-								<span>1</span>
-								<span>2</span>
-								<span>3</span>
-								<span>4</span>
-								<span>5</span>
-								<span>6</span>
-								<span>7</span>
-								<span>8</span>
-								<span>8</span>
-								<span>9</span>
+							<li class="border_bottom" v-for="(n,index) in list">
+								<span>{{index}}</span>
+								<span>{{n.commodityNo}}</span>
+								<span>{{n.direction}}</span>
+								<span>{{n.tradePrice}}</span>
+								<span>{{n.tradeNum}}</span>
+								<span>{{n.tradeFee}}</span>
+								<span>{{n.hedgeProfit}}</span>
+								<span>{{n.currencyNo}}</span>
+								<span>{{n.exchangeNo}}</span>
+								<span>{{n.tradeDatetime}}</span>
 							</li>
 							
 						</template>
@@ -93,15 +93,17 @@
 				</div>
 			</div>
 			<div class="div_white"></div>
-			<div class="bottom_tab" v-show="status == '0'">
-				<span @click="forwards(0)">正向跟投</span>
-				<span @click="forwards(1)">反向跟投</span>
-			</div>
-			<div class="bottom_tab1" v-show="status == '1'">
-				<span @click="forwards(2)">取消跟投</span>
-			</div>
-			<div class="bottom_tab1" v-show="status == '2'">
-				<span>已跟其他用户</span>
+			<div v-show="type!='mine'">
+				<div class="bottom_tab" v-show="status == '0'">
+					<span @click="forwards(0)">正向跟投</span>
+					<span @click="forwards(1)">反向跟投</span>
+				</div>
+				<div class="bottom_tab1" v-show="status == '1'">
+					<span @click="forwards(2)">取消跟投</span>
+				</div>
+				<div class="bottom_tab1" v-show="status == '2'">
+					<span>已跟其他用户</span>
+				</div>
 			</div>
 		</div>
 	</div>	
@@ -124,43 +126,26 @@
 				userNo:"",//交易账号
 				matchid:"",//比赛id
 				status:0,
-				otherData:[],
-				userData:[]
+				otherData:{},
+				userData:{},
+				wxNickname:"",
+				applyTime:"",
+				telphone:'',
+				list:[]
 			}
 		},
 		methods:{
-			//获取个人历史
-			getMineHistory:function(){
-//				var data = {
-//					account:this.userId,
-//				}
-////				console.log(data)
-//				var header = this.headers
-//				pro.fetch("post","/tradeCompetition/getHistoryTrade",data,header).then((res)=>{
-//					console.log(res)
-//				}).catch((err)=>{
-//					console.log(err)
-//				})
-			},
-			//获取详情他人
+			//获取详情
 			getOtherUser:function(apiurl,upData,header){
 				pro.fetch("post",apiurl,upData,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.status = res.data.followStatus;
 						this.otherData = res.data;
-						this.userData = [];
-					}
-				}).catch((err)=>{
-						console.log(err)
-				})
-			},
-			//获取自己
-			getUserHis:function(apiurl,upData,header){
-				pro.fetch("post",apiurl,upData,header).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						this.status = -1;
-						this.otherData = [];
-						this.userData = res.data;
+						this.userData = {};
+						this.wxNickname = res.data.wxNickname;
+						this.telphone = res.data.telphone;
+						this.applyTime = res.data.joinTime;
+						this.list = res.data.tradeRecords;
 					}
 				}).catch((err)=>{
 						console.log(err)
@@ -203,27 +188,17 @@
 			this.userId = this.$route.query.userId;
 			this.type = this.$route.query.type;
 			this.matchid = this.$route.query.matchid;
-			if(this.type == "mine"){
-				this.upData = {
-					id:this.matchid
-				};
-				this.apiUrl = "/tradeCompetition/competitionDetails";
-				this.getMineHistory();
-				this.getUserHis(this.apiUrl,this.upData,this.headers)
-			}else{
-				this.upData = {
-					account:this.userId,
-					id:this.matchid 
-				};
-				this.apiUrl = "/ tradeCompetition/rankDetails";
-				this.getOtherUser(this.apiUrl,this.upData,this.headers);
-			}
-			
-			
+			this.upData = {
+				account:this.userId,
+				id:this.matchid 
+			};
+			this.apiUrl = "/ tradeCompetition/rankDetails";
+			this.getOtherUser(this.apiUrl,this.upData,this.headers);
 		},
 		filters:{
 			changTime:function(e){
 				console.log(e)
+				return e
 			}
 		}
 	}
