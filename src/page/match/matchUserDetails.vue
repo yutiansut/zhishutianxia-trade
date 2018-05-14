@@ -169,12 +169,12 @@
 			this.matchid = this.$route.query.matchid;
 			if(this.type == "mine"){
 				this.upData = {
-					account:this.userId
+					id:this.userId
 				};
 				this.apiUrl = "/tradeCompetition/competitionDetails";
 			}else{
 				this.upData = {
-					id:this.userId
+					account:this.userId
 				};
 				this.headers = "";
 				this.apiUrl = "/ tradeCompetition/getRankDetails";

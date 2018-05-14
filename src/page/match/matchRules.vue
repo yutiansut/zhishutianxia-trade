@@ -54,8 +54,12 @@
 		<div class="btn1 bt" v-else-if="rulesData.statusName == 1">
 			<button>等待报名</button>
 		</div>
-		<div class="btn bt" v-else>
+		<div class="btn bt" v-show="currentTitle" v-else >
 			<button @click="matchApply">比赛报名中，立即参加</button>
+		</div>
+		<div class="btn2 bt" v-show="!currentTitle">
+			<button>已报名，等待开赛</button>
+			<button @click="toMatchSet">跟投设置</button>
 		</div>
 		<!--<div class="btn3 bt">
 			<button @click="enterMatch">进入比赛</button>
@@ -78,6 +82,7 @@
 				tip:[],
 				rule:{},
 				headers:"",
+				currentTitle:true
 				
 			}
 		},
@@ -103,9 +108,11 @@
 					console.log(err)
 				})
 			},
+			//去跟投设置
 			toMatchSet:function(){
 				this.$router.push({path:"/matchSet",query:{matchid:this.matchid}});
 			},
+			//获取比赛详情
 			getMtchRules:function(matchid){
 				var data = {
 					id:matchid
@@ -128,6 +135,7 @@
 					console.log(err)
 				})
 			},
+			//是否登录
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
@@ -138,16 +146,16 @@
 					this.headers = ""
 				}
 			},
-			matchApply:function(){
+			//报名
+			matchApply:function(e){
 					var data = {
 							id : this.matchid
 						}
 					var header = this.headers;
-					console.log(header)
 					pro.fetch("post","/tradeCompetition/join",data,header).then((res)=>{
 						if(res.code == 1 && res.success == true){
-							console.log(res)
-							this.$toast({message:res.data.message,duration: 2000});
+							this.$toast({message:"恭喜您，报名成功！",duration: 2000});
+							this.currentTitle = false;
 						}
 					}).catch((err)=>{
 						console.log(err)
@@ -155,7 +163,6 @@
 			}
 		},
 		activated:function(){
-			console.log("88888")
 			this.getHeaders();
 			if(this.matchid != ""){
 				console.log("66666")
@@ -163,7 +170,6 @@
 			}
 		},
 		mounted:function(){
-			console.log("666")
 			this.getHeaders();
 			if(this.matchid != ""){
 				console.log("66666")
@@ -172,7 +178,6 @@
 		},
 		watch:{
 			matchid:function(e){
-				console.log("7777777777")
 				console.log(e)
 				this.getHeaders();
 				this.getMtchRules(e);
