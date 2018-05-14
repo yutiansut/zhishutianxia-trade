@@ -4,7 +4,10 @@
 			<div class="details">
 				<div class="user border_bottom">
 					<ul>
-						<li><i class="userP"></i><span class="username">18215000000</span></li>
+						<li>
+							<img :src="n.wxHeadImg" class="userP"/>
+							<span class="username">{{n.mobile}}</span>
+						</li>
 					</ul>
 				</div>
 				<div class="buyDetails">
@@ -107,10 +110,8 @@
 		}
 	}
 	.userP{
-		display: inline-block;
 		width: 0.44rem;
 		height: 0.44rem;
-		background: url(../../assets/images/match/userP.png) no-repeat;
 		background-size: 0.44rem 0.44rem;
 		margin-right: 0.2rem;
 	}
