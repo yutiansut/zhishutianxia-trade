@@ -5,10 +5,10 @@
 			<ul class="dis_flex2 border_bottom">
 				<li>
 					<i class="userP"></i>
-					<span class="span_gray">这里是名字</span>
+					<span class="span_gray">{{ (otherData.wxNickname || userData.wxNickname) || (otherData.telphone || userData.telphone) }} </span>
 				</li>
 				<li>
-					<span class="span_gray">报名时间：2018-11-11-2018-11-11</span>
+					<span class="span_gray">报名时间：{{(otherData.joinTime || userData.program.applyTime) | changTime}}</span>
 				</li>
 			</ul>
 			<div class="details border_bottom">
@@ -19,7 +19,7 @@
 					</li>
 					<li>
 						<span class="span_gray">初始资金：</span>
-						<span class="span_black">12151.020</span>
+						<!--<span class="span_black">{{program.totalTradeFund}}</span>-->
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
@@ -29,7 +29,7 @@
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
-						<span class="span_black">11</span>
+						<!--<span class="span_black">{{byProfitRate}}</span>-->
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
@@ -45,7 +45,7 @@
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
-						<span class="span_black">11</span>
+						<!--<span class="span_black">{{byFollowCount}}</span>-->
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
@@ -93,17 +93,15 @@
 				</div>
 			</div>
 			<div class="div_white"></div>
-			<div v-show="type == 'mine'">
-				<div class="bottom_tab" v-if="status == '0'">
-					<span @click="forwards(0)">正向跟投</span>
-					<span @click="forwards(1)">反向跟投</span>
-				</div>
-				<div class="bottom_tab1" v-else-if="status == '1'">
-					<span @click="forwards(2)">取消跟投</span>
-				</div>
-				<div class="bottom_tab1" v-else-if="status == '2'">
-					<span>已跟其他用户</span>
-				</div>
+			<div class="bottom_tab" v-show="status == '0'">
+				<span @click="forwards(0)">正向跟投</span>
+				<span @click="forwards(1)">反向跟投</span>
+			</div>
+			<div class="bottom_tab1" v-show="status == '1'">
+				<span @click="forwards(2)">取消跟投</span>
+			</div>
+			<div class="bottom_tab1" v-show="status == '2'">
+				<span>已跟其他用户</span>
 			</div>
 		</div>
 	</div>	
@@ -125,16 +123,44 @@
 				apiUrl:"",
 				userNo:"",//交易账号
 				matchid:"",//比赛id
-				status:0
+				status:0,
+				otherData:[],
+				userData:[]
 			}
 		},
 		methods:{
-			//获取详情
-			getUser:function(apiurl,upData,header){
+			//获取个人历史
+			getMineHistory:function(){
+//				var data = {
+//					account:this.userId,
+//				}
+////				console.log(data)
+//				var header = this.headers
+//				pro.fetch("post","/tradeCompetition/getHistoryTrade",data,header).then((res)=>{
+//					console.log(res)
+//				}).catch((err)=>{
+//					console.log(err)
+//				})
+			},
+			//获取详情他人
+			getOtherUser:function(apiurl,upData,header){
 				pro.fetch("post",apiurl,upData,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
-						this.status = res.data.followStatus
+						this.status = res.data.followStatus;
+						this.otherData = res.data;
+						this.userData = [];
+					}
+				}).catch((err)=>{
+						console.log(err)
+				})
+			},
+			//获取自己
+			getUserHis:function(apiurl,upData,header){
+				pro.fetch("post",apiurl,upData,header).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						this.status = -1;
+						this.otherData = [];
+						this.userData = res.data;
 					}
 				}).catch((err)=>{
 						console.log(err)
@@ -154,20 +180,22 @@
 			forwards:function(type){
 				var data = {
 					id:this.matchid,
-					account:this.userid,
+					account:this.userId,
 					type:type
 				};
 				var header=this.headers;
-				this.status = this.status == 0 ? 1 : 0;
-//				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
-//					if(res.code == 1 && res.success == true){
-//						console.log(res)
-//						this.$toast({message: "恭喜您，跟投成功！",duration: 2000});
-//						
-//					}
-//				}).catch((err)=>{
-//					console.log(err)
-//				})
+				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
+					if(res.code == 1 && res.success == true){
+						if(type == 2){
+							this.$toast({message: "取消成功",duration: 2000});
+						}else{
+							this.$toast({message: "恭喜您，跟投成功！",duration: 2000});
+						}
+						this.status = this.status == 0 ? 1 : 0;
+					}
+				}).catch((err)=>{
+					console.log(err)
+				})
 			}
 		},
 		activated:function(){
@@ -177,17 +205,26 @@
 			this.matchid = this.$route.query.matchid;
 			if(this.type == "mine"){
 				this.upData = {
-					id:this.userId
+					id:this.matchid
 				};
 				this.apiUrl = "/tradeCompetition/competitionDetails";
+				this.getMineHistory();
+				this.getUserHis(this.apiUrl,this.upData,this.headers)
 			}else{
 				this.upData = {
-					account:this.userId
+					account:this.userId,
+					id:this.matchid 
 				};
-				this.headers = "";
-				this.apiUrl = "/ tradeCompetition/getRankDetails";
+				this.apiUrl = "/ tradeCompetition/rankDetails";
+				this.getOtherUser(this.apiUrl,this.upData,this.headers);
 			}
-			this.getUser(this.apiUrl,this.upData,this.headers);
+			
+			
+		},
+		filters:{
+			changTime:function(e){
+				console.log(e)
+			}
 		}
 	}
 </script>

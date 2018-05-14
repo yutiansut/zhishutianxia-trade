@@ -6,23 +6,23 @@
 				<li><span>总收益</span><i class="change change_1"></i><span>跟投人数</span><i class="change"></i></li>
 			</ul>
 		</div>
-		<ul class="ranking border_bottom" @click="toMatchUser(matchid,'mine')">
+		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')">
 			<li class="li_no">
 				<img :src="user.byProfitRate | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{this.user.byProfitRate}}</span>
 				<img :src="user.wxHeadImg" alt="" class="user"/>
-				<span class="username">{{user.wxNickname}}</span>
+				<span class="username">{{user.wxNickname ? user.wxNickname : user.telphone}}</span>
 			</li>
-			<li><span class="perecnt">{{user.profitRate}}%</span><span class="count">{{user.followCount}}</span></li>
+			<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
 		</ul>
 		<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,'other')">
 			<li class="li_no">
 				<img :src="k | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{k+1}}</span>
 				<img :src="n.wxHeadImg" alt="" class="user"/>
-				<span class="username">{{n.wxNickname}}</span>
+				<span class="username">{{n.wxNickname ? n.wxNickname : n.telphone}}</span>
 			</li>
-			<li><span class="perecnt">{{n.profitRate}}%</span><span class="count">{{n.followCount}}</span></li>
+			<li><span class="perecnt">{{n.profitRate | changpoint}}</span><span class="count">{{n.followCount}}</span></li>
 		</ul>
 	</div>
 </template>
@@ -93,6 +93,11 @@
 					default:
 						return require("../../assets/images/match/no_a.png");
 				}
+			},
+			changpoint:function(e){
+				var str=Number(e*100).toFixed(2);
+			    str+="%";
+			    return str;
 			}
 		}
 	}
