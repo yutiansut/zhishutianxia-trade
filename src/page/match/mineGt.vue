@@ -6,7 +6,7 @@
 				<ul>
 					<li>
 						<span class="span_gray">提取收益率：</span>
-						<span class="span_black">{{divide}}%</span>
+						<span class="span_black">{{divide | changpoint}}</span>
 					</li>
 					<li>
 						<span class="span_gray">跟投人数:</span>
@@ -77,6 +77,17 @@
 		filters:{
 			changDirection:function(e){
 				return e == 0 ? "正向" : "反向"
+			},
+			changpoint:function(e){
+				console.log(e)
+				if(e == undefined){
+					return 0
+				}else{
+					var str=Number(e*100).toFixed(2);
+				    str+="%";
+				    return str;
+				}
+				
 			}
 		}
 	}

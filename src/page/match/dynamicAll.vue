@@ -6,7 +6,7 @@
 					<ul>
 						<li>
 							<img :src="n.wxHeadImg" class="userP"/>
-							<span class="username">{{n.mobile}}</span>
+							<span class="username">{{n.wxNickname ? n.wxNickname : n.mobile}}</span>
 						</li>
 					</ul>
 				</div>
@@ -61,7 +61,7 @@
 					id:id,
 					guardId:'',
 					type:0,
-					pageNo:1,
+					pageNo:0,
 					pageSize:10,
 					direction:0
 				}

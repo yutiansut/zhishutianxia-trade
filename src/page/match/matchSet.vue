@@ -30,7 +30,7 @@
 			<div class="h_20"></div>
 			<ul class="dis_flex border_bottom">
 				<li>开启历史成交记录</li>
-				<li>已开启</li>
+				<li>{{isHistory}}</li>
 			</ul>
 			<p>该功能只可设置一次，不可进行更改请您慎重设置！</p>
 		</div>
@@ -56,7 +56,8 @@
 				scale:"",
 				scale1:"",
 				follow:0,//跟投开关0默认关闭
-				tradeRecord:0//开启成交历史记录
+				tradeRecord:0,//开启成交历史记录
+				isHistory:''
 			}
 		},
 		methods:{
@@ -73,6 +74,10 @@
 				pro.fetch("post","/followInvest/getSetting",data,h).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.show = res.data == null ? true : false ;
+						if(res.data !=null){
+							this.isHistory = res.data.dealRecord == 0 ? "已开启" : "未开启";
+							this.scale1 = res.data.divide;
+						}
 					}
 				}).catch((err)=>{
 					console.log(err)
@@ -106,6 +111,7 @@
 						if(res.code == 1 && res.success == true){
 							console.log(res)
 							this.$toast({message: '恭喜您，设置成功！',duration: 2000});
+							this.$router.back(-1);
 						}
 					}).catch((err)=>{
 						console.log(err)
