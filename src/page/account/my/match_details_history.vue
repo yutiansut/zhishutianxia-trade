@@ -83,9 +83,6 @@
                             <span>{{item.exchangeNo}}</span>
                         </li>                       
                     </ul>
-    
-    
-    
                 </mt-tab-container-item>
             </mt-tab-container>
     
@@ -169,8 +166,8 @@
             },
             getHistory() {
                 var sendData = {
-                    //id: this.id
-                    id: '92bfec94ab03433ba18020a4bfb0b50a'
+                    id: this.id
+                    //id: '92bfec94ab03433ba18020a4bfb0b50a'
                 }
                 const headers = {
                     token: this.userInfo.token,
