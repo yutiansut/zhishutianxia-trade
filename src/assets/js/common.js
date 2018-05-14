@@ -61,7 +61,7 @@ pro.fetch = function(type, url, params, header){
  * 时间搓转化成2017-07-07 02:05:00
  * 
  */
-pro.getDate=function(d,time){
+pro.getDate=function(time,d){
 	var date=new Date(time);
     var year=date.getYear()+1900;
     var month=date.getMonth()+1;
@@ -332,6 +332,15 @@ pro.objIsInArray = function(arr, val){
 		return true;
 	}
 }
+pro.mobileHidden = function (phoneNumber) {
+	if (phoneNumber) {
+		return  phoneNumber.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+	}else {
+		return phoneNumber
+	}	
+}
+
+
 let ls = localStorage;
 pro.local = {
 	set (key,value) {

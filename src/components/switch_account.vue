@@ -5,7 +5,7 @@
                 <h2>交易账号</h2>
                 <ul class="list">
                     <li v-for="(item, index) in userList1" :key="item.username" :class="['item',{'checked': !index}]" @click="login(item)">
-                        {{item.username}}<i v-if="index" @click.stop="deleteItem(userList,item.username)" class="delete"></i>
+                        {{mobileHidden(item.username)}}<i v-if="index" @click.stop="deleteItem(userList,item.username)" class="delete"></i>
                     </li>
                     <!-- <li class="item checked">2607000071<i class="delete"></i></li> -->
                 </ul>
@@ -51,6 +51,9 @@
             close() {
                 //this.isShow = !this.isShow;
                 this.$emit('show-modal', false)
+            },
+            mobileHidden (phoneNumber) {
+                return pro.mobileHidden(phoneNumber)
             },
             deleteItem (listArr , username, key= 'userList') {
                 let index = listArr.findIndex((userObj) =>{
