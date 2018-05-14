@@ -11,7 +11,7 @@
                         <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
                     </div>
                     <div class="right">
-                        <h3>{{details.wxNickname||account.mobile}}</h3>
+                        <h3>{{details.wxNickname||mobileHidden(account.mobile)}}</h3>
                     </div>
                 </li>
                 <li class="item">
@@ -76,6 +76,9 @@ import pro from '../../../assets/js/common'
                 }
     
             },
+            mobileHidden (phoneNumber) {
+                return pro.mobileHidden(phoneNumber)              
+            }, 
             accountShow (state,string) {
                 if(state == 4){
                     return string

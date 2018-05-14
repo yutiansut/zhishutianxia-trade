@@ -19,7 +19,7 @@
                         <li class="item title_item">
                             <div class="left">
                                 <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
-                                <h3>{{details.wxNickname||account.mobile}}</h3>
+                                <h3>{{details.wxNickname||mobileHidden(account.mobile)}}</h3>
                             </div>
                             <div class="right">
                                 <p>跟投人数排名：<span class="orange">{{details.byFollowCount}}</span></p>
@@ -133,6 +133,9 @@ import pro from '../../../assets/js/common'
                     path: `/follow_get_history/${account}/type/${type}/id/${id}`,
                 });
             },
+            mobileHidden (phoneNumber) {
+                return pro.mobileHidden(phoneNumber)              
+            }, 
             getDetails() {
                 var sendData = {
                     id: this.id
@@ -182,7 +185,7 @@ import pro from '../../../assets/js/common'
                 this.$pro.fetch('post', '/tradeCompetition/getHistoryTrade', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
-                        this.historyList = res.data
+                        this.historyList = res.data||this.historyList
                     }
     
                 }.bind(this)).catch(function(err) {

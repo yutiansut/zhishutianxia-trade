@@ -9,7 +9,7 @@
         <div class="user_info">
             <img :src="accountInfo.wxHeadimgurl||require('../../../assets/images/account/WXuser.png')" alt="用户头像">
             <p v-if="!isLogin" @click="goto('/login')" >-点击登录-</p>
-            <p class="login" @click="changeValue(true,'isShow')" v-else>{{accountInfo.wxNickname||accountInfo.mobile}}</p>
+            <p class="login" @click="changeValue(true,'isShow')" v-else>{{accountInfo.wxNickname||mobileHidden(accountInfo.mobile)}}</p>
         </div>
         <div class="money_wrap">
             <div class="money_box">
@@ -117,6 +117,9 @@ export default {
     changeValue (msg, key) {
       //console.log(msg)
       this[key] = msg
+    },
+    mobileHidden (phoneNumber) {
+        return pro.mobileHidden(phoneNumber)
     },
     buwei (numString) {     
       if(numString === undefined||null) {

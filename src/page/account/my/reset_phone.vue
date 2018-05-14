@@ -6,8 +6,8 @@
     
         <!-- 表单 -->
         <div class="input_wrap">
-            <p class="phone_text">您现在正在为账户 {{userInfo.username}} 修改手机号</p>
-            <p class="phone_number"><span>手机号：</span>{{userInfo.username}}</p>
+            <p class="phone_text">您现在正在为账户 {{mobileHidden(userInfo.username)}} 修改手机号</p>
+            <p class="phone_number"><span>手机号：</span>{{mobileHidden(userInfo.username)}}</p>
             <div class="input_group">
                 <input type="number" placeholder="短信验证" v-model="code">
                 <div class="get_code" @click="getcode">
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import pro from '../../../assets/js/common'
     export default {
         name: 'reset_phone',
         data() {
@@ -88,6 +89,9 @@
                     path: path
                 });
             },
+            mobileHidden (phoneNumber) {
+                return pro.mobileHidden(phoneNumber)
+            },            
             getcode: function(e) {
                 //页面效果
                 $(e.target).addClass('current');

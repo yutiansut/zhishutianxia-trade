@@ -15,7 +15,7 @@
                     <span class="small">跟投盈亏</span>
                     <span class="small">跟投比例</span>
                     <template v-if="type=='1'">
-                                <span class="more">{{config.surplus}}</span>
+                        <span class="more">{{config.surplus}}</span>
                     </template>
                         <span class="more">{{config.name}}</span>                                                                      
                         <div class="time">结算时间</div>                       
@@ -23,7 +23,7 @@
                 <template v-if="listLength">
                     <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
-                        <div class="phone_number">{{item.wxNickname||item.telphone}}</div>
+                        <div class="phone_number">{{item.wxNickname||mobileHidden(item.telphone)}}</div>
                         <span class="small">{{item.followProfit}}</span>
                         <span class="small">{{item.divide}}</span>
                         <template v-if="type=='1'">
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import pro from '../../../assets/js/common'
     const extractConfig = {
         type: '跟投用户名',
         name: '提取收益',
@@ -122,6 +123,9 @@
                     path: `/follow_get_history/${id}`
                 });
             },
+            mobileHidden (phoneNumber) {
+                return pro.mobileHidden(phoneNumber)              
+            },
             getList() {
                 var sendData = {
                     account: this.account,
@@ -138,7 +142,7 @@
                 this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
                     //console.log(res)
                     if (res.success && res.code == 1) {
-                        this.followList = res.data
+                        this.followList = res.data||[]
                     }
     
                 }.bind(this)).catch(function(err) {
