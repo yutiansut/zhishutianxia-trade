@@ -16,22 +16,29 @@
                     <span class="small">跟投比例</span>
                     <template v-if="type=='1'">
                                 <span class="more">{{config.surplus}}</span>
-</template>
+                    </template>
                         <span class="more">{{config.name}}</span>                                                                      
                         <div class="time">结算时间</div>                       
-                    </li>
+                </li>
+                <template v-if="hasHistoryList">
                     <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                         <div class="phone_number">{{item.wxNickname||item.telphone}}</div>
                         <span class="small">{{item.followProfit}}</span>
                         <span class="small">{{item.divide}}</span>
-<template v-if="type=='1'">
-    <span class="more">{{item.deductProfit}}</span>
-</template>
+                        <template v-if="type=='1'">
+                            <span class="more">{{item.deductProfit}}</span>
+                        </template>
                         <span class="more">{{item.profit}}</span>     
                         <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">{{item.settleTime}}</p></div>
                         <div>{{123|abc}}</div>
                     </li>
+                </template>
+                <li class="no_list" v-else>
+                    <p>无相关比赛记录</p>
+                </li>
+                
+
                     <!-- <li class="history_item">                        
                         <span>01</span>
                         <div class="phone_number">151****1502</div>            
@@ -80,7 +87,8 @@
                 selected: '1',
                 config: {},
                 userInfo: {},
-                followList: []
+                followList: [],
+                hasHistoryList: false
             }
         },
         computed: {
@@ -114,12 +122,12 @@
             },
             getList() {
                 var sendData = {
-                    // account: this.account,
-                    // type: this.type,
-                    // id: this.id
-                    account: 'sdfsdf',
-                    type: '0',
-                    id: 'sdsdfsfdfsfsfd'
+                    account: this.account,
+                    type: this.type,
+                    id: this.id
+                    // account: 'sdfsdf',
+                    // type: '0',
+                    // id: 'sdsdfsfdfsfsfd'
                 }
                 const headers = {
                     token: this.userInfo.token,
@@ -153,7 +161,14 @@
                 }.bind(this))
             }
         },
-        created() {
+        // watch: {
+        //     '$route' (to, from) {
+        //         this.getList()
+        //     // 对路由变化作出响应...
+        //     }
+        // },    
+        activated() {
+            console.log(1)
             const local = this.$pro.local
             this.userInfo = local.get('user')
             this.getList()
@@ -216,7 +231,13 @@
             @include font($fs24, 0.32rem, $graySimple, right);
         }
     }
-    
+     .no_list {
+        text-align: center;
+        p {
+            @include font($fs28, 0.28rem, $graySimple);
+            padding-bottom: 0.58rem;
+        }
+    }
     .history_item {
         background-color: $bg
     }
