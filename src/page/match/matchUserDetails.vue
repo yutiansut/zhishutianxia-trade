@@ -93,13 +93,18 @@
 				</div>
 			</div>
 			<div class="div_white"></div>
-			<div class="bottom_tab">
-				<span @click="forwards(0)">正向跟投</span>
-				<span @click="forwards(1)">反向跟投</span>
+			<div v-show="type == 'mine'">
+				<div class="bottom_tab" v-if="status == '0'">
+					<span @click="forwards(0)">正向跟投</span>
+					<span @click="forwards(1)">反向跟投</span>
+				</div>
+				<div class="bottom_tab1" v-else-if="status == '1'">
+					<span @click="forwards(2)">取消跟投</span>
+				</div>
+				<div class="bottom_tab1" v-else-if="status == '2'">
+					<span>已跟其他用户</span>
+				</div>
 			</div>
-			<!--<div class="bottom_tab1">
-				<span @click="forwards(2)">取消跟投</span>
-			</div>-->
 		</div>
 	</div>	
 </template>
@@ -108,9 +113,6 @@
 	import topTitle from "../../components/topTitle.vue"
 	import pro from "../../assets/js/common.js"
 	const local = pro.local;
-//	const apiUrl = "";
-//	const header = "";
-//	const upData = "";
 	export default{
 		name:"matchUserDetails",
 		components:{ topTitle },
@@ -122,14 +124,17 @@
 				headers:"",
 				apiUrl:"",
 				userNo:"",//交易账号
-				matchid:""//比赛id
+				matchid:"",//比赛id
+				status:0
 			}
 		},
 		methods:{
+			//获取详情
 			getUser:function(apiurl,upData,header){
 				pro.fetch("post",apiurl,upData,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						console.log(res)
+						this.status = res.data.followStatus
 					}
 				}).catch((err)=>{
 						console.log(err)
@@ -153,13 +158,16 @@
 					type:type
 				};
 				var header=this.headers;
-				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						console.log(res)
-					}
-				}).catch((err)=>{
-					console.log(err)
-				})
+				this.status = this.status == 0 ? 1 : 0;
+//				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
+//					if(res.code == 1 && res.success == true){
+//						console.log(res)
+//						this.$toast({message: "恭喜您，跟投成功！",duration: 2000});
+//						
+//					}
+//				}).catch((err)=>{
+//					console.log(err)
+//				})
 			}
 		},
 		activated:function(){
