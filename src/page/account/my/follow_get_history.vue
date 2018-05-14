@@ -20,7 +20,7 @@
                         <span class="more">{{config.name}}</span>                                                                      
                         <div class="time">结算时间</div>                       
                 </li>
-                <template v-if="hasHistoryList">
+                <template v-if="listLength">
                     <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                         <div class="phone_number">{{item.wxNickname||item.telphone}}</div>
@@ -88,7 +88,6 @@
                 config: {},
                 userInfo: {},
                 followList: [],
-                hasHistoryList: false
             }
         },
         computed: {
@@ -109,6 +108,9 @@
                     default:
                         break;
                 }
+            },
+            listLength () {
+                return this.followList.length
             }
         },
         methods: {
@@ -168,7 +170,6 @@
         //     }
         // },    
         activated() {
-            console.log(1)
             const local = this.$pro.local
             this.userInfo = local.get('user')
             this.getList()

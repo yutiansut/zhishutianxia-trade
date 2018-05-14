@@ -64,12 +64,12 @@
                             <span>币种</span>
                             <span>交易所</span>
                         </li>
-                        <template v-if="hasHistoryList">
+                        <template v-if="listLength">
                              <li class="history_item" v-for="(item, index) in historyList" :key="item.id">
                                 <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                                 <div class="time">
-                                    <p class="time_day">{{item.tradeDatetime|dateChange('y-m-d')}}</p>
-                                    <p class="time_date">{{item.tradeDatetime|dateChange('y-m-d')}}</p>
+                                    <p class="time_day">{{item.tradeDatetime.split(' ')[0]}}</p>
+                                    <p class="time_date">{{item.tradeDatetime.split(' ')[1]}}</p>
                                 </div>
                                 <div class="name">
                                     <p class="time_day">{{tradeName[item.commodityNo]}}</p>
@@ -110,7 +110,6 @@ import pro from '../../../assets/js/common'
                 account: {},
                 tradeNum: {},
                 historyList: [],
-                hasHistoryList: false
     
             }
         },
@@ -121,8 +120,8 @@ import pro from '../../../assets/js/common'
             tradeName () {
                 return this.$store.state.tradeName
             },
-            test1 () {
-                console.log(333)
+            listLength () {
+                return this.historyList.length
             }
         },
         methods: {
@@ -174,14 +173,13 @@ import pro from '../../../assets/js/common'
             },
             getHistory() {
                 var sendData = {
-                    id: this.id
-                    //id: '92bfec94ab03433ba18020a4bfb0b50a'
+                    account: this.account.account
                 }
                 const headers = {
                     token: this.userInfo.token,
                     secret: this.userInfo.secret
                 }
-                this.$pro.fetch('post', '/futureManage/getHistoryTrade', sendData, headers).then(function(res) {
+                this.$pro.fetch('post', '/tradeCompetition/getHistoryTrade', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
                         this.historyList = res.data
