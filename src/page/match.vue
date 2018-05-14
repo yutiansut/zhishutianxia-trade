@@ -25,40 +25,40 @@
 				   <div class="h_98"></div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
-			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_applying.png" />
+				   			<img :src="n.statusName | showMatch" />
 				   			<span>0105至0205</span>
-				   			<span>10086</span>
+				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
-			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_playready.png" />
+				   			<img :src="n.statusName | showMatch" />
 				   			<span>0105至0205</span>
-				   			<span>10086</span>
+				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
-			    	<div class="matchDiv" v-for="n in List" @click="toNext">
+			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
-				   			<img src="../assets/images/match/match_end.png" />
+				   			<img :src="n.statusName | showMatch" />
 				   			<span>0105至0205</span>
-				   			<span>10086</span>
+				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
