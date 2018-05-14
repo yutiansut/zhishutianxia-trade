@@ -1,7 +1,7 @@
 <template>
 	<div id="dynamicPassivity">
 		<div class="container" v-for="n in dataList">
-			<div class="details">
+			<div class="details" @click="toMatchUser(n.userNo,'other')">
 				<div class="user border_bottom">
 					<ul>
 						<li>
@@ -43,6 +43,9 @@
             }
 		},
 		methods:{
+			toMatchUser:function(e,other){
+				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this.matchid}});
+			},
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {

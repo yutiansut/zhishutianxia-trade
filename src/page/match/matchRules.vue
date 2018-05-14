@@ -129,7 +129,11 @@
 							}else{
 								this.rule[item] = i;
 							}
-						}.bind(this))
+						}.bind(this));
+						let statusData = {
+							status:res.data.qiwCompetition.statusName
+						}
+						this.$emit('getStatus',statusData);
 					}
 				}).catch((err)=>{
 					console.log(err)
