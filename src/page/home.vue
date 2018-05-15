@@ -22,9 +22,9 @@
 	@import "../assets/css/common.scss";
 	#home{
 		width: $w;
-		overflow: hidden;
-		position: fixed;
-		top: 0;
-		left: 0;
+		// overflow: hidden;
+		// position: fixed;
+		// top: 0;
+		// left: 0;
 	}
 </style>
