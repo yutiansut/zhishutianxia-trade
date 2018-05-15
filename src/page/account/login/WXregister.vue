@@ -266,12 +266,12 @@
 		.reg{
 			.input{
 				width: 100%;
-				height: 1.2rem;
-				line-height: 1.2rem;
+				height: 0.4rem;
 				border-bottom: 0.01rem solid $bgDeep;
 				color:$graySimple ;
 				text-indent: 0.36rem;
 				font-size: 0.28rem;
+				padding: 0.5rem 0;
 			}
 			.input1{
 				margin-top: 0.4rem;
