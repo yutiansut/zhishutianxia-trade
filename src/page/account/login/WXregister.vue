@@ -27,7 +27,7 @@
 					</li>
 				</ul>
 			</div>
-			<button class="btn" @click="confirm">立即绑定并注册</button>
+			<button class="btn" @click.native="confirm">立即绑定并注册</button>
 			<p class="color_p" @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
 		</div>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
