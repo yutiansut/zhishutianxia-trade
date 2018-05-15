@@ -28,7 +28,8 @@ input, button, select {
     font-family: "\5FAE\8F6F\96C5\9ED1", Arial, Helvetica, sans-serif; 
     vertical-align: middle;
     outline: none;
-    -webkit-appearance: none;
+	-webkit-appearance: none;
+	border-radius: 0
 }
 input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px white inset; /*利用阴影来填充掉input自动填充色*/

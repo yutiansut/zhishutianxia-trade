@@ -19,8 +19,8 @@
                     <p>亏损平仓线: &nbsp<span class="money">{{account.lossCloseOutLine}}</span>&nbsp元</p>
                 </li>
                 <li class="item">
-                    <p>交易账号: &nbsp<span class="money">{{accountShow(account.state,account.account)}}</span></p>
-                    <p>交易密码: &nbsp<span class="money">{{accountShow(account.state,account.accountPassword)}}</span></p>
+                    <p>交易账号: &nbsp<span class="money">{{accountShow(details.status,account.account)}}</span></p>
+                    <p>交易密码: &nbsp<span class="money">{{accountShow(details.status,account.accountPassword)}}</span></p>
                 </li>
                 <li class="item">
                     <p>活动时间: &nbsp<span class="money">{{details.beginTime|dateChange('y-m-d')}} 至 {{details.endTime|dateChange('y-m-d')}}</span></p>
@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="btn_wrap">
-            <button class="trade" :class="{'disabled': account.state !== '4'}">立即交易</button>
+            <button class="trade" :class="{'disabled': details.status !== 4}">立即交易</button>
             <button class="black" @click="goto('/topNars', true)">比赛规则</button>
         </div>
     
