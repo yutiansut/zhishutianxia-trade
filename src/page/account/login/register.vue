@@ -138,17 +138,18 @@
 				this.$router.push({path:"/userRegistrationProtocol"});
 			},
 			getCode:function(e){
+				if($(e.target).hasClass('current')) return false;
 				if(this.isClick == false){
 					this.$toast({message: '请输入11位手机号码',duration: 2000});
 				}else if(this.phoneReg.test(this.phone) == false){
 					this.$toast({message: '手机格式错误',duration: 2000});
 				}else{
 					this.$refs.codeDialog.ishow = true;
-					console.log(this.PATH);
 					this.$refs.codeDialog.path= this.PATH+"/loginAndRegister/getImgCode.jpg"+Math.random()*1000+"?mobile=" + this.phone;
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					this.time = 60;
+					$(e.target).addClass('current');
 					var timing = setInterval(function(){
 						this.time--;
 						if(this.time <= 0){

@@ -107,7 +107,6 @@
 				}
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
@@ -133,6 +132,7 @@
 		mounted:function(){
 		},
 		activated:function(){ 
+			this.selected = "1";
 			this.getHeaders();
 			this.getMatchList(0,this.headers);
 		},
@@ -170,7 +170,7 @@
 				}
 			},
 			changeTime:function(e){
-				return pro.getDate(new Date(e),'y-m-d');
+				return pro.getDate(new Date(e.replace(/-/g, "/")),'y-m-d');
 			}
 		}
 	}
