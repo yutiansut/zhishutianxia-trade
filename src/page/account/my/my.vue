@@ -231,9 +231,9 @@ export default {
     this.userInfo = local.get('user')
     this.userList = local.get('userList')
     this.idList = local.get('idList')||[]
+    this.getNewList() //为了得到新闻中心信息是否更新
     if(this.userInfo){
-      this.getUserInfo()
-      this.getNewList() //为了得到新闻中心信息是否更新
+      this.getUserInfo()  
     }
     
   },

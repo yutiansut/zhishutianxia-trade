@@ -188,9 +188,11 @@ import pro from '../../../assets/js/common'
     }
     
     .btn_wrap {
-        position: absolute;
+        position: fixed;
+        left: 0;
         bottom: 0;
         width: 7.5rem;
+        //height: 0.98rem;
         font-size: 0;
         button {
             width: 50%;

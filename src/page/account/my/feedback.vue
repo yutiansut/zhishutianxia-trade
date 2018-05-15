@@ -202,14 +202,22 @@
     .btn_wrap {
         position: fixed;
         bottom: 0;
-        width: 7.5rem;
-        padding: 0.6rem 0 0 0;
+        left: 0;
+        width: 100%;
+        height: 0.88rem;
+        line-height: 0.48rem;
+        // position: fixed;
+        // left: 0;
+        // bottom: 0;
+        // width: 7.5rem;
+        // padding: 0.6rem 0 0 0;
         text-align: center;
         background-color: $bgGray;
         .btn {
             width: 7.5rem;
             @include font($fs36, 0.88rem, $bg);
             background-color: $redDeep;
+            border: none
         }
     }
 </style>

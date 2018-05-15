@@ -30,6 +30,7 @@ input, button, select {
     outline: none;
 	-webkit-appearance: none;
 	border-radius: 0
+	
 }
 input:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0px 1000px white inset; /*利用阴影来填充掉input自动填充色*/
@@ -37,6 +38,7 @@ input:-webkit-autofill {
 button{
 	border: none;
 	outline: none;
+	padding: 0;
 }
 input{
 	background: none;
