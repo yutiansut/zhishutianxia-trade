@@ -25,7 +25,7 @@
         <div class="list_wrap">
             <ul class="list">
                 <li class="item" v-for="(item, index) in list" :key="item.path" @click="goto(item.path)">
-                    <span class="icon" :class="{'news_icon':index==4}"></span>
+                    <span class="icon" :class="{'news_icon':index==4&&isNew}"></span>
                     {{item.name}}
                     <span class="right_icon"></span>
                 </li>
@@ -44,11 +44,12 @@
 </template>
 
 <script>
-import pro from '../../../assets/js/common'
+
 import {mapMutations} from 'vuex'
 import switchAccount from '../../../components/switch_account'
-
+import pro from '../../../assets/js/common'
 const local = pro.local;
+const idList1 = local.get('idList')||[];
 
 
 export default {
@@ -58,9 +59,9 @@ export default {
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
       isLogin: false,
       isShow: false,
+      idList: idList1,
       list: [
         // {
         //   name: "自选管理",
@@ -101,12 +102,15 @@ export default {
     },
     accountInfo () {
       return this.$store.state.accountInfo;
+    },
+    isNew () {
+        return this.$store.state.newsList.some(item => item.isRead == false)
     }
   },
   methods: {
     ...mapMutations({
       setAccountInfo: 'ACCOUNT_INFO',
-      clearUserInfo: 'INFO_CLEAR'
+      clearUserInfo: 'INFO_CLEAR',
     }),
     goLast() {
       this.$router.push(this.lastPath);
@@ -166,13 +170,70 @@ export default {
 					}
 				})
     },  
+    //获取新闻列表
+     getNewList() {
+                const data = {
+                    pageNo: 1,
+                    pageSize: 20
+                }
+                pro.fetch("post", "/others/getNoticeList", data, "").then((res) => {
+                    //console.log(res)
+                   if(res.success == true){
+						if(res.code == 1){
+                            /* 
+                                本地存储新闻内容 
+                                 1.给返回的list 添加一个isread属性
+                                 2. 点击事件 改变所点击那个item的isread 
+                                    2.1 改变isread 
+                                    2.2 存储 item 的id
+                                 3. 重新渲染 对比本地存储的id,改变isread
+                                    3.1 二次循环 改变对应id 的 isread属性
+                                    3.2 赋值给渲染的 属性   
+                            */
+                            res.data.list.forEach(item => {
+                                //是否在idList中                                
+                                item.isRead = this.idList.includes(item.id);
+                                
+                            });
+                            this.$store.state.newsList = res.data.list
+                        }
+                    }
+    
+                }).catch((err) => {
+                    var data = err.data;
+                    console.log(err)
+                    if (data == undefined) {
+                        this.$toast({
+                            message: "网络不给力，请稍后再试",
+                            duration: 1000
+                        });
+                    } else {
+                        if (data.code == -9999) {
+                            this.$toast({
+                                message: "认证失败，请重新登录",
+                                duration: 1000
+                            });
+                            this.$router.push({
+                                path: "/login"
+                            });
+                        } else {
+                            this.$toast({
+                                message: data.message,
+                                duration: 1000
+                            });
+                        }
+                    }
+                })
+            },
 
   },  
   activated () {    
     this.userInfo = local.get('user')
     this.userList = local.get('userList')
+    this.idList = local.get('idList')||[]
     if(this.userInfo){
       this.getUserInfo()
+      this.getNewList() //为了得到新闻中心信息是否更新
     }
     
   },
@@ -295,7 +356,7 @@ export default {
       "home_self_icon",
       "home_customer_icon",
       "home_help_icon",
-      "home_note_icon"
+      'home_note_icon_no'
     );
     .item:nth-child(#{$i}) {
       .icon {
@@ -305,6 +366,10 @@ export default {
         background-size: 100%;
       }
     }
+  }
+  .item:nth-child(5) .news_icon {
+      background: url("../../../assets/images/account/home_note_icon.png") center no-repeat ;
+      background-size: 100%;
   }
 }
 .btn_wrap {

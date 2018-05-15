@@ -27,7 +27,7 @@ const idList1 = local.get('idList')||[];
         data() {
             return {
                 hasList: true,
-                newsList: [],
+                //newsList: [],
                 currentIndex: 0,
                 idList : idList1,
             }
@@ -35,6 +35,9 @@ const idList1 = local.get('idList')||[];
         computed: {
             clientHeight() {
                 return document.documentElement.clientHeight + 'px';
+            },
+            newsList () {
+                return this.$store.state.newsList
             }
         },
         methods: {
@@ -60,7 +63,7 @@ const idList1 = local.get('idList')||[];
                     pageSize: 20
                 }
                 pro.fetch("post", "/others/getNoticeList", data, "").then((res) => {
-                    console.log(res)
+                    //console.log(res)
                    if(res.success == true){
 						if(res.code == 1){
                             /* 
@@ -108,12 +111,6 @@ const idList1 = local.get('idList')||[];
             },
 
         },
-        created () {
-            this.getNewList()
-        },
-        // activated () {
-        //     this.getNewList()
-        // }
     }
 </script>
 

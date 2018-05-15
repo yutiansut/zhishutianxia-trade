@@ -2,7 +2,7 @@
     <div id="switch_account" :style="{height:clientHeight}">
         <div class="wrap">
             <div class="list_box">
-                <h2>交易账号</h2>
+                <h2>登录账号</h2>
                 <ul class="list">
                     <li v-for="(item, index) in userList1" :key="item.username" :class="['item',{'checked': !index}]" @click="login(item)">
                         {{mobileHidden(item.username)}}<i v-if="index" @click.stop="deleteItem(userList,item.username)" class="delete"></i>

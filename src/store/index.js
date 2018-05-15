@@ -88,6 +88,7 @@ export default new Vuex.Store({
 		tradeName: tradeName,
 		userInfo: {},
 		accountInfo: {},
+		newsList: [],
 	    wsjsondata: {},
 		//行情websocket
 		quoteSocket: {},
