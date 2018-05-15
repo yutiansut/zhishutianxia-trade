@@ -89,7 +89,7 @@
 				}
 			},
 			toLogin:function(){
-				this.$router.push({path:"/login"})
+				this.$router.push({path:"/login"});
 			},
 			eyeEvent:function(e){
 				if(this.showEye == true){
