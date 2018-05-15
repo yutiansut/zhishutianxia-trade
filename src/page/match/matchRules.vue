@@ -199,7 +199,7 @@
 				}
 			},
 			changeDate:function(e){
-				return pro.getDate(new Date(e),'y-m-d');
+				return pro.getDate(new Date(e.replace(/-/g, "/")),'y-m-d');
 			}
 		}
 	}
