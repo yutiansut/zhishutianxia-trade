@@ -7,7 +7,7 @@
 					<li>价格：<span>{{n.tradePrice}}</span></li>
 				</ul>
 				<ul>
-					<li>10分钟前</li>
+					<li>{{n.tradeDatetime}}</li>
 				</ul>
 			</div>
 			<div class="h_20"></div>
