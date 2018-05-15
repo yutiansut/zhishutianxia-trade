@@ -49,7 +49,7 @@
 						break;
 					case 2:
 						if(this.status == 1 || this.status == 2 || this.status == 3){
-							this.$toast({message: '比赛未开始，不能查看排行榜',duration: 2000});
+							this.$toast({message: '比赛未开始，不能查看动态',duration: 2000});
 						}else{
 							this.current = index;
 							this.currentView = 'matchDynamic'
