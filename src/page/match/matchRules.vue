@@ -1,7 +1,7 @@
 <template>
 	<div id="matchRules">
 		<div class="time">
-			比赛时间：{{rulesData.beginTime}} 至 {{rulesData.endTime}}
+			比赛时间：{{rulesData.joinBeginTime | changeDate}} 至 {{rulesData.joinEndTime | changeDate}}
 		</div>
 		<div class="nar border_bottom">
 			<span>活动奖励</span>
@@ -26,7 +26,7 @@
 			<ul>
 				<li class="border_bottom" v-for="(k,v) in rule">
 					<span>{{v}}：</span>
-					<label>{{k}}元</label>
+					<label>{{k}}</label>
 				</li>
 			</ul>
 		</div>
@@ -197,6 +197,9 @@
 					case 2:
 						return require("../../assets/images/match/no3.png");
 				}
+			},
+			changeDate:function(e){
+				return pro.getDate(new Date(e),'y-m-d');
 			}
 		}
 	}
