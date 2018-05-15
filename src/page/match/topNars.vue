@@ -63,7 +63,7 @@
 			this.current = 0;
 			this.currentView = 'matchRules';
 		},
-		activated:function(){
+		activated:function(){;
 			this.current = 0;
 			this.currentView = 'matchRules';
 			this.matchid = this.$route.query.matchId

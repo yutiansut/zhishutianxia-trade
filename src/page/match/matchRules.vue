@@ -105,7 +105,7 @@
 						});
 					}
 				}).catch((err)=>{
-					console.log(err)
+					this.errobj(err);
 				})
 			},
 			//去跟投设置
@@ -136,7 +136,7 @@
 						this.$emit('getStatus',statusData);
 					}
 				}).catch((err)=>{
-					console.log(err)
+					this.errobj(err);
 				})
 			},
 			//是否登录
@@ -162,8 +162,16 @@
 							this.currentTitle = false;
 						}
 					}).catch((err)=>{
-						console.log(err)
+						this.errobj(err);
 					})
+			},
+			errobj:function(err){
+				var data = err.data;
+				if(data == undefined){
+					this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+				}else{
+					this.$toast({message:data.message,duration: 2000});
+				}
 			}
 		},
 		activated:function(){
