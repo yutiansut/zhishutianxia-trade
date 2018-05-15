@@ -6,12 +6,12 @@
 				<li><span>总收益</span><i class="change change_1"></i><span>跟投人数</span><i class="change"></i></li>
 			</ul>
 		</div>
-		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')">
+		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
 			<li class="li_no">
 				<img :src="user.byProfitRate | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{this.user.byProfitRate}}</span>
 				<img :src="user.wxHeadImg" alt="" class="user"/>
-				<span class="username">{{user.wxNickname ? user.wxNickname : user.telphone}}</span>
+				<span class="username">{{user.wxNickname ? user.wxNickname : (mobileHidden(user.telphone))}}</span>
 			</li>
 			<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
 		</ul>
@@ -20,7 +20,7 @@
 				<img :src="k | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{k+1}}</span>
 				<img :src="n.wxHeadImg" alt="" class="user"/>
-				<span class="username">{{n.wxNickname ? n.wxNickname : n.telphone}}</span>
+				<span class="username">{{n.wxNickname ? n.wxNickname : (mobileHidden(n.telphone))}}</span>
 			</li>
 			<li><span class="perecnt">{{n.profitRate | changpoint}}</span><span class="count">{{n.followCount}}</span></li>
 		</ul>
@@ -42,6 +42,9 @@
 			}
 		},
 		methods:{
+			mobileHidden (phoneNumber) {
+		        return pro.mobileHidden(phoneNumber);
+		    },
 			toMatchUser:function(e,type){
 				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type,matchid:this.matchid}});
 

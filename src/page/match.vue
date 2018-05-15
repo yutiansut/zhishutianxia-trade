@@ -17,7 +17,7 @@
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
-				   			<span>000至000</span>
+				   			<span>{{n.beginTime | changeTime}}至{{n.endTime | changeTime}}</span>
 				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
@@ -31,7 +31,7 @@
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
-				   			<span>0105至0205</span>
+				   			<span>{{n.beginTime | changeTime}}至{{n.endTime | changeTime}}</span>
 				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
@@ -44,7 +44,7 @@
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
-				   			<span>0105至0205</span>
+				   			<span>{{n.beginTime | changeTime}}至{{n.endTime | changeTime}}</span>
 				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
@@ -57,13 +57,14 @@
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
-				   			<span>0105至0205</span>
+				   			<span>{{n.beginTime | changeTime}}至{{n.endTime | changeTime}}</span>
 				   			<span>{{n.joinNum}}</span>
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
 			    </mt-tab-container-item>
 			</mt-tab-container>
+			<div id="listNone" v-show="List == null">暂无比赛哟~</div>
 		</div>
 		<!-- 选项卡 -->
 		<bottomTab :tabSelect="tabSelected"></bottomTab>
@@ -110,7 +111,12 @@
 						this.List = res.data.list;
 					}
 				}).catch((err)=>{
-					console.log(err)
+					var data = err.data;
+					if(data == undefined){
+						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+					}else{
+						this.$toast({message:data.message,duration: 2000});
+					}
 				})
 			},
 			getHeaders:function(){
@@ -162,6 +168,9 @@
 					case 5:
 						return require("../assets/images/match/match_end.png");
 				}
+			},
+			changeTime:function(e){
+				return pro.getDate(new Date(e),'y-m-d');
 			}
 		}
 	}
@@ -237,6 +246,12 @@
 			}
 		}
 	}
-
+	#listNone{
+		width: 100%;
+		text-align: center;
+		margin-top: 50%;
+		font-size: 0.32rem;
+		color: $grayDeep;
+	}
 
 </style>

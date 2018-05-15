@@ -18,7 +18,7 @@
 						<input type="tel"  placeholder="请输入手机号" class="input input1" v-model="phone" maxlength="11"/>
 					</li>
 					<li class="Rt">
-						<span class="getcode">{{volid ? info1 : (time + '秒')}}</span>
+						<span class="getcode" @click="getcode">{{volid ? info1 : (time + '秒')}}</span>
 						<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 					</li>
 					<li class="Rt">
