@@ -31,7 +31,6 @@
 		methods:{
 			getStatus(...data){
 				this.status = data[0].status;
-				console.log(typeof this.status);
 			},
 			switchTab(index){
 				switch (index){
@@ -40,9 +39,8 @@
 						this.currentView = 'matchRules'
 						break;
 					case 1:
-						if(this.status == 1 || this.status == 2){
+						if(this.status == 1 || this.status == 2 || this.status == 3){
 							this.$toast({message: '比赛未开始，不能查看排行榜',duration: 2000});
-							console.log("1111")
 						}else{
 							this.current = index;
 							this.currentView = 'matchRanking'
@@ -50,9 +48,8 @@
 						
 						break;
 					case 2:
-						if(this.status == 1 || this.status == 2){
+						if(this.status == 1 || this.status == 2 || this.status == 3){
 							this.$toast({message: '比赛未开始，不能查看排行榜',duration: 2000});
-							console.log("1111")
 						}else{
 							this.current = index;
 							this.currentView = 'matchDynamic'
