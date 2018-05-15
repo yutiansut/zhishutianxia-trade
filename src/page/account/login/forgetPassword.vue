@@ -11,7 +11,7 @@
 					<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 				</li>
 			</ul>
-			<button class="btn" @click="toResetPassword">下一步</button>
+			<mt-button :class="btnType ? 'btn' : 'btnred'" @click="toResetPassword" type="danger">下一步</mt-button>
 			<p @click="toRegister">新用户注册>></p>
 			<div class="showWX" v-show="showWhat">
 				<i class="toWX"></i>
@@ -49,6 +49,13 @@
 					return true
 				}else{
 					return false
+				}
+			},
+			btnType:function(){
+				if(this.phone!="" && this.code!=""){
+					return false;
+				}else{
+					return true;
 				}
 			}
 		},
@@ -136,12 +143,12 @@
 		padding: 0 0.3rem;
 		.input{
 			width: 100%;
-			height: 1.2rem;
-			line-height: 1.2rem;
+			height: 0.4rem;
 			border-bottom: 0.01rem solid $bgDeep;
 			color:$graySimple ;
 			text-indent: 0.36rem;
 			font-size: 0.28rem;
+			padding: 0.5rem 0;;
 		}
 		.input1{
 			margin-top: 0.4rem;
@@ -156,6 +163,16 @@
 			right: 0.3rem;
 			font-size: $fs24;
 			color: $grayMiddle;
+		}
+		.btnred{
+			width: 100%;
+			height: 0.9rem;
+			font-size: 0.36rem;
+			line-height: 0.9rem;
+			background-color: $redDeep;
+			color: $bg;
+			border-radius: 0.45rem;
+			margin-top: 0.6rem;
 		}
 		.btn{
 			width: 100%;

@@ -5,7 +5,7 @@
 				<div class="user border_bottom">
 					<ul>
 						<li>
-							<img :src="n.wxHeadImg" class="userP"/>
+							<img :src="n.wxHeadImg | changeWXimg" class="userP"/>
 							<span class="username">{{n.wxNickname ?n.wxNickname : n.mobile}}</span>
 						</li>
 					</ul>
@@ -16,7 +16,7 @@
 						<li>价格：<span>{{n.tradePrice}}</span></li>
 					</ul>
 					<ul>
-						<li>10分钟前</li>
+						<li>{{n.tradeDatetime}}</li>
 					</ul>
 				</div>
 			</div>
@@ -91,7 +91,10 @@
 		filters:{
 			changeDrection:function(e){
 				return e == 0 ? "买入" : "卖出"
-			}
+			},
+			changeWXimg:function(e){
+				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
+			},
 		}
 	}
 </script>

@@ -12,7 +12,7 @@
 					<input type="password"  placeholder="请再次输入密码" class="input" v-model="surePassword" maxlength="11" id="password1"/>
 				</li>
 			</ul>
-			<button class="btn" @click="login">登录</button>
+			<mt-button :class="btnType ? 'btn' : 'btnred'" @click="login" type="danger">登录</mt-button>
 			<p @click="toRegisiter">新用户注册>></p>
 			<div class="showWX" v-show="showWhat">
 				<i class="toWX"></i>
@@ -37,6 +37,15 @@
 				fullHeight1:document.documentElement.clientHeight,
 				showPsd:false,
 				showPsd1:false
+			}
+		},
+		computed:{
+			btnType:function(){
+				if(this.password!="" && this.surePassword!=""){
+					return false;
+				}else{
+					return true;
+				}
 			}
 		},
 		methods:{
@@ -169,12 +178,12 @@
 		padding: 0 0.3rem;
 		.input{
 			width: 100%;
-			height: 1.2rem;
-			line-height: 1.2rem;
+			height: 0.4rem;
 			border-bottom: 0.01rem solid $bgDeep;
 			color:$graySimple ;
 			text-indent: 0.36rem;
 			font-size: 0.28rem;
+			padding: 0.5rem 0;
 		}
 		.input1{
 			margin-top: 0.4rem;
@@ -201,6 +210,16 @@
 			height: 0.16rem;
 			background: url(../../../assets/images/account/accout_nopsd.png);
 			background-size: 100% 100%;
+		}
+		.btnred{
+			width: 100%;
+			height: 0.9rem;
+			font-size: 0.36rem;
+			line-height: 0.9rem;
+			background-color: $redDeep;
+			color: $bg;
+			border-radius: 0.45rem;
+			margin-top: 0.6rem;
 		}
 		.btn{
 			width: 100%;

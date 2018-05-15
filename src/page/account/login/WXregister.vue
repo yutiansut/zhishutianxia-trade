@@ -27,7 +27,7 @@
 					</li>
 				</ul>
 			</div>
-			<mt-button class="btn" @click.native="confirm" type="danger">立即绑定并注册</mt-button>
+			<mt-button :class="btnType ? 'btn' : 'btnred'" @click.native="confirm" type="danger">立即绑定并注册</mt-button>
 			<p class="color_p" @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
 		</div>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
@@ -78,6 +78,13 @@
 			},
 			packChannel(){
 				return this.$store.state.account.packChannel;
+			},
+			btnType:function(){
+				if(this.phone!="" && this.code!="" && this.password){
+					return false;
+				}else{
+					return true;
+				}
 			}
 		},
 		methods:{
@@ -266,12 +273,12 @@
 		.reg{
 			.input{
 				width: 100%;
-				height: 1.2rem;
-				line-height: 1.2rem;
+				height: 0.4rem;
 				border-bottom: 0.01rem solid $bgDeep;
 				color:$graySimple ;
 				text-indent: 0.36rem;
 				font-size: 0.28rem;
+				padding: 0.5rem 0;
 			}
 			.input1{
 				margin-top: 0.4rem;
@@ -307,6 +314,16 @@
 				font-size: $fs24;
 				color: $grayMiddle;
 			}
+		}
+		.btnred{
+			width: 100%;
+			height: 0.9rem;
+			font-size: 0.36rem;
+			line-height: 0.9rem;
+			background-color: $redDeep;
+			color: $bg;
+			border-radius: 0.45rem;
+			margin-top: 0.6rem;
 		}
 		.btn{
 			width: 100%;
