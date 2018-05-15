@@ -34,6 +34,7 @@
 <script>
 	import topTitle from "../../components/topTitle.vue"
 	import pro from "../../assets/js/common.js"
+	const local = pro.local;
 	export default{
 		name:"mineGt",
 		components:{ topTitle },
@@ -46,16 +47,23 @@
 			}
 		},
 		methods:{
+			getHeaders:function(){
+				if(local.get("user") != null){
+					this.headers = {
+						token:local.get("user").token,
+						secret:local.get("user").secret
+					}
+				}else{
+					this.headers = ""
+				}
+			},
 			getMintGt:function(id){
 				var data = {
 					id:id,
 					pageNo:0,
 					pageSize:10
 				}
-				var headers = {
-					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM=",
-					secret:"7cda0b054336c9cca469bf0aca8e3918"
-				}
+				var headers = this.headers
 				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						console.log(res)
@@ -76,6 +84,7 @@
 		mounted:function(){
 		},
 		activated:function(){
+			this.getHeaders();
 			this.matchid = this.$route.query.matchId;
 			this.getMintGt(this.matchid);
 		},

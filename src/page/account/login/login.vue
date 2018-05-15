@@ -43,7 +43,6 @@
 				fullHeight:document.documentElement.clientHeight,
 				fullHeight1:document.documentElement.clientHeight,
 				userList: [],
-				btnType:true
 			}
 		},
 		computed : {
@@ -55,6 +54,13 @@
 			},
 			weixinLoginInfo:function(){
 				return this.$store._modules.root.state.account.weixinLoginInfo
+			},
+			btnType:function(){
+				if(this.phone!="" && this.password!=""){
+					return false;
+				}else{
+					return true;
+				}
 			}
 		},
 		methods:{
