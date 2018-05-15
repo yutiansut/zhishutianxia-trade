@@ -100,7 +100,9 @@
 			},
 			//保存跟投
 			matchSet:function(){
-				if(this.scale > 40){
+				if(!this.switchN){
+					this.$toast({message: '请先开启跟投开关',duration: 2000});
+				}else if(this.scale > 40){
 					this.$toast({message: '比例最大不超过40%',duration: 2000});
 				}else if(this.scale < 0){
 					this.$toast({message: '比例不能设置为负数',duration: 2000});
