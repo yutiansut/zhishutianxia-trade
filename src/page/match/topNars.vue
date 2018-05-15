@@ -1,6 +1,6 @@
 <template>
 	<div id="topNars">
-		<topTitle title="模拟比赛" type="0" type1="0" :matchid="matchid"></topTitle>
+		<topTitle :title="title" type="0" type1="0" :matchid="matchid"></topTitle>
 		<div id="container">
 			<div class="tab" v-for="(n,index) in list" :class="{current:current == index}"  @click="switchTab(index)">
 				<span>{{n}}</span>
@@ -25,7 +25,8 @@
 				current:0,
 				currentView:'matchRules',
 				matchid:"",
-				status:""
+				status:"",
+				title:""
 			}
 		},
 		methods:{
@@ -66,7 +67,9 @@
 		activated:function(){;
 			this.current = 0;
 			this.currentView = 'matchRules';
-			this.matchid = this.$route.query.matchId
+			this.matchid = this.$route.query.matchId;
+			this.title = this.$route.query.matchTitle;
+			console.log(this.title)
 		}
 	}
 </script>
