@@ -14,7 +14,7 @@
                     <div class="phone_number"> {{config.type}}</div>
                     <span class="small">跟投盈亏</span>
                     <span class="small">跟投比例</span>
-                    <template v-if="type=='1'">
+                    <template v-if="type=='2'">
                         <span class="more">{{config.surplus}}</span>
                     </template>
                         <span class="more">{{config.name}}</span>                                                                      
@@ -26,12 +26,11 @@
                         <div class="phone_number">{{item.wxNickname||mobileHidden(item.telphone)}}</div>
                         <span class="small">{{item.followProfit}}</span>
                         <span class="small">{{item.divide}}</span>
-                        <template v-if="type=='1'">
+                        <template v-if="type=='2'">
                             <span class="more">{{item.deductProfit}}</span>
                         </template>
                         <span class="more">{{item.profit}}</span>     
-                        <div class="time"><p class="time_day">2018-03-03</p><p class="time_date">{{item.settleTime}}</p></div>
-                        <div>{{123|abc}}</div>
+                        <div class="time"><p class="time_day">{{item.settleTime|dateChange('y-m-d')}}</p><p class="time_date">{{item.settleTime|dateChange('h:i:s')}}</p></div>
                     </li>
                 </template>
                 <li class="no_list" v-else>
@@ -97,11 +96,11 @@ import pro from '../../../assets/js/common'
             },
             titleName() {
                 switch (this.type) {
-                    case '0':
+                    case '1':
                         this.config = extractConfig;
                         return '跟投提取收益'
                         break;
-                    case '1':
+                    case '2':
                         this.config = deductionConfig;
                         return '跟投扣除收益'
                         break;
@@ -112,7 +111,8 @@ import pro from '../../../assets/js/common'
             },
             listLength () {
                 return this.followList.length
-            }
+            },
+            
         },
         methods: {
             goBack() {
@@ -172,7 +172,12 @@ import pro from '../../../assets/js/common'
         //         this.getList()
         //     // 对路由变化作出响应...
         //     }
-        // },    
+        // },  
+         filters: {
+            dateChange (time, d) {
+               return pro.getDate(time, d)
+            }
+        },  
         activated() {
             const local = this.$pro.local
             this.userInfo = local.get('user')
