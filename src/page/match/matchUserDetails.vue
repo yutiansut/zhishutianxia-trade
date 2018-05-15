@@ -4,7 +4,7 @@
 		<div id="container">
 			<ul class="dis_flex2 border_bottom">
 				<li>
-					<i class="userP"></i>
+					<img :src="wxHeadImg | changeWXimg" alt=""   class="userP" />
 					<span class="span_gray">{{wxNickname || telphone}}</span>
 				</li>
 				<li>
@@ -76,9 +76,9 @@
 						</li>
 						<template>
 							<li class="border_bottom" v-for="(n,index) in list">
-								<span>{{index}}</span>
+								<span>{{index+1}}</span>
 								<span>{{n.commodityNo}}</span>
-								<span>{{n.direction}}</span>
+								<span>{{n.direction | changeDrection}}</span>
 								<span>{{n.tradePrice}}</span>
 								<span>{{n.tradeNum}}</span>
 								<span>{{n.tradeFee}}</span>
@@ -131,7 +131,8 @@
 				wxNickname:"",
 				applyTime:"",
 				telphone:'',
-				list:[]
+				list:[],
+				wxHeadImg:""
 			}
 		},
 		methods:{
@@ -146,6 +147,7 @@
 						this.telphone = res.data.telphone;
 						this.applyTime = res.data.joinTime;
 						this.list = res.data.tradeRecords;
+						this.wxHeadImg = res.data.wxHeadImg;
 					}
 				}).catch((err)=>{
 						console.log(err)
@@ -197,8 +199,13 @@
 		},
 		filters:{
 			changTime:function(e){
-				console.log(e)
-				return e
+				return pro.getDate(e,"y-m-d h:i:s");
+			},
+			changeWXimg:function(e){
+				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
+			},
+			changeDrection:function(e){
+				return e == 0 ? "买" : "卖";
 			}
 		}
 	}

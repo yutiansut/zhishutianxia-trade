@@ -8,10 +8,8 @@
 		</div>
 		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
 			<li class="li_no">
-				<img :src="user.byProfitRate | changNo" alt="" class="rang_no" />
-				<span class="span_no">{{this.user.byProfitRate}}</span>
-				<img :src="user.wxHeadImg" alt="" class="user"/>
-				<span class="username">{{user.wxNickname ? user.wxNickname : (mobileHidden(user.telphone))}}</span>
+				<img :src="this.user.wxHeadImg | changwxhead" alt="" class="rang_no1" />
+				<span class="username">{{this.user.wxNickname ||  (mobileHidden(this.user.telphone))}}</span>
 			</li>
 			<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
 		</ul>
@@ -19,7 +17,7 @@
 			<li class="li_no">
 				<img :src="k | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{k+1}}</span>
-				<img :src="n.wxHeadImg" alt="" class="user"/>
+				<img :src="n.wxHeadImg  | changwxhead" alt="" class="user"/>
 				<span class="username">{{n.wxNickname ? n.wxNickname : (mobileHidden(n.telphone))}}</span>
 			</li>
 			<li><span class="perecnt">{{n.profitRate | changpoint}}</span><span class="count">{{n.followCount}}</span></li>
@@ -106,6 +104,9 @@
 				var str=Number(e*100).toFixed(2);
 			    str+="%";
 			    return str;
+			},
+			changwxhead:function(e){
+				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
 			}
 		}
 	}
@@ -158,6 +159,12 @@
 		display: inline-block;
 		width: 0.44rem;
 		height: 0.44rem;
+	}
+	.rang_no1{
+		display: inline-block;
+		width: 0.8rem;
+		height: 0.8rem;
+		margin-right: 0.2rem;
 	}
 	.li_no{
 		position: relative;
