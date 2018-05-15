@@ -36,6 +36,7 @@
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
+				    <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
 			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
@@ -49,6 +50,7 @@
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
+				    <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
 			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
@@ -62,6 +64,7 @@
 				   			<span>参赛人数：</span>
 				   		</div>
 				   </div>
+				    <div class="h_98"></div>
 			    </mt-tab-container-item>
 			</mt-tab-container>
 			<div id="listNone" v-show="List == null">暂无比赛哟~</div>
