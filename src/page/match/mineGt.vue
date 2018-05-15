@@ -49,8 +49,8 @@
 			getMintGt:function(id){
 				var data = {
 					id:id,
-					pageNo:"",
-					pageSize:""
+					pageNo:0,
+					pageSize:10
 				}
 				var headers = {
 					token:"YTlkYzQ5NmUxMjQ3NGRkN2E4OWE5MWE0MjJhZjcyNzM=",

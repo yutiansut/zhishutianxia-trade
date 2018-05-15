@@ -93,7 +93,6 @@
 				return e == 0 ? "买入" : "卖出"
 			},
 			changeWXimg:function(e){
-				console.log(e)
 				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
 			},
 		}
