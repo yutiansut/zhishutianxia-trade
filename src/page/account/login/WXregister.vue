@@ -27,7 +27,7 @@
 					</li>
 				</ul>
 			</div>
-			<button class="btn" @click.native="confirm">立即绑定并注册</button>
+			<mt-button class="btn" @click.native="confirm" type="danger">立即绑定并注册</mt-button>
 			<p class="color_p" @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
 		</div>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
@@ -37,6 +37,7 @@
 <script>
 	import topTitle from "../../../components/topTitle.vue"
 	import codeDialog from "../../../components/codeDialog.vue"
+	import pro from "../../../assets/js/common.js"
 	export default{
 		name:"WXregister",
 		components:{ topTitle,codeDialog },
@@ -100,7 +101,7 @@
 					this.showEye=!this.showEye;
 					this.showNo=!this.showNo;
 					$(e.target).removeClass("current").siblings(".input2").attr("type",'password');
-				}
+				} 
 			},
 			getCode:function(e){
 				if($(e.target).hasClass('current')) return false;
