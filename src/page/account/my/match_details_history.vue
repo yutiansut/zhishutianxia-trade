@@ -150,6 +150,7 @@ import pro from '../../../assets/js/common'
                         this.details = res.data;
                         this.account = res.data.program;
                         this.tradeNum = res.data.tradeNum;
+                        this.getHistory()
                     }
     
                 }.bind(this)).catch(function(err) {
@@ -185,11 +186,11 @@ import pro from '../../../assets/js/common'
                 this.$pro.fetch('post', '/tradeCompetition/getHistoryTrade', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
-                        this.historyList = res.data||this.historyList
+                        this.historyList = res.data
                     }
     
                 }.bind(this)).catch(function(err) {
-                    //console.log(err)
+                    console.log(err)
                     var data = err.data;
                     if (data == undefined) {
                         this.$toast({
@@ -206,15 +207,6 @@ import pro from '../../../assets/js/common'
             }
     
         },
-        watch: {
-            selected (value) {
-                 if(value == 2) {
-                    if(this.historyList.length) return; 
-                    this.getHistory()
-                }
-            }
-           
-        },
         filters: {
             dateChange (time, d) {
                return pro.getDate(time, d)
@@ -229,6 +221,7 @@ import pro from '../../../assets/js/common'
             const local = this.$pro.local
             this.userInfo = local.get('user')
             this.getDetails()
+            // this.getHistory()
         }
     
     }
