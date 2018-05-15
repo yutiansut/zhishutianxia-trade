@@ -1,5 +1,5 @@
 <template>
-    <div id="home" :style="{height:clientHeight}">
+    <div id="customer_services" :style="{height:clientHeight}">
         <mt-header fixed title="客服中心">
             <mt-button slot="left" icon="back" @click="goBack"></mt-button>
         </mt-header>
@@ -8,7 +8,7 @@
         <div class="list_wrap">
             <ul class="list">
                <li @click="callCustomer">
-                   <div>在线客服</div>
+                   <div>客服热线</div>
                    <div class="item_right_box">
                         <span class="gray_text">400-852-8008</span>
                         <span class="right_icon"></span>
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: 'self_setting',
+  name: 'customer_services',
   data () {
     return {
       hasList: true, 
@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/css/common.scss";
-#home{
+#customer_services{
     width: 7.5rem;
     background-color: $bgGray;
 }

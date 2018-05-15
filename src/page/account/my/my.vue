@@ -24,8 +24,8 @@
         <!-- 列表 -->
         <div class="list_wrap">
             <ul class="list">
-                <li class="item" v-for="item in list" :key="item.path" @click="goto(item.path)">
-                    <span class="icon"></span>
+                <li class="item" v-for="(item, index) in list" :key="item.path" @click="goto(item.path)">
+                    <span class="icon" :class="{'news_icon':index==4}"></span>
                     {{item.name}}
                     <span class="right_icon"></span>
                 </li>
@@ -139,8 +139,7 @@ export default {
 
     },
     //获取用户信息
-		getUserInfo () {
-      
+		getUserInfo () {     
 		  const headers = {
 					token : this.userInfo.token,
 					secret : this.userInfo.secret
@@ -289,9 +288,9 @@ export default {
     vertical-align: middle;
     text-align: right;
   }
-  @for $i from 1 through 6 {
+  @for $i from 1 through 5 {
     $background_img: (
-      "self_choose_icon",
+      //"self_choose_icon",
       "home_match_icon",
       "home_self_icon",
       "home_customer_icon",
