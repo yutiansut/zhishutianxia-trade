@@ -18,7 +18,7 @@
 						<input type="tel"  placeholder="请输入手机号" class="input input1" v-model="phone" maxlength="11"/>
 					</li>
 					<li class="Rt">
-						<span class="getcode" @click="getcode">{{volid ? info1 : (time + '秒')}}</span>
+						<span class="getcode" @click="getCode" :class="{current: isClick == false}">{{volid ? info1 : (time + '秒')}}</span>
 						<input type="tel"  placeholder="请输入验证码" class="input" v-model="code" maxlength="11"/>
 					</li>
 					<li class="Rt">
@@ -30,14 +30,16 @@
 			<button class="btn" @click="confirm">立即绑定并注册</button>
 			<p class="color_p" @click="toLogin"><span class="color_gray">已有账户？</span>立即登录>></p>
 		</div>
+		<codeDialog ref="codeDialog" type="register"></codeDialog>
 	</div>
 </template>
 
 <script>
 	import topTitle from "../../../components/topTitle.vue"
+	import codeDialog from "../../../components/codeDialog.vue"
 	export default{
 		name:"WXregister",
-		components:{ topTitle },
+		components:{ topTitle,codeDialog },
 		data(){
 			return{
 				nickname:"你是谁",
@@ -58,7 +60,8 @@
 				headimgurl:"",
 				privilege:"",
 				accessToken:"",
-				showPsd:false
+				showPsd:false,
+				isClick: false,
 			}
 		},
 		computed: {
@@ -106,7 +109,7 @@
 				}else if(this.phoneReg.test(this.phone) == false){
 					this.$toast({message: '手机格式错误',duration: 2000});
 				}else{
-					this.$refs.codeDialog.isshow = true;
+					this.$refs.codeDialog.ishow = true;
 					this.$refs.codeDialog.path= this.PATH+"/loginAndRegister/getImgCode.jpg"+Math.random()*1000+"?mobile=" + this.phone;
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
@@ -190,6 +193,15 @@
 			this.privilege=this.$route.query.weixinInfo.privilege;
 			this.accessToken=this.$route.query.weixinInfo.access_token;
 			this.sex=this.$route.query.weixinInfo.sex;
+		},
+		watch:{
+			phone: function(n, o){
+				if(n && n.length == 11){
+					this.isClick = true;
+				}else{
+					this.isClick = false;
+				}
+			},
 		}
 	}
 </script>
@@ -312,6 +324,9 @@
 		}
 		.color_gray{
 			color: $grayMiddle;
+		}
+		.current{
+			color: $redDeep;
 		}
 	}
 </style>
