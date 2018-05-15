@@ -121,6 +121,7 @@ import pro from '../../../assets/js/common'
                 return this.$store.state.tradeName
             },
             listLength () {
+                console.log(this.historyList)
                 return this.historyList.length
             }
         },
@@ -186,7 +187,7 @@ import pro from '../../../assets/js/common'
                 this.$pro.fetch('post', '/tradeCompetition/getHistoryTrade', sendData, headers).then(function(res) {
                     console.log(res)
                     if (res.success && res.code == 1) {
-                        this.historyList = res.data
+                        this.historyList = res.data||[] //保证historyList 不为空
                     }
     
                 }.bind(this)).catch(function(err) {
@@ -279,6 +280,9 @@ import pro from '../../../assets/js/common'
             }
         }
         .title_item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 0.22rem 0.3rem;
             font-size: 0;
             border-bottom: 1px solid $bgDeep;
@@ -288,9 +292,6 @@ import pro from '../../../assets/js/common'
                 vertical-align: middle;
                 @include font($fs28, 0.46rem, $graySimple, left);
                 font-size: 0;
-            }
-            .left {
-                margin-right: 2.25rem;
             }
             img {
                 width: 0.44rem;
