@@ -13,7 +13,7 @@
 			</li>
 			<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
 		</ul>
-		<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,'other')">
+		<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,(n.userNo == user.userNo ? 'mine' : 'other'))">
 			<li class="li_no">
 				<img :src="k | changNo" alt="" class="rang_no" />
 				<span class="span_no">{{k+1}}</span>
