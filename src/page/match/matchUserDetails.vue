@@ -15,7 +15,7 @@
 				<ul class=" dis_flex1">
 					<li>
 						<span class="span_gray">今权益：</span>
-						<span class="span_black">{{otherData.equities}}</span>
+						<span class="span_black">{{Number(otherData.equities).toFixed(2)}}</span>
 					</li>
 					<li>
 						<span class="span_gray">初始资金：</span>
@@ -25,7 +25,7 @@
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">总收益：</span>
-						<span class="span_red">{{otherData.totalProfit}}</span>
+						<span class="span_red">{{Number(otherData.totalProfit).toFixed(2)}}</span>
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
@@ -35,7 +35,7 @@
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">跟投收益：</span>
-						<span class="span_green">{{otherData.followProfit}}</span>
+						<span class="span_green">{{Number(otherData.followProfit).toFixed(2)}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
