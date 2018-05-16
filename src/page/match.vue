@@ -11,7 +11,7 @@
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
-				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
+				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
@@ -25,7 +25,7 @@
 				   <div class="h_98"></div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
-			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
+			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
@@ -39,7 +39,7 @@
 				    <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
-			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
+			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
@@ -53,7 +53,7 @@
 				    <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
-			    	 <div class="matchDiv" v-for="n in List" @click="toNext(n.id)">
+			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
 				   		</div>
@@ -99,8 +99,8 @@
 			},
 		},
 		methods:{
-			toNext:function(id){
-				this.$router.push({path:"/topNars",query:{matchId:id}});
+			toNext:function(id,title){
+				this.$router.push({path:"/topNars",query:{matchId:id,matchTitle:title}});
 			},
 			getMatchList:function(n,headers){
 				var data = {

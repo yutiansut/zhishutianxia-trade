@@ -206,7 +206,7 @@
 				}
 			},
 			changeDate:function(e){
-				return pro.getDate(new Date(e.replace(/-/g, "/")),'y-m-d');
+				return e!=undefined ? pro.getDate(new Date(e.replace(/-/g, "/")),'y-m-d') : e;
 			}
 		}
 	}
