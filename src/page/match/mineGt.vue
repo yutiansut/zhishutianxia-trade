@@ -6,7 +6,7 @@
 				<ul>
 					<li>
 						<span class="span_gray">提取收益率：</span>
-						<span class="span_black">{{divide | changpoint}}</span>
+						<span class="span_black">{{divide ? divide : '0'}}%</span>
 					</li>
 					<li>
 						<span class="span_gray">跟投人数:</span>
@@ -26,6 +26,9 @@
 						<span class="color_red">{{n.direction | changDirection}}</span>
 					</li>
 				</ul>
+			</div>
+			<div class="listNone" v-show="followList == undefined">
+				暂无跟投者！
 			</div>
 		</div>
 	</div>
@@ -91,17 +94,6 @@
 		filters:{
 			changDirection:function(e){
 				return e == 0 ? "正向" : "反向"
-			},
-			changpoint:function(e){
-				console.log(e)
-				if(e == undefined){
-					return 0
-				}else{
-					var str=Number(e*100).toFixed(2);
-				    str+="%";
-				    return str;
-				}
-				
 			}
 		}
 	}
@@ -159,6 +151,13 @@
 			height: 0.44rem;
 			display: inline-block;
 			margin-right: 0.2rem;
+		}
+		.listNone{
+			width: 100%;
+			text-align: center;
+			font-size: 0.28rem;
+			color: $grayDeep;
+			margin-top: 50%;
 		}
 	}
 </style>
