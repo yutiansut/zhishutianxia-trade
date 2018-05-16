@@ -295,14 +295,14 @@
 				ul{
 					display: block;
 					padding: 0 0.3rem;
-					width: 14.6rem;
+					width: 17.6rem;
 					li{
 						text-align: center;
 						line-height: 0.88rem;
 						height:0.88rem;
 						span{
 							float: left;
-							width: 1.2rem;
+							width: 1.5rem;
 							display: block;
 							overflow: hidden;
 							color: $blcakThin;
