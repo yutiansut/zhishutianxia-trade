@@ -183,13 +183,11 @@
 		mounted:function(){
 			this.getHeaders();
 			if(this.matchid != ""){
-				console.log("66666")
 				this.getMtchRules(this.matchid);
 			}
 		},
 		watch:{
 			matchid:function(e){
-				console.log(e)
 				this.getHeaders();
 				this.getMtchRules(e);
 			}

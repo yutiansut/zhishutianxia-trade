@@ -69,7 +69,6 @@
 			this.currentView = 'matchRules';
 			this.matchid = this.$route.query.matchId;
 			this.title = this.$route.query.matchTitle;
-			console.log(this.title)
 		}
 	}
 </script>
