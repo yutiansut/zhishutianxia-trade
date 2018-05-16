@@ -1,16 +1,21 @@
 <template>
 	<div id="dynamicMine">
-		<div class="container" v-for="n in dataList">
-			<div class="buyDetails">
-				<ul>
-					<li>{{n.direction | changeDrection}}：<span>{{tradeName[n.commodityNo]}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
-					<li>价格：<span>{{n.tradePrice}}</span></li>
-				</ul>
-				<ul>
-					<li>{{n.tradeDatetime}}</li>
-				</ul>
+		<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
+			<div class="container" v-for="n in dataList" v-show="dataList != ''">
+				<div class="buyDetails">
+					<ul>
+						<li>{{n.direction | changeDrection}}：<span>{{tradeName[n.commodityNo]}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
+						<li>价格：<span>{{n.tradePrice}}</span></li>
+					</ul>
+					<ul>
+						<li>{{n.tradeDatetime}}</li>
+					</ul>
+				</div>
+				<div class="h_20"></div>
 			</div>
-			<div class="h_20"></div>
+		</mt-loadmore>
+		<div v-show="dataList == ''" class="listNone">
+			暂无动态哦
 		</div>
 	</div>
 </template>
@@ -24,7 +29,8 @@
 		data(){
 			return{
 				headers:"",
-				dataList:''
+				dataList:'',
+				pagesize:10
 			}
 		},
 		computed:{
@@ -33,6 +39,19 @@
             }
 		},
 		methods:{
+			//加载跟多
+			loadBottom:function(){
+				this.pagesize+=10;
+				console.log(this.pagesize)
+				this.getDynamic(this.id,this.pagesize);
+				this.$refs.loadmore.onTopLoaded();
+			},
+			//下拉刷新
+			loadTop:function(){
+				this.pagesize = 10 ;
+				this.getDynamic(this.id,this.pagesize);
+				this.$refs.loadmore.onTopLoaded();
+			},
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
@@ -46,13 +65,13 @@
 			toMatchUser:function(){
 				this.$router.push({path:"matchUserDetails"});
 			},
-			getDynamic:function(id){
+			getDynamic:function(id,pagesize){
 				var data ={
 					id:id,
 					guardId:'',
 					type:2,
-					pageNo:1,
-					pageSize:10,
+					pageNo:0,
+					pageSize:pagesize,
 					direction:0
 				};
 				var headers = this.headers;
@@ -72,8 +91,9 @@
 			}
 		},
 		mounted:function(){
+			this.pagesize = 10;
 			this.getHeaders();
-			this.getDynamic(this.id);
+			this.getDynamic(this.id,this.pagesize);
 		},
 		filters:{
 			changeDrection:function(e){
@@ -107,5 +127,12 @@
 		span{
 			color:$blcakThin ;
 		}
+	}
+	.listNone{
+		font-size: 0.28rem;
+		width: 100%;
+		margin-top: 50%;
+		text-align: center;
+		color: $grayDeep;
 	}
 </style>
