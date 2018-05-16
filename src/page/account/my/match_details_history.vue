@@ -60,7 +60,7 @@
                             <span>成交量</span>                     
                             <span>成交价</span>
                             <span>平仓盈亏</span>
-                            <span>交易手续费</span>
+                            <span class="more">交易手续费</span>
                             <span>币种</span>
                             <span>交易所</span>
                         </li>
@@ -79,7 +79,7 @@
                                 <span>{{item.tradeNum}}</span>
                                 <span>{{item.tradePrice}}</span>
                                 <span>{{item.hedgeProfit}}</span>
-                                <span>{{item.tradeFee}}</span>
+                                <span class="more">{{item.tradeFee}}</span>
                                 <span>{{item.currencyNo}}</span>
                                 <span>{{item.exchangeNo}}</span>
                             </li>      
@@ -367,6 +367,9 @@ import pro from '../../../assets/js/common'
         }
         .small {
             width: 0.7rem;
+        }
+        .more {
+            width: 1.6rem
         }
         .time_day {
             @include font($fs28, 0.32rem, $blcakThin, right);
