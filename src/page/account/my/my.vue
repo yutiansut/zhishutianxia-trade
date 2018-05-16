@@ -18,7 +18,7 @@
             </div>
             <div class="money_box">
                 <p>账户余额</p>
-                <p class="money_text"><span>{{allMoney||"0.00"}}</span> 元</p>
+                <p class="money_text"><span>{{buwei(allMoney)||"0.00"}}</span> 元</p>
             </div>
         </div>
         <!-- 列表 -->
@@ -98,7 +98,7 @@ export default {
       return document.documentElement.clientHeight + "px";
     },
     allMoney () {
-      return this.accountInfo.balance*1 + this.accountInfo.freeze*1
+      return (this.accountInfo.balance*1 + this.accountInfo.freeze*1).toString()
     },
     accountInfo () {
       return this.$store.state.accountInfo;
@@ -127,11 +127,12 @@ export default {
     },
     buwei (numString) {     
       if(numString === undefined||null) {
-          numString
+          return  numString
       }else if(numString.indexOf('.')>-1){
-         numString
+         return  numString
       }else{  
-         numString + '.00'
+        //console.log(typeof numString)
+         return  numString + '.00'
       }
     },
     loginOut () {
@@ -190,12 +191,18 @@ export default {
                                     3.1 二次循环 改变对应id 的 isread属性
                                     3.2 赋值给渲染的 属性   
                             */
-                            res.data.list.forEach(item => {
+                            const newList  = res.data.list.reduce((arr,item) => {
                                 //是否在idList中                                
                                 item.isRead = this.idList.includes(item.id);
-                                
-                            });
-                            this.$store.state.newsList = res.data.list
+                                //考虑置顶
+                                if(item.isTop == 1) {
+                                  arr.unshift(item)
+                                }else{
+                                  arr.push(item)
+                                }
+                                return arr
+                            },[]);
+                            this.$store.state.newsList = newList
                         }
                     }
     

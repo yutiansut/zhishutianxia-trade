@@ -172,7 +172,15 @@ const router = new Router({
     	path:"/matchSet",
     	name:"matchSet",
     	component:load("match/matchSet")
+    },
+    /* discover页面的路由配置 begin */
+    {
+      path:"/discoverSearch",
+    	name:"discoverSearch",
+    	component:load("discover/discover_search")
     }
+    /* discover页面的路由配置 end */
+  
   ]
 })
 export default router

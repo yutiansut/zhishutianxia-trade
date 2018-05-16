@@ -30,7 +30,7 @@
 #help_docs .mint-tab-item .mint-tab-item-label {
     font-size: .28rem
 }
-#my_match .mint-tab-item-label {
+#discover .mint-tab-item-label ,#my_match .mint-tab-item-label {
     font-size: .28rem
 }
 
@@ -54,4 +54,20 @@
 }
 #customer_services .mint-actionsheet-listitem:nth-child(1){
     border: 0
+}
+#discover {
+    .mint-datetime-action {  
+        color: #fff;  
+      }   
+      .mint-swipe-indicators{
+        bottom: 0;
+    }
+      .mint-swipe-indicator{
+          opacity: 0.5;
+          background-color: #fff;
+          
+      }
+      .is-active {
+          opacity: 1;
+      }
 }

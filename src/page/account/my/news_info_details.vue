@@ -67,6 +67,13 @@ import pro from '../../../assets/js/common'
                 })
             }
         },
+        watch: {
+            id (value, oldValue) {
+                if(value !== oldValue){
+                    this.getDetails()
+                }
+            }
+        },
         created () {
             console.log(12)
             this.getDetails() 
