@@ -66,7 +66,8 @@ import pro from '../../../assets/js/common'
                     this.$router.push({
                         path: path,
                         query: {
-                            matchId: this.id
+                            matchId: this.id,
+                            matchTitle: this.title
                         }
                     });
                 } else {
