@@ -295,17 +295,20 @@
 				ul{
 					display: block;
 					padding: 0 0.3rem;
-					width: 20.6rem;
+					width: 14.6rem;
 					li{
 						text-align: center;
 						line-height: 0.88rem;
 						height:0.88rem;
 						span{
 							float: left;
-							width: 2rem;
+							width: 1.2rem;
 							display: block;
 							overflow: hidden;
 							color: $blcakThin;
+							&:nth-child(10){
+								width: 3rem;
+							}
 						}
 					}
 				}
