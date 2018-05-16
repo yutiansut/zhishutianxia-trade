@@ -69,7 +69,7 @@
                 userInfo: {},
                 matchingList: [],
                 matchHistoryList: [],
-                statusName: ['等待报名', '报名中', require('../../../assets/images/match/match_waitplay.png'), require('../../../assets/images/match/match_playready.png'), require('../../../assets/images/match/match_end.png')]
+                statusName: ['等待报名', require('../../../assets/images/match/match_waitplay.png'), require('../../../assets/images/match/match_waitplay.png'), require('../../../assets/images/match/match_playready.png'), require('../../../assets/images/match/match_end.png')]
             }
     
         },
