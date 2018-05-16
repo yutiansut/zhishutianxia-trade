@@ -14,8 +14,8 @@
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
-				   			<div class="rightIcon" v-show="n.join!='-1'"></div>
-				   			<span>{{n.join | changeAction}}</span>
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -44,6 +44,8 @@
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -58,6 +60,8 @@
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
