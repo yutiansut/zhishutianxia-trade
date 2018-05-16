@@ -43,6 +43,7 @@
 				fullHeight:document.documentElement.clientHeight,
 				fullHeight1:document.documentElement.clientHeight,
 				userList: [],
+				num:"",
 			}
 		},
 		computed : {
@@ -121,7 +122,7 @@
 							this.$toast({message: data.message,duration: 2000});
 							this.num = data.data.failNum;
 							if(this.num > 2){
-								this.$refs.codeDialog.isshow = true;
+								this.$refs.codeDialog.ishow = true;
 								this.$refs.codeDialog.path = this.PATH + "/loginAndRegister/getImgCode.jpg" + Math.random()*1000 + "?mobile=" + this.phone;
 								this.str = {
 									loginName : this.phone,

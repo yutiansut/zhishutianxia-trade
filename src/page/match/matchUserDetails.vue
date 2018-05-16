@@ -15,7 +15,7 @@
 				<ul class=" dis_flex1">
 					<li>
 						<span class="span_gray">今权益：</span>
-						<span class="span_black">{{otherData.equities}}</span>
+						<span class="span_black">{{Number(otherData.equities).toFixed(2)}}</span>
 					</li>
 					<li>
 						<span class="span_gray">初始资金：</span>
@@ -25,7 +25,7 @@
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">总收益：</span>
-						<span class="span_red">{{otherData.totalProfit}}</span>
+						<span class="span_red">{{Number(otherData.totalProfit).toFixed(2)}}</span>
 					</li>
 					<li>
 						<span class="span_gray">排名:</span>
@@ -35,7 +35,7 @@
 				<ul class="dis_flex border_bottom">
 					<li>
 						<span class="span_gray">跟投收益：</span>
-						<span class="span_green">{{otherData.followProfit}}</span>
+						<span class="span_green">{{Number(otherData.followProfit).toFixed(2)}}</span>
 					</li>
 				</ul>
 				<ul class="dis_flex border_bottom">
@@ -199,7 +199,7 @@
 				account:this.userId,
 				id:this.matchid 
 			};
-			this.apiUrl = "/ tradeCompetition/rankDetails";
+			this.apiUrl = "/tradeCompetition/rankDetails";
 			this.getOtherUser(this.apiUrl,this.upData,this.headers);
 		},
 		filters:{
@@ -295,17 +295,20 @@
 				ul{
 					display: block;
 					padding: 0 0.3rem;
-					width: 20.6rem;
+					width: 17.6rem;
 					li{
 						text-align: center;
 						line-height: 0.88rem;
 						height:0.88rem;
 						span{
 							float: left;
-							width: 2rem;
+							width: 1.5rem;
 							display: block;
 							overflow: hidden;
 							color: $blcakThin;
+							&:nth-child(10){
+								width: 3rem;
+							}
 						}
 					}
 				}

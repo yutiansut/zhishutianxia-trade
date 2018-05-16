@@ -1,7 +1,7 @@
 <template>
 	<div id="matchRules">
 		<div class="time">
-			比赛时间：{{rulesData.joinBeginTime | changeDate}} 至 {{rulesData.joinEndTime | changeDate}}
+			比赛时间：{{rulesData.beginTime | changeDate}} 至 {{rulesData.endTime | changeDate}}
 		</div>
 		<div class="nar border_bottom">
 			<span>活动奖励</span>
@@ -183,13 +183,11 @@
 		mounted:function(){
 			this.getHeaders();
 			if(this.matchid != ""){
-				console.log("66666")
 				this.getMtchRules(this.matchid);
 			}
 		},
 		watch:{
 			matchid:function(e){
-				console.log(e)
 				this.getHeaders();
 				this.getMtchRules(e);
 			}

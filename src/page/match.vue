@@ -14,6 +14,8 @@
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -42,6 +44,8 @@
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -56,6 +60,8 @@
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
 				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<div class="rightIcon" v-show="n.join=='2'"></div>
+				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -174,6 +180,16 @@
 			},
 			changeTime:function(e){
 				return pro.getDate(new Date(e.replace(/-/g, "/")),'y-m-d');
+			},
+			changeAction:function(e){
+				switch (e){
+					case 0:
+						return "未报名";
+					case 1:
+						return "未参赛";
+					case 2:
+						return "已参赛";
+				}
 			}
 		}
 	}
@@ -217,10 +233,30 @@
 			background-size: 100% 100%;
 		}
 		.img_div{
+			position: relative;
 			img{
 				width: 6.9rem;
 				height: 2.4rem;
 				background-size: 100% 100%;
+			}
+			.rightIcon{
+				position: absolute;
+				top: 0;
+				right: 0;
+				float: right;
+				width: 0;
+			    height: 0;
+			    border-top: 1rem solid  rgba(51, 51, 64, 0.4);
+			    border-left: 1rem solid transparent; 
+			    text-align: right;
+				opacity: 0.4;
+			}
+			span{
+				position: absolute;
+				top: 0.2rem;
+				right: 0;
+				color: $bg;
+				transform: rotate(45deg);
 			}
 		}
 		.time_div{
