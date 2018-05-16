@@ -73,15 +73,17 @@
 		}
 		.back{
 			display: inline-block;
-			width: 0.64rem;
+			width: 2rem;
 			height: 0.64rem;
-			background: url(../assets/images/account/icon_back.png) no-repeat 70% 50%;
+			background: url(../assets/images/account/icon_back.png) no-repeat 15% 50%;
 			background-size: 0.16rem 0.32rem;
 		}
 		.span_color{
 			font-size: $fs28;
 			color: $bg;
 			padding-right: 0.3rem;
+			width: 2rem;
+			text-align: right;
 		}
 	}
 	
