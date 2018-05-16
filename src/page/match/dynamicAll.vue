@@ -2,7 +2,7 @@
 	<div id="dynamicAll">
 		<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
 			<div class="container" v-for="(n,k) in dataList" v-show="dataList != ''">
-				<div class="details" @click="toMatchUser(n.userNo,'other')">
+				<div class="details" @click="toMatchUser(n.userNo,(n.currUserNo != n.userNo ? 'other' : 'mine'))">
 					<div class="user border_bottom">
 						<ul>
 							<li>

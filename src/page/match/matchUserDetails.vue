@@ -199,7 +199,7 @@
 				account:this.userId,
 				id:this.matchid 
 			};
-			this.apiUrl = "/ tradeCompetition/rankDetails";
+			this.apiUrl = "/tradeCompetition/rankDetails";
 			this.getOtherUser(this.apiUrl,this.upData,this.headers);
 		},
 		filters:{

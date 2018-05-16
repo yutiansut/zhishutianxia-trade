@@ -2,7 +2,7 @@
 	<div id="dynamicMine">
 		<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
 			<div class="container" v-for="n in dataList" v-show="dataList != ''">
-				<div class="buyDetails">
+				<div class="buyDetails" @click="toMatchUser(n.userNo,'mine')">
 					<ul>
 						<li>{{n.direction | changeDrection}}：<span>{{tradeName[n.commodityNo]}}</span>{{n.commodityNo}}{{n.contractNo}}</li>
 						<li>价格：<span>{{n.tradePrice}}</span></li>
@@ -52,6 +52,9 @@
 				this.getDynamic(this.id,this.pagesize);
 				this.$refs.loadmore.onTopLoaded();
 			},
+			toMatchUser:function(e,other){
+				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this.id}});
+			},
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
@@ -61,9 +64,6 @@
 				}else{
 					this.headers = ""	
 				}
-			},
-			toMatchUser:function(){
-				this.$router.push({path:"matchUserDetails"});
 			},
 			getDynamic:function(id,pagesize){
 				var data ={
