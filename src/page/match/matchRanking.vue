@@ -3,7 +3,7 @@
 		<div class="myRank">
 			<ul>
 				<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
-				<li><span>总收益</span><i class="change change_1"></i><span>跟投人数</span><i class="change"></i></li>
+				<li><span @click="profitRateFollow('profitrate')">总收益</span><i class="change change_1"></i><span @click="profitRateFollow('follow')">跟投人数</span><i class="change"></i></li>
 			</ul>
 		</div>
 		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
@@ -36,22 +36,29 @@
 				user:[],//用户信息
 				followedUser:[],//被跟投信息
 				rankingList:[],//排行信息
-				headers:""
+				headers:"",
+				//收益跟投
+				sidx:"",
+				//排序
+				sort:'',
 			}
 		},
 		methods:{
+			profitRateFollow:function(type){
+				this.sidx = type == 'profitrate' ? 0 : 1 ;
+				this.getRanking(this.matchid,this.sidx,this.sort);
+			},
 			mobileHidden (phoneNumber) {
 		        return pro.mobileHidden(phoneNumber);
 		    },
 			toMatchUser:function(e,type){
 				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type,matchid:this.matchid}});
-
 			},
-			getRanking:function(id){
+			getRanking:function(id,sidx,sort){
 				var data = { 
 					id:id,
-					sidx:0,
-					sort:0,
+					sidx:sidx,
+					sort:sort,
 					pageNo:0,
 					pageSize:10
 				};
@@ -84,8 +91,10 @@
 			}
 		},
 		mounted:function(){
+			this.sort = 0;
+			this.sidx = 0;
 			this.getHeaders();
-			this.getRanking(this.matchid);
+			this.getRanking(this.matchid,this.sidx,this.sort);
 		},
 		filters:{
 			changNo:function(e){
