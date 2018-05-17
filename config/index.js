@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
     	//跨域请求配置
 			'/api': {
-				target: 'test.platform-trade.dktai.cn',
+				target: 'http://test.platform.dktai.cn',
 				changeOrigin: true,
 				pathRewrite: {
 			      '^/api': ''
