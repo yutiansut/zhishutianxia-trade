@@ -202,6 +202,7 @@
 		width: $w;
 	}
 	#container{
+		background-color: $bg;
 		margin-top: 0.96rem;
 		width: 100%;
 		.mint-navbar .mint-tab-item.is-selected{

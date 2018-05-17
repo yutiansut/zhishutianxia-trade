@@ -34,6 +34,7 @@
 			<span>提醒：</span>
 			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
+		<div class="h_98"></div>
 		<div class="btn1 bt" v-if="rulesData.statusName == 5">
 			<button>比赛已结束</button>
 		</div>
@@ -214,6 +215,7 @@
 	@import "../../assets/css/common.scss";
 	#matchRules{
 		width: $w;
+		background-color: $bg;
 	}
 	.time{
 		width: 100%;
