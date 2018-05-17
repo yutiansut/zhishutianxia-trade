@@ -307,7 +307,7 @@ export default new Vuex.Store({
 				return '/api'
 			} else if(state.setting == 'build'){
 				if(state.environment == 'test'){
-					return state.account.currentUrlHead + '//test.platform-quote.dktai.cn';
+					return state.account.currentUrlHead + '//test.platform-trade.dktai.cn';
 				}else{
 					return state.account.currentUrlHead + '//139.196.232.17';
 				}

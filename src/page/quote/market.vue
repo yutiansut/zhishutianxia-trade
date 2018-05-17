@@ -225,7 +225,7 @@
 <style scoped lang="scss">
 	@import "../../assets/css/common.scss";
 	nav{
-		color:$fontBlueTitle;
+		color:#616166;
 		position: fixed;
 		top: 0.96rem;
 		left: 0;
