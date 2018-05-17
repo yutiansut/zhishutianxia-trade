@@ -1,6 +1,5 @@
 <template>
 	<div id="index">
-		<TabBar></TabBar>
 		<header>
 			<div class="tab">
 				<template v-for="(v, index) in tabList">
@@ -80,12 +79,8 @@
 </template>
 
 <script>
-	import TabBar from "../../components/TabBar.vue"
 	export default {
 		name: 'index',
-		components: {
-			TabBar
-		},
 		data(){
 			return{
 				selectNum: 1,

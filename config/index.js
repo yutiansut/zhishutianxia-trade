@@ -13,14 +13,14 @@ module.exports = {
     proxyTable: {
     	//跨域请求配置
 			'/api': {
-				target: 'http://test.api.zhishutianxia.com',
+				target: 'http://test.platform-quote.dktai.cn',
 				changeOrigin: true,
 				pathRewrite: {
 			      '^/api': ''
 			    }
 			},
 			'/nat': {
-				target: 'http://192.168.0.153:8080/qiw-platform',
+				target: 'http://192.168.0.132:8080/qiw-platform',
 				changeOrigin: true,
 				pathRewrite: {
 			      '^/nat': ''

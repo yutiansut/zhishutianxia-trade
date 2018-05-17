@@ -27,12 +27,10 @@
 			<p><span>登录账号：</span>使用手机注册后的平台账号，用户登录APP和网站，进行充值、查看资金明细等。</p>
 			<selectBox ref="selectBox" :obj="obj" :type="type"></selectBox>
 		</div>
-		<TabBar :selected="selected" :tabs="tabs" ></TabBar>
 	</div>
 </template>
 
 <script>
-	import TabBar from "../../components/TabBar.vue"
 	import back from "../../components/back.vue"
 	import btn from "../../components/btn.vue"
 	import selectBox from "../../components/selectBox.vue"
@@ -41,7 +39,7 @@
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'index',
-		components: {TabBar, back, btn, selectBox,},
+		components: { back, btn, selectBox},
 		data(){
 			return{
 				currentNum: 0,
@@ -49,9 +47,6 @@
 				user: '',
 				pwd: '',
 				type: 0,
-				tabs:[require("../../assets/images/quote/quotation_02.png"),require("../../assets/images/quote/mockTrading_01.png"),
-				require("../../assets/images/quote/information_02.png"),require("../../assets/images/quote/mine_02.png")],
-				selected: "模拟交易",
 				obj: '',
 			}
 		},

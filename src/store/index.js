@@ -303,11 +303,11 @@ export default new Vuex.Store({
 	getters: {
 		PATH: function(state) {
 			if(state.setting == 'dev') {
-//				return state.account.currentUrlHead + '//139.196.232.17';
+//				return 'http://192.168.0.132:8080/qiw-platform';
 				return '/api'
 			} else if(state.setting == 'build'){
 				if(state.environment == 'test'){
-					return state.account.currentUrlHead + '//test.api.zhishutianxia.com';
+					return state.account.currentUrlHead + '//test.platform-quote.dktai.cn';
 				}else{
 					return state.account.currentUrlHead + '//139.196.232.17';
 				}

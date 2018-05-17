@@ -12,10 +12,6 @@
 					<i class="icon icon_two"></i>
 					<span>退出交易账号</span>
 				</li>
-				<li @touchstart="touchstartEvent" @touchend="touchendEvent" @click.stop="toTradeApply">
-					<i class="icon icon_three"></i>
-					<span>融资交易申请</span>
-				</li>
 			</ul>
 		</div>
 	</div>
@@ -97,12 +93,6 @@
 				$(".cont").css({'right': -6.2 + 'rem'});
 				this.$router.push({path: '/tradeLogin'});
 				sessionStorage.isSwitchAccount = true;
-			},
-			toTradeApply: function(){
-				this.$router.push({path: '/tradeApply'});
-				this.show = false;
-				$(".bg").css({'opacity': 0, 'z-index': -1});
-				$(".cont").css({'right': -6.2 + 'rem'});
 			}
 		},
 		mounted: function(){
@@ -166,10 +156,6 @@
 					background: url(../../assets/images/quote/num_02.png) no-repeat center center;
 					background-size: 100% 100%;
 				}
-				&.icon_three{
-					background: url(../../assets/images/quote/num_03.png) no-repeat center center;
-					background-size: 100% 100%;
-				}
 			}
 			&.current{
 				background: $lightBlue;
@@ -183,10 +169,6 @@
 					}
 					&.icon_two{
 						background: url(../../assets/images/quote/num_22.png) no-repeat center center;
-						background-size: 100% 100%;
-					}
-					&.icon_three{
-						background: url(../../assets/images/quote/num_33.png) no-repeat center center;
 						background-size: 100% 100%;
 					}
 				}

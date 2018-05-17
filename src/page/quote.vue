@@ -258,9 +258,9 @@
 		top: 0;
 		left: 0;
 		width: $w;
-		height: 1rem;
+		height: 0.96rem;
 		overflow: hidden;
-		background: $bg1;
+		background: $headColr;
 		border-bottom: 0.01rem solid $black;
 		margin: auto;
 		.tab{
@@ -274,18 +274,18 @@
 				height: 0.6rem;
 				line-height: 0.6rem;
 				text-align: center;
-				background: $lightBlue;
 				font-size: $fs28;
-				color:$fontBlueTitle;
+				color:$grayDeep;
 				&.current{
-					background: $black;
 					color: $white;
+					border-bottom: 0.03rem solid $white;
+					padding-bottom: 0.2rem;
 				}
 			}
 		}
 		.icon_search{
 			width: 0.6rem;
-			height: 1rem;
+			height: 0.96rem;
 			background: url(../assets/images/quote/search.png) no-repeat right 0.3rem;
 			background-size: 0.4rem 0.4rem;
 			position: absolute;
@@ -294,7 +294,7 @@
 		}
 		.icon_set{
 			width: 0.6rem;
-			height: 1rem;
+			height: 0.96rem;
 			background: url(../assets/images/quote/set.png) no-repeat left 0.3rem;
 			background-size: 0.4rem 0.4rem;
 			position: absolute;

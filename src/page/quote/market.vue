@@ -227,12 +227,12 @@
 	nav{
 		color:$fontBlueTitle;
 		position: fixed;
-		top: 1.01rem;
+		top: 0.96rem;
 		left: 0;
 		width: $w;
 		height: 0.8rem;
-		background: $bg1;
-		border-bottom: 0.01rem solid $black;
+		background: $bg;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		.nav_box{
 			width: 7.51rem;
@@ -243,31 +243,32 @@
 			line-height: 0.8rem;
 			font-size: $fs28;
 			margin-left: 0.3rem;
+			
 			&:first-child{
 				margin: 0;
 			}
 			&.current{
-				color: $blue;
-				border-bottom: 0.05rem solid $blue;
+				color: $redDeep;
+				border-bottom: 0.05rem solid $redDeep;
 			}
 		}
 	}
 	.main{
+		color:#616166;
 		width: 7.5rem;
 		overflow: hidden;
 		margin-top: 1.82rem;
-		color:$fontBlueTitle;
 	}
 	.recommend{
 		width: 7.5rem;
 		height: 1.6rem;
 		overflow: hidden;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		.col{
 			float: left;
 			width: 2.5rem;
 			height: 1.6rem;
-			border-right: 0.01rem solid $black;
+			border-right: 0.01rem solid $bgDeep;
 			span{
 				display: inline-block;
 				width: 2.5rem;
@@ -314,7 +315,7 @@
 			height: 0.96rem;
 			line-height: 0.96rem;
 			overflow: hidden;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			&:first-child{
 				height: 0.64rem;
