@@ -5,7 +5,8 @@
 				<span class="icon_account"></span>
 			</mt-button>
 			<mt-button slot="right" @click="goto('/discoverSearch')">
-				<span class="icon_search"></span>
+				<span class="icon_search" v-show="selected==1" @click="toImformationSearch"></span>
+		    	<span class="icon_calendar" v-show="selected==2" @click="toChooseDay('picker1')"></span>
 			</mt-button>
 		</mt-header>
 		<!-- 选项卡 -->
@@ -53,7 +54,8 @@
 		data() {
 			return {
 				tabSelected: 'discover',
-				selected: "1"
+				selected: "1",
+				navCheck: 0
 			}
 		},
 		methods: {
@@ -68,6 +70,12 @@
 					}})
 				}
 				
+			},
+			toImformationSearch () {
+
+			},
+			toChooseDay () {
+
 			}
 		}
 		
@@ -78,6 +86,7 @@
 	@import "../assets/css/common.scss";
 	#discover {
 		width: $w;
+		background-color: #fff;
 		.mint-navbar .mint-tab-item.is-selected {
 			margin: 0;
 			border-bottom: 0.03rem solid $redDeep;
@@ -94,7 +103,8 @@
 	}
 	
 	.icon_account,
-	.icon_search {
+	.icon_search,
+	.icon_calendar {
 		display: inline-block;
 		width: 0.32rem;
 		height: 0.32rem;
@@ -106,9 +116,14 @@
 		background: url("../assets/images/account/search_icon_white.png") center no-repeat;
 		background-size: cover;
 	}
+	.icon_calendar {
+		background: url("../assets/images/discover/choose_day.png") center no-repeat;
+		background-size: cover;
+	}
 	.tab_wrap{
 		margin-top: 0.96rem;
-        width: 7.5rem;
+		width: 7.5rem;
+		padding-bottom: 0.66rem; 
 	}
 	
 	

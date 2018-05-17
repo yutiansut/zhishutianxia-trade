@@ -1,35 +1,11 @@
 <template>
 	<div class="calendar_wrap">
-		<h2>2018－05</h2>
+		<h2>{{showTime}}</h2>
 		<div class="calendar_date">
 			<ul class="date_list">
-				<li>
-					<p class="date">16</p>
-					<p class="day">周一</p>
-				</li>
-				<li class="selected">
-					<p class="date">16</p>
-					<p class="day">周二</p>
-				</li>
-				<li>
-					<p class="date">16</p>
-					<p class="day">周三</p>
-				</li>
-				<li>
-					<p class="date">16</p>
-					<p class="day">周四</p>
-				</li>
-				<li>
-					<p class="date">16</p>
-					<p class="day">周五</p>
-				</li>
-				<li>
-					<p class="date">16</p>
-					<p class="day">周六</p>
-				</li>
-				<li>
-					<p class="date">16</p>
-					<p class="day">周日</p>
+				<li v-for="item in weekDayList" :class="{'selected':item.time == showTime}" @click="changeDate(item)">
+					<p class="date">{{item.day}}</p>
+					<p class="day">{{item.weekday}}</p>
 				</li>
 			</ul>
 		</div>
@@ -90,7 +66,11 @@
 		data() {
 			return {
 				tabSelected: 'discover',
-				selected: "1"
+				selected: "1",
+				today: '',
+				weekday: [],
+				weekDayList: [],
+				showTime: ''
 			}
 		},
 		methods: {
@@ -110,7 +90,67 @@
 					})
 				}
 	
+			},
+			getWeekDay (time) {
+				const weekList = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+				return weekList[time]
+			},
+			mouthList (setTime= null) {
+				/* 
+					1. 取到当天时间的 年, 月, 日
+					2. 判断本年,本月的天数
+					3. 设置本月每天的星期数
+					4. 渲染到页面
+				*/
+				let today;
+				if (setTime) {
+					today = new Date(setTime);
+				}else{
+					today = new Date();
+				}
+				
+				let year = today.getFullYear();
+				let mouth = today.getMonth();
+				let date = today.getDate();
+				let weekday = today.getDay();
+				let mouthDayList = [];
+				const mouthDayLength = [31,28,31,30,31,30,31,31,30,31,30,31]
+				//判断当月的天数
+				//处理闰年二月
+				if (year%4 === 0 ) {
+					mouthDayLength[1] = 29
+				}
+				let mouthDay = mouthDayLength[mouth];
+				//当月第一天 
+				for (let index = 1; index <= mouthDay; index++) {
+					//循环遍历 得到每天的星期数   星期数 = |(天数差%7 + 当天星期数)%7|
+					let indexDayWeekday = ((index - date)%7 + weekday)%7;
+					//let isSelected = index===date;
+					let indexDay = {
+						time: year + '-' + (mouth + 1) + '-' + index,
+						day: index,
+						weekday: this.getWeekDay (Math.abs(indexDayWeekday)),
+						//selected: isSelected
+					}
+					mouthDayList.push(indexDay)
+					 	
+				}
+				this.showTime = mouthDayList[date - 1].time
+				return mouthDayList
+
+
+			},
+			changeDate (item) {
+				if(item.time == this.showTime) return;
+				//console.log(item.time)
+				this.showTime = item.time
 			}
+
+		},
+		created () {
+			let today = new Date();
+			this.today = today;
+			this.weekDayList = this.mouthList('2016-2-1')
 		}
 	
 	}
@@ -122,8 +162,13 @@
 		h2{
 			@include font($fs24,0.64rem,$graySimple);
 		}
+		.calendar_date{
+			overflow: scroll;
+			 -webkit-overflow-scrolling: touch;
+		}
 		.date_list{
 			@include flex(space-between);
+			width: 500%;
 			background-color: $bgGray;
 			padding: 0.3rem 0.2rem;
 			li{

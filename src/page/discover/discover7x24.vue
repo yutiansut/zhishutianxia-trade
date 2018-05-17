@@ -1,53 +1,22 @@
 <template>
 	
 		<div class="wrap">
-			<h2>2018－05－01 星期五</h2>
-			<ul class="list">
+			<h2>{{startTime}} {{getWeekDay(today)}}</h2>
+			<ul class="discover_list">
 				<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
 						<template >
-							<li class="list" v-for="k in newsInfo">
+							<li class="list" v-for="k in newsInfo" :key="k.liveWallstreetnId">
 								<p class="time_text"><span class="time">{{k.createdAt | changTime }}</span></p>
 								<div class="box">
-									<p>{{k.liveTitle}}</p>
-									<div class="icon_box">
+									<p :class="{textHeight:k.zhankai}" :style="{color:k.importance!=1?'#ff5533':''}">{{k.liveTitle}}</p>
+									<div class="icon_box" v-if="k.liveTitle.length>70" @click="showAll1(k)">
 										<i class="display_icon"></i>	
 									</div>
-									
+									<div class="hr30"></div>
 								</div>
-								<!-- <p :class="{textHeight:k.zhankai}" :style="{color:k.importance!=1?'#ff5533':''}">{{k.liveTitle}}</p>
-								<p v-if="k.liveTitle.length>120" @click="showAll1(k)"><span>{{k.zhankai?'展开':'收起'}}</span></p> -->
 							</li>
 						</template>
 				</mt-loadmore> 
-
-				<li class="item">
-					<p class="time_text"><span class="time">16:44</span></p>
-					<div class="box">
-						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。</p>
-						<i class="display_icon"></i>
-					</div>
-				</li>
-				<li class="item">
-					<p class="time_text"><span class="time">16:44</span></p>
-					<div class="box">
-						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-						<i class="display_icon"></i>
-					</div>
-				</li>
-				<li class="item">
-					<p class="time_text"><span class="time">16:44</span></p>
-					<div class="box">
-						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-						<i class="display_icon"></i>
-					</div>
-				</li>
-				<li class="item">
-					<p class="time_text"><span class="time">16:44</span></p>
-					<div class="box">
-						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-						<i class="display_icon"></i>
-					</div>
-				</li>
 			</ul>
 		</div>
 </template>
@@ -62,52 +31,83 @@
 				selected: "1",
 				startTime: '',
 				endTime: '',
-				newsInfo: []
+				pageNum:0,
+				newsInfo: [],
+				zhankai: false,
+				today: null,
 			}
 		},
+		computed: {
+			
+		},
 		methods: {
-			goto (...pathObj) {
-				if (pathObj.length == 1) {
-					this.$router.push({path:pathObj[0]})
-				}else if (pathObj.length == 2) {
-					this.$router.push({path:pathObj[0] ,query: {
-						id:1,
-						title:'比特币再现巨大跌幅，自高位跌去七成 这次还能爬起来吗？',
-						time: '2018-02-10'
-					}})
-				}
-				
+			getWeekDay (time) {
+				const weekList = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+				return weekList[time.getDay()]
 			},
 			getNewsInfo:function(pageNo){
 		    	var data = {
 		    		pageSize:20,
 		    		pageNo:pageNo,
-		    		// minTime:this.startTime,
-					// maxTime:this.endTime,
-					minTime: '2018-5-17',
-		    		maxTime: '2018-5-18',
+		    		minTime:this.startTime,
+					maxTime:this.endTime,
 		    		keyword:""
 		    	}
 		    	this.$pro.fetch("post","/news/get7_24Live",data,"").then((res)=>{
 					console.log(res)
 		    		if(res.code == 1 && res.success == true){
 						res.data.forEach((k) => {
-							if(k.liveTitle.length>120){
+							if(k.liveTitle.length>70){
+								console.log(k.liveTitle.length)
 								k.zhankai = true
 							}							
 						})
-		    			this.newsInfo = res.data;
+						let newList = res.data;
+						if (this.newsInfo.length == 0) {
+							this.newsInfo = res.data;
+						}else{
+							this.newsInfo.concat(newList)
+						}
+		    			
 		    		}
-		    	}).catch((err)=>{
-//		    		console.log("err==="+err)
-					// this.err(err)
-		    	})
+		    	}).catch((err) => {
+                    var data = err.data;
+                    console.log(err)
+                    if (data === undefined) {
+                        this.$toast({
+                            message: "网络不给力，请稍后再试",
+                            duration: 1000
+                        });
+                    } else {
+                        if (data.code == -9999) {
+                            this.$toast({
+                                message: "认证失败，请重新登录",
+                                duration: 1000
+                            });
+                            this.$router.push({
+                                path: "/login"
+                            });
+                        } else {
+                            this.$toast({
+                                message: data.message,
+                                duration: 1000
+                            });
+                        }
+                    }
+                })
+			},
+			showAll1 (item) {
+				item.zhankai = !item.zhankai
 			},
 			loadBottom () {
-
+				this.pageNum = 0;
+				this.getNewsInfo(0);
+				this.$refs.loadmore.onTopLoaded();
 			},
 			loadTop () {
-
+				this.pageNum++
+				this.getNewsInfo(this.pageNum)
+				this.$refs.loadmore.onBottomLoaded();
 			}
 		},
 		filters:{
@@ -118,9 +118,10 @@
 		},
 		created () {
 			let today = new Date()
-			let tomorrow =  today.setDate(today.getDate()+1)
-			this.minTime = this.$pro.getDate(Date.parse(today),"y-m-d")
-			this.maxTime = this.$pro.getDate(Date.parse(tomorrow),"y-m-d")
+			let tomorrow = (Date.parse(new Date())/1000+24*60*60)*1000;
+			this.today = today;
+			this.startTime = this.$pro.getDate(Date.parse(today),"y-m-d")
+			this.endTime = this.$pro.getDate(tomorrow,"y-m-d")
 			this.getNewsInfo(0)
 		}
 		
@@ -135,8 +136,11 @@
 			background-color: $bgDeep;
 			border-bottom: 1px solid $bgDeep;
 		}	
+		.discover_list{
+			padding: 0.25rem 0.3rem
+		}
 		.list{
-			padding: 0.25rem 0.3rem;
+			padding: 0 0 0 0.25rem;
 			.time_text{
 				position: relative;
 				&::before {
@@ -161,17 +165,32 @@
 				border-radius: 0.2rem;
 			}
 			.box{
+				position: relative;
 				border-left: 0.04rem dashed #dadae6;
-				padding: 0.3rem 0.2rem;
+				padding: 0.3rem 0  0.3rem 0.2rem;
 				margin: 0 0.05rem;
+				.textHeight{
+					height: 1.4rem;
+					overflow: hidden;
+					
+				}
 				p{
 					@include font($fs30,0.46rem,$blcakThin,left);
-					padding-bottom: 0.8rem; 
-					border-bottom: 1px solid $bgDeep;
+				}
+				.hr30{
+					height: 1px;
+					margin-top: 0.3rem;
+					background-color: $bgDeep
+				
+
+
 				}
 			}
 			.icon_box{
-				position: absolute;
+				position: relative;
+				text-align: right;
+				padding-top: 0.1rem;
+
 			}
 			.display_icon{
 				display: inline-block;
