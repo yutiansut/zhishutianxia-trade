@@ -38,6 +38,139 @@ const router = new Router({
       name: 'match',
       component: load('match')
     },
+    //一下是行情交易
+    {
+      path: '/stockFutures',
+      name: 'stockFutures',
+      component: load('quote/stockFutures')
+    },
+     {
+      path: '/optionalList',
+      name: 'optionalList',
+      component: load('quote/optionalList')
+    },
+     {
+      path: '/optionalBox',
+      name: 'optionalBox',
+      component: load('quote/optionalBox')
+    },
+     {
+      path: '/noLogin',
+      name: 'noLogin',
+      component: load('quote/noLogin')
+    },
+     {
+      path: '/optionalManage',
+      name: 'optionalManage',
+      component: load('quote/optionalManage')
+    },
+     {
+      path: '/search',
+      name: 'search',
+      component: load('quote/search')
+    },
+     {
+      path: '/quoteDetails',
+      name: 'quoteDetails',
+      component: load('quote/quoteDetails')
+    },
+		 {
+	      path: '/remind',
+	      name: 'remind',
+	      component: load('quote/remind')
+	    },
+		{
+	      path: '/cl',
+	      name: 'cl',
+	      component: load('role/cl')
+	    },
+	    {
+	      path: '/cn',
+	      name: 'cn',
+	      component: load('role/cn')
+	    },
+	    {
+	      path: '/es',
+	      name: 'es',
+	      component: load('role/es')
+	    },
+	    {
+	      path: '/fdax',
+	      name: 'fdax',
+	      component: load('role/fdax')
+	    },
+	    {
+	      path: '/fdxm',
+	      name: 'fdxm',
+	      component: load('role/fdxm')
+	    },
+	    {
+	      path: '/gc',
+	      name: 'gc',
+	      component: load('role/gc')
+	    },
+	    {
+	      path: '/hg',
+	      name: 'hg',
+	      component: load('role/hg')
+	    },
+	    {
+	      path: '/hhi',
+	      name: 'hhi',
+	      component: load('role/hhi')
+	    },
+	    {
+	      path: '/hsi',
+	      name: 'hsi',
+	      component: load('role/hsi')
+	    },
+	    {
+	      path: '/mch',
+	      name: 'mch',
+	      component: load('role/mch')
+	    },
+	    {
+	      path: '/mhi',
+	      name: 'mhi',
+	      component: load('role/mhi')
+	    },
+	    {
+	      path: '/ng',
+	      name: 'ng',
+	      component: load('role/ng')
+	    },
+	    {
+	      path: '/nk',
+	      name: 'nk',
+	      component: load('role/nk')
+	    },
+	     {
+	      path: '/nq',
+	      name: 'nq',
+	      component: load('role/nq')
+	    },
+	    {
+	      path: '/qm',
+	      name: 'qm',
+	      component: load('role/qm')
+	    },
+	     {
+	      path: '/si',
+	      name: 'si',
+	      component: load('role/si')
+	    },
+	    {
+	      path: '/ym',
+	      name: 'ym',
+	      component: load('role/ym')
+	    },
+	    {
+	      path: '/tradeLogin',
+	      name: 'tradeLogin',
+	      component: load('trade/tradeLogin')
+	    },
+    
+    //以上是行情交易
     /* my页面的路由配置 begin */
     {
       path: '/my',

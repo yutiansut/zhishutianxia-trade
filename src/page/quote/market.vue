@@ -225,6 +225,7 @@
 <style scoped lang="scss">
 	@import "../../assets/css/common.scss";
 	nav{
+		color:$fontBlueTitle;
 		position: fixed;
 		top: 1.01rem;
 		left: 0;
@@ -255,6 +256,7 @@
 		width: 7.5rem;
 		overflow: hidden;
 		margin-top: 1.82rem;
+		color:$fontBlueTitle;
 	}
 	.recommend{
 		width: 7.5rem;

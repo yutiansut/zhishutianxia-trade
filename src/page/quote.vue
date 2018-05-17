@@ -276,6 +276,7 @@
 				text-align: center;
 				background: $lightBlue;
 				font-size: $fs28;
+				color:$fontBlueTitle;
 				&.current{
 					background: $black;
 					color: $white;
