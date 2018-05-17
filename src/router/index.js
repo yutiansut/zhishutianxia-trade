@@ -31,7 +31,7 @@ const router = new Router({
     {
       path: '/discover',
       name: 'discover',
-     component: load('discover')
+      component: load('discover'),
     },
     {
       path: '/match',
@@ -178,7 +178,12 @@ const router = new Router({
       path:"/discoverSearch",
     	name:"discoverSearch",
     	component:load("discover/discover_search")
-    }
+    },
+    {
+      path:"/importantDetails",
+    	name:"importantDetails",
+    	component:load("discover/importantDetails")
+    },
     /* discover页面的路由配置 end */
   
   ]

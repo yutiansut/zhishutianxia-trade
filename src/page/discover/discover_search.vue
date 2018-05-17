@@ -7,6 +7,20 @@
 			<input id="keyword" placeholder="搜索" type="search" v-model="searchValue">
 			<span class="close">取消</span>
 		</div>
+		<div class="hot_search_wrap">
+			<h2>热门搜索</h2>
+			<ul>
+				<li>黄金</li>
+				<li>布伦特原油</li>
+				<li>美国原油</li>
+				<li>美元</li>
+				<li>纳斯达克</li>
+				<li>上证指数</li>
+				<li>黄金</li>
+				<li>黄金</li>
+				<li>上证指数</li>
+			</ul>
+		</div>
 		<div class="">
 			<div class="title_box">7x24</div>
 			<ul class="list">
@@ -94,11 +108,28 @@
 			line-height: 0.5rem;
 		}
 	}
+	.hot_search_wrap{
+		h2{
+			@include font($fs24,0.8rem,$grayMiddle,left);
+			background-color: $bgGray;
+			padding: 0 0.3rem;
+		}	
+		ul{
+			@include flex(space-between);
+			flex-wrap: wrap;
+			li{
+				width: 33.3%;
+				@include font($fs24,0.8rem,$grayMiddle);
+			}
+		}
+
+	}
 	.title_box{
 		@include font($fs24,0.8rem,$grayMiddle,left);
 		background-color: $bgGray;
 		padding: 0 0.3rem;
 	}
+	
 	.list {
 		padding: 0.25rem 0.3rem;
 		.time_text {
