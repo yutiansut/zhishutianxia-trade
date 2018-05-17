@@ -8,36 +8,37 @@
 			<span class="close">取消</span>
 		</div>
 		<div class="">
+			<div class="title_box">7x24</div>
 			<ul class="list">
-							<li class="item">
-								<p class="time_text"><span class="time">16:44</span></p>
-								<div class="box">
-									<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。</p>
-									<i class="display_icon"></i>
-								</div>
-							</li>
-							<li class="item">
-								<p class="time_text"><span class="time">16:44</span></p>
-								<div class="box">
-									<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-									<i class="display_icon"></i>
-								</div>
-							</li>
-							<li class="item">
-								<p class="time_text"><span class="time">16:44</span></p>
-								<div class="box">
-									<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-									<i class="display_icon"></i>
-								</div>
-							</li>
-							<li class="item">
-								<p class="time_text"><span class="time">16:44</span></p>
-								<div class="box">
-									<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
-									<i class="display_icon"></i>
-								</div>
-							</li>
-						</ul>
+				<li class="item">
+					<p class="time_text"><span class="time">16:44</span></p>
+					<div class="box">
+						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。</p>
+						<i class="display_icon"></i>
+					</div>
+				</li>
+				<li class="item">
+					<p class="time_text"><span class="time">16:44</span></p>
+					<div class="box">
+						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
+						<i class="display_icon"></i>
+					</div>
+				</li>
+				<li class="item">
+					<p class="time_text"><span class="time">16:44</span></p>
+					<div class="box">
+						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
+						<i class="display_icon"></i>
+					</div>
+				</li>
+				<li class="item">
+					<p class="time_text"><span class="time">16:44</span></p>
+					<div class="box">
+						<p>GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息。GA统计代码随后将这些访客信息存储到Cookie中，Cookie是一段短小的文本，存放于本地，与访问的网站相关联，它被用来判断一个用户是初次访问还是多次访问，页面的推荐来源和随后的页面浏览信息</p>
+						<i class="display_icon"></i>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -61,13 +62,12 @@
 </script>
 
 <style lang="scss" scoped>
-		@import "../../assets/css/common.scss";
+	@import "../../assets/css/common.scss";
 	.search-wrap {
 		position: relative;
 		width: 7.5rem;
 		padding-top: 0.96rem;
 		text-align: center;
-		
 		input {
 			width: 6.9rem;
 			height: 0.64rem;
@@ -76,7 +76,7 @@
 			text-indent: 0.66rem;
 			vertical-align: middle;
 			border: $bgDeep 1px solid;
-			color: #fff;
+			color: #000;
 			background: url('../../assets/images/account/search_icon.png') 0.3rem center no-repeat;
 			background-size: 0.26rem 0.26rem;
 		}
@@ -92,44 +92,52 @@
 			height: 0.5rem;
 			color: $grayDeep;
 			line-height: 0.5rem;
-			
-			
 		}
-	}	
-	.list{
-			padding: 0.25rem 0.3rem;
-			.time_text{
-				position: relative;
-				&::before {
-					position: absolute;
-					left: 0;
-					top: 50%;
-					transform: translateY(-50%);
-					content: '';
-					width: 0.16rem;
-					height: 0.16rem;
-					background-color: $blueBall;
-					border-radius: 50%;
-				}
-			}
-			.time{
-				display: inline-block;
-				width: 1rem;
-				height: 0.4rem;
-				margin-left: 0.3rem;
-				@include font($fs24,0.4rem,$graySimple);
-				background-color: $bgGray;
-				border-radius: 0.2rem;
-			}
-			.box{
-				border-left: 0.04rem dashed #dadae6;
-				padding: 0.3rem 0.2rem;
-				margin: 0 0.05rem;
-				p{
-					@include font($fs30,0.46rem,$blcakThin,left);
-					padding-bottom: 0.8rem; 
-					border-bottom: 1px solid $bgDeep;
-				}
+	}
+	.title_box{
+		@include font($fs24,0.8rem,$grayMiddle,left);
+		background-color: $bgGray;
+		padding: 0 0.3rem;
+	}
+	.list {
+		padding: 0.25rem 0.3rem;
+		.time_text {
+			position: relative;
+			&::before {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				content: '';
+				width: 0.16rem;
+				height: 0.16rem;
+				background-color: $blueBall;
+				border-radius: 50%;
 			}
 		}
+		.time {
+			display: inline-block;
+			width: 1rem;
+			height: 0.4rem;
+			margin-left: 0.3rem;
+			@include font($fs24,
+			0.4rem,
+			$graySimple);
+			background-color: $bgGray;
+			border-radius: 0.2rem;
+		}
+		.box {
+			border-left: 0.04rem dashed #dadae6;
+			padding: 0.3rem 0.2rem;
+			margin: 0 0.05rem;
+			p {
+				@include font($fs30,
+				0.46rem,
+				$blcakThin,
+				left);
+				padding-bottom: 0.8rem;
+				border-bottom: 1px solid $bgDeep;
+			}
+		}
+	}
 </style>
