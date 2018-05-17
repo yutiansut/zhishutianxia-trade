@@ -29,7 +29,17 @@
 					<focus-news></focus-news>
 				</mt-tab-container-item>
 			</mt-tab-container>
-	
+			<mt-datetime-picker
+				ref="picker1"
+				type="date"
+				v-model="value1"
+				year-format="{value} 年"
+				month-format="{value} 月"
+				date-format="{value} 日"
+				:startDate="startDate"
+				:endDate="endDate"
+				@confirm="handleChange">
+			</mt-datetime-picker>
 	
 	
 		</div>
@@ -55,7 +65,11 @@
 			return {
 				tabSelected: 'discover',
 				selected: "1",
-				navCheck: 0
+				navCheck: 0,
+				value: null,
+		      	value1: null,
+		      	startDate: new Date('2014'),
+		      	endDate: new Date('2020-12-31'),
 			}
 		},
 		methods: {
@@ -74,9 +88,9 @@
 			toImformationSearch () {
 
 			},
-			toChooseDay () {
-
-			}
+			toChooseDay (picker){
+				this.$refs[picker].open();
+			},
 		}
 		
 	}
