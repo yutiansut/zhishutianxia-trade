@@ -5,7 +5,7 @@
 			<h1>{{title}}</h1>
 			<i class="online" @click="toRight" v-if="type1 == '1'"></i>
 			<span class="span_color" v-else-if="type1 == '0' " @click="toRight()">我的跟投者</span>
-			<i v-else-if="type1 == '2' "></i>
+			<i v-else-if="type1 == '2' " class="iconRight"></i>
 		</div>
 	</div>
 </template>
@@ -84,6 +84,9 @@
 			padding-right: 0.3rem;
 			width: 2rem;
 			text-align: right;
+		}
+		.iconRight{
+			width: 2rem;
 		}
 	}
 	

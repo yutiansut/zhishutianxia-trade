@@ -220,6 +220,7 @@
 	@import "../../assets/css/common.scss";
 	#matchUserDetails{
 		width: $w;
+		background-color: $bg;
 	}
 	#container{
 		margin-top: 0.96rem;

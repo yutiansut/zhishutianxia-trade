@@ -77,8 +77,10 @@
 	@import "../../assets/css/common.scss";
 	#topNars{
 		width: $w;
+		background-color: $bg;
 	}
 	#container{
+		background-color: $bg;
 		margin-top: 0.96rem;
 		width: 100%;
 		display: flex;
