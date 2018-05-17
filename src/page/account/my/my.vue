@@ -98,7 +98,13 @@ export default {
       return document.documentElement.clientHeight + "px";
     },
     allMoney () {
-      return (this.accountInfo.balance*1 + this.accountInfo.freeze*1).toString()
+      if(this.accountInfo.balance &&this.accountInfo.freeze) {
+       return (this.accountInfo.balance*1 + this.accountInfo.freeze*1).toString();
+      }else{
+        return 
+      }
+      
+      
     },
     accountInfo () {
       return this.$store.state.accountInfo;

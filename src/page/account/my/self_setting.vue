@@ -7,7 +7,8 @@
         <!-- 列表 -->
         <div class="list_wrap">
             <ul class="list">
-                <li @click="accountInfo.wxHeadimgurl?'':goto('/WXregister')">
+                <li @click="WXregister">
+                <!-- <li @click="accountInfo.wxHeadimgurl?'':WXregister"> -->
                     <div>昵称</div>
                     <div class="item_right_box">                        
                         <img class="img" :src="accountInfo.wxHeadimgurl||require('../../../assets/images/account/WXlogin.png')" alt="">
@@ -58,7 +59,10 @@
             },
             accountInfo() {
                 return this.$store.state.accountInfo;
-            }
+            },
+            weixinLoginInfo:function(){
+				return this.$store._modules.root.state.account.weixinLoginInfo
+			},
         },
         methods: {
             goBack() {
@@ -68,6 +72,20 @@
                 this.$router.push({
                     path: path
                 });
+            },
+            WXregister () {
+                console.log(123)
+                this.$pro.toweixin();
+            },
+
+        },
+        watch: {
+            weixinLoginInfo (o,n) {
+                if(o == true){
+                    var weixinInfo = localStorage.weixinUser ? JSON.parse(localStorage.weixinUser) : "" ;
+                    this.$router.push({path:"/WXregister",query:{weixinInfo:weixinInfo}});
+                    this.$store._modules.root.state.account.weixinLoginInfo = false;
+                }           
             }
         },
         beforeRouteEnter: (to, from, next) => {            
