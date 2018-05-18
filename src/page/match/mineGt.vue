@@ -2,10 +2,11 @@
 	<div id="mineGt">
 		<topTitle title="我的跟投者" type="0" type1="2"></topTitle>
 		<div id="container">
-			<div  class="details" v-show="myFollower">
+			<div  class="details" v-show="myFollower != undefined">
+				<p class="border_bottom">我当前跟投的：</p>
 				<ul  class="border_bottom" >
 					<li>
-						<img src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
+						<img :src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
 						<span class="span_black">{{myFollower.wxNickname || mobileHidden(myFollower.telphone)}}</span>
 					</li>
 					<li>
@@ -16,6 +17,7 @@
 			</div>
 			<div class="h_20"></div>
 			<div class="tip">
+				<p class="border_bottom">我的跟投者：</p>
 				<ul>
 					<li>
 						<span class="span_gray">提取收益率：</span>
@@ -113,6 +115,7 @@
 				return e == 0 ? "正向" : "反向"
 			},
 			changeImg:function(e){
+				console.log(e)
 				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
 			}
 		}
@@ -179,6 +182,15 @@
 			font-size: 0.28rem;
 			color: $grayDeep;
 			margin-top: 50%;
+		}
+		p{
+			height: 0.88rem;
+			font-size: 0.32rem;
+			text-align: left;
+			text-indent: 0.3rem;
+			line-height: 0.88rem;
+			color: $blcakThin;
+			font-weight: bold;
 		}
 	}
 </style>
