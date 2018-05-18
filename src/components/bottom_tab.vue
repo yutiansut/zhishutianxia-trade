@@ -19,10 +19,10 @@
 			return{
 				tabSelected: this.tabSelect,
 				tabList: [
-					{
-						name: '首页',
-						path: 'home'
-					},
+					// {
+					// 	name: '首页',
+					// 	path: 'home'
+					// },
 					{
 						name: '行情',
 						path: 'quote'
@@ -74,8 +74,9 @@
   //background: url('../assets/img/icon_colour.png') top center no-repeat;
   background-size: cover;
 }
-@for $i from 1 through 5 {
-  $img: ("index", "quotation", "trade", "match", "discover");
+@for $i from 1 through 4 {
+ 	//  $img: ("index", "quotation", "trade", "match", "discover");
+	 $img: ("quotation", "trade", "match", "discover");
   .icon#{$i}{
 	background: url('../assets/images/account/#{nth($img,$i)}_tab_icon.png') center no-repeat;
 	background-size: cover;

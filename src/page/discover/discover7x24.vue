@@ -17,6 +17,7 @@
 							</li>
 						</template>
 				</mt-loadmore> 
+				<!-- <p @click="test1">加载跟多</p> -->
 			</ul>
 		</div>
 </template>
@@ -66,7 +67,7 @@
 						if (this.newsInfo.length == 0) {
 							this.newsInfo = res.data;
 						}else{
-							this.newsInfo.concat(newList)
+							this.newsInfo = this.newsInfo.concat(newList)
 						}
 		    			
 		    		}
@@ -96,15 +97,19 @@
                     }
                 })
 			},
+			// test1 () {
+			// 	this.pageNum++
+			// 	this.getNewsInfo(this.pageNum)	
+			// },
 			showAll1 (item) {
 				item.zhankai = !item.zhankai
 			},
-			loadBottom () {
+			loadTop () {
 				this.pageNum = 0;
 				this.getNewsInfo(0);
 				this.$refs.loadmore.onTopLoaded();
 			},
-			loadTop () {
+			loadBottom () {
 				this.pageNum++
 				this.getNewsInfo(this.pageNum)
 				this.$refs.loadmore.onBottomLoaded();

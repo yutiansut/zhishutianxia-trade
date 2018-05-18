@@ -25,11 +25,11 @@
                     <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                         <div class="phone_number">{{item.wxNickname||mobileHidden(item.telphone)}}</div>
-                        <span class="small">{{item.followProfit}}</span>
+                        <span class="small">{{toFixed(item.followProfit)}}</span>
                         <span class="small">{{item.divide}}%</span>
-                        <span class="more">{{item.deductProfit}}</span>
+                        <span class="more">{{toFixed(item.deductProfit)}}</span>
                         <template v-if="type=='2'">
-                            <span class="more">{{item.profit}}</span>
+                            <span class="more">{{toFixed(item.profit)}}</span>
                         </template>
                         <div class="time"><p class="time_day">{{item.settleTime|dateChange('y-m-d')}}</p><p class="time_date">{{item.settleTime|dateChange('h:i:s')}}</p></div>
                     </li>
@@ -100,6 +100,9 @@ import pro from '../../../assets/js/common'
                     path: `/follow_get_history/${id}`
                 });
             },
+            toFixed (num,point = 2) {
+                return num.toFixed(point)
+            },
             mobileHidden (phoneNumber) {
                 return pro.mobileHidden(phoneNumber)              
             },
@@ -108,9 +111,6 @@ import pro from '../../../assets/js/common'
                     account: this.account,
                     type: this.type,
                     id: this.id
-                    // account: 'sdfsdf',
-                    // type: '0',
-                    // id: 'sdsdfsfdfsfsfd'
                 }
                 const headers = {
                     token: this.userInfo.token,
