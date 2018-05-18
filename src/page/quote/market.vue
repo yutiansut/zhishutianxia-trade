@@ -318,6 +318,7 @@
 			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			&:first-child{
+				background-color: #f2f2f2;
 				height: 0.64rem;
 				line-height: 0.64rem;
 				span{
