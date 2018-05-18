@@ -2,16 +2,16 @@
 	<div id="mineGt">
 		<topTitle title="我的跟投" type="0" type1="2"></topTitle>
 		<div id="container">
-			<div  class="details" v-show="myFollower != undefined">
+			<div  class="details" v-show="myFollower != ''">
 				<p class="border_bottom">我当前跟投的：</p>
 				<ul  class="border_bottom" >
 					<li>
 						<img :src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
-						<span class="span_black">{{myFollower.wxNickname || mobileHidden(myFollower.telphone)}}</span>
+						<span class="span_black">{{myFollower.wxNickname != '' ? myFollower.wxNickname : mobileHidden(myFollower.telphone)}}</span>
 					</li>
 					<li>
 						<span class="span_simp">{{myFollower.FollowTime}}</span>
-						<span class="color_red">{{myFollower.direction | changDirection}}</span>
+						<span class="color_red">{{myFollower.direction}}</span>
 					</li>
 				</ul>
 			</div>
@@ -38,7 +38,7 @@
 					</li>
 					<li>
 						<span class="span_simp">{{n.FollowTime}}</span>
-						<span class="color_red">{{n.direction | changDirection}}</span>
+						<span class="color_red">{{n.direction}}</span>
 					</li>
 				</ul>
 			</div>
@@ -91,7 +91,8 @@
 						this.divide = res.data.divide;
 						this.followList = res.data.follower;
 						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
-						this.myFollower = res.data.myFollower;
+						this.myFollower = res.data.myFollower == undefined ? '': res.data.myFollower;
+						console.log(this.myFollower.wxNickname);
 					}
 				}).catch((err)=>{
 					var data = err.data;
@@ -111,12 +112,8 @@
 			this.getMintGt(this.matchid);
 		},
 		filters:{
-			changDirection:function(e){
-				return e == 0 ? "正向" : "反向"
-			},
 			changeImg:function(e){
-				console.log(e)
-				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
+				return e != '' ? e : require("../../assets/images/account/WXlogin.png");
 			}
 		}
 	}

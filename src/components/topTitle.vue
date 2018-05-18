@@ -4,7 +4,7 @@
 			<i :class="type == 1 ? 'account' : 'back'" @click="toNext(type)"></i>
 			<h1>{{title}}</h1>
 			<i class="online" @click="toRight" v-if="type1 == '1'"></i>
-			<span class="span_color" v-else-if="type1 == '0' " @click="toRight()">我的跟投者</span>
+			<span class="span_color" v-else-if="type1 == '0' " @click="toRight()">我的跟投</span>
 			<i v-else-if="type1 == '2' " class="iconRight"></i>
 		</div>
 	</div>
