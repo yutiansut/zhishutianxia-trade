@@ -100,7 +100,7 @@
 				</div>
 			</div>
 			<div class="btn_box">
-				<btn name="完成" className="bluelg" @click.native="saveEvent"></btn>
+				<btn name="完成" className="redlg" @click.native="saveEvent"></btn>
 			</div>
 		</div>
 		</div>
@@ -330,7 +330,7 @@
 				let obj = $(e.currentTarget).find('.icon_zero');
 				if(obj.hasClass('current')){
 					obj.removeClass('current');
-					obj.css({'left': 0, 'background': '#525866'});
+					obj.css({'left': 0, 'background': '#ffffff'});
 					if($(e.currentTarget).hasClass('lastPriceUp')){
 						this.risePointSwitch = '0';
 					}else if($(e.currentTarget).hasClass('lastPriceDown')){
@@ -346,7 +346,7 @@
 					}
 				}else{
 					obj.addClass('current');
-					obj.css({'left': 0.48+'rem', 'background': '#00a1f2'});
+					obj.css({'left': 0.48+'rem', 'background': '#ffffff'});
 					if($(e.currentTarget).hasClass('lastPriceUp')){
 						this.risePointSwitch = '1';
 					}else if($(e.currentTarget).hasClass('lastPriceDown')){
@@ -575,8 +575,8 @@
 		width: 7.5rem;
 		height: 1rem;
 		overflow: hidden;
-		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		background: $blcakThin;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		box-sizing: border-box;
 		.icon_back{
@@ -596,10 +596,10 @@
 			overflow: hidden;
 			text-align: center;
 			span{
+				color: $white;
 				width: 7.5rem;
 				display: block;
 				&:first-child{
-					color: $white;
 					font-size: $fs32;
 					margin: 0.2rem 0 0.05rem 0;
 				}
@@ -607,11 +607,12 @@
 		}
 	}
 	.main{
+		background-color: $bg;
 		margin-top: 1.01rem;
 		.title{
 			width: 7.5rem;
 			height: 3rem;
-			border-bottom: 0.15rem solid $black;
+			border-bottom: 0.15rem solid $bgDeep;
 		}
 		.cont{
 			.type{
@@ -625,7 +626,7 @@
 			height: 0.96rem;
 			overflow: hidden;
 			background: $bg;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			span{
 				float: left;
@@ -634,15 +635,15 @@
 				font-size: $fs28;
 			}
 			input{
+				color: $blcakThin;
 				float: left;
 				display: inline-block;
 				height: 0.64rem;
-				background: #1b1f26;
-				border: 0.01rem solid $black;
+				background: $bg;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
 				margin: 0.16rem 0;
 				padding: 0 0.1rem;
-				color: $white;
 				font-size: $fs28;
 				&.ipt_lg{
 					width: 2rem;
@@ -652,7 +653,7 @@
 					margin-right: 0.15rem;
 				}
 				&:focus{
-					border-color: $blue;
+					border-color: $redDeep;
 				}
 			}
 			em{
@@ -686,27 +687,24 @@
 				float: right;
 				width: 0.96rem;
 				height: 0.48rem;
-				background: #1b1f26;
+				background: #c2c2cc;
 				border-radius: 0.24rem;
-				border: 0.01rem solid $black;
+				border: 0.01rem solid #c2c2cc;
 				margin: 0.24rem 0;
 				position: relative;
 				.icon_zero{
 					width: 0.4rem;
 					height: 0.4rem;
-					background: #525866;
+					background: $bg;
 					border-radius: 100%;
 					position: absolute;
 					top: 0.04rem;
 					left: 0.04rem;
 					transition: all .2s;
 				}
-				&.current{
-					.icon_zero{
-						left: 0.48rem;
-						background: $blue;
-					}
-				}
+			}
+			.current{
+				background-color: $redDeep;
 			}
 			.reminda_ways{
 				float: right;
@@ -731,7 +729,6 @@
 			}
 			p{
 				line-height: 0.38rem;
-				color: $white;
 				margin-top: 0.1rem;
 			}
 		}

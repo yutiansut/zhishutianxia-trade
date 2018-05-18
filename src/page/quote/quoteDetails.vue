@@ -214,16 +214,16 @@
 			</div>
 		</div>
 		<mt-tabbar fixed class="menu">
-      		<mt-tab-item class="col" @tap.native="addRemind" style="background-color:#2d3340;">
+      		<mt-tab-item class="col" @tap.native="addRemind" >
 		        <img slot="icon" v-show="!remindShow" src="../../assets/images/quote/remind.png">
 		        <img slot="icon" v-show="remindShow" src="../../assets/images/quote/remind_01.png">
 		        <span :class="{current: remindShow == true}">提醒</span>
 		    </mt-tab-item>
-		    <mt-tab-item class="col" @click.native="toTradeCenter" style="background-color:#2d3340;">  
-			    <img slot="icon" src="../../assets/images/quote/mockTrading_02.png">  
+		    <mt-tab-item class="col" @click.native="toTradeCenter" >  
+			    <img slot="icon" src="../../assets/images/account/trade_tab_icon_checked.png">  
 			    <span>模拟交易</span>
 			</mt-tab-item>
-      		<mt-tab-item class="col" @click.native="addOptional" style="background-color:#2d3340;">  
+      		<mt-tab-item class="col" @click.native="addOptional" >  
 		        <img slot="icon" v-show="!optionalIconShow" src="../../assets/images/quote/add_optional.png">
 		        <img slot="icon" v-show="optionalIconShow" src="../../assets/images/quote/add_optional_01.png">
 		        <span :class="{current: optionalIconShow == true}">{{optionalName}}</span>
@@ -1029,7 +1029,7 @@
 		display: flex;
 		width: 7.5rem;
 		height: 1rem;
-		background: $bg;
+		background: $blcakThin;
 		border-bottom: 0.01rem solid $black;
 		padding: 0 0.3rem;
 		box-sizing: border-box;
@@ -1049,9 +1049,9 @@
 				text-align: center;
 			}
 			span{
+				color: $white;
 				display: block;
 				&:first-child{
-					color: $white;
 					font-size: $fs32;
 					margin: 0.2rem 0 0.05rem 0;
 				}
@@ -1069,7 +1069,7 @@
 			height: 0.36rem;
 			line-height: 0.36rem;
 			text-align: center;
-			background: $yellow;
+			background: $redDeep;
 			font-size: 0.2rem;
 			color: $bg;
 			border-radius: 0.08rem;
@@ -1082,9 +1082,9 @@
 	.menu{
 		.col{
 			overflow: hidden;
-			background: $titleBlue;
-			border-top: 0.01rem solid $black;
-			border-left: 0.01rem solid $black;
+			background: $bg;
+			border-top: 0.01rem solid $bgDeep;
+			border-left: 0.01rem solid $bgDeep;
 			&:first-child{
 				border-left: none;
 			}
@@ -1100,17 +1100,17 @@
 		margin-top: 1.01rem;
 		padding-bottom: 1.5rem;
 		.details{
+			background-color: $bg;
 			width: 7.5rem;
 			height: 3.85rem;
-			background: #1b1f26;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			.cont{
 				float: left;
 				width: 4.2rem;
 				height: 3.65rem;
 				background: $bg;
-				border-bottom: 0.01rem solid $black;
-				border-right: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
+				border-right: 0.01rem solid $bgDeep;
 				padding-left: 0.29rem;
 				.name{
 					height: 0.5rem;
@@ -1173,19 +1173,18 @@
 				.title{
 					height: 0.49rem;
 					line-height: 0.49rem;
-					background: $lightBlue;
 					text-align: center;
-					border-bottom: 1px solid #12141a;
+					border-bottom: 0.01rem solid $bgDeep;
 					span{
 						display: inline-block;
 						width: 50%;
 						&:nth-child(1){
-							border-right: 1px solid #12141a ;
+							border-right: 0.01rem solid $bgDeep ;
 						}
 					}
 				}
 				.currentContrast{
-					color: $blue;
+					color: $redDeep;
 				}
 				.contrast_list{
 					height: 3.16rem;
@@ -1197,15 +1196,15 @@
 						color: #525866;
 						font-size: 0.36rem;
 						font-weight: bold;
-						border-bottom: 0.01rem solid $black;
+						border-bottom: 0.01rem solid $bgDeep;
 					}
 					li{
 						/*height: 0.63rem;*/
 						overflow: hidden;
-						border-bottom: 0.01rem solid $black;
+						border-bottom: 0.01rem solid $bgDeep;
 						padding: 0.05rem;
 						&.current{
-							background: #1b1f26;
+							background: $bgDeep;
 						}
 						.name{
 							width: 1.15rem;
@@ -1214,7 +1213,6 @@
 								display: block;
 								font-size: 0.2rem;
 								&:first-child{
-									color: $white;
 									margin: 0.05rem 0;
 								}
 							}
@@ -1258,7 +1256,7 @@
 					.choseStrategyClass{
 						width: 100%;
 						height: 0.64rem;
-						border-bottom: 0.01rem solid $black;
+						border-bottom: 0.01rem solid $bgDeep;
 						line-height: 0.64rem;
 						font-size: 0.2rem;
 						text-align: center;
@@ -1271,9 +1269,8 @@
 					}
 					.choseStrategyClass1{
 						position: relative;
-						background-color: #1b1f26;
+						background-color: $bgDeep;
 						span{
-							color: $white;
 							float: left;
 						}
 						button{
@@ -1305,7 +1302,7 @@
 			.title{
 				height: 0.8rem;
 				padding: 0 0.3rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				overflow-x: scroll;
 				span{
 					float: left;
@@ -1324,11 +1321,11 @@
 			}
 			.cont{
 				height: 5.4rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				.chart{
 					width: 5.7rem;
 					height: 5.4rem;
-					border-right: 0.01rem solid $black;
+					border-right: 0.01rem solid $bgDeep;
 				}
 				.cont_right{
 					width: 1.8rem;
@@ -1336,14 +1333,14 @@
 					.tab_title{
 						height: 0.8rem;
 						line-height: 0.8rem;
-						background: $titleBlue;
-						border-bottom: 0.01rem solid $black;
+						background: $bg;
+						border-bottom: 0.01rem solid $bgDeep;
 						span{
 							float: left;
 							display: inline-block;
 							width: 50%;
 							text-align: center;
-							border-left: 0.01rem solid $black;
+							border-left: 0.01rem solid $bgDeep;
 							&.current{
 								color: $blue;
 							}
@@ -1357,11 +1354,11 @@
 							h3{
 								height: 0.48rem;
 								line-height: 0.48rem;
-								background: $lightBlue;
+								background: $bg;
 								padding: 0 0.1rem;
-								border-bottom: 0.01rem solid $black;
+								border-bottom: 0.01rem solid $bgDeep;
 								&.border_top{
-									border-top: 0.01rem solid $black;
+									border-top: 0.01rem solid $bgDeep;
 								}
 							}
 							li{

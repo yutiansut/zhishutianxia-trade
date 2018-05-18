@@ -903,8 +903,8 @@ export default new Vuex.Store({
 				name: state.market.currentNo,
 	            type: 'line',
 	            data: price,
-	            lineStyle: {normal: {width: 1,color: "#ffffff"}},
-				itemStyle: {normal: {color: "#ffffff"}},
+	            lineStyle: {normal: {width: 1,color: '#333340'}},
+				itemStyle: {normal: {color: '#333340'}},
 				symbolSize: 2,
 	        },];
 	        let optionxAxis = [{
@@ -914,7 +914,7 @@ export default new Vuex.Store({
 				axisTick: {onGap: false},
 				splitLine: {show: false},
 				axisLabel: {textStyle: {fontSize: 10,}},
-				axisLine: {lineStyle: {color: '#8392A5'}},
+				axisLine: {lineStyle: {color: '#333340'}},
 				data: time
 			}];
 	        
@@ -936,7 +936,7 @@ export default new Vuex.Store({
 					name: '成交量(万)',
 					axisLine: {
 						lineStyle: {
-							color: '#8392A5'
+							color: '#333340'
 						}
 					},
 					axisTick: {
@@ -957,7 +957,7 @@ export default new Vuex.Store({
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: "#8392A5"
+							color: "#333340"
 						}
 					}
 				}],
@@ -967,7 +967,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#ffffff',
+							color: '#333340',
 							width: 1,
 							opacity: 1
 						}
@@ -999,7 +999,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#ffffff',
+							color: '#333340',
 							width: 1,
 							opacity: 1
 						}
@@ -1034,7 +1034,7 @@ export default new Vuex.Store({
 					data: time,
 					axisLine: {
 						lineStyle: {
-							color: '#8392A5'
+							color: '#333340'
 						}
 					},
 					boundaryGap: true
@@ -1048,7 +1048,7 @@ export default new Vuex.Store({
 					},
 					axisLine: {
 						lineStyle: {
-							color: '#8392A5'
+							color: '#333340'
 						}
 					},
 					splitArea: {
@@ -1064,7 +1064,7 @@ export default new Vuex.Store({
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: "#8392A5"
+							color: "#333340"
 						}
 					}
 				}],
