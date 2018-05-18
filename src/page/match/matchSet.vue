@@ -40,6 +40,7 @@
 <script>
 	import topTitle from "../../components/topTitle.vue"
 	import pro from "../../assets/js/common.js"
+	import { MessageBox } from 'mint-ui'
 	const local = pro.local;
 	export default{
 		name:'matchSet',
@@ -114,20 +115,21 @@
 						tradeRecord:this.tradeRecord
 					}
 					var header = this.headers
-					pro.fetch("post","/followInvest/setting",data,header).then((res)=>{
-						if(res.code == 1 && res.success == true){
-							console.log(res)
-							this.$toast({message: '恭喜您，设置成功！',duration: 2000});
-							this.$router.back(-1);
-						}
-					}).catch((err)=>{
-						var data = err.data;
-					if(data == undefined){
-						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
-					}else{
-						this.$toast({message:data.message,duration: 2000});
-					}
-					})
+					MessageBox.confirm("扣除跟单盈利分成："+this.scale+"%"+"</br>"+"注意：只能设置一次","提示").then(()=>{
+						pro.fetch("post","/followInvest/setting",data,header).then((res)=>{
+							if(res.code == 1 && res.success == true){
+								this.$toast({message: '恭喜您，设置成功！',duration: 2000});
+								this.$router.back(-1);
+							}
+						}).catch((err)=>{
+							var data = err.data;
+							if(data == undefined){
+								this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+							}else{
+								this.$toast({message:data.message,duration: 2000});
+							}
+						})
+					}).catch(()=>{})
 				}
 			}
 		},
