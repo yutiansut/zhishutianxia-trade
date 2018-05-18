@@ -4,9 +4,9 @@
 			<ul>
 				<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
 				<li>
-					<span @click="profitRateFollow('profitrate')">总收益</span>
+					<span @click="profitRateFollow('profitrate')" :class="{current : current == 0}">总收益</span>
 					<i  :class="profitrateUp ? 'change' : 'change_2'" class="change_1" @click="changeSort('profitrateUp')"></i>
-					<span @click="profitRateFollow('follow')">跟投人数</span>
+					<span @click="profitRateFollow('follow')" :class="{current : current == 1}">跟投人数</span>
 					<i :class="followUp ? 'change':'change_2'" @click="changeSort('followUp')"></i>
 				</li>
 			</ul>
@@ -47,7 +47,8 @@
 				//排序
 				sort:'',
 				profitrateUp:true,
-				followUp:true
+				followUp:true,
+				current:0
 				
 			}
 		},
@@ -59,6 +60,8 @@
 			},
 			profitRateFollow:function(type){
 				this.sidx = type == 'profitrate' ? 0 : 1 ;
+				this.sort = 0;
+				this.current = type == 'profitrate' ? 0 : 1;
 				this.getRanking(this.matchid,this.sidx,this.sort);
 			},
 			mobileHidden (phoneNumber) {
@@ -221,5 +224,8 @@
 	.perecnt{
 		margin-right: 1.32rem;
 		color: $redDeep;
+	}
+	.current{
+		color:$redDeep;
 	}
 </style>
