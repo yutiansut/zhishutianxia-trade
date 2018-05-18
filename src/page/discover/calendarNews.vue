@@ -62,7 +62,8 @@
 
 <script>
 	export default {
-		name: "7x24",
+		name: "calendarNews",
+		props: ['newDate'],
 		data() {
 			return {
 				tabSelected: 'discover',
@@ -70,7 +71,8 @@
 				today: '',
 				weekday: [],
 				weekDayList: [],
-				showTime: ''
+				showTime: '',
+				list: []
 			}
 		},
 		methods: {
@@ -140,18 +142,93 @@
 
 
 			},
+			getTomorrow (todayString) {
+				let todayList = todayString.split('-');
+				todayList[2] = todayList[2]*1 + 1;
+				return todayList.join("-");
+				
+			},
 			changeDate (item) {
 				if(item.time == this.showTime) return;
 				//console.log(item.time)
 				this.showTime = item.time
-			}
+				let tomorrow = this.getTomorrow(this.showTime)
+				if (this.userInfo) {
+					this.getInfoList(item.time, tomorrow)
+				}else{
+					console.log(123)
+				}
+
+			},
+			getInfoList (startTime,endTime) {
+				const data = {
+					startTime:startTime,
+					endTime:endTime
+				}
+				const headers = {
+					token : this.userInfo.token,
+					secret : this.userInfo.secret
+				}
+				this.$pro.fetch("post","/news/getCalendar",data,headers).then((res)=>{
+//					console.log("res======"+JSON.stringify(res));
+					if(res.success == true && res.code == 1){
+						this.list = res.data;
+						if(!this.list){
+							this.showNoInfo = true
+						}else{
+							this.showNoInfo = false
+						}
+					}
+				}).catch((err) => {
+                    var data = err.data;
+                    console.log(err)
+                    if (data == undefined) {
+                        this.$toast({
+                            message: "网络不给力，请稍后再试",
+                            duration: 1000
+                        });
+                    } else {
+                        if (data.code == -9999) {
+                            this.$toast({
+                                message: "认证失败，请重新登录",
+                                duration: 1000
+                            });
+                            this.$router.push({
+                                path: "/login"
+                            });
+                        } else {
+                            this.$toast({
+                                message: data.message,
+                                duration: 1000
+                            });
+                        }
+                    }
+                })
+			},
 
 		},
+		watch: {
+			newDate (newValue, oldValue) {
+				if (newValue&&newValue !== oldValue) {
+					this.weekDayList = this.mouthList(newValue);
+					//console.log(Date(newValue))
+					let tomorrow = this.getTomorrow(newValue);
+					if (this.userInfo) {
+					this.getInfoList(newValue, tomorrow)
+					}else{
+						console.log(123)
+					}
+				}
+			}	
+		},
 		created () {
+			const local = this.$pro.local;
+			this.userInfo = local.get('user');
 			let today = new Date();
 			this.today = today;
-			this.weekDayList = this.mouthList('2016-2-1')
-		}
+			this.weekDayList = this.mouthList()
+		},
+		
 	
 	}
 </script>

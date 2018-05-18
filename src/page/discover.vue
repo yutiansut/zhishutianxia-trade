@@ -4,8 +4,8 @@
 			<mt-button slot="left" @click="goto('/my')">
 				<span class="icon_account"></span>
 			</mt-button>
-			<mt-button slot="right" @click="goto('/discoverSearch')">
-				<span class="icon_search" v-show="selected==1" @click="toImformationSearch"></span>
+			<mt-button slot="right">
+				<span class="icon_search" v-show="selected==1" @click="goto('/discoverSearch')"></span>
 		    	<span class="icon_calendar" v-show="selected==2" @click="toChooseDay('picker1')"></span>
 			</mt-button>
 		</mt-header>
@@ -23,13 +23,23 @@
 					<discover7x24></discover7x24>
 				</mt-tab-container-item>
 				<mt-tab-container-item id="2">
-					<calendar-news></calendar-news>
+					<calendar-news :newDate ="newsDate"></calendar-news>
 				</mt-tab-container-item>
 				<mt-tab-container-item id="3">
 					<focus-news></focus-news>
 				</mt-tab-container-item>
 			</mt-tab-container>
-	
+			<mt-datetime-picker
+				ref="picker1"
+				type="date"
+				v-model="value1"
+				year-format="{value} 年"
+				month-format="{value} 月"
+				date-format="{value} 日"
+				:startDate="startDate"
+				:endDate="endDate"
+				@confirm="handleChange">
+			</mt-datetime-picker>
 	
 	
 		</div>
@@ -55,7 +65,12 @@
 			return {
 				tabSelected: 'discover',
 				selected: "1",
-				navCheck: 0
+				navCheck: 0,
+				newsDate: '',
+				value: null,
+		      	value1: new Date(),
+		      	startDate: new Date('2014'),
+		      	endDate: new Date('2020-12-31'),
 			}
 		},
 		methods: {
@@ -74,9 +89,24 @@
 			toImformationSearch () {
 
 			},
-			toChooseDay () {
-
-			}
+			toChooseDay (picker){
+				this.$refs[picker].open();
+			},
+			handleChange:function(value){
+				console.log(value)
+				console.log(this.$pro.getDate(Date.parse(value),"y-m-d"))
+				this.newsDate = this.$pro.getDate(Date.parse(value),"y-m-d");
+				// this.startTime = pro.getDate("y-m-d", Date.parse(value));
+				// this.endTime = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+24*60*60)*1000);
+				// this.getDayList(this.startTime);
+				// //保证未登录的状态下进行调用
+				// if(this.userInfo == ''){
+				// 	this.getInfoListNokoken(this.startTime,this.endTime)
+				// }else{
+				// 	this.getInfoList(this.startTime,this.endTime);
+				// }
+				// this.show_day = pro.getDate("yy-mm-dd", Date.parse(value));
+			},
 		}
 		
 	}
