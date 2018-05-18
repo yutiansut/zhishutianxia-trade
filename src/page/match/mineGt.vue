@@ -1,6 +1,6 @@
 <template>
 	<div id="mineGt">
-		<topTitle title="我的跟投者" type="0" type1="2"></topTitle>
+		<topTitle title="我的跟投" type="0" type1="2"></topTitle>
 		<div id="container">
 			<div  class="details" v-show="myFollower != undefined">
 				<p class="border_bottom">我当前跟投的：</p>
