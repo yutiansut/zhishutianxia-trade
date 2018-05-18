@@ -153,7 +153,7 @@
 	.tab_wrap{
 		margin-top: 0.96rem;
 		width: 7.5rem;
-		padding-bottom: 0.66rem; 
+		padding-bottom: 1.16rem;
 	}
 	
 	

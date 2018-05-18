@@ -9,54 +9,34 @@
 				</li>
 			</ul>
 		</div>
+		
 		<ul class="my_list">
-			<li class="item">
+			<li class="item" v-for="item in list" :key="item.calendarId">
 				<div class="title_box">
 					<div class="left">
-						<span class="subscribe_icon_no"></span>
-						<span class="time">06:30</span>
-						<img src="../../assets/images/discover/flag_china.png" alt="">
-						<span class="country">中国</span>
+						<span :class="['subscribe_icon_no',{'subscribe_icon':item.status==1}]" @click="subscription(item)"></span>
+						<span class="time">{{$pro.getDate(item.timestamp, 'h:m')}}</span>
+						<img :src="item.flagUrl" alt="">
+						<span class="country">{{item.country}}</span>
 					</div>
 					<div class="right">
-						<i class="star_icon"></i>
-						<i class="star_icon star_red"></i>
-						<i class="star_icon star_yellow"></i>
+					<i v-for="t in Number(item.importance)" class='star_icon'  :class="item.importance==3?'star_red':'star_yellow'"></i>
+					<i v-for="t in (3-Number(item.importance))" class='star_icon' :class="item.importance==3?'star_red':''"></i>
 					</div>
 				</div>
 				<div>
-					<p class="text">中国公布三月M0货币供应年率</p>
+					<p class="text">{{item.title}}</p>
 				</div>
 				<div class="number_box">
-					<p>今值: <span>---</span></p>
-					<p>预期: <span>0.20%</span></p>
-					<p>前值: <span>2.00%</span></p>
-				</div>
-			</li>
-			<li class="item">
-				<div class="title_box">
-					<div class="left">
-						<span class="subscribe_icon_no subscribe_icon"></span>
-						<span class="time">06:30</span>
-						<img src="../../assets/images/discover/flag_china.png" alt="">
-						<span class="country">中国</span>
-					</div>
-					<div class="right">
-						<i class="star_icon"></i>
-						<i class="star_icon star_red"></i>
-						<i class="star_icon star_yellow"></i>
-					</div>
-				</div>
-				<div>
-					<p class="text">中国公布三月M0货币供应年率</p>
-				</div>
-				<div class="number_box">
-					<p>今值: <span>---</span></p>
-					<p>预期: <span>0.20%</span></p>
-					<p>前值: <span>2.00%</span></p>
+					<p>今值: <span>{{item.actual||'---'}}</span></p>
+					<p>预期: <span>{{item.forecast||'---'}}</span></p>
+					<p>前值: <span>{{item.previous||'---'}}</span></p>
 				</div>
 			</li>
 		</ul>
+		<div class="noInfo" v-show="showNoInfo">
+			暂无内容
+		</div>
 	</div>
 </template>
 
@@ -72,7 +52,8 @@
 				weekday: [],
 				weekDayList: [],
 				showTime: '',
-				list: []
+				list: [],
+				showNoInfo: false
 			}
 		},
 		methods: {
@@ -138,6 +119,11 @@
 					 	
 				}
 				this.showTime = mouthDayList[date - 1].time
+				// var style = window.getComputedStyle ? window.getComputedStyle(document.getElementsByClassName('calendar_date')[0],null) : null || box.currentStyle;
+				// console.log(style.width);
+				// console.log( window.getComputedStyle(document.getElementsByClassName('date_list')[0],null).width)
+				// document.getElementsByClassName('calendar_date')[0].scrollLeft = 100;
+				// console.log(document.getElementsByClassName('calendar_date')[0].scrollLeft);
 				return mouthDayList
 
 
@@ -161,15 +147,25 @@
 
 			},
 			getInfoList (startTime,endTime) {
+				var startTime = startTime|| this.$pro.getDate(Date.parse(new Date()),"y-m-d")
+				var endTime = endTime||this.getTomorrow(startTime)
+				let url,headers
 				const data = {
 					startTime:startTime,
 					endTime:endTime
 				}
-				const headers = {
-					token : this.userInfo.token,
-					secret : this.userInfo.secret
+				if(this.userInfo) {
+					headers = {
+						token : this.userInfo.token,
+						secret : this.userInfo.secret
+					}
+					url = "/news/getCalendar"
+				}else{
+					headers = ''
+					url = "/news/getCalendarNoToken"
 				}
-				this.$pro.fetch("post","/news/getCalendar",data,headers).then((res)=>{
+				 
+				this.$pro.fetch("post",url,data,headers).then((res)=>{
 //					console.log("res======"+JSON.stringify(res));
 					if(res.success == true && res.code == 1){
 						this.list = res.data;
@@ -205,6 +201,76 @@
                     }
                 })
 			},
+			//订阅功能
+			subscription:function(item){
+				var timestampNow = Date.parse(new Date())/1000;
+				if(!this.userInfo){
+					this.$toast({message:"您还未登录，请先登录，方可订阅",duration: 2000});
+					this.$router.push({path:"/login"});
+				}else{
+					if(timestampNow-item.timestamp > 0){
+						this.$toast({message:"该事件已经发生，不可订阅",duration: 2000});
+					}else{
+						const data = {
+							calendarId:item.calendarId,
+							previous:item.previous,
+							actual:item.actual,
+							forecast:item.forecast,
+							title:item.title,
+							timestamp:item.timestamp
+						}
+						const data1 = {
+							calendarId:item.calendarId
+						}
+						const headers = {
+							token : this.userInfo.token,
+							secret : this.userInfo.secret
+						}
+						
+						if(item.status == '1'){
+							this.delSubscription(data1,headers);
+							item.status =  '0'
+						}else{
+							this.addSubscription(data,headers);
+							item.status =  '1'
+						}
+					}
+				}
+			},
+			//添加订阅
+			addSubscription (data,headers) {
+				this.$pro.fetch("post","/news/subscibeCalendar",data,headers).then((res)=>{
+					if(res.success == true && res.code == 1){
+						this.$toast({message:"订阅成功",duration: 1000});
+					}
+				}).catch((err)=>{
+					this.err(err)
+				})
+			},
+			// 删除订阅不成功
+			delSubscription (data,headers) {
+				this.$pro.fetch("post","/news/removeSubscibeCalendar",data,headers).then((res)=>{
+					if(res.success == true && res.code == 1){
+						this.$toast({message:"删除成功！",duration: 1000});
+					}
+				}).catch((err)=>{
+					this.err(err)
+				})
+			},
+			err (err) {
+				var data = err.data;
+				if(data == undefined){
+					this.$toast({message:"网络不给力，请稍后再试",duration: 1000});
+				}else{
+					if(data.code == -9999){
+						this.$toast({message:"认证失败，请重新登录",duration: 1000});
+						this.$router.push({path:"/login"});
+					}
+					else{
+						this.$toast({message:data.message,duration: 1000});
+					}
+				}
+			}
 
 		},
 		watch: {
@@ -221,12 +287,21 @@
 				}
 			}	
 		},
-		created () {
+		// created () {
+		// 	const local = this.$pro.local;
+		// 	this.userInfo = local.get('user');
+		// 	let today = new Date();
+		// 	this.today = today;
+		// 	this.weekDayList = this.mouthList();
+		// 	this.getInfoList()
+		// },
+		activated () {
 			const local = this.$pro.local;
 			this.userInfo = local.get('user');
 			let today = new Date();
 			this.today = today;
-			this.weekDayList = this.mouthList()
+			this.weekDayList = this.mouthList();
+			this.getInfoList()
 		},
 		
 	
@@ -240,12 +315,13 @@
 			@include font($fs24,0.64rem,$graySimple);
 		}
 		.calendar_date{
+			width: 7.5rem;
 			overflow: scroll;
 			 -webkit-overflow-scrolling: touch;
 		}
 		.date_list{
 			@include flex(space-between);
-			width: 500%;
+			width: 37.5rem;
 			background-color: $bgGray;
 			padding: 0.3rem 0.2rem;
 			li{
@@ -300,6 +376,12 @@
 					background-size: 100%;
 				}
 			}
+		}
+		.noInfo{
+			color: #7a8599;
+			text-align: center;
+			font-size: .36rem;
+			margin-top: 50%;
 		}
 		.subscribe_icon_no{
 			display: inline-block;

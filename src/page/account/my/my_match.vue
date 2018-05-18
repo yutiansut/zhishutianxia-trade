@@ -118,7 +118,7 @@
                     secret: this.userInfo.secret
                 }
                 this.$pro.fetch('post', '/tradeCompetition/historyRecords', sendData, headers).then(function(res) {
-                    console.log(res)
+                    //console.log(res)
                     if (res.success && res.code == 1) {
                         this[listName] = res.data.list
                         this[isShow] = res.data.list?res.data.list.length:res.data.list
@@ -150,8 +150,8 @@
         },
         watch: {
             selected: function(n, old) {
-                console.log(n);
-                console.log("----" + old)
+                // console.log(n);
+                // console.log("----" + old)
             },
         },
         // created() {

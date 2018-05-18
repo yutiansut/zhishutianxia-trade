@@ -101,7 +101,7 @@ import pro from '../../../assets/js/common'
                     secret: this.userInfo.secret
                 }
                 this.$pro.fetch('post', '/tradeCompetition/competitionDetails', sendData, headers).then(function(res) {
-                    console.log(res)
+                    //console.log(res)
                     if (res.success && res.code == 1) {
                         this.details = res.data;
                         this.account = res.data.program;
@@ -193,7 +193,7 @@ import pro from '../../../assets/js/common'
         left: 0;
         bottom: 0;
         width: 7.5rem;
-        //height: 0.98rem;
+        height: 0.98rem;
         font-size: 0;
         button {
             width: 50%;
