@@ -39,7 +39,7 @@
                             <p>亏损平仓线:&nbsp<span class="money">{{account.lossCloseOutLine}}</span>&nbsp元</p>
                             <p>交易账号：&nbsp<span class="money">{{account.account}}</span></p>
                             <p>交易密码:&nbsp<span class="money">{{account.accountPassword}}</span></p>
-                            <p> 美元结算汇率:&nbsp<span class="money">1美元={{account.rate}}人民币 </span></p>
+                            <p> 美元结算汇率:&nbsp<span class="money">1美元={{details.rate}}人民币 </span></p>
                             <p>活动时间：&nbsp<span class="money">{{details.beginTime|dateChange('y-m-d')}} 至 {{details.endTime|dateChange('y-m-d')}}</span></p>
                             <p>报名时间:&nbsp<span class="money">{{account.applyTime}}</span></p>
                         </li>

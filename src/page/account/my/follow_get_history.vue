@@ -14,10 +14,11 @@
                     <div class="phone_number"> {{config.type}}</div>
                     <span class="small">跟投盈亏</span>
                     <span class="small">跟投比例</span>
+                    <span class="more">{{config.name}}</span>
                     <template v-if="type=='2'">
                         <span class="more">{{config.surplus}}</span>
                     </template>
-                        <span class="more">{{config.name}}</span>                                                                      
+                                                                                              
                         <div class="time">结算时间</div>                       
                 </li>
                 <template v-if="listLength">
@@ -25,42 +26,18 @@
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                         <div class="phone_number">{{item.wxNickname||mobileHidden(item.telphone)}}</div>
                         <span class="small">{{item.followProfit}}</span>
-                        <span class="small">{{item.divide}}</span>
+                        <span class="small">{{item.divide}}%</span>
+                        <span class="more">{{item.deductProfit}}</span>
                         <template v-if="type=='2'">
-                            <span class="more">{{item.deductProfit}}</span>
+                            <span class="more">{{item.profit}}</span>
                         </template>
-                        <span class="more">{{item.profit}}</span>     
                         <div class="time"><p class="time_day">{{item.settleTime|dateChange('y-m-d')}}</p><p class="time_date">{{item.settleTime|dateChange('h:i:s')}}</p></div>
                     </li>
                 </template>
                 <li class="no_list" v-else>
                     <p>无相关比赛记录</p>
                 </li>
-                
-
-                    <!-- <li class="history_item">                        
-                        <span>01</span>
-                        <div class="phone_number">151****1502</div>            
-                        <span class="small">100000</span>
-                        <span class="small">12%</span>
-<template v-if="type=='1'">
-    <span class="more">88000</span>
-</template>
-                        <span class="more">88000</span>
-                        <div class="time"><p class="time_day">2018-03-05</p><p class="time_date">15:59:12</p></div>
-                    </li>
-                    <li class="history_item">                        
-                        <span>01</span>
-                        <div class="phone_number">小四</div>                  
-                        <span class="small">12</span>
-                        <span class="small">100000</span>
-<template v-if="type=='1'">
-    <span class="more">110</span>
-</template>
-                        <span class="more">88000</span>
-                        <div class="time"><p class="time_day">2018-03-21</p><p class="time_date">15:59:12</p></div>
-                    </li> -->
-                </ul>                                                
+            </ul>                                                
         </div>         
         
         
@@ -75,8 +52,8 @@ import pro from '../../../assets/js/common'
     }
     const deductionConfig = {
         type: '被跟投用户名',
-        name: '跟投结余',
-        surplus: '跟投扣除金额'
+        name: '跟投扣除金额',
+        surplus: '跟投结余'
     }
     export default {
         name: 'follow_history',

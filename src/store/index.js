@@ -317,10 +317,10 @@ export default new Vuex.Store({
 		},
 		IMGPATH: function (state) {
 			if(state.setting == 'dev') {
-				return state.account.currentUrlHead + '//192.168.0.225'
+				return state.account.currentUrlHead + '//test.platform-trade.dktai.cn'
 			}else if(state.setting == 'build'){
 				if(state.environment == 'test'){
-					return state.account.currentUrlHead + '//test.api.zhishutianxia.com';
+					return state.account.currentUrlHead + '//test.platform-trade.dktai.cn';
 				}else{
 					return state.account.currentUrlHead + '//139.196.232.17';
                 }
