@@ -2,10 +2,10 @@
 	<div id="mineGt">
 		<topTitle title="我的跟投者" type="0" type1="2"></topTitle>
 		<div id="container">
-			<!--<div  class="details" v-show="myFollower">
+			<div  class="details" v-show="myFollower">
 				<ul  class="border_bottom" >
 					<li>
-						<img src="myFollower.wxHeadImg | changeImg" alt="" />
+						<img src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
 						<span class="span_black">{{myFollower.wxNickname || mobileHidden(myFollower.telphone)}}</span>
 					</li>
 					<li>
@@ -13,7 +13,7 @@
 						<span class="color_red">{{myFollower.direction | changDirection}}</span>
 					</li>
 				</ul>
-			</div>-->
+			</div>
 			<div class="h_20"></div>
 			<div class="tip">
 				<ul>
