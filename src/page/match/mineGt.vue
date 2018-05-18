@@ -1,8 +1,23 @@
 <template>
 	<div id="mineGt">
-		<topTitle title="我的跟投者" type="0" type1="2"></topTitle>
+		<topTitle title="我的跟投" type="0" type1="2"></topTitle>
 		<div id="container">
+			<div  class="details" v-show="myFollower != ''">
+				<p class="border_bottom">我当前跟投的：</p>
+				<ul  class="border_bottom" >
+					<li>
+						<img :src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
+						<span class="span_black">{{myFollower.wxNickname != '' ? myFollower.wxNickname : mobileHidden(myFollower.telphone)}}</span>
+					</li>
+					<li>
+						<span class="span_simp">{{myFollower.FollowTime}}</span>
+						<span class="color_red">{{myFollower.direction}}</span>
+					</li>
+				</ul>
+			</div>
+			<div class="h_20"></div>
 			<div class="tip">
+				<p class="border_bottom">我的跟投者：</p>
 				<ul>
 					<li>
 						<span class="span_gray">提取收益率：</span>
@@ -18,17 +33,17 @@
 			<div class="details">
 				<ul class="border_bottom" v-for="n in followList">
 					<li>
-						<img :src="n.wxHeadImg" class="user"/>
-						<span class="span_gray">{{n.wxNickname}}</span>
+						<img :src="n.wxHeadImg | changeImg" class="user"/>
+						<span class="span_gray">{{n.wxNickname || mobileHidden(n.telphone)}}</span>
 					</li>
 					<li>
-						<span class="span_simp">{{n.followTime}}</span>
-						<span class="color_red">{{n.direction | changDirection}}</span>
+						<span class="span_simp">{{n.FollowTime}}</span>
+						<span class="color_red">{{n.direction}}</span>
 					</li>
 				</ul>
 			</div>
 			<div class="listNone" v-show="followList == undefined">
-				暂无跟投者！
+				{{this.followCount == 'undefined' ? '比赛未报名' : '暂无跟投者'}}
 			</div>
 		</div>
 	</div>
@@ -46,10 +61,14 @@
 				matchid :'',
 				divide:"",//收益率
 				followCount:"",//跟投人数
-				followList:[]//跟投列表
+				followList:[],//跟投列表
+				myFollower:{}
 			}
 		},
 		methods:{
+			mobileHidden (phoneNumber) {
+		        return pro.mobileHidden(phoneNumber);
+		    },
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
@@ -68,11 +87,12 @@
 				}
 				var headers = this.headers
 				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						console.log(res)
+					if(res.success == true){
 						this.divide = res.data.divide;
-						this.followCount = res.data.followCount;
-						this.followList = res.data.followers
+						this.followList = res.data.follower;
+						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
+						this.myFollower = res.data.myFollower == undefined ? '': res.data.myFollower;
+						console.log(this.myFollower.wxNickname);
 					}
 				}).catch((err)=>{
 					var data = err.data;
@@ -92,8 +112,8 @@
 			this.getMintGt(this.matchid);
 		},
 		filters:{
-			changDirection:function(e){
-				return e == 0 ? "正向" : "反向"
+			changeImg:function(e){
+				return e != '' ? e : require("../../assets/images/account/WXlogin.png");
 			}
 		}
 	}
@@ -159,6 +179,15 @@
 			font-size: 0.28rem;
 			color: $grayDeep;
 			margin-top: 50%;
+		}
+		p{
+			height: 0.88rem;
+			font-size: 0.32rem;
+			text-align: left;
+			text-indent: 0.3rem;
+			line-height: 0.88rem;
+			color: $blcakThin;
+			font-weight: bold;
 		}
 	}
 </style>

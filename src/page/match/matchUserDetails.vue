@@ -110,8 +110,9 @@
 </template>
 
 <script>
-	import topTitle from "../../components/topTitle.vue"
-	import pro from "../../assets/js/common.js"
+	import topTitle from "../../components/topTitle.vue";
+	import pro from "../../assets/js/common.js";
+	import { MessageBox } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"matchUserDetails",
@@ -171,23 +172,35 @@
 					type:type
 				};
 				var header=this.headers;
-				pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						if(type == 2){
-							this.$toast({message: "取消成功",duration: 2000});
-						}else{
-							this.$toast({message: "恭喜您，跟投成功！",duration: 2000});
+				let title = '';
+				if(type == 0){
+					title="正向跟投："
+				}else if(type == 1){
+					title = "反向跟投："
+				}else if(type == 2){
+					title = "取消跟投："
+				}
+				let name = this.wxNickname ? thiw.wxNickname : this.telphone
+				MessageBox.confirm("您确定"+title+"</br>"+name+"吗？","跟投设置").then(()=>{
+					pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
+						if(res.code == 1 && res.success == true){
+							if(type == 2){
+								this.$toast({message: "取消成功",duration: 2000});
+							}else{
+								this.$toast({message: "恭喜您，跟投成功！",duration: 2000});
+							}
+							this.status = this.status == 0 ? 1 : 0;
 						}
-						this.status = this.status == 0 ? 1 : 0;
-					}
-				}).catch((err)=>{
-					var data = err.data;
-					if(data == undefined){
-						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
-					}else{
-						this.$toast({message:data.message,duration: 2000});
-					}
-				})
+					}).catch((err)=>{
+						var data = err.data;
+						if(data == undefined){
+							this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+						}else{
+							this.$toast({message:data.message,duration: 2000});
+						}
+					})
+				}).catch(()=>{})
+				
 			}
 		},
 		activated:function(){

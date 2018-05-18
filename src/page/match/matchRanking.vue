@@ -3,7 +3,12 @@
 		<div class="myRank">
 			<ul>
 				<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
-				<li><span @click="profitRateFollow('profitrate')">总收益</span><i class="change change_1"></i><span @click="profitRateFollow('follow')">跟投人数</span><i class="change"></i></li>
+				<li>
+					<span @click="profitRateFollow('profitrate')" :class="{current : current == 0}">总收益</span>
+					<i  :class="profitrateUp ? 'change' : 'change_2'" class="change_1" @click="changeSort('profitrateUp')"></i>
+					<span @click="profitRateFollow('follow')" :class="{current : current == 1}">跟投人数</span>
+					<i :class="followUp ? 'change':'change_2'" @click="changeSort('followUp')"></i>
+				</li>
 			</ul>
 		</div>
 		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
@@ -41,11 +46,24 @@
 				sidx:"",
 				//排序
 				sort:'',
+				profitrateUp:true,
+				followUp:true,
+				current:0
+				
 			}
 		},
 		methods:{
+			changeSort:function(type){
+				this[type] = !this[type];
+				this.sort = this[type] ? '0' : '1';
+				this.getRanking(this.matchid,this.sidx,this.sort);
+			},
 			profitRateFollow:function(type){
 				this.sidx = type == 'profitrate' ? 0 : 1 ;
+				this.sort = 0;
+				this.current = type == 'profitrate' ? 0 : 1;
+				this.profitrateUp = true;
+				this.followUp = true;
 				this.getRanking(this.matchid,this.sidx,this.sort);
 			},
 			mobileHidden (phoneNumber) {
@@ -91,6 +109,7 @@
 			}
 		},
 		mounted:function(){
+			this.profitrateUp = true;
 			this.sort = 0;
 			this.sidx = 0;
 			this.getHeaders();
@@ -152,6 +171,14 @@
 	.change_1{
 		margin-right: 0.4rem;
 	}
+	.change_2{
+		display: inline-block;
+		width: 0.18rem;
+		height: 0.24rem;
+		background: url(../../assets/images/match/match_rankDown.png) no-repeat;
+		background-size: 0.18rem 0.24rem;
+		margin-left: 0.1rem;
+	}
 	.ranking{
 		width: $w;
 		padding: 0 0.3rem;
@@ -199,5 +226,8 @@
 	.perecnt{
 		margin-right: 1.32rem;
 		color: $redDeep;
+	}
+	.current{
+		color:$redDeep;
 	}
 </style>
