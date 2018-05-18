@@ -28,7 +28,7 @@
 				</ul>
 			</div>
 			<div class="listNone" v-show="followList == undefined">
-				暂无跟投者！
+				{{this.followCount == 'undefined' ? '比赛未报名' : '暂无跟投者'}}
 			</div>
 		</div>
 	</div>
@@ -68,11 +68,11 @@
 				}
 				var headers = this.headers
 				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
-					if(res.code == 1 && res.success == true){
-						console.log(res)
+					if(res.success == true){
 						this.divide = res.data.divide;
-						this.followCount = res.data.followCount;
 						this.followList = res.data.followers
+						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
+						
 					}
 				}).catch((err)=>{
 					var data = err.data;
