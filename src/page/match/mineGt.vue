@@ -18,8 +18,8 @@
 			<div class="details">
 				<ul class="border_bottom" v-for="n in followList">
 					<li>
-						<img :src="n.wxHeadImg" class="user"/>
-						<span class="span_gray">{{n.wxNickname}}</span>
+						<img :src="n.wxHeadImg | changeImg" class="user"/>
+						<span class="span_gray">{{n.wxNickname || mobileHidden(n.telphone)}}</span>
 					</li>
 					<li>
 						<span class="span_simp">{{n.followTime}}</span>
@@ -50,6 +50,9 @@
 			}
 		},
 		methods:{
+			mobileHidden (phoneNumber) {
+		        return pro.mobileHidden(phoneNumber);
+		    },
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
@@ -70,7 +73,7 @@
 				pro.fetch("post","/followInvest/myFollowers",data,headers).then((res)=>{
 					if(res.success == true){
 						this.divide = res.data.divide;
-						this.followList = res.data.followers
+						this.followList = res.data.follower;
 						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
 						
 					}
@@ -94,6 +97,9 @@
 		filters:{
 			changDirection:function(e){
 				return e == 0 ? "正向" : "反向"
+			},
+			changeImg:function(e){
+				return e != "" ? e : require("../../assets/images/account/WXlogin.png");
 			}
 		}
 	}

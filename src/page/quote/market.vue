@@ -338,7 +338,7 @@
 				}
 				&:nth-child(3){
 					width: 1.25rem;
-					color: $white;
+					color: $blcakThin;
 				}
 				&:nth-child(4), &:nth-child(5){
 					width: 1.4rem;
@@ -368,6 +368,7 @@
 						margin-top: 0.18rem;
 						font-size: $fs32;
 						color: $white;
+						color: $blcakThin;
 					}
 				}
 			}
