@@ -13,7 +13,7 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -29,7 +29,7 @@
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -43,7 +43,7 @@
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -59,7 +59,7 @@
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://192.168.0.225'+n.imgUrl" />
+				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
