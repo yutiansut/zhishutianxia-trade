@@ -276,7 +276,7 @@
 				font-size: $fs32;
 				&.name{
 					font-size: $fs30;
-					color: $white;
+					color:$blcakThin;
 					margin-top: 0.25rem;
 				}
 				&:last-child{
