@@ -26,7 +26,7 @@
 						<span @tap="switchEvent">{{changeRateName}}<i class="icon icon_switch"></i></span>
 					</li>
 					<template v-for="(v, index) in parameters">
-						<li @tap="toQuoteDetails(v.CommodityNo, v.MainContract, v.ExchangeNo, v.contrast)">
+						<li @tap="toQuoteDetails(v.CommodityNo, v.MainContract, v.ExchangeNo, v.contrast)" :class="{backRed:v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, backGreen: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">
 							<div class="name">
 								<em>{{v.CommodityName}}</em>
 								<em>{{v.CommodityNo + v.MainContract}}</em>
@@ -373,5 +373,11 @@
 				}
 			}
 		}
+	}
+	.backRed{
+		background-color: $redSimple;
+	}
+	.backGreen{
+		background-color: $greenSimple;
 	}
 </style>

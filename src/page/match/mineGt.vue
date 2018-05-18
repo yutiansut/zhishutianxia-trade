@@ -2,6 +2,19 @@
 	<div id="mineGt">
 		<topTitle title="我的跟投者" type="0" type1="2"></topTitle>
 		<div id="container">
+			<!--<div  class="details" v-show="myFollower">
+				<ul  class="border_bottom" >
+					<li>
+						<img src="myFollower.wxHeadImg | changeImg" alt="" />
+						<span class="span_black">{{myFollower.wxNickname || mobileHidden(myFollower.telphone)}}</span>
+					</li>
+					<li>
+						<span class="span_simp">{{myFollower.FollowTime}}</span>
+						<span class="color_red">{{myFollower.direction | changDirection}}</span>
+					</li>
+				</ul>
+			</div>-->
+			<div class="h_20"></div>
 			<div class="tip">
 				<ul>
 					<li>
@@ -22,7 +35,7 @@
 						<span class="span_gray">{{n.wxNickname || mobileHidden(n.telphone)}}</span>
 					</li>
 					<li>
-						<span class="span_simp">{{n.followTime}}</span>
+						<span class="span_simp">{{n.FollowTime}}</span>
 						<span class="color_red">{{n.direction | changDirection}}</span>
 					</li>
 				</ul>
@@ -46,7 +59,8 @@
 				matchid :'',
 				divide:"",//收益率
 				followCount:"",//跟投人数
-				followList:[]//跟投列表
+				followList:[],//跟投列表
+				myFollower:{}
 			}
 		},
 		methods:{
@@ -75,7 +89,7 @@
 						this.divide = res.data.divide;
 						this.followList = res.data.follower;
 						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
-						
+						this.myFollower = res.data.myFollower;
 					}
 				}).catch((err)=>{
 					var data = err.data;

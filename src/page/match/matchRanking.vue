@@ -62,6 +62,8 @@
 				this.sidx = type == 'profitrate' ? 0 : 1 ;
 				this.sort = 0;
 				this.current = type == 'profitrate' ? 0 : 1;
+				this.profitrateUp = true;
+				this.followUp = true;
 				this.getRanking(this.matchid,this.sidx,this.sort);
 			},
 			mobileHidden (phoneNumber) {
