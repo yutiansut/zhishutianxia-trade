@@ -16,14 +16,14 @@
 				<mt-tab-item id="2">日历</mt-tab-item>
 				<mt-tab-item id="3">要闻</mt-tab-item>
 			</mt-navbar>
-			
+
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
 				<mt-tab-container-item id="1">
 					<discover7x24></discover7x24>
 				</mt-tab-container-item>
 				<mt-tab-container-item id="2">
-					<calendar-news :newDate ="newsDate"></calendar-news>
+					<calendar-news :newDate ="newsDate" @datePosition="getDatePosition"></calendar-news>
 				</mt-tab-container-item>
 				<mt-tab-container-item id="3">
 					<focus-news></focus-news>
@@ -40,8 +40,8 @@
 				:endDate="endDate"
 				@confirm="handleChange">
 			</mt-datetime-picker>
-	
-	
+
+
 		</div>
 		<bottomTab :tabSelect="tabSelected"></bottomTab>
 	</div>
@@ -52,7 +52,7 @@
 	import discover7x24 from '../page/discover/discover7x24'
 	import calendarNews from '../page/discover/calendarNews'
 	import focusNews from '../page/discover/focusNews'
-	
+
 	export default {
 		name: "discover",
 		components: {
@@ -70,7 +70,8 @@
 				value: null,
 		      	value1: new Date(),
 		      	startDate: new Date('2014'),
-		      	endDate: new Date('2020-12-31'),
+                endDate: new Date('2020-12-31'),
+                datePosition: ''
 			}
 		},
 		methods: {
@@ -84,32 +85,34 @@
 						time: '2018-02-10'
 					}})
 				}
-				
-			},
-			toImformationSearch () {
 
 			},
-			toChooseDay (picker){
+			toChooseDay (picker) {
 				this.$refs[picker].open();
 			},
-			handleChange:function(value){
+			handleChange (value) {
 				console.log(value)
 				console.log(this.$pro.getDate(Date.parse(value),"y-m-d"))
 				this.newsDate = this.$pro.getDate(Date.parse(value),"y-m-d");
-				// this.startTime = pro.getDate("y-m-d", Date.parse(value));
-				// this.endTime = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+24*60*60)*1000);
-				// this.getDayList(this.startTime);
-				// //保证未登录的状态下进行调用
-				// if(this.userInfo == ''){
-				// 	this.getInfoListNokoken(this.startTime,this.endTime)
-				// }else{
-				// 	this.getInfoList(this.startTime,this.endTime);
-				// }
-				// this.show_day = pro.getDate("yy-mm-dd", Date.parse(value));
-			},
+            },
+            getDatePosition (value) {
+                this.datePosition = value
+            }
 		},
-		
-		
+		watch: {
+			selected (value) {
+				if(value == 2) {
+					//接受子组件的传值来进行定位
+					let calendar_date = document.getElementsByClassName('calendar_date')[0]
+                    this.$nextTick(()=>{
+                        console.log(this.datePosition)
+						calendar_date.scrollLeft = this.datePosition
+					})
+				}
+			}
+		}
+
+
 	}
 </script>
 
@@ -130,9 +133,9 @@
 			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 		}
-		
+
 	}
-	
+
 	.icon_account,
 	.icon_search,
 	.icon_calendar {
@@ -142,7 +145,7 @@
 		background: url("../assets/images/account/account_user.png") center no-repeat;
 		background-size: cover;
 	}
-	
+
 	.icon_search {
 		background: url("../assets/images/account/search_icon_white.png") center no-repeat;
 		background-size: cover;
@@ -156,6 +159,6 @@
 		width: 7.5rem;
 		padding-bottom: 1.16rem;
 	}
-	
-	
+
+
 </style>

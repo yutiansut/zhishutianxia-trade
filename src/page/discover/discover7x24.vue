@@ -29,7 +29,6 @@
 		data() {
 			return {
 				tabSelected: 'discover',
-				selected: "1",
 				startTime: '',
 				endTime: '',
 				pageNum:0,
@@ -55,11 +54,11 @@
 		    		keyword:""
 		    	}
 		    	this.$pro.fetch("post","/news/get7_24Live",data,"").then((res)=>{
-					console.log(res)
+					//console.log(res)
 		    		if(res.code == 1 && res.success == true){
 						res.data.forEach((k) => {
 							if(k.liveTitle.length>70){
-								console.log(k.liveTitle.length)
+								//console.log(k.liveTitle.length)
 								k.zhankai = true
 							}							
 						})
@@ -97,10 +96,6 @@
                     }
                 })
 			},
-			// test1 () {
-			// 	this.pageNum++
-			// 	this.getNewsInfo(this.pageNum)	
-			// },
 			showAll1 (item) {
 				item.zhankai = !item.zhankai
 			},

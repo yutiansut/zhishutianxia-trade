@@ -137,6 +137,8 @@ import pro from '../../../assets/js/common'
             toFixedNum (num,point = 2) {
                 if(num){
                     return num.toFixed(point)
+                }else{
+                    return num
                 }
                 
             },

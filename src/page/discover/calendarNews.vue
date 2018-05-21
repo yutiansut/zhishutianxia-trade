@@ -53,7 +53,8 @@
 				weekDayList: [],
 				showTime: '',
 				list: [],
-				showNoInfo: false
+                showNoInfo: false,
+                datePosition: ''
 			}
 		},
 		methods: {
@@ -111,22 +112,29 @@
 					if(indexDayWeekday<0) {
 						indexDayWeekday = indexDayWeekday + 7
 					}
-					//let isSelected = index===date;
 					let indexDay = {
 						time: year + '-' + (mouth + 1) + '-' + index,
 						day: index,
 						weekday: this.getWeekDay (indexDayWeekday),
-						//selected: isSelected
 					}
 					mouthDayList.push(indexDay)
 					 	
 				}
-				this.showTime = mouthDayList[date - 1].time
-				document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
+                this.showTime = mouthDayList[date - 1].time
+                this.getPosition(date)
 				return mouthDayList
-
-
-			},
+            },
+            //定位日历选中居中
+            getPosition (date) {
+                //定位当前天数在中间
+                const ratio = parseFloat(document.getElementsByTagName('html')[0].style.fontSize)
+                const liWidth =  ratio*1.07 //1.07是li的宽度 (340行)
+                let calendar_date = document.getElementsByClassName('calendar_date')[0]
+                this.datePosition = (date-4)*liWidth
+                calendar_date.scrollLeft = this.datePosition
+                //传值给父组件
+                this.$emit('datePosition',this.datePosition);
+            },
 			getTomorrow (todayString) {
 				let todayList = todayString.split('-');
 				todayList[2] = todayList[2]*1 + 1;
@@ -142,7 +150,8 @@
 					this.getInfoList(item.time, tomorrow)
 				}else{
 					console.log(123)
-				}
+                }
+                this.getPosition(item.day)
 
 			},
 			getInfoList (startTime,endTime) {
@@ -287,25 +296,12 @@
 				}
 			}	
 		},
-		// created () {
-		// 	const local = this.$pro.local;
-		// 	this.userInfo = local.get('user');
-		// 	let today = new Date();
-		// 	this.today = today;
-		// 	this.weekDayList = this.mouthList();
-		// 	this.getInfoList()
-		// },
-		mounted () {
-			document.getElementsByClassName('calendar_date')[0].scrollLeft = 500
-			console.log(document.getElementsByClassName('calendar_date')[0].scrollLeft)
-			//document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
-		},
 		activated () {
 			const local = this.$pro.local;
 			this.userInfo = local.get('user');
 			let today = new Date();
 			this.today = today;
-			this.weekDayList = this.mouthList();
+            this.weekDayList = this.mouthList();
 			this.getInfoList()
 		},	
 	}
@@ -324,11 +320,13 @@
 		}
 		.date_list{
 			@include flex(space-between);
-			width: 37.5rem;
-			background-color: $bgGray;
-			padding: 0.3rem 0.2rem;
+			width: auto;
+			// background-color: $bgGray;
+			// padding: 0.3rem 0.2rem;
 			li{
-				padding: 0 0.2rem;
+				padding: 0.3rem 0.2rem;
+                flex: 0 0 1.07rem;
+                background-color: $bgGray;
 			}
 			.selected{
 				p {
