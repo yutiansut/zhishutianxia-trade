@@ -107,7 +107,8 @@
 				// }
 				// this.show_day = pro.getDate("yy-mm-dd", Date.parse(value));
 			},
-		}
+		},
+		
 		
 	}
 </script>

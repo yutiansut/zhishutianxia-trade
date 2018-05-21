@@ -11,7 +11,7 @@
 		</div>
 		
 		<ul class="my_list">
-			<li class="item" v-for="item in list" :key="item.calendarId">
+			<li class="item" v-for="item in list" :key="item.createdAt">
 				<div class="title_box">
 					<div class="left">
 						<span :class="['subscribe_icon_no',{'subscribe_icon':item.status==1}]" @click="subscription(item)"></span>
@@ -106,24 +106,23 @@
 				let mouthDay = mouthDayLength[mouth];
 				//当月第一天 
 				for (let index = 1; index <= mouthDay; index++) {
-					//循环遍历 得到每天的星期数   星期数 = |(天数差%7 + 当天星期数)%7|
+					//循环遍历 得到每天的星期数   星期数 = (天数差%7 + 当天星期数)%7   如果为负数加7 解决周六问题
 					let indexDayWeekday = ((index - date)%7 + weekday)%7;
+					if(indexDayWeekday<0) {
+						indexDayWeekday = indexDayWeekday + 7
+					}
 					//let isSelected = index===date;
 					let indexDay = {
 						time: year + '-' + (mouth + 1) + '-' + index,
 						day: index,
-						weekday: this.getWeekDay (Math.abs(indexDayWeekday)),
+						weekday: this.getWeekDay (indexDayWeekday),
 						//selected: isSelected
 					}
 					mouthDayList.push(indexDay)
 					 	
 				}
 				this.showTime = mouthDayList[date - 1].time
-				// var style = window.getComputedStyle ? window.getComputedStyle(document.getElementsByClassName('calendar_date')[0],null) : null || box.currentStyle;
-				// console.log(style.width);
-				// console.log( window.getComputedStyle(document.getElementsByClassName('date_list')[0],null).width)
-				// document.getElementsByClassName('calendar_date')[0].scrollLeft = 100;
-				// console.log(document.getElementsByClassName('calendar_date')[0].scrollLeft);
+				document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
 				return mouthDayList
 
 
@@ -204,6 +203,7 @@
 			//订阅功能
 			subscription:function(item){
 				var timestampNow = Date.parse(new Date())/1000;
+				//document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
 				if(!this.userInfo){
 					this.$toast({message:"您还未登录，请先登录，方可订阅",duration: 2000});
 					this.$router.push({path:"/login"});
@@ -295,6 +295,11 @@
 		// 	this.weekDayList = this.mouthList();
 		// 	this.getInfoList()
 		// },
+		mounted () {
+			document.getElementsByClassName('calendar_date')[0].scrollLeft = 500
+			console.log(document.getElementsByClassName('calendar_date')[0].scrollLeft)
+			//document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
+		},
 		activated () {
 			const local = this.$pro.local;
 			this.userInfo = local.get('user');
@@ -302,9 +307,7 @@
 			this.today = today;
 			this.weekDayList = this.mouthList();
 			this.getInfoList()
-		},
-		
-	
+		},	
 	}
 </script>
 

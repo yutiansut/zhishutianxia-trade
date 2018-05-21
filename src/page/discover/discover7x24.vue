@@ -5,7 +5,7 @@
 			<ul class="discover_list">
 				<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
 						<template >
-							<li class="list" v-for="k in newsInfo" :key="k.liveWallstreetnId">
+							<li class="list" v-for="k in newsInfo" >
 								<p class="time_text"><span class="time">{{k.createdAt | changTime }}</span></p>
 								<div class="box">
 									<p :class="{textHeight:k.zhankai}" :style="{color:k.importance!=1?'#ff5533':''}">{{k.liveTitle}}</p>
