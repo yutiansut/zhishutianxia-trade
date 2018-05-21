@@ -152,15 +152,15 @@
 	.search{
 		width: 7.5rem;
 		height: 0.96rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		.col{
 			float: left;
 			width: 2.2rem;
 			height: 0.64rem;
 			overflow: hidden;
-			background: #1b1f26;
-			border: 0.01rem solid $black;
+			background: $bg;
+			border: 0.01rem solid $bgDeep;
 			border-radius: 0.1rem;
 			margin: 0.16rem 0;
 			.icon{
@@ -186,11 +186,12 @@
 			margin: 0 0.1rem;
 		}
 		button{
+			color: $bg;
 			width: 1.12rem;
 			height: 0.56rem;
 			line-height: 0.56rem;
 			text-align: center;
-			background: $yellow;
+			background: $redDeep;
 			border-radius: 0.1rem;
 			margin: 0.2rem 0.1rem;
 			padding: 0;
@@ -199,7 +200,7 @@
 	.list{
 		width: 7.5rem;
 		overflow: auto;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		ul{
 			width: 16.6rem;
 		}
@@ -238,8 +239,8 @@
 			}
 			.list_title{
 				height: 0.64rem;
-				border-bottom: 0.01rem solid $black;
-				background: #16597f;
+				border-bottom: 0.01rem solid $bgDeep;
+				background: $bg;
 				padding-left: 0.3rem;
 				span{
 					height: 0.64rem;
@@ -253,7 +254,7 @@
 			}
 			.list_cont{
 				height: 0.88rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
@@ -272,7 +273,7 @@
 			}
 			.tools{
 				height: 0.96rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				display: flex;
 				justify-content: center;
 				#btn{

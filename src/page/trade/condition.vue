@@ -638,7 +638,7 @@
 	.tools{
 		width: 7.5rem;
 		height: 0.96rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		background: $bg;
 		position: absolute;
 		top: 0;
@@ -653,7 +653,7 @@
 	.order_type{
 		height: 0.96rem;
 		padding: 0 0.3rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		span{
 			display: inline-block;
 			float: left;
@@ -661,9 +661,10 @@
 			height: 0.56rem;
 			line-height: 0.56rem;
 			text-align: center;
-			background: $lightBlue;
+			border:0.01rem solid $redDeep;
+			background: $bg;
 			margin: 0.2rem 0;
-			color: $white; 
+			color: $redDeep; 
 			&:first-child{
 				border-top-left-radius: 0.1rem;
 				border-bottom-left-radius: 0.1rem;
@@ -673,7 +674,8 @@
 				border-bottom-right-radius: 0.1rem;
 			}
 			&.current{
-				background: $blue;
+				background: $redDeep;
+				color: $bg;
 			}
 		}
 	}
@@ -715,8 +717,8 @@
 			}
 			.list_title{
 				height: 0.64rem;
-				border-bottom: 0.01rem solid $black;
-				background: #16597f;
+				border-bottom: 0.01rem solid $bgDeep;
+				background: $bg;
 				padding-left: 0.3rem;
 				span{
 					height: 0.64rem;
@@ -730,7 +732,7 @@
 			}
 			.list_cont{
 				height: 0.88rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;

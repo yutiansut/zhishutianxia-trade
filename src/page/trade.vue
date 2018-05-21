@@ -1,5 +1,6 @@
 <template>
 	<div id="trade">
+		<bottomTab :tabSelect="tabSelected"></bottomTab>
 		<hasLogin ref="hasLogin" :name="tradeUser"></hasLogin>
 		<header>
 			<h1>ID:{{tradeUser}}</h1>
@@ -27,9 +28,10 @@
 	import holdOrder from "./trade/holdOrder.vue"
 	import moneyDetails from "./trade/moneyDetails.vue"
 	import hasLogin from "./trade/hasLogin.vue"
+	import bottomTab from "../components/bottom_tab"
 	export default{
 		name: "trade",
-		components: { moneyTotal, tradeCenter, holdOrder, moneyDetails, hasLogin},
+		components: { moneyTotal, tradeCenter, holdOrder, moneyDetails, hasLogin,bottomTab},
 		data(){
 			return{
 				tabList: ['交易','持仓','资金明细'],
@@ -38,6 +40,7 @@
 				totalShow: false,
 				componentsShow: false,
 				currentNo: '',
+				tabSelected: 'trade'
 			}
 		},
 		computed: {

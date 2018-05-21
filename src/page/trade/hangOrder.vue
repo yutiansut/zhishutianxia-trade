@@ -235,8 +235,8 @@
 			}
 			.list_title{
 				height: 0.64rem;
-				border-bottom: 0.01rem solid $black;
-				background: #16597f;
+				border-bottom: 0.01rem solid $bgDeep;
+				background: $bg;
 				padding-left: 0.3rem;
 				span{
 					height: 0.64rem;

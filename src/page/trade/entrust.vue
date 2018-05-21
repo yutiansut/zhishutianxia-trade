@@ -159,8 +159,8 @@
 			}
 			.list_title{
 				height: 0.64rem;
-				border-bottom: 0.01rem solid $black;
-				background: #16597f;
+				border-bottom: 0.01rem solid $bgDeep;
+				background: $bg;
 				padding-left: 0.3rem;
 				span{
 					height: 0.64rem;
@@ -174,18 +174,16 @@
 			}
 			.list_cont{
 				height: 0.88rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
-					color: $white;
 				}
 				.name{
 					em{
 						display: block; 
 						&:first-child{
 							font-size: $fs28;
-							color: $white;
 							margin: 0.15rem 0 0.05rem 0;
 						}
 					}
