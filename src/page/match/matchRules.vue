@@ -14,7 +14,7 @@
 						<span id="span_no">{{index+1}}</span>
 						<span>{{v}}</span>
 					</div>
-					<label>{{k}}元</label>
+					<label>{{k}}</label>
 				</li>
 			</ul>
 		</div>
