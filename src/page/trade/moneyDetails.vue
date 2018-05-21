@@ -162,9 +162,9 @@
 			width: 1.6rem;
 			height: 0.88rem;
 			line-height: 0.88rem;
-			background: $titleBlue;
-			border-bottom: 0.01rem solid $black;
-			border-right: 0.01rem solid $black;
+			background: $bg;
+			border-bottom: 0.01rem solid $bgDeep;
+			border-right: 0.01rem solid $bgDeep;
 			padding-left: 0.3rem;
 		}
 		span{
@@ -181,7 +181,7 @@
 			width: 8.7rem;
 			height: 0.88rem;
 			line-height: 0.88rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding-left: 0.3rem;
 			span{
 				display: inline-block;

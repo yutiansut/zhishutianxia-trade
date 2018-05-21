@@ -153,7 +153,7 @@
 	.nav{
 		width: 7.5rem;
 		height: 0.8rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		background: $bg;
 		position: fixed;
 		top: 1.01rem;
@@ -171,8 +171,8 @@
 			}
 			&.current{
 				span{
-					color: $blue;
-					border-bottom: 0.05rem solid $blue;
+					color: $redDeep;
+					border-bottom: 0.05rem solid $redDeep;
 				}
 			}
 		}

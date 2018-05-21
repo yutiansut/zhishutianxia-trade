@@ -49,14 +49,14 @@
 	.total{
 		width: 7.5rem;
 		height: 0.95rem;
-		background: $lightBlue;
-		border-bottom: 0.01rem solid $black;
+		background:$bg;
+		border-bottom: 0.01rem solid $bgDeep;
 		.col{
 			float: left;
 			width: 2.5rem;
 			height: 0.95rem;
 			text-align: center;
-			border-left: 0.01rem solid $black;
+			border-left: 0.01rem solid $bgDeep;
 			&:first-child{
 				border: none;
 			}
@@ -66,9 +66,9 @@
 				margin: 0.14rem 0;
 			}
 			span{
+				color: $blcakThin;
 				display: inline-block;
 				text-align: center;
-				color: $white;
 				font-size: $fs28;
 				&.red{
 					color: $red;

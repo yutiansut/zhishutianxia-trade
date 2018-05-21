@@ -129,7 +129,6 @@
 			line-height: 2.5rem;
 			text-align: center;
 			font-size: $fs32;
-			color: $white;
 			border-bottom: 0.01rem solid $black;
 		}
 		li{

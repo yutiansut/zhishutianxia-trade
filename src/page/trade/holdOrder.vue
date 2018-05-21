@@ -69,7 +69,7 @@
 		width: 7.5rem;
 		height: 0.8rem;
 		padding: 0 0.3rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		overflow-x: auto;
 		ul{
 			width: 8rem;
@@ -84,7 +84,7 @@
 					margin-right: 0;
 				}
 				&.current{
-					color: $blue;
+					color: $redDeep;
 				}
 			}
 		}

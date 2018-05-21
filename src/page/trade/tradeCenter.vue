@@ -679,8 +679,8 @@
 	.tips{
 		height: 0.64rem;
 		line-height: 0.64rem;
-		background: $titleBlue;
-		border-bottom: 0.01rem solid $black;
+		background: $bg;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		span{
 			float: left;
@@ -696,14 +696,11 @@
 		p{
 			float: right;
 			font-size: $fs28;
-			em{
-				color: $white;
-			}
 		}
 	}
 	.fens_title{
 		height: 0.48rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding-left: 3.4rem;
 		span{
 			float: left;
@@ -754,17 +751,16 @@
 		width: 7.5rem;
 		height: 0.64rem;
 		line-height: 0.64rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		display: flex;
 		text-align: center;
 		.col{
 			width: 50%;
-			background: #3a2d36;
+			background: $bg;
 			&:first-child{
-				background: #273a3b;
+				background: $bg;
 			}
 			em{
-				color: $white;
 				font-size: $fs28;
 				margin: 0 0.2rem;
 			}
@@ -782,7 +778,7 @@
 	.order_type{
 		height: 0.96rem;
 		padding: 0 0.3rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		span{
 			display: inline-block;
 			float: left;
@@ -790,9 +786,10 @@
 			height: 0.56rem;
 			line-height: 0.56rem;
 			text-align: center;
-			background: $lightBlue;
+			background: $bg;
+			border: 0.01rem solid $redDeep;
 			margin: 0.2rem 0;
-			color: $white; 
+			color: $redDeep; 
 			&:first-child{
 				border-top-left-radius: 0.1rem;
 				border-bottom-left-radius: 0.1rem;
@@ -802,7 +799,8 @@
 				border-bottom-right-radius: 0.1rem;
 			}
 			&.current{
-				background: $blue;
+				background: $redDeep;
+				color: $bg;
 			}
 		}
 	}
@@ -859,10 +857,10 @@
 				line-height: 0.6rem;
 				padding: 0.12rem 0;
 				box-sizing: content-box;
-				color: $white;
-				border: 0.01rem solid $black;
+				color: $redDeep;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
-				background: #1b1f26;
+				background: $bg;
 				text-align: center;
 				font-size: $fs24;
 				&.ipt_lg{
@@ -909,10 +907,12 @@
 				width: 5.58rem;
 				height: 0.88rem;
 				line-height: 0.88rem;
-				border: 0.01rem solid $black;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
-				background: #1b1f26;
+				background: $bg;
 				span{
+					border: 0.01rem solid $redDeep;
+					color: $redDeep;
 					float: left;
 					display: inline-block;
 					width: 2.76rem;
@@ -921,12 +921,14 @@
 					text-align: center;
 					box-sizing: border-box;
 					&:last-child.current{
-						background: $lightBlue;
+						color: $bg;
+						background: $redDeep;
 						border-top-right-radius: 0.1rem;
 						border-bottom-right-radius: 0.1rem;
 					}
 					&:first-child.current{
-						background: $lightBlue;
+						color: $bg;
+						background: $redDeep;
 						border-top-left-radius: 0.1rem;
 						border-bottom-left-radius: 0.1rem;
 					}
@@ -936,8 +938,8 @@
 				float: left;
 				width: 5.6rem;
 				height: 0.88rem;
-				border: 0.01rem solid $black;
-				background: #1b1f26;
+				border: 0.01rem solid $bgDeep;
+				background: $bg;
 				border-radius: 0.1rem;
 				span{
 					display: inline-block;
@@ -946,12 +948,12 @@
 					height: 0.88rem;
 					line-height: 0.88rem;
 					text-align: center;
-					border-right: 0.01rem solid $black;
+					border-right: 0.01rem solid $bgDeep;
 					font-size: $fs32;
 					&.reduce{
 						float: right;
 						border: none;
-						border-left: 0.01rem solid $black;
+						border-left: 0.01rem solid $bgDeep;
 					}
 				}
 				input{
@@ -965,10 +967,9 @@
 				height: 0.88rem;
 				line-height: 0.88rem;
 				text-align: center;
-				border: 0.01rem solid $black;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
 				font-size: $fs28;
-				color: $white;
 			}
 		}
 		.btn_box{
