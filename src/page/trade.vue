@@ -126,8 +126,8 @@
 	header{
 		width: 7.5rem;
 		height: 1rem;
-		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		background: $blcakThin;
+		border-bottom: 0.01rem solid $bgDeep;
 		position: relative;
 		position: fixed;
 		top: 0;

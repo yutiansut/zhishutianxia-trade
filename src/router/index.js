@@ -10,7 +10,7 @@ const router = new Router({
   	{
       path: '/',
       redirect:{
-      	name:"home"
+      	name:"quote"
       }
     },
     {
@@ -22,11 +22,6 @@ const router = new Router({
       path: '/trade',
       name: 'trade',
      component: load('trade')
-    },
-     {
-    	path: '/home',
-      name: 'home',
-      component: load('home')
     },
     {
       path: '/discover',
