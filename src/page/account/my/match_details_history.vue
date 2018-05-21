@@ -27,11 +27,11 @@
                             </div>
                         </li>
                         <li class="item">
-                            <p>结算金额:&nbsp<span class="money">{{account.clearMoney}}</span>&nbsp元</p>
-                            <p>交易盈亏:&nbsp<span class="money">{{account.tradeProfitAndLoss}}</span>&nbsp元</p>
-                            <p>跟投提取收益:&nbsp<span class="money">{{details.followProfit}}</span>&nbsp元 <span class="btn" @click="goFollow(account.account,'1',account.activityType)">查看详情</span></p>
-                            <p>跟投扣除收益:&nbsp<span class="money">{{details.followDeduct}}</span>&nbsp元 <span class="btn" @click="goFollow(account.account,'2',account.activityType)">查看详情</span></p>
-                            <p>交易手续费:&nbsp<span class="money">{{account.tradeFee}}</span>&nbsp元</p>
+                            <p>结算金额:&nbsp<span class="money">{{toFixedNum(account.clearMoney)}}</span>&nbsp元</p>
+                            <p>交易盈亏:&nbsp<span class="money">{{toFixedNum(account.tradeProfitAndLoss)}}</span>&nbsp元</p>
+                            <p>跟投提取收益:&nbsp<span class="money">{{toFixedNum(details.followProfit)}}</span>&nbsp元 <span class="btn" @click="goFollow(account.account,'1',account.activityType)">查看详情</span></p>
+                            <p>跟投扣除收益:&nbsp<span class="money">{{toFixedNum(details.followDeduct)}}</span>&nbsp元 <span class="btn" @click="goFollow(account.account,'2',account.activityType)">查看详情</span></p>
+                            <p>交易手续费:&nbsp<span class="money">{{toFixedNum(account.tradeFee)}}</span>&nbsp元</p>
                             <p class="note"><span class="red">提醒</span>：结算金额=初始资金+交易盈亏+跟投提取收益-交易手续费-跟投扣除收益</p>
                         </li>
                         <li class="item">
@@ -133,6 +133,12 @@ import pro from '../../../assets/js/common'
                 this.$router.push({
                     path: `/follow_get_history/${account}/type/${type}/id/${id}`,
                 });
+            },
+            toFixedNum (num,point = 2) {
+                if(num){
+                    return num.toFixed(point)
+                }
+                
             },
             mobileHidden (phoneNumber) {
                 return pro.mobileHidden(phoneNumber)              
