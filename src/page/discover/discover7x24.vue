@@ -45,7 +45,7 @@
 				const weekList = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 				return weekList[time.getDay()]
 			},
-			getNewsInfo:function(pageNo){
+			getNewsInfo (pageNo) {
 		    	var data = {
 		    		pageSize:20,
 		    		pageNo:pageNo,
@@ -63,7 +63,7 @@
 							}							
 						})
 						let newList = res.data;
-						if (this.newsInfo.length == 0) {
+						if (this.pageNum == 0) {
 							this.newsInfo = res.data;
 						}else{
 							this.newsInfo = this.newsInfo.concat(newList)
@@ -101,13 +101,17 @@
 			},
 			loadTop () {
 				this.pageNum = 0;
-				this.getNewsInfo(0);
+				this.getNewsInfo(this.pageNum);
 				this.$refs.loadmore.onTopLoaded();
 			},
 			loadBottom () {
 				this.pageNum++
 				this.getNewsInfo(this.pageNum)
 				this.$refs.loadmore.onBottomLoaded();
+			},
+			test1 () {
+				this.pageNum++
+				this.getNewsInfo(this.pageNum)
 			}
 		},
 		filters:{

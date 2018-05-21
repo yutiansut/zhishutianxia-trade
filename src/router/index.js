@@ -208,6 +208,11 @@ const router = new Router({
       component: load('account/my/feedback')
     },
     {
+      path: '/account_details',
+      name: 'account_details',
+      component: load('account/my/account_details')
+    },
+    {
       path: '/news_info',
       name: 'news_info',
       component: load('account/my/news_info')

@@ -16,6 +16,12 @@
                         <span class="right_icon"></span>
                    </div>
                 </li>  
+                 <li @click="goto('/account_details')">
+                   <div>平台交易账号</div>
+                   <div class="item_right_box">
+                        <span class="right_icon"></span>
+                   </div>
+                </li>
                 <li @click="goto('/reset_password')">
                    <div>修改登录密码</div>
                    <div class="item_right_box">

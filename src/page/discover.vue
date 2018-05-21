@@ -105,7 +105,7 @@
 					//接受子组件的传值来进行定位
 					let calendar_date = document.getElementsByClassName('calendar_date')[0]
                     this.$nextTick(()=>{
-                        console.log(this.datePosition)
+                        //console.log(this.datePosition)
 						calendar_date.scrollLeft = this.datePosition
 					})
 				}

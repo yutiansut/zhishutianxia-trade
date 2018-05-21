@@ -19,7 +19,7 @@
             <!-- search-history -->
             <div class="search_history" v-show="showHistoryDiv">
                 <ul class="history_list">
-                    <li v-for="name in historyList"  class="item">{{name}}</li>
+                    <li v-for="name in historyList"  class="item" @click="setInputValue(name)">{{name}}</li>
                 </ul>
             </div>
 		</div>
@@ -54,7 +54,7 @@ const local = pro.local;
 		name: "discover",
 		data() {
 			return {
-				tabSelected: 'discover',
+				tabSelected: 'discover_search',
 				selected: "1",
 				searchValue: '',
 				arrList:[{"name":"黄金"},{"name":"布伦特原油"},{"name":"美国原油"},{"name":"美元"},{"name":"日元"},{"name":"标普500"},{"name":"纳斯达克"},{"name":"上证指数"},{"name":"深圳指数"}],
@@ -69,6 +69,7 @@ const local = pro.local;
 		methods: {
 			goBack() {
 				window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+				this.searchValue = ''
 			},
 			search () {
 				if(this.searchValue == ""){
