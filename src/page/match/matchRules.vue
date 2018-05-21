@@ -101,9 +101,8 @@
 				var header = this.headers
 				pro.fetch("post","/tradeCompetition/getAccount",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
 						MessageBox.alert("账号："+res.data.account+"</br>"+"密码："+res.data.password,"交易账号",{confirmButtonText:"进入登录页面",}).then(action=>{
-							console.log("9999");
+							this.$router.push({path:"/tradeLogin",query:{tradeAccount:res.data.account,password:res.data.password}});
 						});
 					}
 				}).catch((err)=>{

@@ -84,7 +84,7 @@
 				$(".bg").css({'opacity': 0, 'z-index': -1});
 				$(".cont").css({'right': -6.2 + 'rem'});
 				this.tradeSocket.send('{"Method":"Logout","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'"}}');
-				this.$router.push({path: '/index'});
+				this.$router.push({path: '/quote'});
 			},
 			totradeLogin: function(){
 				this.tradeSocket.send('{"Method":"Logout","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'"}}');

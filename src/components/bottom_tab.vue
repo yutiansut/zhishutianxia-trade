@@ -12,6 +12,7 @@
 </template>
 
 <script>
+	import { mapActions } from 'vuex'
 	export default{
 		name:"bottom_tab",
 		props:['tabSelect',"type"],
@@ -41,15 +42,35 @@
 					}
 
 				],
+				tradeUser: '',
 			}
 		},
 		methods:{
-			
+			...mapActions([
+				'initTrade'
+			]),
+		},
+		computed:{
+			loginStatus(){
+				return this.$store.state.account.loginStatus;
+			}
 		},
 		watch: {
 			tabSelected (value ,oldValue) {
 				if(value == this.tabSelect) return;
-				this.$router.push({path: `/${value}`})				
+				if(value == 'trade'){
+					this.tradeUser = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : ''; 
+					if(this.tradeUser != ''){
+						this.$router.push({path: '/trade'});
+						if(this.loginStatus == true) return;
+						this.initTrade();
+					}else{
+						this.$router.push({path: '/tradeLogin'});
+					}
+				}else{
+					this.$router.push({path: `/${value}`});				
+				}
+
 			},
 		},
 		updated () {
