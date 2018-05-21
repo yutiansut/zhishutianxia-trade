@@ -22,9 +22,10 @@
 		height: 1rem;
 		line-height: 1rem;
 		text-align: center;
-		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		background: $blcakThin;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		font-size: $fs32;
+		color: $bg;
 	}
 </style>

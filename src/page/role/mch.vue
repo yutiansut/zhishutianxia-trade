@@ -40,7 +40,7 @@
 					</tr>
 				</table>
 			</div>
-			<!--<p>香港交易所H股指数，最小波动10港元，可买涨买跌。</p>
+			<p>香港交易所H股指数，最小波动10港元，可买涨买跌。</p>
 			<h3>什么是买涨？</h3>
 			<p>当您买涨时，价格涨了你就赚钱，跌了亏钱。</p>
 			<h3>什么是买跌？</h3>
@@ -68,7 +68,7 @@
 			<h3>盈利如何分配？</h3>
 			<p>盈利100%归用户所有，平台不参与盈利分成。若用户亏损超出保证金，平台也不承担超出部分的亏损金额。</p>
 			<h3>实盘交易下单</h3>
-			<p>您的所有小H股指数交易，全部经由平台的期货交易账户，下单到香港交易所。</p>-->
+			<p>您的所有小H股指数交易，全部经由平台的期货交易账户，下单到香港交易所。</p>
 		</div>
 	</div>
 </template>
@@ -90,21 +90,20 @@
 
 <style scoped lang="scss">
 	@import "../../assets/css/common.scss";
-    .page_cont{
+     .page_cont{
     	margin-top: 1.01rem;
 		h3{
 			height: 0.6rem;
 			line-height: 0.6rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			color: $yellow;
 			font-size: $fs28;
 		}
 		p{
 			line-height: 0.4rem;
-			color: $white;
 			padding: 0.1rem 0.3rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 		}
 		.list{
 			width: 7.5rem;
@@ -116,8 +115,7 @@
 					text-align: left;
 					line-height: 0.36rem;
 					padding: 0.1rem;
-					border: 0.01rem solid $white;
-					color: $white;
+					border: 0.01rem solid $bgDeep;
 					&:nth-child(1){
 						width: 1rem;
 					}
