@@ -1115,9 +1115,6 @@
 				.name{
 					height: 0.5rem;
 					line-height: 0.55rem;
-					span{
-						color: $white;
-					}
 				}
 				.price{
 					font-size: 0.64rem;
@@ -1151,7 +1148,6 @@
 							font-size: 0.2rem;
 							&:last-child{
 								margin-top: 0.05rem;
-								color: $white;
 							}
 							&.default{
 								&.red{
