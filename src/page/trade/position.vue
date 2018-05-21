@@ -26,9 +26,9 @@
 			</template>
 		</ul>
 		<div class="tools" v-show="toolShow">
-			<btn name="平仓" className="orangesm" @click.native="closePosition"></btn>
-			<btn name="反手" className="bluesm" @tap.native="backTrade"></btn>
-			<btn name="止损止盈" className="greensm" @click.native="stopMoney"></btn>
+			<btn name="平仓" className="whitesm" @click.native="closePosition"></btn>
+			<btn name="反手" className="whitesm" @tap.native="backTrade"></btn>
+			<btn name="止损止盈" className="whitesm" @click.native="stopMoney"></btn>
 		</div>
 		<stopMoneyAlert ref="stopMoneyAlert"></stopMoneyAlert>
 	</div>
@@ -238,8 +238,8 @@
 	.tools{
 		width: 7.5rem;
 		height: 0.96rem;
-		border-bottom: 0.01rem solid $black;
-		background: $bg;
+		border-bottom: 0.01rem solid $bgDeep;
+		background: #f2f2f2;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -268,7 +268,6 @@
 					display: block; 
 					&:first-child{
 						font-size: $fs28;
-						color: $white;
 						margin: 0.15rem 0 0.05rem 0;
 					}
 				}
@@ -299,22 +298,22 @@
 				background: $bg;
 				padding-left: 0.3rem;
 				span{
+					color: $grayDeep;
 					height: 0.64rem;
 					line-height: 0.64rem;
 				}
 			}
 			&.current{
 				.list_cont{
-					background: $lightBlue;
+					background: #e6e6e6;
 				}
 			}
 			.list_cont{
 				height: 0.88rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
-					color: $white;
 				}
 			}
 		}

@@ -74,9 +74,9 @@
 			</ul>
 		</div>
 		<div class="tools" v-show="toolShow">
-			<btn :name="statusName" className="orangesm" @click.native="suspendEvent"></btn>
-			<btn name="修改" className="bluesm" @click.native="editEvent"></btn>
-			<btn name="删除" className="greensm" @click.native="deleteEvent"></btn>
+			<btn :name="statusName" className="whitesm" @click.native="suspendEvent"></btn>
+			<btn name="修改" className="whitesm" @click.native="editEvent"></btn>
+			<btn name="删除" className="whitesm" @click.native="deleteEvent"></btn>
 		</div>
 		<stopLossAlert ref="stopLossAlert"></stopLossAlert>
 		<stopProfitAlert ref="stopProfitAlert"></stopProfitAlert>
@@ -436,7 +436,7 @@
 		width: 7.5rem;
 		height: 0.96rem;
 		border-bottom: 0.01rem solid $bgDeep;
-		background: $bg;
+		background: #f2f2f2;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -524,7 +524,7 @@
 			}
 			&.current{
 				.list_cont{
-					background: $lightBlue;
+					background: $bgDeep;
 				}
 			}
 			.list_cont{
@@ -533,14 +533,12 @@
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
-					color: $white;
 				}
 				.name{
 					em{
 						display: block; 
 						&:first-child{
 							font-size: $fs28;
-							color: $white;
 							margin: 0.15rem 0 0.05rem 0;
 						}
 					}

@@ -287,7 +287,7 @@
 			height: 0.88rem;
 			line-height: 0.88rem;
 			font-size: $fs28;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			li{
 				float: left;
 				width: 3rem;
@@ -298,8 +298,8 @@
 				}
 				&.current{
 					span{
-						border-bottom: 0.04rem solid $blue;
-						color: $blue;
+						border-bottom: 0.04rem solid $redDeep;
+						color: $redDeep;
 					}
 				}
 			}
@@ -308,7 +308,7 @@
 			width: 6rem;
 			height: 0.88rem;
 			overflow: hidden;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			span{
 				float: left;
 				display: inline-block;
@@ -316,7 +316,7 @@
 				height: 0.88rem;
 				line-height: 0.88rem;
 				text-align: center;
-				border-right: 0.01rem solid $black;
+				border-right: 0.01rem solid $bgDeep;
 				&.percent{
 					width: auto;
 					border: 0;
@@ -326,10 +326,7 @@
 				}
 				&.price{
 					padding-left: 0.25rem;
-					border-left: 0.01rem solid $black;
-				}
-				em{
-					color: $white;
+					border-left: 0.01rem solid $bgDeep;
 				}
 			}
 			.name{
@@ -339,7 +336,7 @@
 				height: 0.88rem;
 				line-height: 0.88rem;
 				text-align: center;
-				border-right: 0.01rem solid $black;
+				border-right: 0.01rem solid $bgDeep;
 			}
 			input{
 				float: left;
@@ -347,11 +344,10 @@
 				width: 1.8rem;
 				height: 0.64rem;
 				line-height: 0.64rem;
-				background: #1b1f26;
-				border: 0.01rem solid $black;
+				background: $bg;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
 				margin: 0.12rem 0.1rem;
-				color: $white;
 				text-align: center;
 				&.spe{
 					margin: 0.12rem 0.1rem 0.12rem 0;
@@ -361,11 +357,10 @@
 				width: 1.8rem;
 				height: 0.64rem;
 				line-height: 0.64rem;
-				background: #1b1f26;
-				border: 0.01rem solid $black;
+				background: $bg;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
 				margin: 0.12rem 0.1rem;
-				color: $white;
 				text-align: center;
 				position: relative;
 				b{
@@ -388,7 +383,6 @@
 			width: 6rem;
 			height: 0.92rem;
 			line-height: 0.92rem;
-			border-top: 0.15rem solid #1b1f26;
 			span{
 				width: 50%;
 				text-align: center;

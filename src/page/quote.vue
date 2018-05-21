@@ -261,25 +261,23 @@
 		height: 0.96rem;
 		overflow: hidden;
 		background: $headColr;
-		border-bottom: 0.01rem solid $black;
 		margin: auto;
 		.tab{
 			width: 2rem;
-			height: 0.6rem;
-			margin: 0.2rem auto;
+			height: 0.96rem;
+			margin:auto;
 			span{
 				display: inline-block;
 				float: left;
 				width: 1rem;
-				height: 0.6rem;
-				line-height: 0.6rem;
+				height: 0.96rem;
+				line-height: 0.96rem;
 				text-align: center;
 				font-size: $fs28;
 				color:$grayDeep;
 				&.current{
 					color: $white;
 					border-bottom: 0.03rem solid $white;
-					padding-bottom: 0.2rem;
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 <template>
 	<div id="tradeLogin">
 		<header>
-			<back @click.native="goBack" :type="type"></back>
+			<back @click.native="goBack" :type="0"></back>
 			<div class="tab">
 				交易账号登录
 			</div>
