@@ -83,7 +83,8 @@
 				tip:[],
 				rule:{},
 				headers:"",
-				currentTitle:true
+				currentTitle:true,
+				isApply:false
 				
 			}
 		},
@@ -153,18 +154,23 @@
 			},
 			//报名
 			matchApply:function(e){
+				if(this.isApply == true){
+					this.$toast({message:"请不要重复点击。",duration: 2000});
+				}else{
 					var data = {
-							id : this.matchid
-						}
+						id : this.matchid
+					}
 					var header = this.headers;
 					pro.fetch("post","/tradeCompetition/join",data,header).then((res)=>{
 						if(res.code == 1 && res.success == true){
 							this.$toast({message:"恭喜您，报名成功！",duration: 2000});
 							this.currentTitle = false;
+							this.isApply = true;
 						}
 					}).catch((err)=>{
 						this.errobj(err);
 					})
+				}
 			},
 			errobj:function(err){
 				var data = err.data;
@@ -176,12 +182,14 @@
 			}
 		},
 		activated:function(){
+			this.isApply = false;
 			this.getHeaders();
 			if(this.matchid != ""){
 				this.getMtchRules(this.matchid);
 			}
 		},
 		mounted:function(){
+			this.isApply = false;
 			this.getHeaders();
 			if(this.matchid != ""){
 				this.getMtchRules(this.matchid);

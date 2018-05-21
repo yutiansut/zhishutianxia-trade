@@ -244,13 +244,13 @@
 		width: 7.5rem;
 		height: 1rem;
 		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0.18rem 0.3rem;
 		.search{
 			width: 6.9rem;
 			height: 0.64rem;
 			background: #1b1f26;
-			border: 0.01rem solid $black;
+			border: 0.01rem solid $bgDeep;;
 			border-radius: 0.1rem;
 			position: relative;
 			input{
@@ -259,7 +259,8 @@
 				line-height: 0.64rem;
 				padding: 0 0.9rem 0 0.85rem;
 				box-sizing: border-box;
-				color: $white;
+				background-color: $bg;
+				border: 0.01rem solid $bgDeep;
 			}
 			.icon_search{
 				position: absolute;
@@ -290,8 +291,8 @@
 			height: 0.64rem;
 			line-height: 0.64rem;
 			padding: 0 0.3rem;
-			border-bottom: 0.01rem solid $black;
-			background: $titleBlue;
+			border-bottom: 0.01rem solid $bgDeep;
+			background: #f2f2f2;
 		}
 		.recommend{
 			li{
@@ -300,8 +301,8 @@
 				height: 0.88rem;
 				line-height: 0.88rem;
 				text-align: center;
-				border-right: 0.01rem solid $black;
-				border-bottom: 0.01rem solid $black;
+				border-right: 0.01rem solid $bgDeep;
+				border-bottom: 0.01rem solid $bgDeep;
 			}
 		}
 		.result{
@@ -309,7 +310,7 @@
 				li{
 					height: 0.96rem;
 					padding: 0 0.17rem 0.3rem;
-					border-bottom: 0.01rem solid $black;
+					border-bottom: 0.01rem solid $bgDeep;
 					.col{
 						float: left;
 						span{
@@ -346,7 +347,7 @@
 		.empty{
 			height: 2.4rem;
 			line-height: 2.4rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			text-align: center;
 			p{
 				font-size: 0.36rem;

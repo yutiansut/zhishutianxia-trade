@@ -31,7 +31,7 @@
 		</div>
 		<div class="add_optional">
 			<div class="box" @tap="addOptional">
-				<i class="icon icon_add"></i>
+				<i class="icon icon_add">+</i>
 				<span>添加自选</span>
 			</div>
 		</div>
@@ -286,14 +286,14 @@
 <style scoped lang="scss">
 	@import "../../assets/css/common.scss";
 	nav{
-		color:$fontBlueTitle;
+		color:$blcakThin;
 		position: fixed;
 		top: 1.01rem;
 		left: 0;
 		width: $w;
 		height: 0.8rem;
-		background: $bg1;
-		border-bottom: 0.01rem solid $black;
+		background: $bg;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		overflow-x: scroll;
 		.nav_box{
@@ -310,8 +310,8 @@
 				margin: 0;
 			}
 			&.current{
-				color: $blue;
-				border-color: $blue;
+				color: $redDeep;
+				border-color: $redDeep;
 			}
 		}
 	}
@@ -322,7 +322,9 @@
 			height: 0.96rem;
 			line-height: 0.96rem;
 			overflow: hidden;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
+			color:#919199;
+			background-color: #f2f2f2;
 			padding: 0 0.3rem;
 			&:first-child{
 				height: 0.64rem;
@@ -345,7 +347,7 @@
 				}
 				&:nth-child(3){
 					width: 1.25rem;
-					color: $white;
+					color: $blcakThin;
 				}
 				&:nth-child(4), &:nth-child(5){
 					width: 1.4rem;
@@ -374,7 +376,7 @@
 					&:first-child{
 						margin-top: 0.1rem;
 						font-size: $fs32;
-						color: $white;
+						color: $blcakThin;
 					}
 				}
 			}
@@ -384,19 +386,17 @@
 		width: 7.5rem;
 		height: 1rem;
 		line-height: 1rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		display: flex;
 		justify-content: center;
 		.icon_add{
 			float: left;
-			width: 0.4rem;
-			height: 0.4rem;
-			background: url(../../assets/images/quote/add.png) no-repeat center center;
-			background-size: 100% 100%;
-			margin: 0.3rem 0.15rem 0 0;
+			font-size: 0.34rem;
+			margin-right: 0.1rem;
+			color: $grayDeep;
 		}
 		span{
-			color: $white;
+			color: $grayDeep;
 		}
 	}
 	.btn_box{

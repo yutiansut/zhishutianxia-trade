@@ -90,21 +90,20 @@
 
 <style scoped lang="scss">
 	@import "../../assets/css/common.scss";
-    .page_cont{
+     .page_cont{
     	margin-top: 1.01rem;
 		h3{
 			height: 0.6rem;
 			line-height: 0.6rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			color: $yellow;
 			font-size: $fs28;
 		}
 		p{
 			line-height: 0.4rem;
-			color: $white;
 			padding: 0.1rem 0.3rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 		}
 		.list{
 			width: 7.5rem;
@@ -116,8 +115,7 @@
 					text-align: left;
 					line-height: 0.36rem;
 					padding: 0.1rem;
-					border: 0.01rem solid $white;
-					color: $white;
+					border: 0.01rem solid $bgDeep;
 					&:nth-child(1){
 						width: 1rem;
 					}
