@@ -430,14 +430,14 @@
 			.icon_radio{
 				width: 0.24rem;
 				height: 0.24rem;
-				background: $redDeep;
+				background: $grayDeep;
 				border-radius: 0.12rem;
 				margin: 0.35rem 0.1rem 0 1.48rem;
 			}
 			.icon_radios{
 				width: 0.18rem;
 				height: 0.18rem;
-				background: $blue;
+				background: $redDeep;
 				border-radius: 0.1rem;
 				position: absolute;
 				top: 0.38rem;

@@ -56,6 +56,8 @@
 			changeSort:function(type){
 				this[type] = !this[type];
 				this.sort = this[type] ? '0' : '1';
+				this.current = type == 'profitrateUp' ? 0 : 1;
+				this.sidx = type == 'profitrateUp' ? 0 : 1;
 				this.getRanking(this.matchid,this.sidx,this.sort);
 			},
 			profitRateFollow:function(type){

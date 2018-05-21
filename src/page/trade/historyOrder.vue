@@ -90,11 +90,11 @@
 			},
 			startTimeConfirm: function(e){
 				let time = new Date(e);
-				this.startTime = pro.getDate("y-m-d", time);
+				this.startTime = pro.getDate(time, "y-m-d");
 			},
 			endTimeConfirm: function(e){
 				let time = new Date(e);
-				this.endTime = pro.getDate("y-m-d", time);
+				this.endTime = pro.getDate(time, "y-m-d");
 			},
 			searchEvent: function(){
 				let _beginTime = Date.parse(new Date(this.startTime));
@@ -177,7 +177,6 @@
 				width: 1.65rem;
 				height: 0.64rem;
 				padding: 0.1rem;
-				color: $white;
 			}
 		}
 		span{

@@ -28,8 +28,8 @@
 			</template>
 		</ul>
 		<div class="tools" v-show="toolShow">
-			<btn name="撤单" className="orangesm" @click.native="cancelOrder"></btn>
-			<btn name="改单" className="bluesm" @click.native="editOrder"></btn>
+			<btn name="撤单" className="whitesm" @click.native="cancelOrder"></btn>
+			<btn name="改单" className="whitesm" @click.native="editOrder"></btn>
 		</div>
 		<editOrder ref="editOrder"></editOrder>
 	</div>
@@ -186,8 +186,8 @@
 	.tools{
 		width: 7.5rem;
 		height: 0.96rem;
-		border-bottom: 0.01rem solid $black;
-		background: $bg;
+		border-bottom: 0.01rem solid $bgDeep;
+		background: #f2f2f2;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -245,23 +245,21 @@
 			}
 			&.current{
 				.list_cont{
-					background: $lightBlue;
+					background: $bgDeep;
 				}
 			}
 			.list_cont{
 				height: 0.88rem;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
-					color: $white;
 				}
 				.name{
 					em{
 						display: block; 
 						&:first-child{
 							font-size: $fs28;
-							color: $white;
 							margin: 0.15rem 0 0.05rem 0;
 						}
 					}

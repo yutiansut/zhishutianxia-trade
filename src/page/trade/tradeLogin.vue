@@ -1,11 +1,9 @@
 <template>
 	<div id="tradeLogin">
 		<header>
-			<back @click.native="goBack" :type="type"></back>
+			<back @click.native="goBack" :type="0"></back>
 			<div class="tab">
-				<template v-for="(v, index) in tabList" >
-					<span :class="{current: currentNum == index}" @click="switchover(index)">{{v}}</span>
-				</template>
+				交易账号登录
 			</div>
 		</header>
 		<div class="cont">
@@ -19,12 +17,14 @@
 					<span>交易密码</span>
 					<input type="password" placeholder="请输入交易密码" readonly onfocus="this.removeAttribute('readonly');" v-model="pwd" @keyup.enter="tradeLogin" />
 				</div>
-				<btn name="交易登录" className="bluelg" class="mb30" @tap.native="tradeLogin"></btn>
-				<btn name="配资方案申请" className="orangelg" class="mb30" @tap.native="tradeApply"></btn>
+				<btn name="立即登录" className="redlg" class="mb30" @tap.native="tradeLogin"></btn>
 			</div>
-			<h3>交易账号不等于注册登录账号</h3>
-			<p><span>交易账号：</span>申请配资方案后系统会自动发放，用于实盘或者模拟盘交易的账号。可查询交易明细，结算后将会更换。</p>
-			<p><span>登录账号：</span>使用手机注册后的平台账号，用户登录APP和网站，进行充值、查看资金明细等。</p>
+			<h3>平台交易账号与比赛交易账号说明：</h3>
+			<p>1.比赛页面进入，自动显示比赛交易账号</p>
+			<p>2.比赛交易账号登陆后，根据账号信息，确定交易合约</p>
+			<p>3.平台交易账号登陆以后，可以交易所以合约，账号，资金杠杆是固定不变</p>
+			<p>4.保存了多个交易账号，可以通过切换账号</p>
+			<p>5.比赛交易账号登陆以后，平台交易账号下线，再次转入平台交易账号，需要重新登陆</p>
 			<selectBox ref="selectBox" :obj="obj" :type="type"></selectBox>
 		</div>
 	</div>
@@ -42,8 +42,6 @@
 		components: { back, btn, selectBox},
 		data(){
 			return{
-				currentNum: 0,
-				tabList: ['融资交易登录', '融资交易申请'],
 				user: '',
 				pwd: '',
 				type: 0,
@@ -76,14 +74,7 @@
 				'initTrade'
 			]),
 			goBack: function(){
-				this.$router.push({path: '/index'});
-			},
-			switchover: function(index){
-				if(index == 0){
-					this.$router.push({path: '/tradeLogin'});
-				}else{
-					this.$router.push({path: '/tradeApply'});
-				}
+				this.$router.push({path: '/quote'});
 			},
 			getTradeWsUrl: function(){   
 				var data = {
@@ -123,9 +114,6 @@
 						}
 					}, 5000);
 				}
-			},
-			tradeApply: function(){
-				this.$router.push({path: '/tradeApply'});
 			},
 			switchAccount: function(){
 				if(this.tradeAccounts.length <= 0){
@@ -208,38 +196,17 @@
 		top: 0;
 		left: 0;
 		width: $w;
-		height: 1rem;
+		height: 0.96rem;
 		overflow: hidden;
-		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		background: $blcakThin;
+		border-bottom: 0.01rem solid $bgDeep;
+		color:$bg;
 		margin: auto;
 		.tab{
-			width: 4rem;
-			height: 0.56rem;
-			margin: 0.22rem auto;
-			span{
-				display: inline-block;
-				float: left;
-				width: 2rem;
-				height: 0.56rem;
-				line-height: 0.56rem;
-				text-align: center;
-				background: $lightBlue;
-				font-size: $fs28;
-				&.current{
-					background: $black;
-					color: $white;
-				}
-			}
-		}
-		.icon_back{
-			width: 0.24rem;
-			height: 1rem;
-			background: url(../../assets/images/quote/back_icon.png) no-repeat center 0.34rem;
-			background-size: 0.24rem 0.32rem;
-			position: fixed;
-			top: 0;
-			left: 0.3rem;
+			text-align:center;
+			line-height:0.96rem;
+			font-size:0.3rem;
+			color:$bg;
 		}
 	}
 	.fm{
@@ -248,8 +215,8 @@
 		.row{
 			width: 6.9rem;
 			height: 0.88rem;
-			background: #1b1f26;
-			border: 0.01rem solid $black;
+			background: $bg;
+			border: 0.01rem solid $bgDeep;
 			border-radius: 0.1rem;
 			margin-bottom: 0.3rem;
 			span{
@@ -263,15 +230,15 @@
 				width: 3.4rem;
 				height: 0.84rem;
 				line-height: 0.84rem;
-				color: $white;
+				color: $blcakThin;
 			}
 			button{
 				float: right;
 				width: 1.74rem;
 				height: 0.86rem;
 				line-height: 0.86rem;
-				background: $titleBlue;
-				color: $white;
+				background: $red;
+				color: $bg;
 				margin: 0 0.01rem 0 0;
 				padding: 0;
 				border-bottom-right-radius: 0.1rem;
@@ -287,17 +254,13 @@
 		height: 0.64rem;
 		line-height: 0.64rem;
 		padding: 0 0.3rem;
-		background: $titleBlue;
-		border-top: 0.01rem solid $black;
-		border-bottom: 0.01rem solid $black;
+		border-top: 0.01rem solid $bgDeep;
+		border-bottom: 0.01rem solid $bgDeep;
 		margin-bottom: 0.2rem;
+		background-color: #F2F2F2;
 	}
 	p{
 		padding: 0 0.3rem;
 		line-height: 0.4rem;
-		color: $white;
-		span{
-			color: $fontBlue;
-		}
 	}
 </style>

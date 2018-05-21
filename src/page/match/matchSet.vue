@@ -74,7 +74,8 @@
 				}
 				pro.fetch("post","/followInvest/getSetting",data,h).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						this.show = res.data == null ? true : false ;
+						console.log(res.data)
+						this.show = res.data == undefined ? true : false ;
 						if(res.data !=null){
 							this.isHistory = res.data.dealRecord == 0 ? "未开启" : "已开启";
 							this.scale1 = res.data.divide;

@@ -41,6 +41,9 @@
 					case 'greensm':
 						return 'greensm';
 						break;
+					case 'whitesm':
+						return 'whitesm';
+						break;
 				}
 				
 			}
@@ -144,6 +147,17 @@
     		font-size: $fs24;
     		&.current{
     			background: #88966b;
+    		}
+    	}
+    	&.whitesm{
+    		width: 1.28rem;
+    		height: 0.64rem;
+    		line-height: 0.64rem;
+    		background: #FFFFFF;
+    		font-size: $fs24;
+    		color: $blcakThin;
+    		&.current{
+    			background: $bgDeep;
     		}
     	}
     }

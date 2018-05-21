@@ -4,7 +4,7 @@
 		<div id="container">
 			<div  class="details" v-show="myFollower != ''">
 				<p class="border_bottom">我当前跟投的：</p>
-				<ul  class="border_bottom" >
+				<ul  class="border_bottom" @click="toDetails(myFollower.UserNo)">
 					<li>
 						<img :src="myFollower.wxHeadImg | changeImg" alt="" class="user"/>
 						<span class="span_black">{{myFollower.wxNickname != '' ? myFollower.wxNickname : mobileHidden(myFollower.telphone)}}</span>
@@ -66,6 +66,9 @@
 			}
 		},
 		methods:{
+			toDetails:function(user){
+				this.$router.push({path:"/matchUserDetails",query:{userId:user,type:"other",matchid:this.matchid}});
+			},
 			mobileHidden (phoneNumber) {
 		        return pro.mobileHidden(phoneNumber);
 		    },
