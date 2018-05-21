@@ -376,7 +376,7 @@
 					&:first-child{
 						margin-top: 0.1rem;
 						font-size: $fs32;
-						color: $white;
+						color: $blcakThin;
 					}
 				}
 			}
