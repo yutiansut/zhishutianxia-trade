@@ -254,14 +254,15 @@
 	header{
 		height: 1rem;
 		overflow: hidden;
-		background: $bg;
-		border-bottom: 0.01rem solid $black;
+		background: $blcakThin;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		position: fixed;
 		top: 0;
 		left: 0;
 		z-index: 1;
 		h1{
+			color: $bg;
 			width: 6.9rem;
 			height: 1rem;
 			line-height: 1rem;
@@ -282,7 +283,7 @@
 			height: 1rem;
 			line-height: 1rem;
 			font-size: $fs28;
-			color: $fontBlueTitle;
+			color: $bg;
 			position: fixed;
 			top: 0;
 			right: 0.3rem;
@@ -294,13 +295,13 @@
 			width: 7.5rem;
 			height: 0.96rem;
 			background: $bg;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0.16rem 0.3rem;
 			.search{
 				width: 6.9rem;
 				height: 0.64rem;
-				background: #1b1f26;
-				border: 0.01rem solid $black;
+				background: $bg;
+				border: 0.01rem solid $bgDeep;
 				border-radius: 0.1rem;
 				position: relative;
 				input{
@@ -309,7 +310,7 @@
 					line-height: 0.64rem;
 					padding: 0 0.1rem 0 0.85rem;
 					box-sizing: border-box;
-					color: $white;
+					color: $blcakThin;
 				}
 				.icon_search{
 					position: absolute;
@@ -329,7 +330,7 @@
 				li{
 					height: 0.64rem;
 					line-height: 0.64rem;
-					background: $titleBlue;
+					background: #f2f2f2;
 					.icon{
 						height: 0.64rem;
 						background: url(../../assets/images/quote/check.png) no-repeat 0.3rem 0.36rem;
@@ -349,7 +350,7 @@
 				height: 0.96rem;
 				overflow: hidden;
 				background: $bg;
-				border-bottom: 0.01rem solid $black;
+				border-bottom: 0.01rem solid $bgDeep;
 				.icon{
 					float: left;
 					width: 0.84rem;
@@ -377,7 +378,6 @@
 						display: block;
 						&:first-child{
 							font-size: $fs32;
-							color: $white;
 							margin: 0.15rem 0 0.1rem 0;
 						}
 					}
@@ -404,15 +404,15 @@
 		left: 0;
 		width: 7.5rem;
 		height: 0.96rem;
-		border-top: 0.01rem solid $black;	
-		background: $titleBlue;
+		border-top: 0.01rem solid $bgDeep;	
+		background: $bg;
 		.col{
 			float: left;
 			width: 50%;
 			height: 0.96rem;
 			line-height: 0.96rem;
 			text-align: center;
-			border-left: 0.01rem solid $black;
+			border-left: 0.01rem solid $bgDeep;
 			position: rrelative;
 			&:first-child{
 				border: none;
@@ -430,7 +430,7 @@
 			.icon_radio{
 				width: 0.24rem;
 				height: 0.24rem;
-				background: $black;
+				background: $redDeep;
 				border-radius: 0.12rem;
 				margin: 0.35rem 0.1rem 0 1.48rem;
 			}

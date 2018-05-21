@@ -20,7 +20,7 @@
 			</template>
 			<div class="add_optional">
 				<div class="box" @tap="addOptional">
-					<i class="icon icon_add"></i>
+					<i class="icon icon_add">+</i>
 					<span>添加自选</span>
 				</div>
 			</div>
@@ -174,14 +174,14 @@
 	}
 	.type{
 		overflow: hidden;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 	}
 	.title{
 		width: 7.5rem;
 		height: 0.64rem;
 		overflow: hidden;
-		background: $titleBlue;
-		border-bottom: 0.01rem solid $black;
+		background: #F2F2F2;
+		border-bottom: 0.01rem solid $bgDeep;
 		padding: 0 0.3rem;
 		span{
 			line-height: 0.64rem;
@@ -206,13 +206,12 @@
 			float: left;
 			width: 2.5rem;
 			height: 1.6rem;
-			border-right: 0.01rem solid $black;
+			border-right: 0.01rem solid $bgDeep;
 			span{
 				display: block;
 				text-align: center;
 				font-size: $fs32;
 				&.name{
-					color: $white;
 					margin-top: 0.25rem;
 					font-size: $fs30;
 				}
@@ -250,19 +249,14 @@
 		width: 7.5rem;
 		height: 1rem;
 		line-height: 1rem;
-		border-bottom: 0.01rem solid $black;
+		border-bottom: 0.01rem solid $bgDeep;
 		display: flex;
 		justify-content: center;
 		.icon_add{
 			float: left;
-			width: 0.4rem;
-			height: 0.4rem;
-			background: url(../../assets/images/quote/add.png) no-repeat center center;
-			background-size: 100% 100%;
-			margin: 0.3rem 0.15rem 0 0;
-		}
-		span{
-			color: $white;
+			font-size: 0.32rem;
+			color: $grayDeep;
+			margin-right: 0.1rem;
 		}
 	}
 	.btn_box{

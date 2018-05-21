@@ -323,7 +323,8 @@
 			line-height: 0.96rem;
 			overflow: hidden;
 			border-bottom: 0.01rem solid $bgDeep;
-			background-color: red;
+			color:#919199;
+			background-color: #f2f2f2;
 			padding: 0 0.3rem;
 			&:first-child{
 				height: 0.64rem;
@@ -346,7 +347,7 @@
 				}
 				&:nth-child(3){
 					width: 1.25rem;
-					color: $white;
+					color: $blcakThin;
 				}
 				&:nth-child(4), &:nth-child(5){
 					width: 1.4rem;
