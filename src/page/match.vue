@@ -13,7 +13,7 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img v-bind:src="IMGPATH+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -30,7 +30,7 @@
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img v-bind:src="IMGPATH+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -45,7 +45,7 @@
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img v-bind:src="IMGPATH+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -62,7 +62,7 @@
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img v-bind:src="IMGPATH+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -106,9 +106,6 @@
 		computed:{
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
-			IMGPATH:function(){
-				return this.$store.getters.IMGPATH
 			}
 		},
 		methods:{

@@ -65,7 +65,7 @@
 			},
 			url_real(){
 				return this.$store.state.market.tradeConfig.url_real
-			}
+			},
 		},
 		watch: {
 			quoteStatus: function(n, o){
@@ -86,7 +86,7 @@
 					this.isconnected = true;
 					this.isconnecting = false;
 				}
-			}
+			},
 		},
 		methods: {
 			...mapActions([

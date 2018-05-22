@@ -188,7 +188,7 @@
 				}else if(type == 2){
 					title = "取消跟投："
 				}
-				let name = this.wxNickname ? thiw.wxNickname : this.telphone
+				let name = this.wxNickname ? this.wxNickname : this.telphone
 				MessageBox.confirm("您确定"+title+"</br>"+name+"吗？","跟投设置").then(()=>{
 					pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
 						if(res.code == 1 && res.success == true){

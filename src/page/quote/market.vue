@@ -26,7 +26,7 @@
 						<span @tap="switchEvent">{{changeRateName}}<i class="icon icon_switch"></i></span>
 					</li>
 					<template v-for="(v, index) in parameters">
-						<li @tap="toQuoteDetails(v.CommodityNo, v.MainContract, v.ExchangeNo, v.contrast)" :class="{backRed:v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, backGreen: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">
+						<li @tap="toQuoteDetails(v.CommodityNo, v.MainContract, v.ExchangeNo, v.contrast)" >
 							<div class="name">
 								<em>{{v.CommodityName}}</em>
 								<em>{{v.CommodityNo + v.MainContract}}</em>
@@ -73,7 +73,13 @@
 			},
 			len(){
 				return this.$store.state.market.Parameters.length;
-			}
+			},
+//			quoteIndex(){
+//				return this.$store.state.market.quoteIndex;
+//			},
+//			quoteColor(){
+//				return this.$store.state.market.quoteColor;
+//			},
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -94,7 +100,20 @@
 						Indicator.close();
 					}, 5000);
 				}
-			}
+			},
+//			quoteIndex: function(n, o){
+//				if(this.quoteColor == 'red'){
+//					$(".list li").eq(n).addClass("backRed");
+//					setTimeout(function(){
+//						$(".list li").eq(n).removeClass("red");
+//					}, 500);
+//				}else{
+//					$(".list li").eq(n).addClass("backGreen");
+//					setTimeout(function(){
+//						$(".list li").eq(n).removeClass("backGreen");
+//					}, 500);
+//				}
+//			},
 		},
 		methods: {
 			toQuoteDetails: function(commodityNo, mainContract, exchangeNo, contrast){

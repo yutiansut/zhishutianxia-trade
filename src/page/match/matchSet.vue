@@ -15,7 +15,13 @@
 				<li>开启历史成交记录</li>
 				<li><mt-switch v-model="buyHistory" @change="changSwitch('buyHistory')"></mt-switch></li>
 			</ul>
-			<p>该功能只可设置一次，不可进行更改请您慎重设置！</p>
+			<h3>
+				跟投规则 :
+			</h3>
+			<p>1.该功能只可设置一次，不可进行更改请您慎重设置！</p>
+			<p>2.b跟投a，a操作合约，b操作相同的合约</p>
+			<p>3.c跟投b，b操作合约，c操作相同的合约</p>
+			<p>4.a跟投c，c操作合约，a和b操作相同的合约，c自己检测到这单是自己的操作，不重复跟投</p>
 			<button @click="matchSet">保存</button>
 		</div>
 		<div id="container1" v-show="!show">
@@ -32,7 +38,13 @@
 				<li>开启历史成交记录</li>
 				<li>{{isHistory}}</li>
 			</ul>
-			<p>该功能只可设置一次，不可进行更改请您慎重设置！</p>
+			<h3>
+				跟投规则 :
+			</h3>
+			<p>1.该功能只可设置一次，不可进行更改请您慎重设置！</p>
+			<p>2.b跟投a，a操作合约，b操作相同的合约</p>
+			<p>3.c跟投b，b操作合约，c操作相同的合约</p>
+			<p>4.a跟投c，c操作合约，a和b操作相同的合约，c自己检测到这单是自己的操作，不重复跟投</p>
 		</div>
 	</div>
 </template>
@@ -245,5 +257,14 @@
 	}
 	.mint-switch-core{
 		height: 0.48rem;
+	}
+	h3{
+		font-size: 0.28rem;
+		color: $redDeep;
+		width: 100%;
+		background-color: $bgDeep;
+		height: 0.64rem;
+		line-height: 0.64rem;
+		padding-left: 0.3rem;
 	}
 </style>
