@@ -237,7 +237,7 @@
 			margin-top: 0.3rem;
 			box-shadow: 0rem 0.03rem 0rem 0.03rem $bgDeep;
 			border-radius: 0.1rem;
-			
+			margin-bottom: 0.1rem;
 			background-size: 100% 100%;
 		}
 		.img_div{
