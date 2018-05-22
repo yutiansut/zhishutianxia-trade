@@ -538,7 +538,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#ffffff',
+							color: '#8585a6',
 							width: 1,
 							opacity: 1
 						}
@@ -641,10 +641,10 @@ export default new Vuex.Store({
 						},
 						itemStyle: {
 							normal: {
-								color: '#FD1050',
-								color0: '#0CF49B',
-								borderColor: '#FD1050',
-								borderColor0: '#0CF49B'
+								color: '#e64552',
+								color0: '#3aa643',
+								borderColor: '#e64552',
+								borderColor0: '#3aa643'
 							}
 						}
 					},
@@ -807,7 +807,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#ffffff',
+							color: '#8585a6',
 							width: 1,
 							opacity: 1
 						}
@@ -903,8 +903,8 @@ export default new Vuex.Store({
 				name: state.market.currentNo,
 	            type: 'line',
 	            data: price,
-	            lineStyle: {normal: {width: 1,color: '#333340'}},
-				itemStyle: {normal: {color: '#333340'}},
+	            lineStyle: {normal: {width: 1,color: '#0099e6'}},
+				itemStyle: {normal: {color: '#0099e6'}},
 				symbolSize: 2,
 	        },];
 	        let optionxAxis = [{
@@ -914,7 +914,7 @@ export default new Vuex.Store({
 				axisTick: {onGap: false},
 				splitLine: {show: false},
 				axisLabel: {textStyle: {fontSize: 10,}},
-				axisLine: {lineStyle: {color: '#333340'}},
+				axisLine: {lineStyle: {color: '#8585a6'}},
 				data: time
 			}];
 	        
@@ -929,14 +929,14 @@ export default new Vuex.Store({
 					x2: 30,
 					y2: 20
 				},
-				color: ['#edf07c'],
+				color: ['#ffb54c'],
 				xAxis: optionxAxis,
 				yAxis: [{
 					type: 'value',
 					name: '成交量(万)',
 					axisLine: {
 						lineStyle: {
-							color: '#333340'
+							color: '#8585a6'
 						}
 					},
 					axisTick: {
@@ -957,7 +957,7 @@ export default new Vuex.Store({
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: "#333340"
+							color: "#8585a6"
 						}
 					}
 				}],
@@ -967,7 +967,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#333340',
+							color: '#8585a6',
 							width: 1,
 							opacity: 1
 						}
@@ -999,7 +999,7 @@ export default new Vuex.Store({
 						type: 'line',
 						animation: false,
 						lineStyle: {
-							color: '#333340',
+							color: '#8585a6',
 							width: 1,
 							opacity: 1
 						}
@@ -1034,7 +1034,7 @@ export default new Vuex.Store({
 					data: time,
 					axisLine: {
 						lineStyle: {
-							color: '#333340'
+							color: '#e64552'
 						}
 					},
 					boundaryGap: true
@@ -1048,7 +1048,7 @@ export default new Vuex.Store({
 					},
 					axisLine: {
 						lineStyle: {
-							color: '#333340'
+							color: '#8585a6'
 						}
 					},
 					splitArea: {
@@ -1064,7 +1064,7 @@ export default new Vuex.Store({
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: "#333340"
+							color: "#8585a6"
 						}
 					}
 				}],
