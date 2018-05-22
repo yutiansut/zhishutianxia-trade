@@ -101,7 +101,11 @@ import pro from '../../../assets/js/common'
                 });
             },
             toFixed (num,point = 2) {
-                return num.toFixed(point)
+                //console.log(num)
+                if (typeof num === 'number') {
+                    return num.toFixed(point)
+                }
+                
             },
             mobileHidden (phoneNumber) {
                 return pro.mobileHidden(phoneNumber)              
@@ -119,7 +123,9 @@ import pro from '../../../assets/js/common'
                 this.$pro.fetch('post', '/followInvest/profitDetails', sendData, headers).then(function(res) {
                     //console.log(res)
                     if (res.success && res.code == 1) {
-                        this.followList = res.data||[]
+                        const abe = typeof res.data === 'string'?[]:res.data ;
+                        console.log(abe)
+                        this.followList = abe
                     }
     
                 }.bind(this)).catch(function(err) {

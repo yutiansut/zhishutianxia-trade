@@ -366,5 +366,11 @@ pro.local = {
 		return Object.keys(ls)
 	}	
 }
+pro.toThousands = function (num,nums = 2) {
+	return num.toFixed(nums).replace(/\d(?=(?:\d{3})+\b)/g,'$&,'); // 这里看你是不是要小数
+}
+function toCurrencyString (num){
+    
+  }
 
 export default pro

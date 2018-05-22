@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="btn_wrap">
-            <button class="trade" :class="{'disabled': details.status !== 4}">立即交易</button>
+            <button class="trade" :class="{'disabled': details.status !== 4}" @click="goTrade">立即交易</button>
             <button class="black" @click="goto('/topNars', true)">比赛规则</button>
         </div>
     
@@ -55,6 +55,7 @@ import pro from '../../../assets/js/common'
             clientHeight() {
                 return document.documentElement.clientHeight + 'px';
             }
+
 
         },
         methods: {
@@ -88,9 +89,7 @@ import pro from '../../../assets/js/common'
                 }
             },
             goTrade() {
-                this.$router.push({
-                    path: ''
-                });
+               this.$router.push({path:"/tradeLogin",query:{tradeAccount:this.account.account,password: this.account.accountPassword}});
             },
             getDetails() {
                 var sendData = {

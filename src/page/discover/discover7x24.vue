@@ -63,6 +63,7 @@
 							}							
 						})
 						let newList = res.data;
+						//判断 是下拉加载 还是上来刷新操作
 						if (this.pageNum == 0) {
 							this.newsInfo = res.data;
 						}else{

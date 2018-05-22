@@ -15,7 +15,7 @@
 				<div class="title_box">
 					<div class="left">
 						<span :class="['subscribe_icon_no',{'subscribe_icon':item.status==1}]" @click="subscription(item)"></span>
-						<span class="time">{{$pro.getDate(item.timestamp, 'h:m')}}</span>
+						<span class="time">{{$pro.getDate(item.timestamp*1000, 'h:m')}}</span>
 						<img :src="item.flagUrl" alt="">
 						<span class="country">{{item.country}}</span>
 					</div>
@@ -149,7 +149,7 @@
 				if (this.userInfo) {
 					this.getInfoList(item.time, tomorrow)
 				}else{
-					console.log(123)
+					//console.log(123)
                 }
                 this.getPosition(item.day)
 
@@ -212,7 +212,7 @@
 			//订阅功能
 			subscription:function(item){
 				var timestampNow = Date.parse(new Date())/1000;
-				//document.getElementsByClassName('calendar_date')[0].scrollLeft = 1000
+				//console.log(timestampNow)
 				if(!this.userInfo){
 					this.$toast({message:"您还未登录，请先登录，方可订阅",duration: 2000});
 					this.$router.push({path:"/login"});
