@@ -748,7 +748,7 @@ export default new Vuex.Store({
 					x2: 30,
 					y2: 20
 				},
-				color: ['#edf07c'],
+				color: ['#ffb54c'],
 				tooltip: {},
 				xAxis: [{
 					type: 'category',
