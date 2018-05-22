@@ -13,7 +13,7 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img v-bind:src="IMGPATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -25,11 +25,12 @@
 				   		</div>
 				   </div>
 				   <div class="h_98"></div>
+				    <div class="h_98"></div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img v-bind:src="IMGPATH+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -39,11 +40,12 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img v-bind:src="IMGPATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -55,11 +57,12 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img v-bind:src="IMGPATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -71,6 +74,7 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			</mt-tab-container>
 			<div id="listNone" v-show="List == null">暂无比赛哟~</div>
@@ -196,7 +200,7 @@
 					case 2:
 						return "已参赛";
 				}
-			}
+			},
 		}
 	}
 </script>
