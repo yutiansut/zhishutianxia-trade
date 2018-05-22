@@ -74,7 +74,8 @@
 				'initTrade'
 			]),
 			goBack: function(){
-				this.$router.push({path: '/quote'});
+//				this.$router.push({path: '/quote'});
+				this.$router.go(-1);
 			},
 			getTradeWsUrl: function(){   
 				var data = {
