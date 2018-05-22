@@ -71,7 +71,7 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
-	import { MessageBox } from 'mint-ui';
+	import { MessageBox,Indicator } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"matchRules",
@@ -115,13 +115,13 @@
 			},
 			//获取比赛详情
 			getMtchRules:function(matchid){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data = {
 					id:matchid
 				};
 				var header = this.headers;
 				pro.fetch("post","/tradeCompetition/details",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res);
 						this.rulesData = res.data.qiwCompetition;
 						this.award = res.data.award;
 						$.map(res.data.rule,function(i,item){
@@ -135,6 +135,7 @@
 							status:res.data.qiwCompetition.statusName
 						}
 						this.$emit('getStatus',statusData);
+						Indicator.close();
 					}
 				}).catch((err)=>{
 					this.errobj(err);
@@ -172,6 +173,7 @@
 				}
 			},
 			errobj:function(err){
+				Indicator.close();
 				var data = err.data;
 				if(data == undefined){
 					this.$toast({message:"网络不给力，请稍后再试",duration: 2000});

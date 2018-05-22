@@ -25,7 +25,7 @@
 					</li>
 					<li>
 						<span class="span_gray">跟投人数:</span>
-						<span class="span_black">{{followCount}}</span>
+						<span class="span_black">{{followCount ? followCount : '无' }}</span>
 					</li>
 				</ul>
 			</div>
@@ -95,9 +95,10 @@
 						this.followList = res.data.follower;
 						this.followCount = res.data.followCount != undefined ? res.data.followCount : '0';
 						this.myFollower = res.data.myFollower == undefined ? '': res.data.myFollower;
-						console.log(this.myFollower.wxNickname);
 					}
 				}).catch((err)=>{
+					this.myFollower = '';
+					this.followList = ''
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});

@@ -22,6 +22,7 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	import { Indicator } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"dynamicMine",
@@ -66,6 +67,7 @@
 				}
 			},
 			getDynamic:function(id,pagesize){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data ={
 					id:id,
 					guardId:'',
@@ -77,10 +79,11 @@
 				var headers = this.headers;
 				pro.fetch("post","/tradeCompetition/tradeDynamic",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res);
 						this.dataList = res.data;
+						Indicator.close();
 					}
 				}).catch((err)=>{
+					Indicator.close();
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});

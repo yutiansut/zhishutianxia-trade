@@ -13,7 +13,7 @@
 				<mt-tab-container-item id="1">
 				   <div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -25,11 +25,12 @@
 				   		</div>
 				   </div>
 				   <div class="h_98"></div>
+				    <div class="h_98"></div>
 				</mt-tab-container-item>
 			    <mt-tab-container-item id="2">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   		</div>
 				   		<div class="time_div">
 				   			<img :src="n.statusName | showMatch" />
@@ -39,11 +40,12 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="3">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -55,11 +57,12 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			    <mt-tab-container-item id="4">
 			    	<div class="matchDiv" v-for="n in List" @click="toNext(n.id,n.title)">
 				   		<div class="img_div">
-				   			<img :src="'http://test.platform-trade.dktai.cn'+n.imgUrl" />
+				   			<img :src="PATH+n.imgUrl" />
 				   			<div class="rightIcon" v-show="n.join=='2'"></div>
 				   			<span v-show="n.join=='2'">已参加</span>
 				   		</div>
@@ -71,6 +74,7 @@
 				   		</div>
 				   </div>
 				    <div class="h_98"></div>
+				     <div class="h_98"></div>
 			    </mt-tab-container-item>
 			</mt-tab-container>
 			<div id="listNone" v-show="List == null">暂无比赛哟~</div>
@@ -81,7 +85,7 @@
 </template>
 
 <script>
-	import { Navbar, TabItem } from 'mint-ui';
+	import { Navbar, TabItem,Indicator } from 'mint-ui';
 	import topTitle from "../components/topTitle"
 	import bottomTab from "../components/bottom_tab"
 	import pro from "../assets/js/common.js"
@@ -102,13 +106,14 @@
 		computed:{
 			PATH: function(){
 				return this.$store.getters.PATH;
-			},
+			}
 		},
 		methods:{
 			toNext:function(id,title){
 				this.$router.push({path:"/topNars",query:{matchId:id,matchTitle:title}});
 			},
 			getMatchList:function(n,headers){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data = {
 					status:n,
 					pageNo:'',
@@ -117,8 +122,10 @@
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.List = res.data.list;
+						Indicator.close();
 					}
 				}).catch((err)=>{
+					Indicator.close();
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
@@ -190,7 +197,7 @@
 					case 2:
 						return "已参赛";
 				}
-			}
+			},
 		}
 	}
 </script>
@@ -230,7 +237,7 @@
 			margin-top: 0.3rem;
 			box-shadow: 0rem 0.03rem 0rem 0.03rem $bgDeep;
 			border-radius: 0.1rem;
-			
+			margin-bottom: 0.1rem;
 			background-size: 100% 100%;
 		}
 		.img_div{

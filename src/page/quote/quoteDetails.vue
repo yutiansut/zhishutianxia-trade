@@ -1311,7 +1311,8 @@
 						margin: 0;
 					}
 					&.current{
-						border-bottom: 0.05rem solid $blue;
+						color:$redDeep;
+						border-bottom: 0.05rem solid $redDeep;
 					}
 				}
 			}

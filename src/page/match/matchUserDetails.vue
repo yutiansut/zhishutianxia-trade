@@ -112,7 +112,7 @@
 <script>
 	import topTitle from "../../components/topTitle.vue";
 	import pro from "../../assets/js/common.js";
-	import { MessageBox } from 'mint-ui';
+	import { MessageBox,Indicator } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"matchUserDetails",
@@ -139,6 +139,7 @@
 		methods:{
 			//获取详情
 			getOtherUser:function(apiurl,upData,header){
+				Indicator.open({spinnerType: 'fading-circle'});
 				pro.fetch("post",apiurl,upData,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.status = res.data.followStatus;
@@ -149,9 +150,16 @@
 						this.applyTime = res.data.joinTime;
 						this.list = res.data.tradeRecords;
 						this.wxHeadImg = res.data.wxHeadImg;
+						Indicator.close();
 					}
 				}).catch((err)=>{
-						console.log(err)
+					Indicator.close();
+					var data = err.data;
+					if(data == undefined){
+						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
+					}else{
+						this.$toast({message:data.message,duration: 2000});
+					}
 				})
 			},
 			getHeaders:function(){
@@ -180,7 +188,7 @@
 				}else if(type == 2){
 					title = "取消跟投："
 				}
-				let name = this.wxNickname ? thiw.wxNickname : this.telphone
+				let name = this.wxNickname ? this.wxNickname : this.telphone
 				MessageBox.confirm("您确定"+title+"</br>"+name+"吗？","跟投设置").then(()=>{
 					pro.fetch("post","/followInvest/follow",data,header).then((res)=>{
 						if(res.code == 1 && res.success == true){
