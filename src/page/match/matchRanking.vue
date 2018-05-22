@@ -32,6 +32,7 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	import { Indicator } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"matchRanking",
@@ -75,6 +76,7 @@
 				this.$router.push({path:"/matchUserDetails",query:{userId:e,type:type,matchid:this.matchid}});
 			},
 			getRanking:function(id,sidx,sort){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data = { 
 					id:id,
 					sidx:sidx,
@@ -88,8 +90,10 @@
 						this.user = res.data.user;
 						this.followedUser = res.data.followedUser;
 						this.rankingList = res.data.rankingList;
+						Indicator.close();
 					}
 				}).catch((err)=>{
+					Indicator.close();
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});

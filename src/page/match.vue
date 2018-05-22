@@ -81,7 +81,7 @@
 </template>
 
 <script>
-	import { Navbar, TabItem } from 'mint-ui';
+	import { Navbar, TabItem,Indicator } from 'mint-ui';
 	import topTitle from "../components/topTitle"
 	import bottomTab from "../components/bottom_tab"
 	import pro from "../assets/js/common.js"
@@ -112,6 +112,7 @@
 				this.$router.push({path:"/topNars",query:{matchId:id,matchTitle:title}});
 			},
 			getMatchList:function(n,headers){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data = {
 					status:n,
 					pageNo:'',
@@ -120,8 +121,10 @@
 				pro.fetch("post","/tradeCompetition/list",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						this.List = res.data.list;
+						Indicator.close();
 					}
 				}).catch((err)=>{
+					Indicator.close();
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});

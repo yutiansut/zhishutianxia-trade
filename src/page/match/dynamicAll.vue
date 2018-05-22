@@ -7,7 +7,7 @@
 						<ul>
 							<li>
 								<img :src="n.wxHeadImg | changeWXimg" class="userP"/>
-								<span class="username">{{n.wxNickname ? n.wxNickname : n.mobile}}</span>
+								<span class="username">{{n.wxNickname ? n.wxNickname : mobileHidden(n.mobile)}}</span>
 							</li>
 						</ul>
 					</div>
@@ -32,6 +32,7 @@
 
 <script>
 	import pro from "../../assets/js/common.js"
+	import { Indicator } from 'mint-ui';
 	const local = pro.local;
 	export default{
 		name:"dynamicAll",
@@ -49,6 +50,9 @@
             }
 		},
 		methods:{
+			mobileHidden (phoneNumber) {
+		        return pro.mobileHidden(phoneNumber);
+		    },
 			//加载跟多
 			loadBottom:function(){
 				this.pagesize+=10;
@@ -76,6 +80,7 @@
 				this.$router.push({path:"matchUserDetails",query:{userId:e,type:other,matchid:this.id}});
 			},
 			getDynamic:function(id,pagesize){
+				Indicator.open({spinnerType: 'fading-circle'});
 				var data ={
 					id:id,
 					guardId:'',
@@ -87,10 +92,11 @@
 				var header = this.headers
 				pro.fetch("post","/tradeCompetition/tradeDynamic",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res)
-						this.dataList = res.data
+						this.dataList = res.data;
+						Indicator.close();
 					}
 				}).catch((err)=>{
+					Indicator.close();
 					var data = err.data;
 					if(data == undefined){
 						this.$toast({message:"网络不给力，请稍后再试",duration: 2000});
