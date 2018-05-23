@@ -1145,8 +1145,10 @@
 						span{
 							display: block;
 							font-size: 0.2rem;
+							color: #919199;
 							&:last-child{
 								margin-top: 0.05rem;
+								color: #333340;
 							}
 							&.default{
 								&.red{
