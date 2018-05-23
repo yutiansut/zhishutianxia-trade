@@ -333,6 +333,14 @@ const router = new Router({
     },
     /* discover页面的路由配置 end */
   
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+
 })
 export default router

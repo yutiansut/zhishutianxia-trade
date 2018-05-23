@@ -10,7 +10,7 @@
             <p class="phone_number"><span>手机号：</span>{{mobileHidden(userInfo.username)}}</p>
             <div class="input_group">
                 <input type="number" placeholder="短信验证" v-model="code">
-                <div class="get_code" @click="getcode">
+                <div class="get_code" @click="getcode">                 
                     <template v-if="volid">
                         {{info}}
                     </template>
@@ -18,7 +18,6 @@
                         倒计时 <span>{{time}}</span> S
                     </template>
                 </div>
-                <!-- <div class="get_code">{{volid ? info : ('倒计时'+time + '秒')}}</div> -->
             </div>
             <div class="input_group">
                 <input type="number" placeholder="新手机号" v-model="cellphone">
@@ -314,11 +313,11 @@ const local = pro.local;
             top: 0.15rem;
             right: 0.3rem;
             width: 1.76rem;
-            height: 0.88rem;
+            //height: 0.88rem;
             background-color: #ffffff;
             border: solid 1px #e6e6e6;
             border-radius: 0 0.08rem 0.08rem 0;
-            @include font($fs24, 0.88rem, $graySimple);
+            @include font($fs26, 0.85rem, $graySimple);
             span {
                 color: $redDeep
             }

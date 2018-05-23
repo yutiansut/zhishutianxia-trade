@@ -1,6 +1,6 @@
 <template>
 	<div id="discover">
-		<mt-header fixed title="指数天下">
+		<mt-header fixed title="发现">
 			<mt-button slot="left" @click="goto('/my')">
 				<span class="icon_account"></span>
 			</mt-button>

@@ -165,6 +165,7 @@ import pro from '../../../assets/js/common'
             img {
                 width: 0.44rem;
                 height: 0.44rem;
+                border-radius: 50%;
             }
         }
     }
