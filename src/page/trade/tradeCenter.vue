@@ -134,6 +134,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="h_98"></div>
 		<selectBox ref="selectBox" :obj="obj" :type="type"></selectBox>
 	</div>
 </template>
