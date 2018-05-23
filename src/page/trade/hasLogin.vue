@@ -157,9 +157,9 @@
 				}
 			}
 			&.current{
-				background: $lightBlue;
+				background: $redDeep;
 				span{
-					color: $blue;
+					color: $bg;
 				}
 				.icon{
 					&.icon_one{
