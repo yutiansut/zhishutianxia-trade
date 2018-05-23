@@ -139,8 +139,7 @@
             display: inline-block;
             width: 0.32rem;
             height: 0.32rem;
-            background: url("../../../assets/images/account/WXlogin.png") center no-repeat;
-            background-size: cover;
+            border-radius: 50%; 
         }
         .right_icon {
             display: inline-block;
