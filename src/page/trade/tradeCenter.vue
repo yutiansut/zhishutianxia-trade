@@ -481,7 +481,7 @@
 			},
 			handleConfirm: function(e){
 				let time = new Date();
-				this.conditionTime = pro.getDate("h:i:s", time);
+				this.conditionTime = pro.getDate(time,"h:i:s");
 				this.conditionTime = e + ':' + this.conditionTime.split(':')[2];
 			},
 			conditionConfirm: function(){
@@ -650,7 +650,7 @@
 		mounted: function(){
 			//取当前时间
 			let time = new Date();
-			this.conditionTime = pro.getDate("h:i:s", time);
+			this.conditionTime = pro.getDate(time,"h:i:s");
 			//初始化fm当前高度
 			let h = window.screen.height - $("header").height() - $("#tabbar").height() - $(".nav").height() - $("#moneyTotal").height();
 			$("#tradeCenter").height(h);
@@ -658,7 +658,7 @@
 		activated: function(){
 			//取当前时间
 			let time = new Date();
-			this.conditionTime = pro.getDate("h:i:s", time);
+			this.conditionTime = pro.getDate(time,"h:i:s");
 			//默认市价
 			this.priceShow = true;
 			this.tradePrices = '市价';
