@@ -522,18 +522,16 @@
 				}
 			},
 			addRemind: function(){
+				let stateLogin = localStorage.user ? JSON.parse(localStorage.user) : '';
 				if(this.isClick == false){
 					Toast({message: '页面正在加载，请稍后再试', position: 'bottom', duration: 1500});return;
-				}
-				this.chartsShow = false;
-				this.$store.state.isshow.isfensshow = false;
-				this.$store.state.isshow.islightshow = false;
-				this.$store.state.isshow.isklineshow = false;
-//				let userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-				let stateLogin = localStorage.stateLogin ? JSON.parse(localStorage.stateLogin) : '';
-				if(stateLogin.issavepsd == false){
-					this.$router.push({path: '/login'});
+				}else if(stateLogin == ''){
+					Toast({message: '请先登录平台账号', position: 'bottom', duration: 1500})
 				}else{
+					this.chartsShow = false;
+					this.$store.state.isshow.isfensshow = false;
+					this.$store.state.isshow.islightshow = false;
+					this.$store.state.isshow.isklineshow = false;
 					this.$router.push({path: '/remind', query: {isOptional: this.optionalIconShow}});
 				}
 			},
@@ -660,43 +658,44 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.islightshow = false;
 				this.$store.state.isshow.isklineshow = false;
-				let stateLogin = localStorage.stateLogin ? JSON.parse(localStorage.stateLogin) : '';
-				if(stateLogin.issavepsd == false){
-					this.$router.push({path: '/login'}); return;
-				}
-				var headers = {
-					token: this.userInfo.token,
-					secret: this.userInfo.secret
-				}
-				if(this.optionalIconShow == true){   //删除自选
-					var _datas = {id: this.optionalId};
-					MessageBox.confirm("确定删除自选？","提示").then(action=>{
-						pro.fetch('post', '/quoteTrader/userRemoveCommodity', _datas, headers).then((res) => {
+				let stateLogin = localStorage.user ? JSON.parse(localStorage.user) : '';
+				if(stateLogin == ''){
+					Toast({message: '请先登录平台账号', position: 'bottom', duration: 1500});
+				}else{
+					var headers = {
+						token: this.userInfo.token,
+						secret: this.userInfo.secret
+					}
+					if(this.optionalIconShow == true){   //删除自选
+						var _datas = {id: this.optionalId};
+						MessageBox.confirm("确定删除自选？","提示").then(action=>{
+							pro.fetch('post', '/quoteTrader/userRemoveCommodity', _datas, headers).then((res) => {
+								if(res.success == true && res.code == 1){
+									Toast({message: '自选删除成功', position: 'bottom', duration: 1000});
+									this.optionalName = '添加自选';
+									this.optionalIconShow = false;
+								}
+							}).catch((err) => {
+								Toast({message: err.data.message, position: 'bottom', duration: 1000});
+							});
+						}).catch(err=>{});
+					}else{   //添加自选
+						var datas = {
+							'exchangeNo': this.orderTemplist[this.currentNo].ExchangeNo,
+							'commodityNo': this.currentNo,
+							'contractNo': this.orderTemplist[this.currentNo].MainContract,
+						}
+						pro.fetch('post', '/quoteTrader/userAddCommodity', datas, headers).then((res) => {
 							if(res.success == true && res.code == 1){
-								Toast({message: '自选删除成功', position: 'bottom', duration: 1000});
-								this.optionalName = '添加自选';
-								this.optionalIconShow = false;
+								this.optionalIconShow = true;
+								this.optionalName = '已添加自选';
+								Toast({message: '自选添加成功', position: 'bottom', duration: 1500});
+								this.optionalId = res.data.id;
 							}
 						}).catch((err) => {
-							Toast({message: err.data.message, position: 'bottom', duration: 1000});
+							Toast({message: err.data.message, position: 'bottom', duration: 1500});
 						});
-					}).catch(err=>{});
-				}else{   //添加自选
-					var datas = {
-						'exchangeNo': this.orderTemplist[this.currentNo].ExchangeNo,
-						'commodityNo': this.currentNo,
-						'contractNo': this.orderTemplist[this.currentNo].MainContract,
 					}
-					pro.fetch('post', '/quoteTrader/userAddCommodity', datas, headers).then((res) => {
-						if(res.success == true && res.code == 1){
-							this.optionalIconShow = true;
-							this.optionalName = '已添加自选';
-							Toast({message: '自选添加成功', position: 'bottom', duration: 1500});
-							this.optionalId = res.data.id;
-						}
-					}).catch((err) => {
-						Toast({message: err.data.message, position: 'bottom', duration: 1500});
-					});
 				}
 			},
 			getUserCommodityList: function(){
@@ -1091,7 +1090,7 @@
 			span{
 				color: $fontBlue;
 				&.current{
-					color: $blue;
+					color: $redDeep;
 				}
 			}
 		}
@@ -1339,7 +1338,7 @@
 							text-align: center;
 							border-left: 0.01rem solid $bgDeep;
 							&.current{
-								color: $blue;
+								color: $redDeep;
 							}
 							&:first-child{
 								border: none;

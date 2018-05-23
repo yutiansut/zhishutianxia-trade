@@ -7,6 +7,7 @@
 					<span :class="{current: currentNum == index}" @tap="tavEvent(index)">{{v}}</span>
 				</template>
 			</div>
+			<i class="icon icon_account" @tap="toAccount"></i>
 			<i class="icon icon_search" @tap="toSearch"></i>
 			<i class="icon icon_set" v-show="setShow" @tap="toOptionalManage"></i>
 		</header>
@@ -118,6 +119,9 @@
 						this.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + o.exchangeNo + '","CommodityNo":"' + o.commodityNo + '","ContractNo":"' + o.contractNo +'"}}');
 					});
 				}
+			},
+			toAccount:function(){
+				this.$router.push({path: '/my'});
 			},
 			toSearch: function(){
 				this.$router.push({path: '/search'});
@@ -284,11 +288,20 @@
 		.icon_search{
 			width: 0.6rem;
 			height: 0.96rem;
-			background: url(../assets/images/quote/search.png) no-repeat right 0.3rem;
+			background: url(../assets/images/account/search_icon_white.png) no-repeat right 0.3rem;
 			background-size: 0.4rem 0.4rem;
 			position: absolute;
 			top: 0;
 			right: 0.3rem;
+		}
+		.icon_account{
+			width: 0.6rem;
+			height: 0.96rem;
+			background: url(../assets/images/account/account_user.png) no-repeat left ;
+			background-size: 0.4rem 0.4rem;
+			position: absolute;
+			top: 0;
+			left: 0.3rem;
 		}
 		.icon_set{
 			width: 0.6rem;

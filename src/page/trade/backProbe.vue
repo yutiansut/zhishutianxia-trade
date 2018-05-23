@@ -1,6 +1,6 @@
 <template>
 	<div id="backProbe">
-		<mt-header :title="strategyName" fixed style="background-color:#242933;font-size: 0.32rem;height: 1rem;border-bottom: 1px solid #12141a;line-height: 1rem;">
+		<mt-header :title="strategyName" fixed style="background-color:#333340;font-size: 0.32rem;height: 0.96rem;border-bottom: 1px solid #12141a;line-height: 0.96rem;">
 		 	<router-link to="" slot="left">
 			    <i id="back" @tap="backRounter"></i>
 			</router-link>
@@ -52,7 +52,7 @@
 				<li>回测时间：</li>
 				<li>{{TimeEnd | changeTimeType}}-{{TimeStart | changeTimeType}}</li>
 			</ul>
-			<div class="black"></div>
+			<div class="h_20"></div>
 			<p class="color_yellow">策略回测申请已提交到服务器，等待结果返回</p>
 			<!--<p @click="tobackPresentation">这里有个进度条。</p>-->
 			<p>如果用户提交的策略回测太多，可能会造成等待时间较长，请您 耐心等候。</p>
@@ -169,8 +169,8 @@
 			this.strategyName = this.$route.query.strategyName;
 			this.strategyK = this.$route.query.strategyK;
 			this.timec = Date.parse(new Date())/1000;
-			this.TimeStart = pro.getDate("y-m-d h:i:s",this.timec*1000);
-			this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-24*60*60)*1000);
+			this.TimeStart = pro.getDate(this.timec*1000,"y-m-d h:i:s");
+			this.TimeEnd = pro.getDate((this.timec-24*60*60)*1000,"y-m-d-0");
 			this.showConatiner = true;
 			this.showSubmit = false;
 			this.type = "1分k",
@@ -215,28 +215,28 @@
 			time:function(e){
 				switch (e){
 					case "1天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-24*60*60)*1000,"y-m-d-0");
 						break;
 					case "3天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-3*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-3*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "5天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-5*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-5*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "10天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-10*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-10*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "20天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-20*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-20*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "30天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-30*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-30*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "60天":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-60*24*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-60*24*60*60)*1000,"y-m-d-0");
 						break;
 					case "1年":
-					this.TimeEnd = pro.getDate("y-m-d-0",(this.timec-365*60*60)*1000);
+					this.TimeEnd = pro.getDate((this.timec-365*60*60)*1000,"y-m-d-0");
 						break;
 				}
 			},
@@ -250,7 +250,7 @@
 		},
 		filters:{
 			changeTimeType:function(e){
-				var a = pro.getDate("yy-mm-dd",Date.parse(e.replace(/\-/g, "/")));
+				var a = pro.getDate(Date.parse(e.replace(/\-/g, "/")),"yy-mm-dd");
 				return a
 			}
 		}
@@ -276,22 +276,20 @@
 		.info{
 			padding: 0 0.3rem;
 			height: 1rem;
-			color: $white;
 			line-height: 0.5rem;
-			border-bottom: 1px solid #12141a;
+			border-bottom: 1px solid $bgDeep;
 		}
 		.title_left{
-			color: #a3b1cc;
 			height: 0.6rem;
-			background-color: #2d3340;
+			background-color: #f2f2f2;
 			line-height: 0.6rem;
-			border-bottom: 1px solid #12141a;
+			border-bottom: 1px solid $bgDeep;
 			padding-left: 0.3rem;
 		}
 		.choose{
 			height: 1.5rem;
 			padding: 0 0.3rem;
-			border-bottom: 1px solid #12141a;
+			border-bottom: 1px solid $bgDeep;
 			position: relative;
 			.rightSign{
 				position: absolute;
@@ -317,40 +315,40 @@
 				margin-left: 0.3rem;
 				width: 6.9rem;
 				height: 4.5rem;
-				background-color: #1b1f26;
+				background-color: $bg;
 				z-index: 102;
 				position: absolute;
 				top: 1.2rem;
 				left: 0;
 				border-radius: 0.1rem;
-				border:1px solid #12141a;
+				border:1px solid $bgDeep;
 				border-width:0 1px;
 				p{
 					height: 0.9rem;
 					text-align: center;
 					line-height: 0.9rem;
-					color: $white;
+					color: $blcakThin;
 					font-size: 0.28rem;
-					border-bottom: 0.01rem solid #12141a;
+					border-bottom: 0.01rem solid $bgDeep;
 				}
 			}
 			.dayType{
 				z-index: 103;
 				width: 1.2rem;
-				background-color: #1b1f26;
+				background-color: $bg;
 				position: absolute;
 				top: 1.2rem;
 				left: 0.3rem;
 				height: 3.6rem;
 				overflow-y: scroll;
-				border:1px solid #12141a;
+				border:1px solid $bgDeep;
 				border-width:0 1px;
 				p{
 					height: 0.9rem;
 					line-height: 0.9rem;
-					color: $white;
+					color: $blcakThin;
 					text-align: center;
-					border-bottom: 0.01rem solid #12141a;
+					border-bottom: 0.01rem solid $bgDeep;
 				}
 			}
 			.Percentage{
@@ -361,7 +359,7 @@
 				bottom: 1.2rem;
 				left: 0.3rem;
 				height: 3.6rem;
-				border:1px solid #12141a;
+				border:1px solid $bgDeep;
 				border-width:0 1px;
 				overflow-y: scroll;
 				p{
@@ -369,7 +367,7 @@
 					line-height: 0.9rem;
 					color: $white;
 					text-align: center;
-					border-top: 0.01rem solid #12141a;
+					border-top: 0.01rem solid $bgDeep;
 				}
 			}
 		}
@@ -379,24 +377,26 @@
 			top: 0.3rem;
 			width: 6.9rem;
 			height: 0.9rem;
-			border: 0.01rem solid #12141a;
-			color: $white;
+			border: 0.01rem solid $bgDeep;
+			color: $blcakThin;
 			outline: none;
-			background-color: #1b1f26;
+			background-color: $bg;
 			line-height: 0.9rem;
 			font-size: 0.28rem;
+			border: 0.01rem solid $redDeep;
 		}
 		.type1{
 			position: absolute;
 			top: 0.3rem;
 			width: 1.2rem;
 			height: 0.9rem;
-			border: 0.01rem solid #12141a;
-			color: $white;
+			border: 0.01rem solid $bgDeep;
+			color: $blcakThin;
 			outline: none;
-			background-color: #1b1f26;
+			background-color: $bg;
 			line-height: 0.9rem;
 			font-size: 0.28rem;
+			border: 0.01rem solid $redDeep;
 		}
 		.type2{
 			position: absolute;
@@ -404,10 +404,10 @@
 			top: 0.3rem;
 			width: 5.4rem;
 			height: 0.9rem;
-			border: 0.01rem solid #12141a;
-			color: $white;
+			border: 0.01rem solid $redDeep;
+			color: $blcakThin;
 			outline: none;
-			background-color: #1b1f26;
+			background-color: $bg;
 			line-height: 0.9rem;
 			font-size: 0.28rem;
 		}
@@ -417,10 +417,9 @@
 			top: 0.3rem;
 			width: 6.9rem;
 			height: 0.9rem;
-			border: 1px solid #12141a;
+			border: 1px solid $bgDeep;
 			border-radius: 0.1rem;
-			color: $white;
-			background-color: #1b1f26;
+			background-color: #f2f2f2;
 			line-height: 0.9rem;
 			font-size: 0.28rem;
 		}
@@ -429,7 +428,7 @@
 			text-align: center;
 			height: 0.4rem;
 			line-height: 0.4rem;
-			color: #a3b1cc;
+			color: $blcakThin;
 			margin-top: 0.5rem;
 			font-size: 0.28rem;
 		}
@@ -440,6 +439,7 @@
 			bottom: 0.3rem;
 			left: 0.3rem;
 			font-size: 0.32rem;
+			background-color: $redDeep;
 		}
 	}
 	.bg{
@@ -453,11 +453,11 @@
 			height: 0.9rem;
 			line-height: 0.9rem;
 			padding: 0 0.3rem;
-			border-bottom: 1px solid #12141a;
+			border-bottom: 1px solid $bgDeep;
 			li{
 				float: left;
 				&:nth-child(2){
-					color: $white;
+					color: $redDeep;
 				}
 			}
 		}
@@ -465,7 +465,7 @@
 			width: 100%;
 			height: 0.2rem;
 			background-color: #1b1f26;
-			border-bottom: 1px solid #12141a;
+			border-bottom: 1px solid $bgDeep;
 		}
 		.color_yellow{
 			padding-left: 0.3rem;

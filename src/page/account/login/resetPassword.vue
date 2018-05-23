@@ -136,8 +136,6 @@
 							var userData = {'username':res.data.mobile,'token':res.data.token,'secret':res.data.secret};
 							localStorage.user=JSON.stringify(userData);
 							this.$toast({message:"授权登录成功",duration: 1000});
-							var saveState = {"issavepsd":true};
-							localStorage.setItem("stateLogin",JSON.stringify(saveState));
 							this.$router.push({path:"/index"});
 							this.$store.state.account.isLogin = true;
 						}

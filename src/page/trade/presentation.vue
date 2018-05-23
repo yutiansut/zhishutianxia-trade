@@ -71,7 +71,7 @@
 				    },
 				    grid: {
 				    	top:0,
-				        left: 10,
+				        left: 0,
 				        right: 0,
 				        bottom: 10,
 				        containLabel: false,
@@ -86,6 +86,7 @@
 				    ],
 				    yAxis : [
 				        {
+				        	show : false,
 				            type : 'value',
 				            splitLine:{show:false}
 				        }
@@ -95,7 +96,7 @@
 				            name:'收益曲线',
 				            type:'line',
 				            stack: '总量',
-				            areaStyle: {normal: {color:"#242933"}},
+				            areaStyle: {normal: {color:"#f2f2f2"}},
 				            lineStyle:{normal:{color:"#0088cc"}},
 				            data:this.backtestIndexArr.plotting.Cumreturn
 				        }
@@ -117,7 +118,7 @@
 			    calculable : true,
 			    grid: {
 				    	top:0,
-				        left: 10,
+				        left: 0,
 				        right: 0,
 				        bottom: 10,
 				        containLabel: false,
@@ -131,6 +132,7 @@
 			    ],
 			    yAxis : [
 			        {
+			        	show : false,
 			            type : 'value',
 			            splitLine:{show:false}
 			        }
@@ -186,7 +188,7 @@
 				return Number(e).toFixed(2);
 			},
 			changeDay:function(e){
-				return pro.getDate("yy-mm-dd",Date.parse(e.replace(/\-/g,"/")))
+				return pro.getDate(Date.parse(e.replace(/\-/g,"/")),"yy-mm-dd")
 			}
 		}
 	}
@@ -201,9 +203,9 @@
 			padding-left:0.3rem;
 			width:100%;
 			height:0.65rem;
-			border-bottom: 1px solid #12141a;
-			border-top: 1px solid #12141a;
-			background-color:#2d3340;
+			border-bottom: 1px solid $bgDeep;
+			border-top: 1px solid $bgDeep;
+			background-color: #f2f2f2;
 			line-height:0.65rem;
 		}
 		.pat1{

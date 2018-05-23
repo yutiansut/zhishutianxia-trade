@@ -7,12 +7,9 @@
 							<span>序号</span>
 							<span>时间</span>
 							<span>合约名称</span>
-							<!--<span>交易所</span>-->
 							<span>开/平</span>
-							<!--<span>平/开</span>-->
 							<span>成交价</span>
 							<span>手数</span>
-							<!--<span>平仓盈亏</span>-->
 							<span>交易手续费</span>
 							<span>可用资金</span>
 							<span>现有持仓</span>
@@ -54,14 +51,14 @@
 			.list_title{
 				width: 100%;
 				overflow-x: scroll;
-				border-bottom: 1px solid #12141a;
+				border-bottom: 1px solid $bgDeep;
 				ul{
 					width: 18.6rem;
 					display: block;
 					padding: 0 0.3rem;
 					
 					li{
-						border-bottom: 1px solid #12141a;
+						border-bottom: 1px solid $bgDeep;
 						text-align: center;
 						line-height: 0.4rem;
 						height: 0.8rem;
@@ -72,7 +69,6 @@
 							}
 						}
 						span{
-							color: $white;
 							float: left;
 							width: 2rem;
 							display: block;

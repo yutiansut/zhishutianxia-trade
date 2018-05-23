@@ -324,9 +324,9 @@
 			overflow: hidden;
 			border-bottom: 0.01rem solid $bgDeep;
 			color:#919199;
-			background-color: #f2f2f2;
 			padding: 0 0.3rem;
 			&:first-child{
+				background-color: #f2f2f2;
 				height: 0.64rem;
 				line-height: 0.64rem;
 				span{

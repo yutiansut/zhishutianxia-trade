@@ -161,9 +161,9 @@
 			padding-left:0.3rem;
 			width:100%;
 			height:0.65rem;
-			border-bottom: 1px solid #12141a;
-			border-top: 1px solid #12141a;
-			background-color:#2d3340;
+			border-bottom: 1px solid $bgDeep;
+			border-top: 1px solid $bgDeep;
+			background-color:#f2f2f2;
 			line-height:0.65rem;
 		}
 		.detailsInfo{
@@ -196,11 +196,6 @@
 				display: flex;
 				justify-content: space-between;
 				font-size: 0.28rem;
-				span{
-					&:nth-child(2){
-						color: $white;
-					}
-				}
 			}
 		}
 		.Assessment{
@@ -210,14 +205,14 @@
 			height: 1.5rem;
 		}
 		.Notice{
-			border-top: 1px solid #12141a;
+			border-top: 1px solid $bgDeep;
 			padding: 0 0.3rem;
 			width: 100%;
 			height: 1rem;
 			line-height: 1rem;
 			span{
 				&:nth-child(2){
-					color: $white;
+					color: $redDeep;
 				}
 			}
 		}

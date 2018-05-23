@@ -317,7 +317,7 @@
 							display: block;
 							&:first-child{
 								font-size: $fs32;
-								color: $white;
+								/*color: $white;*/
 								margin: 0.15rem 0 0.1rem 0;
 							}
 						}
