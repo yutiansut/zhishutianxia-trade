@@ -8,7 +8,7 @@
             <ul class="list">
                 <li class="item title_item">
                     <div class="left">
-                        <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
+                        <img :src="details.wxHeadImg||require('../../../assets/images/account/WXlogin.png')" alt="header">
                     </div>
                     <div class="right">
                         <h3>{{details.wxNickname||mobileHidden(account.mobile)}}</h3>

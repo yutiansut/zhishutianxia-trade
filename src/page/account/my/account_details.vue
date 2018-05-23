@@ -8,7 +8,7 @@
             <ul class="list">
                 <li class="item title_item">
                     <div class="left">
-                        <img :src="details.wxHeadImg||require('../../../assets/images/account/touxiang.png')" alt="header">
+                        <img :src="details.wxHeadImg||require('../../../assets/images/account/WXlogin.png')" alt="header">
                     </div>
                     <div class="right">
                         <h3>{{accountInfo.wxNickname||mobileHidden(accountInfo.mobile)}}</h3>
@@ -76,7 +76,7 @@ import pro from '../../../assets/js/common'
                     token: this.userInfo.token,
                     secret: this.userInfo.secret
                 }
-                this.$pro.fetch('post', '/ futureManage/getAccounts', '', headers).then(function(res) {
+                this.$pro.fetch('post', '/futureManage/getAccounts', '', headers).then(function(res) {
                     //console.log(res)
                     if (res.success && res.code == 1) {
                         //console.log(res)
@@ -90,7 +90,7 @@ import pro from '../../../assets/js/common'
                     }
     
                 }.bind(this)).catch(function(err) {
-                    //console.log(err)
+                    console.log(err)
                     var data = err.data;
                     if (data == undefined) {
                         this.$toast({

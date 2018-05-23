@@ -14,7 +14,7 @@
 			<mt-navbar v-model="selected">
 				<mt-tab-item id="1">7x24</mt-tab-item>
 				<mt-tab-item id="2">日历</mt-tab-item>
-				<mt-tab-item id="3">要闻</mt-tab-item>
+				<!-- <mt-tab-item id="3">要闻</mt-tab-item> -->
 			</mt-navbar>
 
 			<!-- tab-container -->
@@ -25,9 +25,9 @@
 				<mt-tab-container-item id="2">
 					<calendar-news :newDate ="newsDate" @datePosition="getDatePosition"></calendar-news>
 				</mt-tab-container-item>
-				<mt-tab-container-item id="3">
+				<!-- <mt-tab-container-item id="3">
 					<focus-news></focus-news>
-				</mt-tab-container-item>
+				</mt-tab-container-item> -->
 			</mt-tab-container>
 			<mt-datetime-picker
 				ref="picker1"
@@ -51,7 +51,7 @@
 	import bottomTab from "../components/bottom_tab"
 	import discover7x24 from '../page/discover/discover7x24'
 	import calendarNews from '../page/discover/calendarNews'
-	import focusNews from '../page/discover/focusNews'
+	// import focusNews from '../page/discover/focusNews'
 
 	export default {
 		name: "discover",
@@ -59,7 +59,7 @@
 			bottomTab,
 			discover7x24,
 			calendarNews,
-			focusNews
+			//focusNews
 		},
 		data() {
 			return {
