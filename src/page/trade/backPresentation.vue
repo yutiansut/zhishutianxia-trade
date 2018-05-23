@@ -98,8 +98,8 @@
 				margin-right: 0.3rem;	
 				line-height: 0.9rem;
 				&.current{
-					border-bottom: 1px solid #00a1f2;	
-					color: #00a1f2;
+					border-bottom: 1px solid $redDeep;	
+					color: $redDeep;
 				}
 			}
 		}

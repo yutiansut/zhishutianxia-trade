@@ -164,7 +164,21 @@ const router = new Router({
 	      name: 'tradeLogin',
 	      component: load('trade/tradeLogin')
 	    },
-    
+    	{
+    		path:"/backProbe",
+    		name:'backProbe',
+    		component : load('trade/backProbe')
+    	},
+    	{
+    		path:"/backPresentation",
+    		name:'backPresentation',
+    		component : load('trade/backPresentation')
+    	},
+    	{
+    		path:"/strategyName",
+    		name:'strategyName',
+    		component : load('role/strategyName')
+    	},
     //以上是行情交易
     /* my页面的路由配置 begin */
     {
