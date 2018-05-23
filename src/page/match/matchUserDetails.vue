@@ -5,7 +5,7 @@
 			<ul class="dis_flex2 border_bottom">
 				<li>
 					<img :src="wxHeadImg | changeWXimg" alt=""   class="userP" />
-					<span class="span_gray">{{wxNickname || telphone}}</span>
+					<span class="span_gray">{{wxNickname || mobileHidden(telphone)}}</span>
 				</li>
 				<li>
 					<span class="span_gray">报名时间：{{applyTime | changTime}}</span>
@@ -162,6 +162,9 @@
 					}
 				})
 			},
+			mobileHidden (phoneNumber) {
+		        return pro.mobileHidden(phoneNumber);
+		    },
 			getHeaders:function(){
 				if(local.get("user") != null){
 					this.headers = {
