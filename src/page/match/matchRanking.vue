@@ -1,32 +1,37 @@
 <template>
 	<div id="matchRanking">
-		<div class="myRank">
-			<ul>
-				<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
-				<li>
-					<span @click="profitRateFollow('profitrate')" :class="{current : current == 0}">总收益</span>
-					<i  :class="profitrateUp ? 'change' : 'change_2'" class="change_1" @click="changeSort('profitrateUp')"></i>
-					<span @click="profitRateFollow('follow')" :class="{current : current == 1}">跟投人数</span>
-					<i :class="followUp ? 'change':'change_2'" @click="changeSort('followUp')"></i>
+		<div v-show="ListNone">
+			<div class="myRank">
+				<ul>
+					<li>我的排名：<span>{{this.user.byProfitRate}}&nbsp;{{this.user.byFollowCount}}</span></li>
+					<li>
+						<span @click="profitRateFollow('profitrate')" :class="{current : current == 0}">总收益</span>
+						<i  :class="profitrateUp ? 'change' : 'change_2'" class="change_1" @click="changeSort('profitrateUp')"></i>
+						<span @click="profitRateFollow('follow')" :class="{current : current == 1}">跟投人数</span>
+						<i :class="followUp ? 'change':'change_2'" @click="changeSort('followUp')"></i>
+					</li>
+				</ul>
+			</div>
+			<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
+				<li class="li_no">
+					<img :src="this.user.wxHeadImg | changwxhead" alt="" class="rang_no1" />
+					<span class="username">{{this.user.wxNickname ||  (mobileHidden(this.user.telphone))}}</span>
 				</li>
+				<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
+			</ul>
+			<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,(n.userNo == user.userNo ? 'mine' : 'other'))">
+				<li class="li_no">
+					<img :src="k | changNo" alt="" class="rang_no" />
+					<span class="span_no">{{k+1}}</span>
+					<img :src="n.wxHeadImg  | changwxhead" alt="" class="user"/>
+					<span class="username">{{n.wxNickname ? n.wxNickname : (mobileHidden(n.telphone))}}</span>
+				</li>
+				<li><span class="perecnt">{{n.profitRate | changpoint}}</span><span class="count">{{n.followCount}}</span></li>
 			</ul>
 		</div>
-		<ul class="ranking border_bottom" @click="toMatchUser(user.userNo,'mine')" v-show="user">
-			<li class="li_no">
-				<img :src="this.user.wxHeadImg | changwxhead" alt="" class="rang_no1" />
-				<span class="username">{{this.user.wxNickname ||  (mobileHidden(this.user.telphone))}}</span>
-			</li>
-			<li><span class="perecnt">{{user.profitRate | changpoint}}</span><span class="count">{{user.followCount}}</span></li>
-		</ul>
-		<ul class="ranking border_bottom" v-for="(n,k) in rankingList" @click="toMatchUser(n.userNo,(n.userNo == user.userNo ? 'mine' : 'other'))">
-			<li class="li_no">
-				<img :src="k | changNo" alt="" class="rang_no" />
-				<span class="span_no">{{k+1}}</span>
-				<img :src="n.wxHeadImg  | changwxhead" alt="" class="user"/>
-				<span class="username">{{n.wxNickname ? n.wxNickname : (mobileHidden(n.telphone))}}</span>
-			</li>
-			<li><span class="perecnt">{{n.profitRate | changpoint}}</span><span class="count">{{n.followCount}}</span></li>
-		</ul>
+		<div class="ListNone" v-show="!ListNone">
+			暂无排行榜哦
+		</div>
 	</div>
 </template>
 
@@ -49,7 +54,8 @@
 				sort:'',
 				profitrateUp:true,
 				followUp:true,
-				current:0
+				current:0,
+				ListNone:false
 				
 			}
 		},
@@ -87,9 +93,14 @@
 				var headers = this.headers;
 				pro.fetch("post","/tradeCompetition/ranking",data,headers).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						this.user = res.data.user;
-						this.followedUser = res.data.followedUser;
-						this.rankingList = res.data.rankingList;
+						if(res.data != ""){
+							this.ListNone = true;
+							this.user = res.data.user;
+							this.followedUser = res.data.followedUser;
+							this.rankingList = res.data.rankingList;
+						}else{
+							this.ListNone = false
+						}
 						Indicator.close();
 					}
 				}).catch((err)=>{
@@ -235,5 +246,10 @@
 	}
 	.current{
 		color:$redDeep;
+	}
+	.ListNone{
+		text-align: center;
+		margin-top: 50%;
+		color: $grayDeep;
 	}
 </style>
