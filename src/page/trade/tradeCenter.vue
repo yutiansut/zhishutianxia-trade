@@ -857,8 +857,8 @@
 				line-height: 0.6rem;
 				padding: 0.12rem 0;
 				box-sizing: content-box;
-				color: $redDeep;
-				border: 0.01rem solid $bgDeep;
+				color: $blcakThin;
+				border: 0.01rem solid $redDeep;
 				border-radius: 0.1rem;
 				background: $bg;
 				text-align: center;
