@@ -66,7 +66,7 @@
 		watch: {
 			isBack: function(n, o){
 				if(n && n == true){
-					this.$router.push({path: '/index'});
+					this.$router.push({path: '/quote'});
 					this.$store.state.account.isLogin = true;
 				}
 			},

@@ -108,7 +108,7 @@ a:link, a:visited{
     user-select:none;
 }
 input,textarea {
-    -webkit-user-select:auto; /*webkit浏览器*/
+    /*-webkit-user-select:none; webkit浏览器*/
     margin: 0px;
     padding: 0px;
     outline: none;
