@@ -146,7 +146,6 @@
 			}
 		},
 		mounted:function(){
-			pro.getClentId();
 			pro.isWXInstalled();
 			var isWXInstalled = localStorage.isWXInstalled ? localStorage.isWXInstalled : '';
 			if(isWXInstalled == 'false'){

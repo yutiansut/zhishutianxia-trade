@@ -43,6 +43,7 @@
 
 <script>
 import pro from '../../../assets/js/common'
+const local = pro.local;
     export default {
         name: 'reset_phone',
         data() {
@@ -93,6 +94,8 @@ import pro from '../../../assets/js/common'
                 return pro.mobileHidden(phoneNumber)
             },            
             getcode: function(e) {
+                //禁止点击
+                if (this.time>0) return;
                 //页面效果
                 $(e.target).addClass('current');
                 this.time = 60;
@@ -134,6 +137,8 @@ import pro from '../../../assets/js/common'
                 })
             },
             getcode1: function(e) {  
+                //禁止点击
+                if (this.time1>0) return;
                 var data = {
                     mobile: this.cellphone,
                     type: 3
@@ -222,10 +227,9 @@ import pro from '../../../assets/js/common'
                                 duration: 2000
                             });                                                        
                             //处理本缓存 userList
-                            let local1 = this.$pro.local;
-                            var userList = local1.get('userList')
+                            var userList = local.get('userList')
                             this.removeItem(userList, this.phone)
-                            local1.remove('user')
+                            local.remove('user')
                             this.$router.push({
                                 path: "/login"
                             });
@@ -261,10 +265,8 @@ import pro from '../../../assets/js/common'
             this.phone = this.$route.query.phone;
             console.log("this.phone====" + this.phone)
             var phone = this.$route.query.phone;
-            //this.mobile = phone.substr(0, 3) + '****' + phone.substr(7);
         },
         activated() {
-            let local = this.$pro.local
             this.userInfo = local.get('user')
             this.phone = this.userInfo.username
         }

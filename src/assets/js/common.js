@@ -207,6 +207,13 @@ pro = {
 			});
 		});
 	},
+	getClentId:function(){
+		mui.plusReady(function(){
+			var info = plus.push.getClientInfo();
+			var clientid = {"id":info.clientid};
+			localStorage.setItem("clientid",JSON.stringify(clientid));
+		})
+	},
 	/**
 	 * 判断是IOS还是安卓
 	 * 
@@ -256,6 +263,7 @@ pro = {
 			}
 		}
 	},
+	
 	isOpenMessages: function(){
 		if(window.plus){
 			var pp = plus.navigator.checkPermission('NOTIFITION');

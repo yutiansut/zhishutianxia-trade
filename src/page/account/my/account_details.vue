@@ -85,8 +85,7 @@ import pro from '../../../assets/js/common'
                             return item.account == this.accountInfo.mobile
                             
                         })
-                        this.account = abc;
-                        // this.account = res.data.program;
+                        this.account = abc||{}
                     }
     
                 }.bind(this)).catch(function(err) {
