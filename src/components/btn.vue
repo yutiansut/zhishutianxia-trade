@@ -86,7 +86,7 @@
     	}
     	&.redlg{
     		width: 6.9rem;
-    		background: $red;
+    		background: $redDeep;
     		&.current{
     			background: #fc6f6f;
     		}
@@ -107,7 +107,7 @@
     	}
     	&.redmd{
     		width: 3.3rem;
-    		background: $red;
+    		background: $redDeep;
     		&.current{
     			background: #fc6f6f;
     		}
