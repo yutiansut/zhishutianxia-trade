@@ -2,7 +2,7 @@
 	<div id="backProbe">
 		<mt-header :title="strategyName" fixed style="background-color:#333340;font-size: 0.32rem;height: 0.96rem;border-bottom: 1px solid #12141a;line-height: 0.96rem;">
 		 	<router-link to="" slot="left">
-			    <i id="back" @tap="backRounter"></i>
+			    <i id="back" @tap.stop="backRounter"></i>
 			</router-link>
 		</mt-header>
 		<div id="container" v-show="showConatiner">
@@ -102,7 +102,7 @@
 		},
 		methods:{
 			backRounter:function(){
-				this.$router.go(-2);
+				this.$router.go(-1);
 			},
 			submit:function(){
 				if(this.money == '' || this.money == null){
