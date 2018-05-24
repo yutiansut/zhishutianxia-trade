@@ -129,12 +129,12 @@
 			line-height: 2.5rem;
 			text-align: center;
 			font-size: $fs32;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 		}
 		li{
 			width: 6.2rem;
 			height: 0.88rem;
-			border-bottom: 0.01rem solid $black;
+			border-bottom: 0.01rem solid $bgDeep;
 			padding: 0 0.3rem;
 			background: $bg;
 			span{

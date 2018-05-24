@@ -15,7 +15,7 @@
 				</div>
 				<div class="row">
 					<span>交易密码</span>
-					<input type="password" placeholder="请输入交易密码" readonly onfocus="this.removeAttribute('readonly');" v-model="pwd" @keyup.enter="tradeLogin" />
+					<input type="password" placeholder="请输入交易密码"  v-model="pwd" @keyup.enter="tradeLogin" />
 				</div>
 				<btn name="立即登录" className="redlg" class="mb30" @tap.native="tradeLogin"></btn>
 			</div>
@@ -46,6 +46,7 @@
 				pwd: '',
 				type: 0,
 				obj: '',
+				isLogin:""
 			}
 		},
 		computed: {
@@ -96,6 +97,8 @@
 					Toast({message: '请输入您的账号名', position: 'bottom', duration: 1500});
 				}else if(this.pwd == '' || this.pwd == undefined || this.pwd == null){
 					Toast({message: '请输入您的密码', position: 'bottom', duration: 1500});
+				}else if(this.isLogin == ''){
+					Toast({message: '请先登录平台账号',duration: 1500});
 				}else{
 					if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined){
 						Toast({message: '获取交易地址失败', position: 'bottom', duration: 1500});
@@ -173,6 +176,7 @@
 			this.getTradeAccounts();
 			//URL是否带参
 			let query = this.$route.query;
+			this.isLogin = localStorage.user ? localStorage.user : "";
 			if(query){
 				this.user = query.tradeAccount;
 				this.pwd = query.password;
@@ -228,9 +232,11 @@
 			input{
 				float: left;
 				width: 3.4rem;
-				height: 0.84rem;
-				line-height: 0.84rem;
+				height: 0.48rem;
+				line-height: 0.48rem;
 				color: $blcakThin;
+				margin-top: 0.18rem;
+				font-size: 0.28rem;
 			}
 			button{
 				float: right;
