@@ -1,5 +1,5 @@
 <template>
-	<div id="discover">
+	<div id="discover" ref="viewBox"  :style="{height:clientHeight,overflow:'scroll'}">
 		<mt-header fixed title="发现">
 			<mt-button slot="left" @click="goto('/my')">
 				<span class="icon_account"></span>
@@ -71,9 +71,15 @@
 		      	value1: new Date(),
 		      	startDate: new Date('2014'),
                 endDate: new Date('2020-12-31'),
-                datePosition: ''
+                datePosition: '',
+                scrollY: 0,
 			}
-		},
+        },
+        computed: {
+            clientHeight() {
+                return document.documentElement.clientHeight + 'px';
+            },
+        },
 		methods: {
 			goto (...pathObj) {
 				if (pathObj.length == 1) {
@@ -97,7 +103,15 @@
             },
             getDatePosition (value) {
                 this.datePosition = value
-            }
+			},
+			// forTest () {
+			// 	clearTimeout(timer)
+			// 	var timer = setTimeout(() => {
+            //         //console.log(this)
+            //         this.scrollY = this.$refs.viewBox.scrollTop
+			// 		console.log(this.$refs.viewBox.scrollTop)
+			// 	}, 100);
+			// }
 		},
 		watch: {
 			selected (value) {
@@ -105,12 +119,23 @@
 					//接受子组件的传值来进行定位
 					let calendar_date = document.getElementsByClassName('calendar_date')[0]
                     this.$nextTick(()=>{
-                        //console.log(this.datePosition)
 						calendar_date.scrollLeft = this.datePosition
 					})
 				}
 			}
-		}
+        },
+        //定位回到离开时的位置
+		// activated () {        
+        //     let _this = this
+        //     this.$refs.viewBox.scrollTop = this.scrollY
+        //     //this.$refs.viewBox.addEventListener('scroll',_this.forTest)
+        // },
+		// deactivated () {
+        //     let _this = this
+        //     this.scrollY = this.$refs.viewBox.scrollTop
+		// 	//window.removeEventListener('scroll', _this.forTest);
+				
+		// }
 
 
 	}

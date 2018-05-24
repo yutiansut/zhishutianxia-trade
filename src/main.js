@@ -50,11 +50,15 @@ FastClick.attach(document.body)
 
 Vue.config.productionTip = false
 
+//const Bus = new Vue();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  // data: {
+  //   Bus
+  // }
 })

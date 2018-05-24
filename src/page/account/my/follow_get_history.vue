@@ -22,7 +22,7 @@
                         <div class="time">结算时间</div>                       
                 </li>
                 <template v-if="listLength">
-                    <li class="history_item" v-for="(item,index) in followList" :key="item.telphone">                        
+                    <li class="history_item" v-for="(item,index) in followList" :key="index">                        
                         <span>{{ (index + 1).toString().padStart(2,0) }}</span>
                         <div class="phone_number">{{item.wxNickname||mobileHidden(item.telphone)}}</div>
                         <span class="small">{{toFixed(item.followProfit)}}</span>

@@ -1,6 +1,6 @@
 <template>
 	
-		<div class="wrap">
+		<div class="wrap" ref="viewBox1">
 			<h2>{{startTime}} {{getWeekDay(today)}}</h2>
 			<ul class="discover_list">
 				<mt-loadmore :bottom-method="loadBottom"  :auto-fill="false" :top-method="loadTop" ref="loadmore">
@@ -127,8 +127,9 @@
 			this.today = today;
 			this.startTime = this.$pro.getDate(Date.parse(today),"y-m-d")
 			this.endTime = this.$pro.getDate(tomorrow,"y-m-d")
-			this.getNewsInfo(0)
-		}
+			this.getNewsInfo(0);			
+		},
+		
 		
 	}
 </script>
