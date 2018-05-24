@@ -102,7 +102,7 @@
 		},
 		methods:{
 			backRounter:function(){
-				this.$router.back(-2);
+				this.$router.go(-2);
 			},
 			submit:function(){
 				if(this.money == '' || this.money == null){
