@@ -211,6 +211,8 @@
 						return require("../../assets/images/match/no2.png");
 					case 2:
 						return require("../../assets/images/match/no3.png");
+					default:
+						return require("../../assets/images/match/no_a.png");
 				}
 			},
 			changeDate:function(e){
