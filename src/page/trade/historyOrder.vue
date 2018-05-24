@@ -257,14 +257,12 @@
 				padding-left: 0.3rem;
 				span{
 					line-height: 0.88rem;
-					color: $white;
 				}
 				.name{
 					em{
 						display: block; 
 						&:first-child{
 							font-size: $fs28;
-							color: $white;
 							margin: 0.15rem 0 0.05rem 0;
 						}
 					}
