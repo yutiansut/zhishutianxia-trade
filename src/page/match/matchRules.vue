@@ -34,6 +34,18 @@
 			<span>提醒：</span>
 			<p v-for="(k,v) in tip">{{v}}.{{k}}</p>
 		</div>
+		<div class="nar border_bottom">
+			<span>比赛说明</span>
+		</div>
+		<div class="rules">
+			<ul>
+				<li class="border_bottom" v-for="(k,v,index) in description">
+					<span>{{v}}:</span>
+					<label>{{k}}</label>
+				</li>
+			</ul>
+		</div>
+		<div class="h_98"></div>
 		<div class="h_98"></div>
 		<div class="btn1 bt" v-if="rulesData.statusName == 5">
 			<button>比赛已结束</button>
@@ -84,8 +96,8 @@
 				rule:{},
 				headers:"",
 				currentTitle:true,
-				isApply:false
-				
+				isApply:false,
+				description:{}
 			}
 		},
 		methods:{
@@ -122,8 +134,10 @@
 				var header = this.headers;
 				pro.fetch("post","/tradeCompetition/details",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
+						console.log(res)
 						this.rulesData = res.data.qiwCompetition;
 						this.award = res.data.award;
+						this.description = res.data.description;
 						$.map(res.data.rule,function(i,item){
 							if(typeof i == "object"){
 								this.tip = i
@@ -285,7 +299,6 @@
 	.rules{
 		li{
 			padding: 0 0.3rem;
-			height: 0.96rem;
 			line-height: 0.96rem;
 			width: 100%;
 			span{
@@ -299,7 +312,6 @@
 		}
 	}
 	.tips{
-		margin-bottom: 1.5rem;
 		width: 100%;
 		margin-top: 0.3rem;
 		padding: 0rem 0.3rem;
