@@ -2,7 +2,7 @@
 	<div id="backPresentation">
 		<mt-header :title="strategyName" fixed style="background-color:#242933;font-size: 0.32rem;height: 1rem;border-bottom: 1px solid #12141a;line-height: 1rem;">
 		 	<router-link to="" slot="left">
-			      <i id="back" @tap="backRounter"></i>
+			      <i id="back" @click="backRounter"></i>
 			</router-link>
 		</mt-header>
 		<div id="container">
@@ -59,7 +59,7 @@
 				}
 			},
 			backRounter:function(){
-				this.$router.back(-1);
+				this.$router.go(-1);
 			}
 		},
 		activated:function(){
