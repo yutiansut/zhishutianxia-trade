@@ -21,6 +21,7 @@
 <script>
 	import pro from '../assets/js/common.js'
 	import axios from "axios"
+	const local = pro.local
 	export default{
 		name: 'codeDialog',
 		data(){
@@ -32,7 +33,8 @@
 				secret: '',
 				phone: '',
 				pwd: '',
-				path: ''
+				path: '',
+				userList: [],
 			}
 		},
 		props: ['objstr','type'],
@@ -59,6 +61,17 @@
 			refreshCode: function(){
 				this.path = this.path + '&' + Math.random();
 			},
+			addItem (item,key='userList') {	
+				let index = this.userList.findIndex((userObj) =>{
+					return userObj.username == item.username
+				})	
+                if(index > -1) {
+					this.userList.splice(index,1,item);
+				}else{
+					this.userList.push(item)
+				}
+                local.set(key,this.userList)
+			},
 			confirm: function(){
 				if(this.code == ''){
 					this.$toast({message: '请输入验证码',duration: 2000});
@@ -71,19 +84,24 @@
 							imgCode: this.code,
 							clientId:""
 						};
-						pro.fetch("post",'/loginAndRegister/mobileLogin',data,"").then(function(){
+						pro.fetch("post",'/loginAndRegister/mobileLogin',data,"").then(function(res){
 							if(res.success == true && res.code == 1){
 								this.$toast({message: "登录成功",duration: 2000});
 								this.code = '';
 								this.token = res.data.token;
 								this.secret = res.data.secret;
-								var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': res.data.token, 'secret': res.data.secret};  
+								var userData = {'username': this.info.loginName, 'password': Base64.encode(this.info.password), 'token': res.data.token, 'secret': res.data.secret};  
 								localStorage.setItem("user", JSON.stringify(userData));
+								this.addItem(userData)
+								local.get("user");
+								this.$store.state.account.isLogin = true;
 								setTimeout(function(){
 									this.ishow = false;
-								},1000)
+									this.$router.push({path:"/my"});
+								}.bind(this),1000)
 							}
 						}.bind(this)).catch(function(err){
+							console.log(err)
 							var data = err.data;
 							if(data == undefined){
 								this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
@@ -143,7 +161,12 @@
 					}
 				}
 			}
+		},
+		activated() {
+			const userList1 = local.get('userList')||[]
+			this.userList = userList1
 		}
+
 	}
 </script>
 

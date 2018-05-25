@@ -49,7 +49,7 @@ import {mapMutations} from 'vuex'
 import switchAccount from '../../../components/switch_account'
 import pro from '../../../assets/js/common'
 const local = pro.local;
-const idList1 = local.get('idList')||[];
+
 
 
 export default {
@@ -61,7 +61,7 @@ export default {
     return {
       isLogin: false,
       isShow: false,
-      idList: idList1,
+      idList: [],
       list: [
         // {
         //   name: "自选管理",

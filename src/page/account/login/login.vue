@@ -44,6 +44,7 @@
 				fullHeight1:document.documentElement.clientHeight,
 				userList: [],
 				num:"",
+				str: {},
 			}
 		},
 		computed : {

@@ -159,7 +159,6 @@
 				tradePrices: '市价',
 				defaultNum: 1,
 				priceShow: true,
-				
 				conditionTab: ['价格条件','时间条件'],
 				currentConditionNum: 0,
 				priceTab: ['市价','对手价'],
