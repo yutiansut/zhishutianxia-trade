@@ -74,10 +74,17 @@
 				console.log(e)
 			},
 			parameters: function(n, o){
-				this.componentsShow = true;
-				if(this.$store.state.market.currentNo == ""){
-					this.$store.state.market.currentdetail = this.parameters[0];
-					this.$store.state.market.currentNo = this.parameters[0].CommodityNo;
+				if(n && n.length == 1){
+					this.componentsShow = true;
+					let val = this.$route.query.currentNo;
+					if(val) this.currentNo = val;
+					if(this.currentNo == ''){
+						this.$store.state.market.currentdetail = this.parameters[0];
+						this.$store.state.market.currentNo = this.parameters[0].CommodityNo;
+					}else{
+						this.$store.state.market.currentNo = this.currentNo;
+						this.currentNo = '';
+					}
 				}
 			}
 		},
