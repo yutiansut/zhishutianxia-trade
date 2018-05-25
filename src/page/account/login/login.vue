@@ -119,6 +119,7 @@
 						}
 					}.bind(this)).catch(function(err){
 						console.log(err)
+						this.$store.state.account.isLogin = false;
 						var data = err.data;
 						if(data == undefined){
 							this.$toast({message:"网络不给力，请稍后重试",duration: 2000});
@@ -150,6 +151,7 @@
 			}
 		},
 		mounted:function(){
+			pro.getClentId();
 			pro.isWXInstalled();
 			var isWXInstalled = localStorage.isWXInstalled ? localStorage.isWXInstalled : '';
 			if(isWXInstalled == 'false'){
@@ -159,6 +161,7 @@
 			}
 		},
 		activated:function(){
+			pro.getClentId();
 			//得到userList
 			const userList1 = local.get('userList')||[]
 			this.userList = userList1

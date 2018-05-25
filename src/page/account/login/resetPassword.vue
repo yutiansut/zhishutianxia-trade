@@ -102,6 +102,7 @@
 			}
 		},
 		activited:function(){
+			pro.getClentId();
 			this.code = this.$route.query.sendcode;
 			this.phone = this.$route.query.sendphone;
 			this.fullHeight1 = document.documentElement.clientHeight;
@@ -153,6 +154,7 @@
 		    }
 		},
 		mounted:function(){
+			pro.getClentId();
 			this.code = this.$route.query.sendcode;
 			this.phone = this.$route.query.sendphone;
 		}

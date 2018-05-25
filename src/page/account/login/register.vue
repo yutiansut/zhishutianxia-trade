@@ -214,6 +214,7 @@
 			}
 		},
 		activated:function(){
+			pro.getClentId();
 			this.fullHeight1 = document.documentElement.clientHeight;
 			const that = this
 		    window.onresize = () => {
