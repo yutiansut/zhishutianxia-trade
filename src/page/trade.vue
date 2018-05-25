@@ -70,18 +70,14 @@
 					this.$store.state.account.isLogin = true;
 				}
 			},
+			currentNo:function(e){
+				console.log(e)
+			},
 			parameters: function(n, o){
-				if(n && n.length == 1){
-					this.componentsShow = true;
+				this.componentsShow = true;
+				if(this.$store.state.market.currentNo == ""){
 					this.$store.state.market.currentdetail = this.parameters[0];
-					let val = this.$route.query.currentNo;
-					if(val) this.currentNo = val;
-					if(this.currentNo == ''){
-						this.$store.state.market.currentNo = this.parameters[0].CommodityNo;
-					}else{
-						this.$store.state.market.currentNo = this.currentNo;
-						this.currentNo = '';
-					}
+					this.$store.state.market.currentNo = this.parameters[0].CommodityNo;
 				}
 			}
 		},
@@ -120,6 +116,7 @@
 			this.tradableCommodity.forEach((o, i) => {
 				this.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + this.orderTemplist[o.commodityNo].ExchangeNo + '","CommodityNo":"' + o.commodityNo + '","ContractNo":"' + this.orderTemplist[o.commodityNo].MainContract +'"}}');
 			});
+//			console.log(this.$store.state.market.currentdetail);
 		}
 	}
 </script>
