@@ -104,16 +104,9 @@
 			}
 		},
 		mounted: function(){
-			this.currentNum = 0;
-			this.currentView = 'tradeCenter';
 			//初始化页面高度
 			let h = window.screen.height - $("header").height() - $(".nav").height() - $("#tabbar").height();
 			$(".main").height(h);
-			this.$store.state.market.Parameters = [];
-			this.$store.state.market.commodityOrder = [];
-			this.tradableCommodity.forEach((o, i) => {
-				this.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + this.orderTemplist[o.commodityNo].ExchangeNo + '","CommodityNo":"' + o.commodityNo + '","ContractNo":"' + this.orderTemplist[o.commodityNo].MainContract +'"}}');
-			});
 		},
 		activated: function(){
 			this.currentNum = 0;
