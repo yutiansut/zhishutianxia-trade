@@ -864,13 +864,13 @@
 				text-align: center;
 				font-size: $fs24;
 				&.ipt_lg{
-					width: 5.58rem;
+					width: 5.56rem;
 				}
 				&.ipt_sm{
-					width: 1.18rem;
+					width: 1.16rem;
 				}
 				&.ipt_ssm{
-					width: 0.78rem;
+					width: 0.76rem;
 				}
 				&.ipt_md{
 					width: 3.98rem;
