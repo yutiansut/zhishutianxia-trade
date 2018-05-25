@@ -1,5 +1,5 @@
 <template>
-	<div id="login">
+	<div id="login" :style="{height:clientHeight}">
 		<topTitle title="登录" type="1" type1="1"></topTitle>
 		<div id="container">
 			<ul>
@@ -63,7 +63,10 @@
 				}else{
 					return true;
 				}
-			}
+			},
+			clientHeight() {
+                return document.documentElement.clientHeight + 'px';
+            },
 		},
 		methods:{
 			toRegister:function(){

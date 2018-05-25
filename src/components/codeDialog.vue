@@ -1,5 +1,5 @@
 <template>
-	<div id="codeDialog" v-show="ishow">
+	<div id="codeDialog" v-show="ishow" >
 		<div class="bg"></div>
 		<div class="codeDialog">
 			<div class="page_cont">
@@ -53,6 +53,9 @@
 			version: function(){
 				return '1.1';
 			},
+            clientHeight() {
+                return document.documentElement.clientHeight + 'px';
+            },
 		},
 		methods: {
 			cancel:function(){
