@@ -9,7 +9,7 @@
 			<div class="search_box">
 				<div class="search">
 					<i class="icon icon_search"></i>
-					<input type="text" placeholder="搜索并添加合约" @touchstar="toSearch" />
+					<input type="text" placeholder="搜索并添加合约" @touch="toSearch" />
 				</div>
 			</div>
 			<div class="list">
