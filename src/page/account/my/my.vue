@@ -193,18 +193,21 @@ export default {
                                     3.1 二次循环 改变对应id 的 isread属性
                                     3.2 赋值给渲染的 属性   
                             */
-                            const newList  = res.data.list.reduce((arr,item) => {
-                                //是否在idList中                                
-                                item.isRead = this.idList.includes(item.id);
-                                //考虑置顶
-                                if(item.isTop == 1) {
-                                  arr.unshift(item)
-                                }else{
-                                  arr.push(item)
-                                }
-                                return arr
-                            },[]);
-                            this.$store.state.newsList = newList
+                            //console.log(res)
+                            if(res.data.list) {
+                                const newList  = res.data.list.reduce((arr,item) => {
+                                  //是否在idList中                                
+                                  item.isRead = this.idList.includes(item.id);
+                                  //考虑置顶
+                                  if(item.isTop == 1) {
+                                    arr.unshift(item)
+                                  }else{
+                                    arr.push(item)
+                                  }
+                                  return arr
+                              },[]);
+                              this.$store.state.newsList = newList
+                              }
                         }
                     }
     
