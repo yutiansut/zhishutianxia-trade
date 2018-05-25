@@ -56,19 +56,22 @@
 		    	this.$pro.fetch("post","/news/get7_24Live",data,"").then((res)=>{
 					//console.log(res)
 		    		if(res.code == 1 && res.success == true){
-						res.data.forEach((k) => {
-							if(k.liveTitle.length>70){
-								//console.log(k.liveTitle.length)
-								k.zhankai = true
-							}							
-						})
-						let newList = res.data;
-						//判断 是下拉加载 还是上来刷新操作
-						if (this.pageNum == 0) {
-							this.newsInfo = res.data;
-						}else{
-							this.newsInfo = this.newsInfo.concat(newList)
+						if(res.data){
+								res.data.forEach((k) => {
+								if(k.liveTitle.length>70){
+									//console.log(k.liveTitle.length)
+									k.zhankai = true
+								}							
+							})
+							let newList = res.data;
+							//判断 是下拉加载 还是上来刷新操作
+							if (this.pageNum == 0) {
+								this.newsInfo = res.data;
+							}else{
+								this.newsInfo = this.newsInfo.concat(newList)
+							}
 						}
+						
 		    			
 		    		}
 		    	}).catch((err) => {
