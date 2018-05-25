@@ -11,7 +11,7 @@
 				<li class="border_bottom" v-for="(k,v,index) in award">
 					<div class="li_no">
 						<img :src="index | changNo"/>
-						<span id="span_no">{{index+1}}</span>
+						<span class="span_no">{{index+1}}</span>
 						<span>{{v}}</span>
 					</div>
 					<label>{{k}}</label>
@@ -285,8 +285,8 @@
 			justify-content: space-between;
 			width: 100%;
 			img{
-				width: 0.44rem;
-				height: 0.44rem;
+				width: 0.46rem;
+				height: 0.46rem;
 			}
 			span{
 				margin-left: 0.1rem;
@@ -297,13 +297,15 @@
 		}
 		.li_no{
 			position: relative;
-			#span_no{
+			.span_no{
 				position: absolute;
-				left: 0.06rem;
+				left: -0.01rem;
 				top: 0.04rem;
 				font-size: $fs24;
 				font-weight: bold;
 				color: $bg;
+				width: 0.3rem;
+				text-align: center;
 			}
 		}
 		
