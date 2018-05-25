@@ -70,9 +70,6 @@
 					this.$store.state.account.isLogin = true;
 				}
 			},
-			currentNo:function(e){
-				console.log(e)
-			},
 			parameters: function(n, o){
 				if(n && n.length == 1){
 					this.componentsShow = true;
