@@ -1,5 +1,5 @@
 <template>
-	<div id="codeDialog" v-show="ishow" >
+	<div id="codeDialog" v-show="ishow" :style="{height:clientHeight}">
 		<div class="bg"></div>
 		<div class="codeDialog">
 			<div class="page_cont">
