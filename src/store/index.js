@@ -296,9 +296,9 @@ export default new Vuex.Store({
 		//交易websocket
 		tradeSocket: {},
 		//test 测试环境，online 正式环境
-		environment: 'test',
+		environment: 'online',
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'dev',
+		setting: 'build',
 	},
 	getters: {
 		PATH: function(state) {
@@ -309,7 +309,7 @@ export default new Vuex.Store({
 				if(state.environment == 'test'){
 					return state.account.currentUrlHead + '//test.platform-trade.dktai.cn';
 				}else{
-					return state.account.currentUrlHead + '//139.196.232.17';
+					return state.account.currentUrlHead + '//platform-trade.dktai.cn';
 				}
 			} else if(state.setting == 'nat') {
 				return '/nat';
@@ -322,7 +322,7 @@ export default new Vuex.Store({
 				if(state.environment == 'test'){
 					return state.account.currentUrlHead + '//test.platform-trade.dktai.cn';
 				}else{
-					return state.account.currentUrlHead + '//139.196.232.17';
+					return state.account.currentUrlHead + '//platform-trade.dktai.cn';
                 }
             }    
 		}
