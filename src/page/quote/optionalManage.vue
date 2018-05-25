@@ -9,7 +9,7 @@
 			<div class="search_box">
 				<div class="search">
 					<i class="icon icon_search"></i>
-					<input type="text" placeholder="搜索并添加合约" @touchend="toSearch" />
+					<input type="text" placeholder="搜索并添加合约" @focus="toSearch" />
 				</div>
 			</div>
 			<div class="list">
@@ -125,6 +125,7 @@
 				this.$router.go(-1);
 			},
 			toSearch: function(){
+				document.activeElement.blur();
 				this.$router.push({path: '/search'});
 			},
 			checkEvent: function(val, name){
