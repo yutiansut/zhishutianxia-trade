@@ -680,7 +680,7 @@
 		height: 0.64rem;
 		line-height: 0.64rem;
 		background: $bg;
-		border-bottom: 0.01rem solid $bgDeep;
+		border-bottom: 1px solid $bgDeep;
 		padding: 0 0.3rem;
 		span{
 			float: left;
@@ -700,7 +700,7 @@
 	}
 	.fens_title{
 		height: 0.48rem;
-		border-bottom: 0.01rem solid $bgDeep;
+		border-bottom: 1px solid $bgDeep;
 		padding-left: 3.4rem;
 		span{
 			float: left;
@@ -751,7 +751,7 @@
 		width: 7.5rem;
 		height: 0.64rem;
 		line-height: 0.64rem;
-		border-bottom: 0.01rem solid $bgDeep;
+		border-bottom: 1px solid $bgDeep;
 		display: flex;
 		text-align: center;
 		.col{
@@ -778,7 +778,7 @@
 	.order_type{
 		height: 0.96rem;
 		padding: 0 0.3rem;
-		border-bottom: 0.01rem solid $bgDeep;
+		border-bottom: 1px solid $bgDeep;
 		span{
 			display: inline-block;
 			float: left;
@@ -787,7 +787,7 @@
 			line-height: 0.56rem;
 			text-align: center;
 			background: $bg;
-			border: 0.01rem solid $redDeep;
+			border: 1px solid $redDeep;
 			margin: 0.2rem 0;
 			color: $redDeep; 
 			&:first-child{
@@ -858,7 +858,7 @@
 				padding: 0.12rem 0;
 				box-sizing: content-box;
 				color: $blcakThin;
-				border: 0.01rem solid $redDeep;
+				border: 1px solid $redDeep;
 				border-radius: 0.1rem;
 				background: $bg;
 				text-align: center;
@@ -907,11 +907,11 @@
 				width: 5.58rem;
 				height: 0.88rem;
 				line-height: 0.88rem;
-				border: 0.01rem solid $bgDeep;
+				border: 1px solid $bgDeep;
 				border-radius: 0.1rem;
 				background: $bg;
 				span{
-					border: 0.01rem solid $redDeep;
+					border: 1px solid $redDeep;
 					color: $redDeep;
 					float: left;
 					display: inline-block;
@@ -938,7 +938,7 @@
 				float: left;
 				width: 5.6rem;
 				height: 0.88rem;
-				border: 0.01rem solid $bgDeep;
+				border: 1px solid $bgDeep;
 				background: $bg;
 				border-radius: 0.1rem;
 				span{
@@ -948,12 +948,12 @@
 					height: 0.88rem;
 					line-height: 0.88rem;
 					text-align: center;
-					border-right: 0.01rem solid $bgDeep;
+					border-right: 1px solid $bgDeep;
 					font-size: $fs32;
 					&.reduce{
 						float: right;
 						border: none;
-						border-left: 0.01rem solid $bgDeep;
+						border-left: 1px solid $bgDeep;
 					}
 				}
 				input{
@@ -967,7 +967,7 @@
 				height: 0.88rem;
 				line-height: 0.88rem;
 				text-align: center;
-				border: 0.01rem solid $bgDeep;
+				border: 1px solid $bgDeep;
 				border-radius: 0.1rem;
 				font-size: $fs28;
 			}
