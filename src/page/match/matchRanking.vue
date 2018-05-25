@@ -225,7 +225,7 @@
 	.span_no{
 		position: absolute;
 		top: 0.52rem;
-		left: 0.16rem;
+		left: 0.08rem;
 		font-size: $fs24;
 		font-weight: bold;
 		color: $bg;
