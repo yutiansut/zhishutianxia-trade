@@ -210,8 +210,8 @@
 	}
 	.rang_no{
 		display: inline-block;
-		width: 0.44rem;
-		height: 0.44rem;
+		width: 0.46rem;
+		height: 0.46rem;
 	}
 	.rang_no1{
 		display: inline-block;
@@ -229,6 +229,8 @@
 		font-size: $fs24;
 		font-weight: bold;
 		color: $bg;
+		width: 0.3rem;
+		text-align: center;
 	}
 	.user{
 		width: 0.8rem;
