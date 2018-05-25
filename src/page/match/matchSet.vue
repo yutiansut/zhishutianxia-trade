@@ -66,7 +66,6 @@
 				matchid:'',
 				headers:"",
 				show:true,
-				scale:"",
 				scale1:"",
 				follow:0,//跟投开关0默认关闭
 				tradeRecord:0,//开启成交历史记录
@@ -86,7 +85,6 @@
 				}
 				pro.fetch("post","/followInvest/getSetting",data,h).then((res)=>{
 					if(res.code == 1 && res.success == true){
-						console.log(res.data)
 						this.show = res.data == undefined ? true : false ;
 						if(res.data !=null){
 							this.isHistory = res.data.dealRecord == 0 ? "未开启" : "已开启";
@@ -147,13 +145,16 @@
 			}
 		},
 		activated:function(){
+			this.scale = '';
+			this.buyHistory = false;
 			this.getHeaders();
-			this.matchid = this.$route.query.matchid;
-			this.getIsSet(this.matchid,this.headers)
 			this.follow = 0;
 			this.tradeRecord = 0;
 			this.switchN = false;
 			this.history = false;
+			this.matchid = this.$route.query.matchid;
+			this.getIsSet(this.matchid,this.headers)
+			
 		}
 	}
 </script>
