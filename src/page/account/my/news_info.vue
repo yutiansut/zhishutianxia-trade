@@ -6,7 +6,7 @@
     
         <!-- 列表 -->
         <div class="news_wrap">
-            <ul class="news_list" v-if="hasList">
+            <ul class="news_list" v-if="newsList.length">
                 <li v-for="item in newsList" :key="item.id" @click="goto(item)">
                     <span v-if="!item.isRead" class="is_read"></span>
                     <h3 :class="{have_read:!item.isRead}">{{item.title}}</h3>
