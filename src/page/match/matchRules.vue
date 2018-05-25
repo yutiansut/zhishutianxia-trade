@@ -97,8 +97,14 @@
 				headers:"",
 				currentTitle:true,
 				isApply:false,
-				description:{}
+				description:{},
+				traderUser:''
 			}
+		},
+		computed:{
+			tradeSocket(){
+				return this.$store.state.tradeSocket;
+			},
 		},
 		methods:{
 			toLogin:function(){
@@ -114,7 +120,11 @@
 				pro.fetch("post","/tradeCompetition/getAccount",data,header).then((res)=>{
 					if(res.code == 1 && res.success == true){
 						MessageBox.alert("账号："+res.data.account+"</br>"+"密码："+res.data.password,"交易账号",{confirmButtonText:"进入登录页面",}).then(action=>{
+							if(this.traderUser!= ''){
+								this.tradeSocket.send('{"Method":"Logout","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'"}}');
+							}
 							this.$router.push({path:"/tradeLogin",query:{tradeAccount:res.data.account,password:res.data.password}});
+							
 						});
 					}
 				}).catch((err)=>{
@@ -197,6 +207,7 @@
 			}
 		},
 		activated:function(){
+			this.traderUser = localStorage.tradeUser ? localStorage.tradeUser : '';
 			this.isApply = false;
 			this.getHeaders();
 			if(this.matchid != ""){
@@ -204,6 +215,7 @@
 			}
 		},
 		mounted:function(){
+			this.traderUser = localStorage.tradeUser ? localStorage.tradeUser : '';
 			this.isApply = false;
 			this.getHeaders();
 			if(this.matchid != ""){

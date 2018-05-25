@@ -120,7 +120,6 @@
 			this.tradableCommodity.forEach((o, i) => {
 				this.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + this.orderTemplist[o.commodityNo].ExchangeNo + '","CommodityNo":"' + o.commodityNo + '","ContractNo":"' + this.orderTemplist[o.commodityNo].MainContract +'"}}');
 			});
-//			console.log(this.$store.state.market.currentdetail);
 		}
 	}
 </script>
