@@ -1,8 +1,8 @@
 <template>
 	<div id="strategyName">
 		<mt-header :title="strategyName" fixed style="background-color:#242933;font-size: 0.32rem;height: 1rem;border-bottom: 1px solid #12141a;line-height: 1rem;">
-		 	<router-link to="/" slot="left">
-			    <mt-button icon="back"></mt-button>
+		 	<router-link to="" slot="left">
+			    <mt-button icon="back" @click.stop="backRounter"></mt-button>
 			</router-link>
 		</mt-header>
 		<div id="container">
@@ -80,6 +80,11 @@
 		},
 		activated:function(){
 			this.strategyName = this.$route.query.strategyName;
+		},
+		methods:{
+			backRounter:function(){
+				this.$router.go(-1);
+			},
 		}
 	}
 </script>

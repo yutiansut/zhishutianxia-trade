@@ -158,7 +158,7 @@
 				this.time = k;
 			},
 			toStrategyName:function(){
-				this.$router.push({path:"/strategyName",query:{strategyName:this.strategyName}});
+				this.$router.replace({path:"/strategyName",query:{strategyName:this.strategyName}});
 			}
 		},
 		activated:function(){
