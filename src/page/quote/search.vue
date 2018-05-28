@@ -170,8 +170,7 @@
 			},
 			addOptional: function(key,exchangeNo,commodityNo,contractNo,id){
 				let userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-				let stateLogin = localStorage.stateLogin ? JSON.parse(localStorage.stateLogin) : '';
-				if(stateLogin.issavepsd == false){
+				if(userInfo == ''){
 					Toast({message: '请先登录平台', position: 'bottom', duration: 1000});
 					return;
 				}
