@@ -145,12 +145,8 @@
 				if(item.time == this.showTime) return;
 				//console.log(item.time)
 				this.showTime = item.time
-				let tomorrow = this.getTomorrow(this.showTime)
-				if (this.userInfo) {
-					this.getInfoList(item.time, tomorrow)
-				}else{
-					//console.log(123)
-                }
+				let tomorrow = this.getTomorrow(this.showTime)				
+				this.getInfoList(item.time, tomorrow)
                 this.getPosition(item.day)
 
 			},
@@ -288,11 +284,7 @@
 					this.weekDayList = this.mouthList(newValue);
 					//console.log(Date(newValue))
 					let tomorrow = this.getTomorrow(newValue);
-					if (this.userInfo) {
 					this.getInfoList(newValue, tomorrow)
-					}else{
-						console.log(123)
-					}
 				}
 			}	
 		},
