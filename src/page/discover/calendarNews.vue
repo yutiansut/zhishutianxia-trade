@@ -284,11 +284,7 @@
 					this.weekDayList = this.mouthList(newValue);
 					//console.log(Date(newValue))
 					let tomorrow = this.getTomorrow(newValue);
-					if (this.userInfo) {
 					this.getInfoList(newValue, tomorrow)
-					}else{
-						console.log(123)
-					}
 				}
 			}	
 		},
