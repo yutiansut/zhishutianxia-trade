@@ -2,7 +2,7 @@
 	<div id="strategyName">
 		<mt-header :title="strategyName" fixed style="background-color:#242933;font-size: 0.32rem;height: 1rem;border-bottom: 1px solid #12141a;line-height: 1rem;">
 		 	<router-link to="" slot="left">
-			    <mt-button icon="back" @click.stop="backRounter"></mt-button>
+			    <i id="back" @tap.stop="backRounter"></i>
 			</router-link>
 		</mt-header>
 		<div id="container">
@@ -83,7 +83,7 @@
 		},
 		methods:{
 			backRounter:function(){
-				this.$router.go(-1);
+				this.$router.go(-2);
 			},
 		}
 	}
@@ -93,6 +93,14 @@
 	@import "../../assets/css/common.scss";
 	#strategyName{
 		width: 7.5rem;
+		#back{
+			display: inline-block;
+			width: 0.64rem;
+			height: 1rem;
+			background: url(../../assets/images/quote/back_icon.png) no-repeat 0.15rem 0.34rem;
+			background-size: 0.24rem 0.32rem;
+			margin-top: 0.34rem;
+		}
 		#container{
 			width:7.5rem;
 			margin-top:1rem;
