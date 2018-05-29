@@ -14,7 +14,7 @@
         <div class="money_wrap">
             <div class="money_box">
                 <p>可用资金</p>
-                <p class="money_text"><span>{{buwei(accountInfo.todayAmount)||"0.00"}}</span> 元</p>
+                <p class="money_text"><span>{{buwei(accountInfo.todayEquity)||"0.00"}}</span> 元</p>
             </div>
             <div class="money_box">
                 <p>账户余额</p>
@@ -131,10 +131,8 @@ export default {
       if(numString === undefined||null) {
           return  numString
       }else if(numString&&numString.toString().indexOf('.')>-1){
-        console.log(22)
          return  numString
       }else{  
-        console.log(123)
          return  numString + '.00'
       }
     },
@@ -237,10 +235,11 @@ export default {
                         }
                     }
                 })
-            },
+            },    
 
   },  
-  activated () {    
+  activated () {   
+    
     this.userInfo = local.get('user')
     this.userList = local.get('userList')||[]
     this.idList = local.get('idList')||[]
