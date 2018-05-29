@@ -16,7 +16,7 @@
                 </li>
                 <li class="item">
                     <p>初始资金: &nbsp<span class="money">{{buwei(accountInfo.balance)||"0.00"}}</span>&nbsp元</p>
-                    <p>亏损平仓线: &nbsp<span class="money">{{buwei(allMoney)||"0.00"}}</span>&nbsp元</p>
+                    <p>亏损平仓线: &nbsp<span class="money">{{buwei(accountInfo.lossCloseOutLine)||"0.00"}}</span>&nbsp元</p>
                 </li>
                 <li class="item">
                     <p>交易账号: &nbsp<span class="money">{{account.account}}</span></p>

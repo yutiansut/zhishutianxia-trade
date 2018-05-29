@@ -14,11 +14,11 @@
         <div class="money_wrap">
             <div class="money_box">
                 <p>可用资金</p>
-                <p class="money_text"><span>{{buwei(accountInfo.balance)||"0.00"}}</span> 元</p>
+                <p class="money_text"><span>{{buwei(accountInfo.todayAmount)||"0.00"}}</span> 元</p>
             </div>
             <div class="money_box">
                 <p>账户余额</p>
-                <p class="money_text"><span>{{buwei(allMoney)||"0.00"}}</span> 元</p>
+                <p class="money_text"><span>{{buwei(accountInfo.todayAmount)||"0.00"}}</span> 元</p>
             </div>
         </div>
         <!-- 列表 -->
@@ -130,10 +130,11 @@ export default {
     buwei (numString) {     
       if(numString === undefined||null) {
           return  numString
-      }else if(numString.indexOf('.')>-1){
+      }else if(numString&&numString.toString().indexOf('.')>-1){
+        console.log(22)
          return  numString
       }else{  
-        //console.log(typeof numString)
+        console.log(123)
          return  numString + '.00'
       }
     },
