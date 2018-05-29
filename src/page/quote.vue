@@ -71,15 +71,8 @@
 		watch: {
 			quoteStatus: function(n, o){
 				if(n && n == true && this.tradeUser != '' && this.tradeUser != undefined && this.tradeUser != null && this.url_real){
-//					console.log("判断是否登录交易")
-					
 					setTimeout(() => {
-//						Indicator.open({spinnerType: 'fading-circle'});
-//						console.log("1111")
 						this.initTrade();
-//						console.log("2222")
-//						Indicator.close();
-//						console.log("3333")
 					}, 1000);
 				}
 			},

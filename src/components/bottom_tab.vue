@@ -61,9 +61,7 @@
 				if(value == 'trade'){
 					this.tradeUser = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : ''; 
 					if(this.tradeUser != ''){
-						this.$router.push({path: '/trade'});
-						if(this.loginStatus == true) return;
-						this.initTrade();
+							this.$router.push({path: '/trade'});
 					}else{
 						this.$router.push({path: '/tradeLogin'});
 					}
