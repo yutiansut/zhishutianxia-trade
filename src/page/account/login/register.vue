@@ -154,7 +154,6 @@
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					this.time = 60;
-					$(e.target).addClass('current');
 					var timing = setInterval(function(){
 						this.time--;
 						if(this.time <= 0){
@@ -200,6 +199,7 @@
 							this.show = false;
 						}
 					})
+					
 				}
 			},
 		},

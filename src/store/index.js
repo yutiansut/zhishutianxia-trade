@@ -300,7 +300,7 @@ export default new Vuex.Store({
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'dev',
 	},
-	getters: {
+	getters: {  
 		PATH: function(state) {
 			if(state.setting == 'dev') {
 //				return 'http://192.168.0.132:8080/qiw-platform';
