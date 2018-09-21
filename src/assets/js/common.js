@@ -16,6 +16,7 @@ import store from '../../store'
 // axios 配置
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+
 axios.defaults.baseURL = store.getters.PATH;
 const storea = store
 //POST传参序列化(添加请求拦截器，与Content-Type配合使用，如Content-Type=application/json,则无需序列化)

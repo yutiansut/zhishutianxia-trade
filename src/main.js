@@ -49,7 +49,15 @@ router.beforeEach(function (to, from, next) {
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
+// function changeColor(dom){
+//   dom.style.backgroundColor = "red";
+// }
 
+// Vue.directive('color',{
+//   bind:function(el){
+//       changeColor(el)
+//   }
+// })
 //const Bus = new Vue();
 /* eslint-disable no-new */
 new Vue({
